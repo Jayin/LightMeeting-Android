@@ -30,8 +30,6 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState,R.layout.activity_main);
 		setAppTitle("LightMeeting");
 		
-//		ViewPager mViewPager = (ViewPager)findViewById(R.id.viewpager);
-//		PagerSlidingTabStrip mPagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.tabs);
 		
 		fragments.add(new BusinessCardFragment());
 		fragments.add(new LMListFragment());
@@ -45,7 +43,7 @@ public class MainActivity extends BaseActivity {
 	
 	public class MyPagerAdapter extends FragmentPagerAdapter {
 		List<Fragment>fragments;
-		private final String[] TITLES = { "会议列表","动态","名片"};
+		private final String[] TITLES = { "会议列表","动态","个人名片"};
 
 		public MyPagerAdapter(FragmentManager fm, List<Fragment>fragments) {
 			super(fm);
