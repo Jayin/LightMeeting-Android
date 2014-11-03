@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lm_lucency_blue">#1AB3E9</color>
+     <color name="lm_blue_title_nomal">#3B5998</color>
+    <color name="lm_blue_title_press">#36528C</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+</resources>
