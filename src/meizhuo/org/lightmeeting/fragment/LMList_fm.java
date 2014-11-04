@@ -1,14 +1,11 @@
 package meizhuo.org.lightmeeting.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +27,10 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
-	 String[] names = new String[] {"今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 "};
-	 adapter =  new LMListAdapter(getActivity(), names);
+	 String[] names = {"袂卓第一次会议","袂卓第二次会议","袂卓第二次会议","袂卓第二次会议","袂卓第二次会议"};
+	 String[] Meet_Time = {"2014-9-8","2014-9-8","2014-9-8","2014-9-8","2014-9-8"};
+	 String[] Meet_Place = {"北主楼16楼","北主楼16楼","北主楼16楼","北主楼16楼","北主楼16楼"};
+	 adapter = new LMListAdapter(getActivity(), names, Meet_Time, Meet_Place);
 	 lv.setAdapter(adapter);
 	 return contentView;
 	}

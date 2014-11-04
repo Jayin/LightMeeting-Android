@@ -1,11 +1,9 @@
 package meizhuo.org.lightmeeting.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.InjectView;
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter;
+import meizhuo.org.lightmeeting.adapter.BusinessCardAdapter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
@@ -18,17 +16,18 @@ import android.widget.AbsListView.OnScrollListener;
 public class BusinessCard_fm extends BaseFragment implements  OnRefreshListener, OnScrollListener {
 	
 	
-	@InjectView(R.id.lv) ListView lv;
-	
-	LMListAdapter adapter ;
+	@InjectView(R.id.lv_businesscard) ListView lv;
+	BusinessCardAdapter adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
-	 String[] names = new String[] {"今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 "};
-	 adapter =  new LMListAdapter(getActivity(), names);
+	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_buinesscard);
+	 String[] left_content = new String[] {"名字：","职业：","地址：","电话：","传真：","QQ："};
+	 String[] right_content = new String[] {"黄振炼","web组长","北主楼16楼","123564","0525-544","94674637"};
+	 adapter = new BusinessCardAdapter(getActivity(), left_content, right_content);
+	 
 	 lv.setAdapter(adapter);
 	 return contentView;
 	}

@@ -12,9 +12,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.fragment.BusinessCardFragment;
-import meizhuo.org.lightmeeting.fragment.DynamicFragment;
-import meizhuo.org.lightmeeting.fragment.LMListFragment;
+import meizhuo.org.lightmeeting.fragment.BusinessCard_fm;
+import meizhuo.org.lightmeeting.fragment.Dynamic_fm;
+import meizhuo.org.lightmeeting.fragment.LMList_fm;
 
 public class MainActivity extends BaseActivity {
 //	private static final String TAG = "MainActivity";
@@ -31,10 +31,10 @@ public class MainActivity extends BaseActivity {
 		setAppTitle("LightMeeting");
 		
 		
-		fragments.add(new BusinessCardFragment());
-		fragments.add(new LMListFragment());
-		fragments.add(new DynamicFragment());
 		
+		fragments.add(new LMList_fm());
+		fragments.add(new Dynamic_fm());
+		fragments.add(new BusinessCard_fm());
 		
 		mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
@@ -71,6 +71,7 @@ public class MainActivity extends BaseActivity {
 		}
 		
 	}
+	
 
 
 }

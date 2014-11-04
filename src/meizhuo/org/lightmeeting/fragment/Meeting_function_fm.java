@@ -25,7 +25,7 @@ public class Meeting_function_fm extends BaseFragment implements OnRefreshListen
 		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
 	 String[] names = new String[] {"今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 "};
-	 adapter =  new LMListAdapter(getActivity(), names);
+//	 adapter =  new LMListAdapter(getActivity(), names);
 	 lv.setAdapter(adapter);
 	 return contentView;
 	}
