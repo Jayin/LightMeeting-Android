@@ -15,7 +15,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class BusinessCardFragment extends BaseFragment implements  OnRefreshListener, OnScrollListener {
+public class BusinessCard_fm extends BaseFragment implements  OnRefreshListener, OnScrollListener {
 	
 	
 	@InjectView(R.id.lv) ListView lv;
@@ -26,7 +26,7 @@ public class BusinessCardFragment extends BaseFragment implements  OnRefreshList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lm_lv);
+	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
 	 String[] names = new String[] {"今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 "};
 	 adapter =  new LMListAdapter(getActivity(), names);
 	 lv.setAdapter(adapter);
