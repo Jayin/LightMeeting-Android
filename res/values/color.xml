@@ -5,4 +5,8 @@
     <color name="lm_blue_title_press">#36528C</color>
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
+    <color name="lm_white">#ffffff</color>
+    <color name="lm_grey">#FFE1E8EB</color>
+    <color name="lm_grey_lv_three">#D0D3D7</color>
+    <color name="lm_grey_lv_two">#808080</color>
 </resources>

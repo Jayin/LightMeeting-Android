@@ -38,4 +38,14 @@
            	<item name="android:divider">@drawable/ic_line_1</item>
        </style>
 
+       <style name="LinearLayout">
+           <item name="android:layout_width">match_parent</item>
+           <item name="android:layout_height">match_parent</item>
+       </style>
+       <style name="LinearLayout.item">
+          <item name="android:layout_width">match_parent</item>
+               <item name="android:layout_height">wrap_content</item>
+           </style>
+       
+       
 </resources>

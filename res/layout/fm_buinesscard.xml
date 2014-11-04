@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lm_white"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+       <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                android:id="@+id/thumbnailThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                bootstrap:bct_image="@drawable/aa_talker"
+                bootstrap:bct_size="medium"
+                android:layout_margin="10dp"/>
+    </LinearLayout>
+    <View 
+        android:background="@drawable/ic_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        />
+    <ListView 
+          android:id="@+id/lv_businesscard"
+        style="@style/ListView" >
+        ></ListView>
+    
+
+</LinearLayout>

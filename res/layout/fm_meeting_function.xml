@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_marginTop="20dp"
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text="讨论"
+            />
+    </LinearLayout>
+    
+       <LinearLayout 
+        android:layout_marginTop="20dp"
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text="投票"
+            />
+    </LinearLayout>
+     <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+       <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text="调查"
+            />
+    </LinearLayout>
+    
+           <LinearLayout 
+        android:layout_marginTop="20dp"
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text="设置"
+            />
+    </LinearLayout>
+     <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+       <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"
+            android:text="关于"
+            />
+    </LinearLayout>
+    
+       
+       
+    
+
+</LinearLayout>

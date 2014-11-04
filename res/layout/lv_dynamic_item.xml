@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        style="@style/LinearLayout"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        >
+        
+        <LinearLayout 
+            style="@style/LinearLayout"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            >
+            <TextView 
+                android:id="@+id/dynamic_user_name"
+                style="@style/TextView"
+                android:text="黄振炼"
+                />
+            
+        </LinearLayout>
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/ic_line_1"
+            />
+        <LinearLayout
+            style="@style/LinearLayout"
+             android:orientation="vertical"
+            >
+            <TextView 
+                android:id="@+id/dynamic_user_content"
+                style="@style/TextView"
+                android:text=" 食色招Android程序员了！！ 总感觉食堂吃不饱，晚上吃不好的吃货开发们，快私信 @plidezus 加入食色大家庭！！PS. @plidezus 是AnimeTaste的创始人，也是AT的设计师，EverMemo也是他主导的产品， 靠谱程度乃们自己感受！！ 想换工作的戳我或者直接私信"
+                />
+        </LinearLayout>
+        
+    </LinearLayout>
+    
+</LinearLayout>

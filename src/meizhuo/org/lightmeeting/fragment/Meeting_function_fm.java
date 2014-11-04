@@ -15,7 +15,6 @@ import android.widget.AbsListView.OnScrollListener;
 public class Meeting_function_fm extends BaseFragment implements OnRefreshListener, OnScrollListener{
 
 
-	@InjectView(R.id.lv) ListView lv;
 	
 	LMListAdapter adapter ;
 	
@@ -23,10 +22,7 @@ public class Meeting_function_fm extends BaseFragment implements OnRefreshListen
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
-	 String[] names = new String[] {"今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 ","今天开会 "};
-//	 adapter =  new LMListAdapter(getActivity(), names);
-	 lv.setAdapter(adapter);
+	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_meeting_function);
 	 return contentView;
 	}
 

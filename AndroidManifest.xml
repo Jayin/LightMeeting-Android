@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity 
+            android:name=".acty.MeetingData"
+            android:launchMode="singleTask"
+            >
+        </activity>
+        <!-- MeetingData -->
     </application>
 
 </manifest>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+      <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/aa_talker" />
+      <LinearLayout 
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          >
+          <TextView 
+              android:id="@+id/tv_username"
+              android:layout_marginTop="8dp"
+              style="@style/TextView"
+              android:text="代码家"
+              />
+          <TextView 
+              android:id="@+id/tv_userintro"
+              style="@style/TextView"
+              android:layout_marginTop="8dp"
+              android:text="我爱我的ID"
+              />
+      </LinearLayout>
+    
+
+</LinearLayout>
