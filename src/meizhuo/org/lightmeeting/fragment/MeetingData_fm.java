@@ -1,5 +1,6 @@
 package meizhuo.org.lightmeeting.fragment;
 
+import meizhuo.org.lightmeeting.R;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-//	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
+	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_meetingdata);
 	 return contentView;
 	}
 

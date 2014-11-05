@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
     
+    
+    
     <TextView 
         android:id="@+id/lv_business_left"
         android:layout_marginTop="15dp"

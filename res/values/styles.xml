@@ -31,6 +31,7 @@
         <item name="android:textColor">@color/black</item>
     </style>
     
+    
        <style name="ListView">
            	<item name="android:layout_width">match_parent</item>
            	<item name="android:layout_height">match_parent</item>
@@ -46,6 +47,5 @@
           <item name="android:layout_width">match_parent</item>
                <item name="android:layout_height">wrap_content</item>
            </style>
-       
        
 </resources>
