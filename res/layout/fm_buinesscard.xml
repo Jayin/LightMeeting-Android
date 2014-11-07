@@ -3,31 +3,199 @@
        xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lm_white"
     android:orientation="vertical" >
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout 
+            style="@style/LinearLayout"
+            android:orientation="vertical"
+            >
     
     <LinearLayout 
-        android:layout_width="wrap_content"
+             android:background="@android:color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-       <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
-                android:id="@+id/thumbnailThree"
+        <TextView 
+            android:width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:text="头像"
+            android:layout_gravity="center_vertical"
+            style="@style/TextView"
+            />
+        <LinearLayout 
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                android:id="@+id/minimalThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 bootstrap:bct_image="@drawable/aa_talker"
                 bootstrap:bct_size="medium"
+                bootstrap:bct_minimal="true"
                 android:layout_margin="10dp"/>
+            </LinearLayout>
     </LinearLayout>
     <View 
         android:background="@drawable/ic_line_1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        />
-    <ListView 
-          android:id="@+id/lv_businesscard"
-        style="@style/ListView" >
-        ></ListView>
-    
-
+        android:layout_height="1dp"
+        /> 
+        
+          <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:id="@+id/meeting_function_vote"
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="昵称"
+            />
+        
+    </LinearLayout>
+      <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+           <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="性别"
+            />
+        
+    </LinearLayout>
+      <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            />
+           <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="公司名称"
+            />
+       
+    </LinearLayout>
+       <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+           <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="职位"
+            />
+        
+    </LinearLayout>
+      <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+          <LinearLayout 
+        android:layout_marginTop="20dp"
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="联系电话"
+            />
+      
+    </LinearLayout>
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/ic_line_1"
+            />
+          <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="联系邮箱"
+            />
+         
+    </LinearLayout>
+     <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            />
+          <LinearLayout 
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="职位"
+            />
+        
+    </LinearLayout>
+      <View 
+           android:background="@drawable/ic_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            />
+         <LinearLayout 
+             android:layout_marginBottom="20dp"
+        style="@style/LinearLayout.item"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            style="@style/TextView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="生日"
+            />
+      
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

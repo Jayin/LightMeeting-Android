@@ -16,7 +16,7 @@ import meizhuo.org.lightmeeting.fragment.BusinessCard_fm;
 import meizhuo.org.lightmeeting.fragment.Dynamic_fm;
 import meizhuo.org.lightmeeting.fragment.LMList_fm;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity { 
 //	private static final String TAG = "MainActivity";
 	
 	@InjectView(R.id.tabs) com.astuetz.PagerSlidingTabStrip mPagerSlidingTabStrip;

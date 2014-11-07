@@ -27,7 +27,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">null</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     
@@ -46,6 +46,7 @@
        <style name="LinearLayout.item">
           <item name="android:layout_width">match_parent</item>
                <item name="android:layout_height">wrap_content</item>
+               <item name="android:background">@drawable/lm_btn_white2grey</item>
            </style>
        
 </resources>
