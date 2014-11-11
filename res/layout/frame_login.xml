@@ -55,7 +55,7 @@
                     android:id="@+id/acty_login_et_password"
                     style="@style/EditText_register_item"
                     android:hint="请输入密码"
-                    android:inputType="text|textCapWords"
+                    android:password="true"
                     />
             </LinearLayout>
              <View
