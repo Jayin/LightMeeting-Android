@@ -71,6 +71,18 @@ public class MainActivity extends BaseActivity {
 		}
 		
 	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initLayout() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 
