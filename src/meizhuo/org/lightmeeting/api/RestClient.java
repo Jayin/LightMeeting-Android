@@ -16,7 +16,7 @@ import android.content.Context;
  */
 public class RestClient {
 	//测试url
-	public static final String BASE_URL = "http://10.10.65.0/lightmeeting/Home/index/test";
+	public static final String BASE_URL = "http://10.10.65.0/lightmeeting";
 	private static int HTTP_Timeout = 12*1000;
 	public static Context context;
 	
