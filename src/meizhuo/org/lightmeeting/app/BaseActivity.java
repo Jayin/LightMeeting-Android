@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
 	@Optional @InjectView(R.id.tv_app_title) TextView tv_title;
 	@Optional @InjectView(R.id.iv_app_icon_back) ImageView iv_app_icon_back;
 
@@ -168,5 +168,9 @@ public class BaseActivity extends FragmentActivity {
 			closeActivity();
 		}
 	}
+	protected abstract void initData();
+
+	protected abstract void initLayout();
+	
 }
 
