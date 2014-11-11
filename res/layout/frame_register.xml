@@ -160,7 +160,7 @@
                     />
                 
             </LinearLayout>
-                <View
+          <!--     <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
@@ -231,13 +231,14 @@
                     android:src="@drawable/ic_login_icon_user_name"
                     />
                 <EditText 
-                    android:id="@+id/acty_register_et_email"
+                    android:id="@+id/acty_register_et_birth"
                     style="@style/EditText_register_item"
                     android:hint="请输入出生日期 "
                     android:inputType="text|textCapWords"
                     />
                 
             </LinearLayout>
+             -->  
              <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
