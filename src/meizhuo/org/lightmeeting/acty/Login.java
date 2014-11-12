@@ -10,6 +10,8 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
+import meizhuo.org.lightmeeting.utils.JsonUtils;
+import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.os.Bundle;
@@ -83,6 +85,24 @@ public class Login extends BaseActivity {
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
+				
+				try {
+					if(obj.getString("error_code").equals("40000"))
+					{
+						if(dialog.isShowing())
+						{
+							dialog.dismiss();
+							dialog = null;
+						}
+						String msg = obj.getString("msg");
+						toast(msg);
+						return ;
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				try {
 					if(obj.getString("code").equals("20000")){
 						if(dialog.isShowing())
@@ -92,13 +112,16 @@ public class Login extends BaseActivity {
 						}
 						String message = obj.getString("response");
 						toast(message);
-						return ;
+						openActivity(MainActivity.class);
+						Login.this.finish();
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					toast("出现了异常!");
 				}
+				
+		
 			}
 			
 			@Override
@@ -115,15 +138,115 @@ public class Login extends BaseActivity {
 	}
 	//去注册
 	@OnClick(R.id.acty_login_btn_regist) public void to_regist(){
-		
+		flipper.showNext();
 	}
+	/**
+	 @InjectView(R.id.acty_register_et_username) EditText register_et_username;
+	@InjectView(R.id.acty_register_et_nickname) EditText register_et_nickname;
+	@InjectView(R.id.acty_register_et_password) EditText register_et_password;
+	@InjectView(R.id.radioMale) RadioButton maleRadio;
+	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
+	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
+	 */
 	//点击就进行注册
 	@OnClick(R.id.acty_register_btn_regist) public void regist(){
+		if(!(AndroidUtils.isNetworkConnected(this))){
+			toast("请先打开您的网络开关!");
+			return ;
+		}
+		if(StringUtils.isEmpty(EditTextUtils.getText(register_et_username)))
+		{
+			toast("用户名不能为空");
+			return;
+		}
+		if(StringUtils.isEmpty(EditTextUtils.getText(register_et_nickname)))
+		{
+			toast("昵称不能为空");
+			return;
+		}
+		if(StringUtils.isEmpty(EditTextUtils.getText(register_et_password)))
+		{
+			toast("密码不能为空");
+			return;
+		}
+		if(StringUtils.isEmpty(EditTextUtils.getText(register_et_email)))
+		{
+			toast("电子邮箱不能为空");
+			return;
+		}
+		String username =EditTextUtils.getText(register_et_username); 
+		String nickname =EditTextUtils.getText(register_et_nickname); 
+		String password =EditTextUtils.getText(register_et_password); 
+		String email =EditTextUtils.getText(register_et_email); 
+		String sex = "";
+		boolean maleIsChecked = maleRadio.isChecked(); //男性被点击
+		if(maleIsChecked) sex = "男";
+		boolean femaleIsChecked = femaleRadio.isChecked(); //女性被点击
+		if(femaleIsChecked) sex = "女";
+		UserAPI.regist(username, nickname, password, sex, email, new JsonResponseHandler() {
+			
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				if(dialog == null){
+					dialog = new LoadingDialog(Login.this);
+				}
+				dialog.show();
+				dialog.setText("正在注册");
+			}
+			
+			@Override
+			public void onOK(Header[] headers, JSONObject obj) {
+				// TODO Auto-generated method stub
+				
+				try {
+					if(obj.getString("error_code").equals("40000")){
+						if(dialog.isShowing())
+						{
+							dialog.dismiss();
+							dialog = null;
+						}
+						String msg = obj.getString("msg");
+						toast("msg");
+						flipper.showPrevious();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					if(obj.getString("code").equals("20000")){
+						L.i(obj.toString());
+						if(dialog.isShowing())
+						{
+							dialog.dismiss();
+							dialog = null;
+						}
+						String message = obj.getString("response");
+						toast(message);
+						
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+		
+				
+			}
+			
+			@Override
+			public void onFaild(int errorType, int errorCode) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 	}
 	//取消注册
 	@OnClick(R.id.acty_register_btn_cancle) public void cacle(){
-		
+		flipper.showPrevious();
 	}
 	
 	
@@ -144,5 +267,6 @@ public class Login extends BaseActivity {
 		flipper.setInAnimation(this, R.anim.push_up_in);
 		flipper.setOutAnimation(this, R.anim.push_up_out);
 	}
+	
 
 }
