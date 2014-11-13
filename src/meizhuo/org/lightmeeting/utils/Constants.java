@@ -14,6 +14,8 @@ public class Constants {
 	public static final String Action_Login_In_Successful = "Login_In_Successful";
 	/**用户登录失败*/
 	public static final String Action_Login_failed = "Login_failed";
+	/**还没登录过*/
+	public static final String Action_First_Login = "First_Login";
 
 	
 	

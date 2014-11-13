@@ -6,11 +6,12 @@ import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.app.AppInfo;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
-import meizhuo.org.lightmeeting.utils.JsonUtils;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
@@ -105,15 +106,17 @@ public class Login extends BaseActivity {
 				
 				try {
 					if(obj.getString("code").equals("20000")){
+					
+						String message = obj.getString("response");
+						saveLoginInfo();
 						if(dialog.isShowing())
 						{
 							dialog.dismiss();
 							dialog = null;
 						}
-						String message = obj.getString("response");
 						toast(message);
-						openActivity(MainActivity.class);
-						Login.this.finish();
+						closeActivity();
+						
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -266,6 +269,23 @@ public class Login extends BaseActivity {
 	private void initFlipper(){
 		flipper.setInAnimation(this, R.anim.push_up_in);
 		flipper.setOutAnimation(this, R.anim.push_up_out);
+	}
+	
+	/**
+	 * 保存用户登录信息
+	 */
+	private void saveLoginInfo(){
+		/**
+		 @InjectView(R.id.acty_login_et_username) EditText login_et_username;
+	@InjectView(R.id.acty_login_et_password) EditText login_et_password;
+		 */
+		User user = new User();
+		AppInfo.setUser(getContext(), user);
+		AppInfo.setUsername(getContext(), login_et_username.getText().toString());
+		AppInfo.setUserPSW(getContext(), login_et_password.getText().toString());
+		openActivity(MainActivity.class);
+		toast("登录成功!");
+	
 	}
 	
 

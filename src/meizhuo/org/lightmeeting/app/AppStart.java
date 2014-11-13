@@ -11,8 +11,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 
 public class AppStart extends BaseActivity{
+	
+	private static final String TAG = "AppStart";
+	
 	private long starttime;
 	private long waittime = 1500;
 	private BroadcastReceiver mReceiver = null;
@@ -20,10 +25,11 @@ public class AppStart extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		super.onCreate(savedInstanceState,R.layout.acty_start);
+
 		initReceiver();
-//		init();
+		init();
 		starttime = System.currentTimeMillis();
 		
 	}
@@ -33,6 +39,7 @@ public class AppStart extends BaseActivity{
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.Action_Login_In_Successful);
 		filter.addAction(Constants.Action_Login_failed);
+		filter.addAction(Constants.Action_First_Login);
 		registerReceiver(mReceiver, filter);
 	}
 	
@@ -45,11 +52,11 @@ public class AppStart extends BaseActivity{
 	}
 	
 	//初始化工作
-//	private void init() {
-//		Intent service = new Intent(getContext(), CoreService.class);
-//		service.setAction(Constants.Action_To_Login);
-//		startService(service);
-//	}
+	protected void init() {
+		Intent service = new Intent(getContext(), CoreService.class);
+		service.setAction(Constants.Action_To_Login);
+		startService(service);
+	} 
 	
 	private boolean checkLoginInfo() {
 		DataPool dp = new DataPool(DataPool.SP_Name_User, this);
@@ -66,25 +73,38 @@ public class AppStart extends BaseActivity{
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
-			if(action.equals(Constants.Action_Login_In_Successful)){
-				L.i("AppStartReceiver-->Login Successfully");
-			}else{
-				L.i("AppStartReceiver-->Login faild");
+			if(action.equals(Constants.Action_First_Login)){
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						if(!AppStart.this.isFinishing()){
+							openActivity(Login.class);
+							closeActivity();
+						}
+					}
+				}, 1500);
 			}
-			long lasttime = System.currentTimeMillis() - starttime;
+			if(action.equals(Constants.Action_Login_In_Successful)){
+				Log.i(TAG, "执行了2");
+				L.i("Login Successfully");
+				if(checkLoginInfo()){
+					openActivity(MainActivity.class);
+				}else{
+					openActivity(Login.class);
+				}
+				closeActivity();
+			}
+		
+/*			long lasttime = System.currentTimeMillis() - starttime;
 			if(waittime > lasttime) {
 				try {
 					Thread.sleep(waittime-lasttime);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
-			if(checkLoginInfo()){
-				openActivity(MainActivity.class);
-			}else{
-				openActivity(Login.class);
-			}
-			closeActivity();
+			}*/
+		
 		}
 	}
 
