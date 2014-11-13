@@ -14,13 +14,13 @@ import com.google.gson.Gson;
  *
  */
 @SuppressWarnings("serial")
-public class Member implements Serializable{
+public class User implements Serializable{
 	
 	/**使用json*/
-	public static Member create_by_json(String json){
+	public static User create_by_json(String json){
 		try {
 			Gson gson = new Gson();
-			return (Member)gson.fromJson(json, Member.class);
+			return (User)gson.fromJson(json, User.class);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -32,8 +32,8 @@ public class Member implements Serializable{
 	 * @param jsonarray
 	 * @return
 	 */
-	public static List<Member> create_by_jsonarray(String jsonarray){
-		List<Member>list = null;
+	public static List<User> create_by_jsonarray(String jsonarray){
+		List<User>list = null;
 		JSONObject obj = null;
 		JSONArray array = null;
 		try {
