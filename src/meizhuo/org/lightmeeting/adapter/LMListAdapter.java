@@ -3,8 +3,10 @@ package meizhuo.org.lightmeeting.adapter;
 
 import java.util.Arrays;
 import java.util.List;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.model.Meeting;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,17 +21,13 @@ import android.widget.TextView;
 public class LMListAdapter extends BaseAdapter {
 	
 	
-	List<String>mData;
-	List<String>meeting_Time;
-	List<String>meeting_Place;
+	List<Meeting>mData;
 	private Context mContext;
 
-	public LMListAdapter(Context context, String[] names,String[] Meeting_Time,String[] Meeting_Place) {
+	public LMListAdapter(Context context, List<Meeting> data) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
-		mData = Arrays.asList(names);
-		meeting_Time = Arrays.asList(Meeting_Time);
-		meeting_Place = Arrays.asList(Meeting_Place);
+		mData = data;
 	}
 
 	@Override
@@ -61,16 +59,20 @@ public class LMListAdapter extends BaseAdapter {
 		}else{
 			h = (ViewHolder) convertView.getTag();
 		}
-		h.tv_name.setText(mData.get(position));
-		h.meeting_place.setText(meeting_Place.get(position));
-		h.meeting_time.setText(meeting_Time.get(position));
+		h.tv_meeting_title.setText(mData.get(position).getTitle());
+		h.tv_meeting_address.setText(mData.get(position).getAddress());
+		h.tv_start_time.setText(mData.get(position).getStarttime());
+		h.tv_end_time.setText(mData.get(position).getEndtime());
+		h.tv_meeting_intro.setText(mData.get(position).getIntro());
 		return convertView;
 	}
 	
 	static class ViewHolder {
-		@InjectView(R.id.tv_name) TextView tv_name;
-		@InjectView(R.id.meeting_place) TextView meeting_place;
-		@InjectView(R.id.meeting_time) TextView meeting_time;
+		@InjectView(R.id.tv_meeting_title) TextView tv_meeting_title;
+		@InjectView(R.id.tv_meeting_address) TextView tv_meeting_address;
+		@InjectView(R.id.tv_start_time) TextView tv_start_time;
+		@InjectView(R.id.tv_end_time) TextView tv_end_time;
+		@InjectView(R.id.tv_meeting_intro) TextView tv_meeting_intro;
 		
 		public ViewHolder(View v) {
 			// TODO Auto-generated constructor stub
