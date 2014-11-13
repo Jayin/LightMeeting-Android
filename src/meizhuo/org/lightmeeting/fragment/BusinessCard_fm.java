@@ -11,7 +11,7 @@ import butterknife.InjectView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.Member;
+import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
@@ -109,7 +109,7 @@ private void initLayout(){
 				}
 				JSONObject obj1 = (JSONObject)msg.obj;
 				try {
-					Member member = Member.create_by_json(obj1.getString("response"));
+					User member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
 					member_birth.setText(member.getBirth());
 					if(member.getSex().equals("m")){
