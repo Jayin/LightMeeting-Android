@@ -91,4 +91,13 @@ public class UserAPI {
 		RequestParams params  = new RequestParams();
 		RestClient.post("/home/member/logout", params, responseHandler);
 	}
+	
+	/**
+	 * 获取登录会员信息
+	 * @param responseHandler
+	 */
+	public static void getMemberData(AsyncHttpResponseHandler responseHandler){
+		RestClient.post("/home/member/getloginmember", null, responseHandler);
+	}
+	
 }
