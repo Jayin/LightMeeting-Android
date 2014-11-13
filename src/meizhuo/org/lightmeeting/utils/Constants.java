@@ -15,5 +15,13 @@ public class Constants {
 	/**用户登录失败*/
 	public static final String Action_Login_failed = "Login_failed";
 
-
+	
+	
+	/**http请求状态*/
+	public final static int Start = 0;
+	public final static int Logining = 1;
+	public final static int Downloading = 2;
+	public final static int Finish = 3;
+	public final static int Fail = 4;
+	
 }
