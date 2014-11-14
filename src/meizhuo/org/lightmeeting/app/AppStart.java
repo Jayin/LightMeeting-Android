@@ -6,6 +6,7 @@ import meizhuo.org.lightmeeting.acty.MainActivity;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.DataPool;
 import meizhuo.org.lightmeeting.utils.L;
+import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +14,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Window;
 
 public class AppStart extends BaseActivity{
 	
 	private static final String TAG = "AppStart";
 	
+	ActionBar mActionBar;
 	private long starttime;
 	private long waittime = 1500;
 	private BroadcastReceiver mReceiver = null;
@@ -26,7 +29,10 @@ public class AppStart extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub 
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState,R.layout.acty_start);
+		mActionBar = getActionBar();
+		mActionBar.hide();
 
 		initReceiver();
 		init();
