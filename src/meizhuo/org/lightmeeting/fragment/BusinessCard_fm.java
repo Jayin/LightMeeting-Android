@@ -43,6 +43,7 @@ public class BusinessCard_fm extends BaseFragment  {
 	
 	 LoadingDialog loadingdialog;
 	BCHandler handler = new BCHandler();
+	DialogHandler dialogHandler =new DialogHandler(); 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +153,44 @@ private void initLayout(){
 		
 	}
 	
+	class DialogHandler extends Handler{
+		LoadingDialog dialog;
+		
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			switch (msg.what) {
+			case Constants.Start:
+				if(dialog==null){
+					dialog = new LoadingDialog(getActivity());
+					dialog.setText("正在修改密码");
+					dialog.show();
+				}
+				break;
+			case Constants.Finish:
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						App app = (App)(BusinessCard_fm.this.getActivity().getApplication());
+						app.cleanUpInfo();
+					}
+				}).start();
+				if(dialog.isShowing()){
+					dialog.dismiss();
+					dialog = null;
+				}
+				toast("修改成功,请重新登录");
+				openActivity(Login.class);
+				BusinessCard_fm.this.getActivity().finish();
+				break;
+			default:
+				break;
+			}
+		}
+		
+	}
+	
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -192,7 +231,7 @@ private void initLayout(){
 					}
 					if((et_change_oldpsw.getText().toString()) == null || (et_change_oldpsw.getText().toString()).equals(""))
 					{
-						toast("旧密码不能为空!");
+						toast("确认新密码不能为空!");
 						return ;
 					}
 					if(!((et_confirm_newpsw.getText().toString()).equals(et_change_newpsw.getText().toString()))){
@@ -200,6 +239,12 @@ private void initLayout(){
 						return ;
 					}
 					UserAPI.changePsw(et_change_oldpsw.getText().toString(), et_change_newpsw.getText().toString(), new JsonResponseHandler() {
+						
+						@Override
+						public void onStart() {
+							// TODO Auto-generated method stub
+							dialogHandler.sendEmptyMessage(Constants.Start);
+						}
 						
 						@Override
 						public void onOK(Header[] headers, JSONObject obj) {
@@ -219,8 +264,8 @@ private void initLayout(){
 							try {
 								if(obj.getString("code").equals("20000"))
 								{
-									toast("修改成功");
-									
+									dialogHandler.sendEmptyMessage(Constants.Finish);
+								
 								}
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
