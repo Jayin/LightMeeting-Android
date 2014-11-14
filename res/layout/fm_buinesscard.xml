@@ -14,7 +14,8 @@
             >
     
     <LinearLayout 
-             android:background="@android:color/white"
+             android:background="@drawable/lm_btn_white2grey"
+             android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -51,7 +52,6 @@
           <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 
@@ -80,7 +80,6 @@
          <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 
@@ -109,7 +108,6 @@
            <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 
@@ -140,7 +138,6 @@
                android:layout_marginTop="20dp"
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView
@@ -170,7 +167,6 @@
            <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 
@@ -199,7 +195,6 @@
           <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 
@@ -228,7 +223,6 @@
           <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
         android:layout_height="50dp"
         >
         <TextView 

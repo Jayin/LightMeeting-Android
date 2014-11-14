@@ -10,6 +10,7 @@ import butterknife.InjectView;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.Login;
+import meizhuo.org.lightmeeting.acty.Update_userdata;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
@@ -19,6 +20,7 @@ import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +46,7 @@ public class BusinessCard_fm extends BaseFragment  {
 	 LoadingDialog loadingdialog;
 	BCHandler handler = new BCHandler();
 	DialogHandler dialogHandler =new DialogHandler(); 
+	User member;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +129,7 @@ private void initLayout(){
 				}
 				JSONObject obj1 = (JSONObject)msg.obj;
 				try {
-					User member = User.create_by_json(obj1.getString("response"));
+					 member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
 					member_birth.setText(member.getBirth());
 					if(member.getSex().equals("m")){
@@ -203,7 +206,31 @@ private void initLayout(){
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.action_refreshdata:
-			toast("1");
+			Intent intent = new Intent(getActivity(), Update_userdata.class);
+			/**
+			 	User member = User.create_by_json(obj1.getString("response"));
+					member_nickname.setText(member.getNickname());
+					member_birth.setText(member.getBirth());
+					if(member.getSex().equals("m")){
+						member_sex.setText("男");
+					}else{
+						member_sex.setText("女");
+					}
+					L.i(member.toString());
+					member_company.setText(member.getCompany());
+					member_position.setText(member.getPosition());
+					member_phone.setText(member.getPhone());
+					member_email.setText(member.getEmail());
+			 */
+			intent.putExtra("nickname", member.getNickname());
+			intent.putExtra("birth", member.getBirth());
+			intent.putExtra("sex", member.getSex());
+			intent.putExtra("company", member.getCompany());
+			intent.putExtra("position", member.getPosition());
+			intent.putExtra("phone", member.getPhone());
+			intent.putExtra("email", member.getEmail());
+			startActivityForResult(intent, 1000);
+			
 			break;
 		case R.id.action_changePsw:
 			LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -351,6 +378,19 @@ private void initLayout(){
 		return true;
 	}
 	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(requestCode == 1000 && resultCode == 1001){
+			member_nickname.setText(data.getStringExtra("nickname"));
+			member_birth.setText(data.getStringExtra("birth"));
+				member_sex.setText(data.getStringExtra("sex"));
+			member_company.setText(data.getStringExtra("company"));
+			member_position.setText(data.getStringExtra("position"));
+			member_phone.setText(data.getStringExtra("phone"));
+			member_email.setText(data.getStringExtra("email"));
+		}
+	}
 	
 	
 

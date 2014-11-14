@@ -80,7 +80,7 @@ public class UserAPI {
 		RequestParams params = new RequestParams();
 		params.add("password", password);
 		params.add("newpassword", newpassword);
-		RestClient.post("/home/member/login", params, responseHandler);
+		RestClient.post("/home/member/updatepassword", params, responseHandler);
 	}
 	
 	/**
