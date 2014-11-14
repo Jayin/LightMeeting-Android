@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import butterknife.InjectView;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -39,7 +41,7 @@ public class BusinessCard_fm extends BaseFragment  {
 	@InjectView(R.id.lm_member_phone) TextView member_phone;
 	@InjectView(R.id.lm_member_email) TextView member_email;
 	
-	
+	 LoadingDialog loadingdialog;
 	BCHandler handler = new BCHandler();
 	
 	@Override
@@ -47,6 +49,7 @@ public class BusinessCard_fm extends BaseFragment  {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		loadingdialog = new LoadingDialog(getActivity());
 	}
 	
 	@Override
@@ -237,15 +240,65 @@ private void initLayout(){
 				}
 			});
 			builder.setNegativeButton("取消", null);
-			AlertDialog dialog = builder.create();
+			 AlertDialog dialog = builder.create();
 			dialog.show();
-			
 			break;
 		case R.id.action_logoff:
-			toast("1");
+			UserAPI.logout(new JsonResponseHandler() {
+				
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					if(loadingdialog == null)
+					{
+						loadingdialog = new LoadingDialog(getActivity());
+						loadingdialog.setText("正在注销!");
+						loadingdialog.show();
+					}
+				}
+				
+				@Override
+				public void onOK(Header[] headers, JSONObject obj) {
+					// TODO Auto-generated method stub
+					try {
+						if(obj.getString("code").equals("20000"))
+						{
+			
+							new Thread(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									App app = (App)(getActivity().getApplication());
+									app.cleanUpInfo();
+								}
+							}).start();
+							
+							if(loadingdialog.isShowing())
+							{
+								loadingdialog.dismiss();
+								loadingdialog = null;
+							}
+							toast("注销成功");
+							openActivity(Login.class);
+							getActivity().finish();
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onFaild(int errorType, int errorCode) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 			break;
 		case R.id.action_logout:
-			toast("1");
+			getActivity().finish();
 			break;
 		default:
 			break;

@@ -3,7 +3,9 @@ package meizhuo.org.lightmeeting.app;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.RestClient;
+import meizhuo.org.lightmeeting.utils.DataPool;
 
+import com.loopj.android.http.PersistentCookieStore;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -45,6 +47,13 @@ public class App extends Application{
 	
 	public void cleanUpInfo(){
 		//清除所有缓存
+		DataPool dp = new DataPool(DataPool.SP_Name_User, this);
+		dp.removeAll();
+		
+		PersistentCookieStore cs = new PersistentCookieStore(this);
+		cs.clear();
+		
+		
 	}
 
 
