@@ -24,13 +24,14 @@
             style="@style/TextView"
                android:layout_toRightOf="@+id/iv_app_icon_back"
             android:layout_alignBottom="@+id/iv_app_icon_back"
+            android:layout_marginBottom="4dp"
             android:layout_centerVertical="true"
             android:gravity="left"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="8dp"
             android:text="Application"
             android:textColor="@color/white"
             android:textSize="15sp" 
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="8dp"
             />
     </RelativeLayout>
 </LinearLayout>

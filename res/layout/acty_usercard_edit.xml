@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="@null"
+        >
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="昵称:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_nickname"
+            style="@style/EditText_EditUserDataItem"
+            android:text="黄振炼"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="生日:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_birth"
+            style="@style/EditText_EditUserDataItem"
+            android:text="1992-5-6"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:id="@+id/lm_usercard_changesex"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="性别:"
+            />
+        <TextView 
+            android:id="@+id/lm_usercard_sex"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            style="@style/TextView"
+            android:text="男"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="公司名称:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_company"
+            style="@style/EditText_EditUserDataItem"
+            android:text="袂卓搬砖科技"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="职位:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_position"
+            style="@style/EditText_EditUserDataItem"
+            android:text="web组长"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="联系电话:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_contactphone"
+            style="@style/EditText_EditUserDataItem"
+            android:text="1252653"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line_1" />
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@drawable/lm_btn_item_main"
+        >
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/TextView"
+            android:text="联系邮箱:"
+            />
+        <EditText 
+            android:id="@+id/lm_usercard_contactemail"
+            style="@style/EditText_EditUserDataItem"
+            android:text="498056754@qq.com"
+            />
+    </LinearLayout>
+    
+    <Button 
+        android:id="@+id/lm_usercard_save"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lm_save_userinfo"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="保存"
+        android:gravity="center"
+        android:layout_height="45dp"
+        />
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    
+    <LinearLayout
+        style="@style/LinearLayout"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@android:color/white" 
+        >
+             <LinearLayout 
+                 android:layout_margin="10dp"
+            style="@style/LinearLayout"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            >
+            <TextView 
+                android:id="@+id/dynamic_user_name"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"
+                style="@style/TextView"
+                android:text="袂卓第一次会议"
+                />
+            
+        </LinearLayout>
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/ic_line_1"
+            />
+        <LinearLayout
+            android:layout_margin="10dp"
+            style="@style/LinearLayout"
+            android:layout_height="wrap_content"
+             android:orientation="vertical"
+            >
+            <TextView 
+                android:id="@+id/dynamic_user_content"
+                style="@style/TextView"
+                android:text="1、大家做个简单的自我介绍。
+					2、大家上去TOWER注册信息。
+					3、协会建设（目前项目较少，而且我们能胜任的项目并不多）（品牌活动、男生节女生节策划主要由策划部玩）
+	（社联任务安排的主要由公关部，主要为活动文案上交，星际评比，资料整理（这个具体我也不是很清楚只能够，边走边看，我把协会的建设内容以及一些文案，以及社团管理法则发给你，统一打包给部长））
+（设计部，主要参与各活动的设计工作）
+（技术部，主要参与各活动的设计工作）
+（营销部，学习）
+4、学习任务安排
+（现在项目比较少，组长安排组员学习任务，技术部跟美工还有营销部都有固定的学习内容了，策划部还有公关部的话咨询一下老师的意见）
+优先向企业推荐用人人才。
+
+之前在向力道公司（参与微信平台的推广）推荐了五名协会的人过去，还有很多的天猫代运营的公司要用人才，优先推荐协会的人过去。
+
+
+强调：各个部长进行自主管理，每周一次全体例会，会议内容Tower汇报。
+大例会另行通知（*主要是有活动或者是项目经验分享时召开）
+
+品牌活动：学术讲座，技术交流会，电商比赛。
+（通过这些比赛讲座可以了解到最新的电商发展趋势，提高眼界）
+                "
+                />
+        </LinearLayout>
+    </LinearLayout>
+    
+    </ScrollView>
+    
+
+</LinearLayout>
