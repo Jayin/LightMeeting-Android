@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:clickable="true"
+        android:id="@+id/btn_userinfo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        >
+        <TextView 
+            android:id="@+id/tv_username"
+            style="@style/TextViewBase"
+            android:layout_marginLeft="6dp"
+            android:text="Username"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/lm_ic_line3"
+        />
+    <ListView 
+        android:id="@+id/left_drawer"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@android:color/white"
+        android:divider="@drawable/lm_ic_line3"
+        ></ListView>
+
+</LinearLayout>
