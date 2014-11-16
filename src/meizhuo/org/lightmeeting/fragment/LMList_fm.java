@@ -4,17 +4,23 @@ package meizhuo.org.lightmeeting.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.Lm_meeting_addnewmeet;
 import meizhuo.org.lightmeeting.acty.MeetingData;
+import meizhuo.org.lightmeeting.acty.Update_meeting;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnItemClickListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateBtnClickListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -45,6 +51,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	List<Meeting>data;
 	String page="1",limit="";
 	boolean hasMore = true, isloading=false;
+	LoadingDialog dialog;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,71 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	private void initData(){
 		data = new ArrayList<Meeting>();
 		adapter = new LMListAdapter(getActivity(), data);
+		adapter.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(final int position) {
+				// TODO Auto-generated method stub
+				toast("" + position);
+				MeetingAPI.deleteMeeting(data.get(position).getId(), new JsonResponseHandler() {
+					
+					@Override
+					public void onStart() {
+						// TODO Auto-generated method stub
+						if(dialog == null){
+							dialog = new LoadingDialog(getActivity());
+							dialog.setText("正在删除！");
+							dialog.show();
+						}
+					}
+					
+					@Override
+					public void onOK(Header[] headers, JSONObject obj) {
+						// TODO Auto-generated method stub
+						L.i(obj.toString());
+						try {
+							if(obj.getString("code").equals("20000")){
+								if(dialog.isShowing()){
+									dialog.dismiss();
+									dialog =null;
+								}
+								toast("删除成功");
+								data.remove(position);
+								adapter.notifyDataSetChanged();
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					@Override
+					public void onFaild(int errorType, int errorCode) {
+						// TODO Auto-generated method stub
+						toast("网络不给力,请检查你的网络设置!");
+						return ;
+						
+					}
+				});
+			
+				
+			}
+		});
+		
+		adapter.setOnUpdateBtnClickListener(new OnUpdateBtnClickListener() {
+			@Override
+			public void onUpdateClick(int position) {
+				// TODO Auto-generated method stub
+				Intent intent = new  Intent(getActivity(), Update_meeting.class);
+				intent.putExtra("id", data.get(position).getId());
+				intent.putExtra("title", data.get(position).getTitle());
+				intent.putExtra("intro", data.get(position).getIntro());
+				intent.putExtra("address", data.get(position).getAddress());
+				intent.putExtra("starttime", data.get(position).getStarttime());
+				intent.putExtra("endtime", data.get(position).getEndtime());
+				startActivity(intent);
+			}
+		});
 	}
 	private void initLayout(){
 		swipeRefreshLayout.setOnRefreshListener(this);
@@ -100,7 +172,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				data.addAll(meetinglist);
 				adapter.notifyDataSetChanged();
 				page = "1";
-				if(meetinglist.size()<10)
+				if(meetinglist.size()<5)
 				{
 					hasMore = false;
 				}else{
@@ -141,7 +213,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
 				List<Meeting> meetings = Meeting.create_by_jsonarray(obj.toString());
-				data.clear();
 				data.addAll(meetings);
 				adapter.notifyDataSetChanged();
 				if(obj.isNull("response")||meetings.size()<5)
@@ -160,7 +231,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
+				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});

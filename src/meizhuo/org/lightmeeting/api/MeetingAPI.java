@@ -43,7 +43,7 @@ public class MeetingAPI {
 	public static void updateMeeting(String meetid,String title,String intro,String address,String starttime,String endtime,
 			AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		params.add("meetid", meetid);
+		params.add("id", meetid);
 		if(!(title==null || title.equals(""))){
 			params.add("title", title);
 		}

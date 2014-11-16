@@ -16,7 +16,10 @@ public class Constants {
 	public static final String Action_Login_failed = "Login_failed";
 	/**还没登录过*/
 	public static final String Action_First_Login = "First_Login";
-
+	/**更新会议开始时间*/
+	public static final String Action_Update_Start_Time = "Update_Start_Time";
+	/**更新会议结束时间*/
+	public static final String Action_Update_End_Time = "Update_End_Time";
 	
 	
 	/**http请求状态*/
