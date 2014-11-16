@@ -1,4 +1,4 @@
-package meizhuo.org.lightmeeting.fragment;
+package meizhuo.org.lightmeeting.acty;
 
 
 
@@ -9,10 +9,9 @@ import org.json.JSONObject;
 import butterknife.InjectView;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.acty.Login;
-import meizhuo.org.lightmeeting.acty.Update_userdata;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
+import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -33,7 +32,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class BusinessCard_fm extends BaseFragment  {
+public class BusinessCard extends BaseActivity  {
 	
 	@InjectView(R.id.lm_member_nickname) TextView member_nickname;
 	@InjectView(R.id.lm_member_birth) TextView member_birth;
@@ -51,59 +50,22 @@ public class BusinessCard_fm extends BaseFragment  {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
-		loadingdialog = new LoadingDialog(getActivity());
+		super.onCreate(savedInstanceState,R.layout.fm_buinesscard);
+		loadingdialog = new LoadingDialog(this);
+		 initData();
+		 
 	}
 	
-	@Override
+/*	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_buinesscard);
-	 initData();
-	 initLayout();
-	 
+	 super.onCreateView(inflater, container, savedInstanceState,);
+	
 	 return contentView;
-	}
+	}*/
 	
 	
-	
-	private void initData(){
-		handler.sendEmptyMessage(Constants.Start);
-		final Message msg = handler.obtainMessage();
-		UserAPI.getMemberData(new JsonResponseHandler() {
-			
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						msg.obj =obj;
-						msg.what = Constants.Finish;
-						handler.sendMessage(msg);
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					toast("解析错误");
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		
-	}
-	
-private void initLayout(){
-		
-	}
 	
 	class BCHandler extends Handler{
 		LoadingDialog dialog;
@@ -115,7 +77,7 @@ private void initLayout(){
 			case Constants.Start:
 				if(dialog == null)
 				{
-					dialog = new LoadingDialog(getActivity());
+					dialog = new LoadingDialog(BusinessCard.this);
 				}
 				dialog.setText("正在加载个人资料");
 				dialog.show();
@@ -165,7 +127,7 @@ private void initLayout(){
 			switch (msg.what) {
 			case Constants.Start:
 				if(dialog==null){
-					dialog = new LoadingDialog(getActivity());
+					dialog = new LoadingDialog(BusinessCard.this);
 					dialog.setText("正在修改密码");
 					dialog.show();
 				}
@@ -175,8 +137,7 @@ private void initLayout(){
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						App app = (App)(BusinessCard_fm.this.getActivity().getApplication());
-						app.cleanUpInfo();
+						((App)getApplication()).cleanUpInfo();
 					}
 				}).start();
 				if(dialog.isShowing()){
@@ -185,7 +146,7 @@ private void initLayout(){
 				}
 				toast("修改成功,请重新登录");
 				openActivity(Login.class);
-				BusinessCard_fm.this.getActivity().finish();
+				BusinessCard.this.finish();
 				break;
 			default:
 				break;
@@ -195,10 +156,12 @@ private void initLayout(){
 	}
 	
 	
+	
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		inflater.inflate(R.menu.fm_user, menu);
+		getMenuInflater().inflate(R.menu.fm_user, menu);
+		return true;
 	}
 	
 	@Override
@@ -206,7 +169,7 @@ private void initLayout(){
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.action_refreshdata:
-			Intent intent = new Intent(getActivity(), Update_userdata.class);
+			Intent intent = new Intent(this, Update_userdata.class);
 			/**
 			 	User member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
@@ -233,12 +196,12 @@ private void initLayout(){
 			
 			break;
 		case R.id.action_changePsw:
-			LayoutInflater inflater = LayoutInflater.from(getActivity());
+			LayoutInflater inflater = LayoutInflater.from(BusinessCard.this);
 			View dialogView = inflater.inflate(R.layout.dialog_change_psw, null);
 			final EditText et_change_oldpsw = (EditText)dialogView.findViewById(R.id.et_change_oldpsw);
 			final EditText et_change_newpsw = (EditText)dialogView.findViewById(R.id.et_change_newpsw);
 			final EditText et_confirm_newpsw = (EditText)dialogView.findViewById(R.id.et_change_confirmnewpsw);
-			AlertDialog.Builder  builder =  new AlertDialog.Builder(getActivity());
+			AlertDialog.Builder  builder =  new AlertDialog.Builder(BusinessCard.this);
 			builder.setTitle("修改密码");
 			builder.setView(dialogView);
 			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -323,7 +286,7 @@ private void initLayout(){
 					// TODO Auto-generated method stub
 					if(loadingdialog == null)
 					{
-						loadingdialog = new LoadingDialog(getActivity());
+						loadingdialog = new LoadingDialog(BusinessCard.this);
 						loadingdialog.setText("正在注销!");
 						loadingdialog.show();
 					}
@@ -341,8 +304,7 @@ private void initLayout(){
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									App app = (App)(getActivity().getApplication());
-									app.cleanUpInfo();
+									((App)getApplication()).cleanUpInfo();
 								}
 							}).start();
 							
@@ -353,7 +315,7 @@ private void initLayout(){
 							}
 							toast("注销成功");
 							openActivity(Login.class);
-							getActivity().finish();
+							BusinessCard.this.finish();
 						}
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -370,7 +332,7 @@ private void initLayout(){
 			
 			break;
 		case R.id.action_logout:
-			getActivity().finish();
+			BusinessCard.this.finish();
 			break;
 		default:
 			break;
@@ -390,6 +352,44 @@ private void initLayout(){
 			member_phone.setText(data.getStringExtra("phone"));
 			member_email.setText(data.getStringExtra("email"));
 		}
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		handler.sendEmptyMessage(Constants.Start);
+		final Message msg = handler.obtainMessage();
+		UserAPI.getMemberData(new JsonResponseHandler() {
+			
+			
+			@Override
+			public void onOK(Header[] headers, JSONObject obj) {
+				// TODO Auto-generated method stub
+				try {
+					if(obj.getString("code").equals("20000")){
+						msg.obj =obj;
+						msg.what = Constants.Finish;
+						handler.sendMessage(msg);
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					toast("解析错误");
+				}
+			}
+			
+			@Override
+			public void onFaild(int errorType, int errorCode) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+
+	@Override
+	protected void initLayout() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
