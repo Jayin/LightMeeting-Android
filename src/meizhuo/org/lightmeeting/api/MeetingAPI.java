@@ -40,9 +40,10 @@ public class MeetingAPI {
 	 * @param endtime
 	 * @param responseHandler
 	 */
-	public static void updateMeeting(String title,String intro,String address,String starttime,String endtime,
+	public static void updateMeeting(String meetid,String title,String intro,String address,String starttime,String endtime,
 			AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
+		params.add("meetid", meetid);
 		if(!(title==null || title.equals(""))){
 			params.add("title", title);
 		}
@@ -69,6 +70,7 @@ public class MeetingAPI {
 	public static void deleteMeeting(String meetid,AsyncHttpResponseHandler responseHandler)
 	{
 		RequestParams params = new RequestParams();
+		params.add("meetid", meetid);
 		RestClient.post("/home/meet/deletemeet", params, responseHandler);
 	}
 	
