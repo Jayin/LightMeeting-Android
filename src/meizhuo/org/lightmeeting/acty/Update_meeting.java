@@ -18,7 +18,6 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 public class Update_meeting extends BaseActivity {
@@ -94,7 +93,6 @@ public class Update_meeting extends BaseActivity {
 		it.putExtra("endtime", endtime);
 		sendBroadcast(new Intent(Constants.Action_Update_End_Time));
 		startActivityForResult(it, 1000);
-		
 	}
 	
 	@OnClick(R.id.lm_meeting_update) public void update_meeting(){
