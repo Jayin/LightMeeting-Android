@@ -4,40 +4,39 @@ import java.util.Arrays;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
+import meizhuo.org.lightmeeting.model.Member;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class MemberAdapter extends BaseAdapter {
+
+public class MemberAdapter extends BaseAdapter  {
 	
 	private Context mContext;
-	private List<String>username_list;
-	private List<String>userintro_list;
+	private List<Member>mData;
+	
 
-	public MemberAdapter(Context context, String[] usernames,String[] userintros) {
+	public MemberAdapter(Context context,List<Member>data) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
-		userintro_list = Arrays.asList(userintros);
-		username_list = Arrays.asList(usernames);
+		mData = data;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return username_list.size();
+		return mData.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return username_list.get(position);
+		return mData.get(position);
 	}
 
 	@Override
@@ -45,6 +44,8 @@ public class MemberAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return position;
 	}
+
+
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -55,12 +56,14 @@ public class MemberAdapter extends BaseAdapter {
 			h = new ViewHolder(convertView);
 			convertView.setTag(h);
 		}else{
-			h  =(ViewHolder)convertView.getTag();
+			h = (ViewHolder)convertView.getTag();
 		}
-		h.tv_username.setText(username_list.get(position));
-		h.tv_userintro.setText(userintro_list.get(position));
+		h.tv_username.setText(mData.get(position).getNickname());
+		
+		h.tv_userintro.setText(mData.get(position).getCompany() + mData.get(position).getPosition());
 		return convertView;
 	}
+	
 	
 	static class ViewHolder{
 		@InjectView(R.id.tv_username) TextView tv_username;
@@ -71,5 +74,6 @@ public class MemberAdapter extends BaseAdapter {
 			ButterKnife.inject(this, v);
 		}
 	}
+	
 
 }
