@@ -5,9 +5,6 @@ import com.loopj.android.http.RequestParams;
 
 public class MeetingAPI {
 	
-	public MeetingAPI() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	/**
 	 * 添加会议 
@@ -103,6 +100,16 @@ public class MeetingAPI {
 		RestClient.post("/home/meet/getjoinmeet", params, responseHandler);
 	}
 	
+	/**
+	 * 获取加入的成员列表
+	 * @param meetid
+	 * @param responseHandler
+	 */
+	public static void getJoinMember(String meetid,AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		params.add("meetid", meetid);
+		RestClient.post("/home/meet/getjoinmember", params, responseHandler);
+	}
 
 
 }
