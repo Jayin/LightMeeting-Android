@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,16 +12,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.fragment.BusinessCard_fm;
-import meizhuo.org.lightmeeting.fragment.Dynamic_fm;
-import meizhuo.org.lightmeeting.fragment.LMList_fm;
 import meizhuo.org.lightmeeting.fragment.MeetingData_fm;
 import meizhuo.org.lightmeeting.fragment.Meeting_function_fm;
 import meizhuo.org.lightmeeting.fragment.Member_fm;
+import meizhuo.org.lightmeeting.utils.L;
 
+/***
+ * 一个会议相关的所有东西，包含三个fragment
+ * @author Jason
+ *
+ */
 public class MeetingData extends BaseActivity{
 
-	
 	@InjectView(R.id.tabs) com.astuetz.PagerSlidingTabStrip mPagerSlidingTabStrip;
 	@InjectView(R.id.viewpager) ViewPager mViewPager;
 
@@ -28,11 +31,24 @@ public class MeetingData extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState, R.layout.activity_main);
+		super.onCreate(savedInstanceState, R.layout.lm_list_one_meeting);
+		
+		String meetid = getIntent().getStringExtra("meetid");
+		
+		Member_fm member_fm = new Member_fm();
+		Bundle bundle = new Bundle();
+		bundle.putString("meetid", meetid);
+		member_fm.setArguments(bundle);
+		
+		/*bundle传给meetfunction*/
+		Meeting_function_fm meet_function = new Meeting_function_fm();
+		meet_function.setArguments(bundle);
+		
 		
 		fragments.add(new MeetingData_fm());
-		fragments.add(new Meeting_function_fm());
-		fragments.add(new Member_fm());
+		fragments.add(meet_function);
+		fragments.add(member_fm);
+		
 		
 		mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
