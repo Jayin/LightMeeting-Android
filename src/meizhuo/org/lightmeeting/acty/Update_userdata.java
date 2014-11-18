@@ -13,7 +13,6 @@ import android.widget.TextView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.fragment.BusinessCard_fm;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
@@ -107,7 +106,7 @@ public class Update_userdata extends BaseActivity {
 				try {
 					if(obj.getString("code").equals("20000")){
 						toast("更新成功");
-						Intent it = new Intent(Update_userdata.this, BusinessCard_fm.class);
+						Intent it = new Intent(Update_userdata.this, BusinessCard.class);
 						String nickname1 = nickname;
 						String birth1 = birth;
 						String sex1 = sex;
@@ -115,6 +114,7 @@ public class Update_userdata extends BaseActivity {
 						String position1 = position;
 						String phone1 = phone;
 						String email1 = email;
+						
 						it.putExtra("nickname", nickname1);
 						it.putExtra("birth",birth1);
 						it.putExtra("sex", sex1);
