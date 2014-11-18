@@ -3,19 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-   
-
     android:orientation="vertical" >
 
     <TextView
+        android:background="@drawable/lm_btn_white2grey"
         android:id="@+id/tv_menuName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@android:color/black"
+        android:textColor="@color/lm_lucency_blue"
         android:textSize="18sp" />
 
 </LinearLayout>

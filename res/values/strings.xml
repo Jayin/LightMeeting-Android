@@ -10,5 +10,7 @@
 	<string name="action_changePsw">修改密码</string>
 	<string name="action_logoff">注销账号</string>
 	<string name="action_logout">退出</string>
-	<string name="action_refresh_user">更新资料</string>
+	<string name="action_refresh_user">修改资料</string>
+	<string name="drawer_open">Open navigation drawer</string>
+	 <string name="drawer_close">Close navigation drawer</string>
 </resources>

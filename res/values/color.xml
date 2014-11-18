@@ -9,4 +9,8 @@
     <color name="lm_grey">#FFE1E8EB</color>
     <color name="lm_grey_lv_three">#D0D3D7</color>
     <color name="lm_grey_lv_two">#808080</color>
+    <color name="lucency_white">#00ffffff</color>
+    <color name="lm_grey2">#BABABA</color>
+    <color name="lm_backgroundColor">#E8E8E0</color>
+    <color name="lm_backgroundColorPress">#DBDBD3</color>
 </resources>

@@ -51,13 +51,33 @@
             android:orientation="horizontal"
             android:layout_height="30dp"
             >
+            <LinearLayout 
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                >
              <TextView
-        style="@style/TextView"
-        android:id="@+id/tv_meeting_title"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
- 		android:text="name"
-         />
+      		  style="@style/TextView"
+       		 android:id="@+id/tv_meeting_title"
+      		  android:layout_width="wrap_content"
+      	 	 android:layout_height="60dp"
+ 				android:text="name"
+        	 />
+             </LinearLayout>
+             <LinearLayout 
+                 android:clickable="true"
+                 android:id="@+id/lm_icon_update_meeting"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 >
+                 <ImageView 
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/lm_icon_update_meeting"
+                 />
+                 
+             </LinearLayout>
+             
         </LinearLayout>
            <View 
             android:layout_width="match_parent"
