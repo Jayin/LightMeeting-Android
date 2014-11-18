@@ -54,52 +54,80 @@ public class Vote implements Serializable{
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Vote [id=" + id + ", meetid=" + meetid + ", intro=" + intro
-				+ ", ctime=" + ctime + ", stime=" + stime + ", etime=" + etime
-				+ "]";
-	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getMeetid() {
 		return meetid;
 	}
+
 	public void setMeetid(String meetid) {
 		this.meetid = meetid;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getIntro() {
 		return intro;
 	}
+
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
+
 	public String getCtime() {
 		return ctime;
 	}
+
 	public void setCtime(String ctime) {
 		this.ctime = ctime;
 	}
+
 	public String getStime() {
 		return stime;
 	}
+
 	public void setStime(String stime) {
 		this.stime = stime;
 	}
+
 	public String getEtime() {
 		return etime;
 	}
+
 	public void setEtime(String etime) {
 		this.etime = etime;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Vote [id=" + id + ", meetid=" + meetid + ", title=" + title
+				+ ", intro=" + intro + ", ctime=" + ctime + ", stime=" + stime
+				+ ", etime=" + etime + "]";
+	}
+
+
+
 	/**投票id*/
 	private String id;
 	/**会议id*/
 	private String meetid;
+	/**投票标题*/
+	private String title;
 	/**投票简介 */
 	private String intro;
 	/**时间1*/

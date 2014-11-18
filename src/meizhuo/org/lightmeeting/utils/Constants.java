@@ -20,6 +20,10 @@ public class Constants {
 	public static final String Action_Update_Start_Time = "Update_Start_Time";
 	/**更新会议结束时间*/
 	public static final String Action_Update_End_Time = "Update_End_Time";
+	/**创建讨论成功*/
+	public static final String Action_Create_discuss_successful ="Create_discuss_successful";
+	/**更新讨论成功*/
+	public static final String Action_Update_discuss_successful ="Update_discuss_successful";
 	
 	
 	/**http请求状态*/

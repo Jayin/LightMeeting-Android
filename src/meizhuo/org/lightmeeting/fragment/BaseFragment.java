@@ -16,7 +16,7 @@ import android.widget.Toast;
  * @author Jason
  *
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 	public View contentView;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,4 +73,8 @@ public class BaseFragment extends Fragment {
 		Log.i("debug", this.getClass().getName() + ":" + content);
 	}
 
+	protected abstract void initData();
+
+	protected abstract void initLayout();
+	
 }

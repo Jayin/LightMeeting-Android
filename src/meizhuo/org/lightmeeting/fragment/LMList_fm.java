@@ -1,4 +1,4 @@
-package meizhuo.org.lightmeeting.fragment;
+ package meizhuo.org.lightmeeting.fragment;
 
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.dimen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -72,7 +73,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	 return contentView;
 	}
 	
-	private void initData(){
+	protected void initData(){
 		data = new ArrayList<Meeting>();
 		adapter = new LMListAdapter(getActivity(), data);
 		adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -141,7 +142,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 		});
 	}
-	private void initLayout(){
+	@Override
+	protected void initLayout(){
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, 
 				android.R.color.holo_blue_light,
@@ -262,7 +264,9 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	
 	
 	@OnItemClick(R.id.lv) public void item_click(int position){
-		openActivity(MeetingData.class);
+		Intent it  =  new Intent(getActivity(), MeetingData.class);
+		it.putExtra("meetid", data.get(position).getId());
+		startActivity(it);
 	}
 	
 	@Override

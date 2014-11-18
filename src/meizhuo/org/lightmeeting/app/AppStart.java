@@ -3,6 +3,7 @@ package meizhuo.org.lightmeeting.app;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
+import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.DataPool;
 import meizhuo.org.lightmeeting.utils.L;
@@ -20,7 +21,6 @@ public class AppStart extends BaseActivity{
 	
 	private static final String TAG = "AppStart";
 	
-	ActionBar mActionBar;
 	private long starttime;
 	private long waittime = 1500;
 	private BroadcastReceiver mReceiver = null;
@@ -31,11 +31,19 @@ public class AppStart extends BaseActivity{
 		// TODO Auto-generated method stub 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState,R.layout.acty_start);
-		mActionBar = getActionBar();
-		mActionBar.hide();
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(!AppStart.this.isFinishing()){
+					openActivity(MainActivity.class);
+					closeActivity();
+				}
+			}
+		}, 1500);
 
-		initReceiver();
-		init();
+//		initReceiver();
+//		init();
 		starttime = System.currentTimeMillis();
 		
 	}
