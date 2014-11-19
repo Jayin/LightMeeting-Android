@@ -43,12 +43,6 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Vote>();
-		Vote v1 = new Vote();
-		v1.setIntro("你TM在逗我");
-		Vote v2 = new Vote();
-		v2.setIntro("你TM在逗我");
-		data.add(v1);
-		data.add(v2);
 		adapter = new MeetingData_vote_adapter(this, data);
 		
 	}

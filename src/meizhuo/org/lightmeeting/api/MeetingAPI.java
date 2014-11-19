@@ -78,6 +78,7 @@ public class MeetingAPI {
 	 */
 	public static void addjoin(String meetid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
+		params.add("meetid",meetid);
 		RestClient.post("/home/meet/addjoin", params, responseHandler);
 	}
 	
@@ -109,6 +110,17 @@ public class MeetingAPI {
 		RequestParams params = new RequestParams();
 		params.add("meetid", meetid);
 		RestClient.post("/home/meet/getjoinmember", params, responseHandler);
+	}
+	
+	/**
+	 * 退出会议
+	 * @param meetid
+	 * @param responseHandler
+	 */
+	public static void quiteMeet(String meetid,AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		params.add("meetid", meetid);
+		RestClient.post("/home/meet/outjoin", params, responseHandler);
 	}
 
 

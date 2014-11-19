@@ -14,6 +14,7 @@
        <ListView
            android:layout_marginTop="10dp" 
            android:id="@+id/comment_lv"
+           style="@style/ListView"
            android:divider="@null"
            ></ListView>
            
@@ -22,8 +23,25 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="bottom"
+        android:gravity="center"
          android:background="@drawable/bottombar_bg"
+         android:orientation="horizontal"
         >
+       <ImageView 
+           android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/aa_discuss_comment"
+            />
+           
+              <TextView 
+                  android:layout_marginLeft="8dp"
+                  android:layout_gravity="center"
+                  style="@style/TextView"
+                  android:textColor="#969696"
+                  android:text="评论"
+                  />
+          
         
     </LinearLayout>
 

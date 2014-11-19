@@ -2,27 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="@drawable/card_bg"
+    android:orientation="vertical" 
      >
      
    <com.daimajia.swipe.SwipeLayout
-        android:id="@+id/swipe"
-        android:layout_width="match_parent"
+        android:id="@+id/swipe4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
-        
-        <LinearLayout
-              android:tag="Bottom2"
+          
+           <LinearLayout
+                 android:tag="Bottom2"
                android:layout_width="wrap_content"
-               android:layout_height="match_parent">
-                      <ImageView
-            android:id="@+id/sweep_code"
-            android:src="@drawable/mz_qr_code"
-            android:layout_width="70dp"
-            android:background="#f7e79c"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_height="match_parent" />
-        <ImageView
+               android:layout_height="match_parent"
+           >     
+           
+             <ImageView
             android:id="@+id/update"
             android:src="@drawable/aa_edit"
             android:layout_width="70dp"
@@ -30,7 +27,7 @@
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
-               <ImageView
+             <ImageView
                  android:clickable="true"
             android:id="@+id/delete"
             android:src="@drawable/trash"
@@ -40,21 +37,21 @@
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
         </LinearLayout>
+
     <LinearLayout 
-        style="@style/LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        android:background="@android:color/white"
         >
         <LinearLayout 
             android:layout_margin="10dp"
-            style="@style/LinearLayout"
+            android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="30dp"
             >
             <LinearLayout 
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 >
              <TextView
@@ -74,7 +71,6 @@
             />
         <LinearLayout 
                android:layout_marginTop="4dp"
-               android:layout_marginBottom="10dp"
                android:layout_marginLeft="8dp"
             style="@style/LinearLayout"
             android:layout_height="wrap_content"
@@ -141,11 +137,11 @@
                       	<LinearLayout 
                       	    android:layout_marginTop="4dp"
         	    android:orientation="horizontal"
-        	    android:layout_width="wrap_content"
+        	    android:layout_width="match_parent"
         	    android:layout_height="wrap_content"
         	    >
                 <TextView
-                    android:text="会议简介"
+                    android:text="会议简介:"
                     android:layout_marginLeft="4dp"
                 style="@style/TextView" 
                 android:textColor="@color/lm_grey_lv_two"
@@ -158,7 +154,7 @@
                 style="@style/TextView" 
                 android:textColor="@color/lm_grey_lv_two"
                 />
-                  </LinearLayout>
+           </LinearLayout>
         </LinearLayout>
 	</LinearLayout>
 	</com.daimajia.swipe.SwipeLayout>

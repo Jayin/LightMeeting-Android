@@ -7,7 +7,6 @@ import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.DataPool;
 import meizhuo.org.lightmeeting.utils.L;
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,19 +30,19 @@ public class AppStart extends BaseActivity{
 		// TODO Auto-generated method stub 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState,R.layout.acty_start);
-		new Handler().postDelayed(new Runnable() {
+	/*	new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				if(!AppStart.this.isFinishing()){
-					openActivity(MainActivity.class);
+					openActivity(MeetingData.class);
 					closeActivity();
 				}
 			}
-		}, 1500);
+		}, 1500);*/
 
-//		initReceiver();
-//		init();
+		initReceiver();
+		init();
 		starttime = System.currentTimeMillis();
 		
 	}

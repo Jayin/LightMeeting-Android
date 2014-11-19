@@ -13,6 +13,7 @@
     <color name="lm_grey2">#BABABA</color>
     <color name="lm_backgroundColor">#E8E8E0</color>
     <color name="lm_backgroundColorPress">#DBDBD3</color>
+    <color name="lm_card_bg">#D0D0D0</color>
     
     <!-- 二维码 -->
       <color name="bg_color">#EDEDED</color>
