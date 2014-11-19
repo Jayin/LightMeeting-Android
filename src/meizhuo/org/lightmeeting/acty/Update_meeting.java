@@ -1,7 +1,5 @@
 package meizhuo.org.lightmeeting.acty;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.http.Header;
 import org.json.JSONException;

@@ -31,7 +31,6 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 	private OnUpdateListener mOnUpdateListener = null;
 	private OnHandleListener mOnHandleListener = null;
 	private OnEditListener mEditListener = null;
-	private OnSweepListener mOnSweepListener = null;
 
 	public LMListAdapter(Context context, List<Meeting> data) {
 		// TODO Auto-generated constructor stub
@@ -68,7 +67,6 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 		TextView tv_end_time = (TextView)convertView.findViewById(R.id.tv_end_time);
 		TextView tv_meeting_intro = (TextView)convertView.findViewById(R.id.tv_meeting_intro);
 		ImageView deletebtn = (ImageView)convertView.findViewById(R.id.delete);
-		ImageView sweep_code = (ImageView)convertView.findViewById(R.id.sweep_code);
 		ImageView update = (ImageView)convertView.findViewById(R.id.update);
 		
 		deletebtn.setOnClickListener(new View.OnClickListener() {
@@ -77,17 +75,6 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 				// TODO Auto-generated method stub
 				if(mOnItemClickListener!= null){
 					mOnItemClickListener.onItemClick(position);
-				}
-				
-			}
-		});
-		sweep_code.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(mOnSweepListener != null){
-					mOnSweepListener.onSweepListener(position);
 				}
 				
 			}
@@ -160,7 +147,7 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 	@Override
 	public int getSwipeLayoutResourceId(int position) {
 		// TODO Auto-generated method stub
-		return R.id.swipe;
+		return R.id.swipe4;
 	}
 	
 	public void setOnItemClickListener(OnItemClickListener listener){
@@ -192,14 +179,6 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 		public void onEditListener(int position);
 	}
 	
-	public void setOnSweepListener(OnSweepListener listener){
-		this.mOnSweepListener = listener;
-	}
-	
-	
-	public interface OnSweepListener{
-		public void onSweepListener(int position);
-	}
 	
 	public void setOnUpdateListener(OnUpdateListener listener){
 		this.mOnUpdateListener = listener;
