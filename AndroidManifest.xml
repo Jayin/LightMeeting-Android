@@ -7,12 +7,20 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
-        <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
-     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-        <permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
-        <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" >
+    </uses-permission>
+     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".app.App"
@@ -30,58 +38,106 @@
             </intent-filter>
         </activity>
         <!-- CoreService -->
-       <service android:name=".app.CoreService" >
+        <service android:name=".app.CoreService" >
         </service>
-        
-         <!-- MeetingData -->
-        <activity 
+
+        <!-- MeetingData -->
+        <activity
             android:name=".acty.MeetingData"
-            android:launchMode="singleTask"
-            >
+            android:launchMode="singleTask" >
         </activity>
-       
+
         <!-- MainActivity -->
-          <activity 
+        <activity
             android:name=".acty.MainActivity"
-            android:launchMode="singleTask"
-            >
+            android:launchMode="singleTask" >
         </activity>
-        
+
         <!-- Login -->
-       <activity 
-            android:name=".acty.Login" 
-            android:launchMode="singleTask"
-            >
+        <activity
+            android:name=".acty.Login"
+            android:launchMode="singleTask" >
         </activity>
-        
-       <!-- Update_userdata -->
-       <activity 
-           android:name=".acty.Update_userdata"
-              android:launchMode="standard" 
-           ></activity>
-      <!-- Lm_meeting_addnewmeet -->
-         <activity 
-            android:name=".acty.Lm_meeting_addnewmeet" 
-            android:launchMode="singleTask"
-            >
+
+        <!-- Update_userdata -->
+        <activity
+            android:name=".acty.Update_userdata"
+            android:launchMode="standard" >
+        </activity>
+        <!-- Lm_meeting_addnewmeet -->
+        <activity
+            android:name=".acty.Lm_meeting_addnewmeet"
+            android:launchMode="singleTask" >
         </activity>
         <!-- Update_meeting -->
-           <activity 
-            android:name=".acty.Update_meeting" 
-            android:launchMode="standard"
-            >
+        <activity
+            android:name=".acty.Update_meeting"
+            android:launchMode="standard" >
         </activity>
-        
-           <!-- Lm_meeting_selecttime -->
-              <activity 
-           android:name=".acty.Lm_meeting_selecttime"
-              android:launchMode="standard" 
-           ></activity>
-              <!-- BusinessCard -->
-              <activity 
-                  android:name=".acty.BusinessCard"
-                  android:launchMode="singleTask"
-                  ></activity>
+
+        <!-- Lm_meeting_selecttime -->
+        <activity
+            android:name=".acty.Lm_meeting_selecttime"
+            android:launchMode="standard" >
+        </activity>
+        <!-- BusinessCard -->
+        <activity
+            android:name=".acty.BusinessCard"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_discuss -->
+        <activity
+            android:name=".acty.MeetingData_discuss"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_discuss_item -->
+        <activity
+            android:name=".acty.MeetingData_discuss_item"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_research -->
+        <activity
+            android:name=".acty.MeetingData_research"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_research_item -->
+        <activity
+            android:name=".acty.MeetingData_research_item"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_discuss_update -->
+        <activity
+            android:name=".acty.MeetingData_discuss_update"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_discuss_create -->
+        <activity
+            android:name=".acty.MeetingData_discuss_create"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_vote -->
+        <activity
+            android:name=".acty.MeetingData_vote"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_vote_update -->
+        <activity
+            android:name=".acty.MeetingData_vote_update"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_vote_item -->
+            <activity
+            android:name=".acty.MeetingData_vote_item"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- CaptureActivity -->
+        <activity
+            android:name=".acty.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
     </application>
 
 </manifest>
