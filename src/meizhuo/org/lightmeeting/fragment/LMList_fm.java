@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.CaptureActivity;
 import meizhuo.org.lightmeeting.acty.Lm_meeting_addnewmeet;
 import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.acty.Update_meeting;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnEditListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateBtnClickListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnSweepListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
+import meizhuo.org.lightmeeting.encoding.EncodingHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.L;
@@ -21,8 +24,11 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.dimen;
+import com.google.zxing.WriterException;
+
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -34,6 +40,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
@@ -126,10 +133,10 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				
 			}
 		});
-		
-		adapter.setOnUpdateBtnClickListener(new OnUpdateBtnClickListener() {
+		adapter.setonEditListener(new OnEditListener() {
+			
 			@Override
-			public void onUpdateClick(int position) {
+			public void onEditListener(int position) {
 				// TODO Auto-generated method stub
 				Intent intent = new  Intent(getActivity(), Update_meeting.class);
 				intent.putExtra("id", data.get(position).getId());
@@ -139,8 +146,33 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				intent.putExtra("starttime", data.get(position).getStarttime());
 				intent.putExtra("endtime", data.get(position).getEndtime());
 				startActivity(intent);
+				
 			}
 		});
+		//二维码生成
+		adapter.setOnSweepListener(new OnSweepListener() {
+			@Override
+			public void onSweepListener(int position) {
+				// TODO Auto-generated method stub
+				LayoutInflater inflater = LayoutInflater.from(getActivity());
+				View dialogView = inflater.inflate(R.layout.qr_code_dialog, null);
+				final ImageView qr_code = (ImageView)dialogView.findViewById(R.id.iv_qr_image);
+				String meetid = data.get(position).getId();
+				try {
+					Bitmap qrCodeBitmap = EncodingHandler.createQRCode(meetid, 350);
+					qr_code.setImageBitmap(qrCodeBitmap);
+				} catch (WriterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				AlertDialog.Builder builder =  new AlertDialog.Builder(getActivity());
+				builder.setTitle("生成的二维码");
+				builder.setView(dialogView);
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		});
+		
 	}
 	@Override
 	protected void initLayout(){
@@ -286,13 +318,25 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			openActivity(Lm_meeting_addnewmeet.class);
 			break;
 		case R.id.action_sweep:
-			toast("2");
+			Intent openCameraIntent =  new Intent(getActivity(), CaptureActivity.class);
+			startActivityForResult(openCameraIntent, 0);
 			break;
 		}
 		
 		return true;
 	}
-
-
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		//处理扫描结果（在界面上显示）
+		if(requestCode == getActivity().RESULT_OK){
+			Bundle bundle = data.getExtras();
+			String scanResult = bundle.getString("result");
+			toast("" + scanResult);
+		}
+		
+	}
 
 }
