@@ -307,7 +307,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			break;
 		case R.id.action_sweep:
 			Intent openCameraIntent =  new Intent(getActivity(), CaptureActivity.class);
-			startActivityForResult(openCameraIntent, 0);
+			startActivityForResult(openCameraIntent, 50);
 			break;
 		}
 		
@@ -317,12 +317,50 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		//处理扫描结果（在界面上显示）
-		if(requestCode == getActivity().RESULT_OK){
-			Bundle bundle = data.getExtras();
-			String scanResult = bundle.getString("result");
-			toast("" + scanResult);
+		if(requestCode == 50 && resultCode == 51){
+			String meetid = data.getStringExtra("resultcode");
+			MeetingAPI.addjoin(meetid, new JsonResponseHandler() {
+				
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					if(dialog == null){
+						dialog = new LoadingDialog(getActivity());
+						dialog.setText("正在加入会议");
+					}
+					dialog.show();
+					
+				}
+				
+				@Override
+				public void onOK(Header[] headers, JSONObject obj) {
+					// TODO Auto-generated method stub
+					L.i("二维码扫出来了吗" + obj.toString());
+					try {
+						if(obj.getString("code").equals("20000")){
+							if(dialog.isShowing()){
+								dialog.dismiss();
+								dialog = null;
+							}
+							toast("加入会议成功!");
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				@Override
+				public void onFaild(int errorType, int errorCode) {
+					// TODO Auto-generated method stub
+					if(dialog.isShowing()){
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("加入会议失败,请检查您的网络!");
+				}
+			});
 		}
 		
 	}

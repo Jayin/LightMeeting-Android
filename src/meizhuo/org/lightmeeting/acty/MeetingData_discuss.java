@@ -14,6 +14,7 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
+import meizhuo.org.lightmeeting.utils.L;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -100,7 +101,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			@Override
 			public void onHandlerListener(int position) {
 				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
+				swipeRefreshLayout.setEnabled(true);
 				
 			}
 		});
@@ -128,7 +129,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		DiscussAPI.getdiscusslist(page,limit,meetid, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -195,8 +196,9 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
+				L.i("onloadmore"+ obj.toString());
 				try {
-					if(obj.get("code").equals("20000")){
+					if(obj.getString("code").equals("20000")){
 						List<Discuss>discusslist = Discuss.create_by_jsonarray(obj.toString());
 						data.addAll(discusslist);
 						adapter.notifyDataSetChanged();
@@ -204,12 +206,13 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 						if(obj.isNull("response")||discusslist.size()<10)
 						{
 							hasMore = false;
-							toast("数据记载完毕!");
+							toast("数据加载完毕!");
 						}
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					L.i("异常"+e.getMessage());
 				}
 			}
 			

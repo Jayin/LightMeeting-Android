@@ -44,8 +44,11 @@ public class MeetingData extends BaseActivity{
 		Meeting_function_fm meet_function = new Meeting_function_fm();
 		meet_function.setArguments(bundle);
 		
+		MeetingData_fm meet_data =  new MeetingData_fm();
+		meet_data.setArguments(bundle);
 		
-		fragments.add(new MeetingData_fm());
+		
+		fragments.add(meet_data);
 		fragments.add(meet_function);
 		fragments.add(member_fm);
 		
