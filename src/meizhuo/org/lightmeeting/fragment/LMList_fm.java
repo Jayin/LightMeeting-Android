@@ -11,10 +11,10 @@ import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.acty.Update_meeting;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnEditListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnSweepListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
-import meizhuo.org.lightmeeting.encoding.EncodingHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.L;
@@ -24,11 +24,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.zxing.WriterException;
-
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -40,7 +36,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
@@ -149,29 +144,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				
 			}
 		});
-		//二维码生成
-		adapter.setOnSweepListener(new OnSweepListener() {
-			@Override
-			public void onSweepListener(int position) {
-				// TODO Auto-generated method stub
-				LayoutInflater inflater = LayoutInflater.from(getActivity());
-				View dialogView = inflater.inflate(R.layout.qr_code_dialog, null);
-				final ImageView qr_code = (ImageView)dialogView.findViewById(R.id.iv_qr_image);
-				String meetid = data.get(position).getId();
-				try {
-					Bitmap qrCodeBitmap = EncodingHandler.createQRCode(meetid, 350);
-					qr_code.setImageBitmap(qrCodeBitmap);
-				} catch (WriterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				AlertDialog.Builder builder =  new AlertDialog.Builder(getActivity());
-				builder.setTitle("生成的二维码");
-				builder.setView(dialogView);
-				AlertDialog dialog = builder.create();
-				dialog.show();
-			}
-		});
 		
 	}
 	@Override
@@ -182,6 +154,22 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light);
 		lv.setAdapter(adapter);
+		adapter.setOnUpdateListener(new OnUpdateListener() {
+			
+			@Override
+			public void onUpdateListener(int position) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setEnabled(false);
+			}
+		});
+		adapter.setOnHandleListener(new OnHandleListener() {
+			
+			@Override
+			public void onHandlerListener(int position) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setEnabled(true);
+			}
+		});
 		lv.setOnScrollListener(this);
 		
 	}

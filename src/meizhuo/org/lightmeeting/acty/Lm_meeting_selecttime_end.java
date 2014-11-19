@@ -82,6 +82,7 @@ public class Lm_meeting_selecttime_end extends BaseActivity{
 		Intent intent = new Intent(this, Update_meeting.class);
 		intent.putExtra("updatetime", lm_meeting_update_time.getText().toString());
 			this.setResult(1001, intent);
+			this.setResult(31, intent);
 		Lm_meeting_selecttime_end.this.finish();
 	}
 

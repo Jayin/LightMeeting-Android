@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,8 +61,7 @@ public class Lm_meeting_addnewmeet extends BaseActivity {
 		title = EditTextUtils.getText(lm_meeting_title).toString();
 		address = EditTextUtils.getText(lm_meeting_address).toString();
 		intro = EditTextUtils.getText(lm_meeting_intro).toString();
-		starttime = str;
-		endtime = str;
+		
 		
 		MeetingAPI.addMeeting(title, intro, address, starttime, endtime, new JsonResponseHandler() {
 			
@@ -109,6 +109,19 @@ public class Lm_meeting_addnewmeet extends BaseActivity {
 		});
 		
 	}
+	
+	@OnClick(R.id.lm_meeting_starttime) public void to_selectstarttime(){
+		Intent it = new Intent(this, Lm_meeting_selecttime.class);
+		it.putExtra("starttime", starttime);
+		startActivityForResult(it, 20);
+		
+	}
+	@OnClick(R.id.lm_meeting_endtime) public void to_selectendtime(){
+		Intent it = new Intent(this,Lm_meeting_selecttime_end.class);
+		it.putExtra("endtime", endtime);
+		startActivityForResult(it, 30);
+		
+	}
 
 
 	@Override
@@ -117,14 +130,30 @@ public class Lm_meeting_addnewmeet extends BaseActivity {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日    HH:mm:ss  ");
 		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
 		str = formatter.format(curDate);
+		starttime = str;
+		endtime = str;
 
 	}
 
 	@Override
 	protected void initLayout() {
 		// TODO Auto-generated method stub
-		lm_meeting_starttime.setText(str);
-		lm_meeting_endtime.setText(str);
+		lm_meeting_starttime.setText(starttime);
+		lm_meeting_endtime.setText(endtime);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(requestCode ==20 && resultCode == 21){
+			 starttime = data.getStringExtra("updatetime");
+			lm_meeting_starttime.setText(starttime);
+		}
+		if(requestCode == 30 && resultCode == 31){
+			endtime = data.getStringExtra("updatetime");
+			lm_meeting_endtime.setText(endtime);
+			
+		}
 	}
 
 }
