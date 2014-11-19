@@ -7,6 +7,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.InjectView;
 
+/***
+ * 评论列表（讨论中的一项）暂时处理：使用Listview 显示评论列表,不处理ListView跟ScollView的冲突事件
+ * @author Jason
+ *
+ */
 public class MeetingData_discuss_item extends BaseActivity {
 	
 	
