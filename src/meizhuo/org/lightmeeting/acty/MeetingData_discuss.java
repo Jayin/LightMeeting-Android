@@ -46,7 +46,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	boolean hasMore = true,isloading = false;
 	MeetingData_discuss_adapter adapter;
 	String meetid;
-	String page = "1";
+	String page = "1",limit="";
 	ActionBar mActionBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +64,6 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Discuss>();
-		Discuss d1 = new Discuss();
-		d1.setTitle("哈哈");
-		d1.setContent("呵呵");
-		Discuss d2 = new Discuss();
-		d2.setTitle("哈哈");
-		d2.setContent("呵呵");
-		data.add(d1);
-		data.add(d2);
 		adapter  = new MeetingData_discuss_adapter(this, data);
 	}
 
@@ -136,7 +128,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		DiscussAPI.getdiscusslist(meetid, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(page,limit,meetid, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -155,7 +147,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 						data.addAll(discusslist);
 						adapter.notifyDataSetChanged();
 						page = "1";
-						if(discusslist.size()<50){
+						if(discusslist.size() <10){
 							hasMore = false;
 						}else{
 							hasMore = true;
@@ -192,7 +184,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		DiscussAPI.getdiscusslist(meetid, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -209,7 +201,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 						data.addAll(discusslist);
 						adapter.notifyDataSetChanged();
 						hasMore = true;
-						if(obj.isNull("response")||discusslist.size()<50)
+						if(obj.isNull("response")||discusslist.size()<10)
 						{
 							hasMore = false;
 							toast("数据记载完毕!");
@@ -224,6 +216,8 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			@Override
 			public void onFaild(int errorType, int errorCode) {
 				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				toast("网络不给力，请检查你的网络设置!");
 				
 			}
 			

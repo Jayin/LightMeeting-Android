@@ -2,13 +2,24 @@ package meizhuo.org.lightmeeting.adapter;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.model.Comment;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+/***
+ * 评论
+ * @author Jason
+ *
+ */
 public class MeetingData_discuss_item_adapter extends BaseAdapter{
 	
 	private Context mContext;
@@ -18,7 +29,7 @@ public class MeetingData_discuss_item_adapter extends BaseAdapter{
 		mContext = context;
 		mData = data;
 		
-	}
+	} 
 
 	@Override
 	public int getCount() {
@@ -41,7 +52,27 @@ public class MeetingData_discuss_item_adapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		return null;
+		ViewHolder h;
+		if(convertView == null){
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_meetingdata_discuss_comment, null);
+			h=new ViewHolder(convertView);
+			convertView.setTag(h);
+		}else{
+			h = (ViewHolder)convertView.getTag();
+		}
+		h.discuss_comment.setText(mData.get(position).getContent());
+		
+		return convertView;
+	}
+	
+		class ViewHolder{
+			@InjectView(R.id.discuss_comment) TextView discuss_comment;
+		
+		public ViewHolder(View v) {
+			// TODO Auto-generated constructor stub
+			ButterKnife.inject(this, v);
+		}
+		
 	}
 
 

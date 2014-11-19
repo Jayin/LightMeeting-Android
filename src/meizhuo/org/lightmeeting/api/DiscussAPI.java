@@ -10,9 +10,13 @@ public class DiscussAPI {
 	 * @param meetid
 	 * @param responseHandler
 	 */
-	public static void getdiscusslist(String meetid,AsyncHttpResponseHandler responseHandler){
+	public static void getdiscusslist(String meetid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("meetid", meetid);
+		if(!(page == null || page.equals("")))
+			params.add("page", page);
+		if(!(limit == null || limit.equals("")))
+			params.add("page", limit);
 		RestClient.post("/home/discuss/lists", params, responseHandler);
 	}
 	
