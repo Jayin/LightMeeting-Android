@@ -9,6 +9,7 @@ import butterknife.OnClick;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.DialerFilter;
 import android.widget.EditText;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
@@ -17,6 +18,7 @@ import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
+import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 public class MeetingData_discuss_update extends BaseActivity {
@@ -40,8 +42,8 @@ public class MeetingData_discuss_update extends BaseActivity {
 	}
 	
 	
-	@OnClick(R.id.lm_discuss_content_update) public void update_discuss(){
-		if(AndroidUtils.isNetworkConnected(MeetingData_discuss_update.this)){
+	@OnClick(R.id.lm_discuss_update) public void update_discuss(){
+		if(!AndroidUtils.isNetworkConnected(MeetingData_discuss_update.this)){
 			toast("请打开您的网络开关!");
 			return;
 		}
@@ -53,6 +55,7 @@ public class MeetingData_discuss_update extends BaseActivity {
 			public void onStart() {
 				// TODO Auto-generated method stub
 				if(loadingDialog == null){
+					loadingDialog = new LoadingDialog(MeetingData_discuss_update.this);
 					loadingDialog.setText("正在更新讨论...");
 					loadingDialog.show();
 				}
@@ -61,12 +64,12 @@ public class MeetingData_discuss_update extends BaseActivity {
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
+				L.i(obj.toString());
 				try {
 					if(obj.getString("code").equals("20000")){
 						toast("更新讨论成功!");
 						sendBroadcast(new Intent(Constants.Action_Update_discuss_successful));
 						openActivity(MeetingData_discuss.class);
-						finish();
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

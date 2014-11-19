@@ -20,28 +20,31 @@
         android:layout_gravity="center"
         android:orientation="vertical" >
 
+        <!--  android:background="@drawable/navbar" -->
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:background="@drawable/navbar"
+            android:background="@color/lm_lucency_blue"
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="Scan Barcode"
+            android:text="扫一扫"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
+            android:background="@color/lm_lucency_blue"
             android:id="@+id/btn_cancel_scan"
             android:layout_width="230dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="75dp"
-            android:text="Cancel"
+            android:text="取消"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
 

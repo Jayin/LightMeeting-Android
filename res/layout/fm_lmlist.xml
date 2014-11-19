@@ -3,9 +3,12 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lm_card_bg"
     android:orientation="vertical" >
     <ListView
         android:id="@+id/lv"
+        android:divider="@null"
+        
         style="@style/ListView" >
     </ListView>
 </android.support.v4.widget.SwipeRefreshLayout>
