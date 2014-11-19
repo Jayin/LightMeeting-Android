@@ -1,6 +1,7 @@
 package meizhuo.org.lightmeeting.fragment;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.BusinessCard;
 import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
 import meizhuo.org.lightmeeting.adapter.DrawerAdapter;
@@ -15,7 +16,7 @@ import android.widget.ListView;
 
 public class DrawerMain extends BaseFragment{
 	
-	public static final String[] menuName={"会议列表","动态","个人名片","会议资料","功能","会议成员"};
+	public static final String[] menuName={"会议列表","设置","关于"};
 	private MainActivity mainActivity;
 	
 	@Override
@@ -43,8 +44,7 @@ public class DrawerMain extends BaseFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(mainActivity, Login.class));
-				
+				openActivity(BusinessCard.class);
 			}
 		});
 		lv.setAdapter(new DrawerAdapter(mainActivity, menuName));
@@ -63,27 +63,32 @@ public class DrawerMain extends BaseFragment{
 			case 0://会议列表
 				mainActivity.setMainContent(new LMList_fm());
 				break;
-			case 1://动态
+		/*	case 1://动态   （暂时不显示吧）
 				mainActivity.setMainContent(new Dynamic_fm());
+				break;*/
+			case 1://设置
+				mainActivity.setMainContent(new Settings());
 				break;
-			case 2://个人名片
-				mainActivity.setMainContent(new BusinessCard_fm());
-				break;
-			case 3://会议资料
-				mainActivity.setMainContent(new MeetingData_fm());
-				break;
-			case 4://功能
-				mainActivity.setMainContent(new Meeting_function_fm());
-				break;
-			case 5://会议成员
-				mainActivity.setMainContent(new Member_fm());
-				break;
-	
+			case 2://关于
+				mainActivity.setMainContent(new About());
+				break; 
 			default:
 				break;
 			}
 			
 		}
+		
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initLayout() {
+		// TODO Auto-generated method stub
 		
 	}
 

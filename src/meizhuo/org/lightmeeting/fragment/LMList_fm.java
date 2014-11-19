@@ -1,16 +1,19 @@
-package meizhuo.org.lightmeeting.fragment;
+ package meizhuo.org.lightmeeting.fragment;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.CaptureActivity;
 import meizhuo.org.lightmeeting.acty.Lm_meeting_addnewmeet;
 import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.acty.Update_meeting;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnEditListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateBtnClickListener;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
@@ -72,7 +75,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	 return contentView;
 	}
 	
-	private void initData(){
+	protected void initData(){
 		data = new ArrayList<Meeting>();
 		adapter = new LMListAdapter(getActivity(), data);
 		adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -125,10 +128,10 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				
 			}
 		});
-		
-		adapter.setOnUpdateBtnClickListener(new OnUpdateBtnClickListener() {
+		adapter.setonEditListener(new OnEditListener() {
+			
 			@Override
-			public void onUpdateClick(int position) {
+			public void onEditListener(int position) {
 				// TODO Auto-generated method stub
 				Intent intent = new  Intent(getActivity(), Update_meeting.class);
 				intent.putExtra("id", data.get(position).getId());
@@ -138,16 +141,35 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				intent.putExtra("starttime", data.get(position).getStarttime());
 				intent.putExtra("endtime", data.get(position).getEndtime());
 				startActivity(intent);
+				
 			}
 		});
+		
 	}
-	private void initLayout(){
+	@Override
+	protected void initLayout(){
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, 
 				android.R.color.holo_blue_light,
 				android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light);
 		lv.setAdapter(adapter);
+		adapter.setOnUpdateListener(new OnUpdateListener() {
+			
+			@Override
+			public void onUpdateListener(int position) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setEnabled(false);
+			}
+		});
+		adapter.setOnHandleListener(new OnHandleListener() {
+			
+			@Override
+			public void onHandlerListener(int position) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setEnabled(true);
+			}
+		});
 		lv.setOnScrollListener(this);
 		
 	}
@@ -262,7 +284,9 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	
 	
 	@OnItemClick(R.id.lv) public void item_click(int position){
-		openActivity(MeetingData.class);
+		Intent it  =  new Intent(getActivity(), MeetingData.class);
+		it.putExtra("meetid", data.get(position).getId());
+		startActivity(it);
 	}
 	
 	@Override
@@ -282,13 +306,25 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			openActivity(Lm_meeting_addnewmeet.class);
 			break;
 		case R.id.action_sweep:
-			toast("2");
+			Intent openCameraIntent =  new Intent(getActivity(), CaptureActivity.class);
+			startActivityForResult(openCameraIntent, 0);
 			break;
 		}
 		
 		return true;
 	}
-
-
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		//处理扫描结果（在界面上显示）
+		if(requestCode == getActivity().RESULT_OK){
+			Bundle bundle = data.getExtras();
+			String scanResult = bundle.getString("result");
+			toast("" + scanResult);
+		}
+		
+	}
 
 }

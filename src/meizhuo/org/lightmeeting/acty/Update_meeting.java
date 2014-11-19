@@ -1,5 +1,6 @@
 package meizhuo.org.lightmeeting.acty;
 
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,6 @@ public class Update_meeting extends BaseActivity {
 	@InjectView(R.id.lm_meeting_starttime) TextView lm_meeting_starttime;
 	@InjectView(R.id.lm_meeting_endtime) TextView lm_meeting_endtime;
 	LoadingDialog dialog;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -85,22 +85,19 @@ public class Update_meeting extends BaseActivity {
 	@OnClick(R.id.lm_meeting_starttime_item) public void select_starttiem(){
 		Intent it = new Intent(this, Lm_meeting_selecttime.class);
 		it.putExtra("starttime", starttime);
-		sendBroadcast(new Intent(Constants.Action_Update_Start_Time));
 		startActivityForResult(it, 100);
 	}
 	@OnClick(R.id.lm_meeting_endtime_item) public void select_endtime(){
-		Intent it = new Intent(this,Lm_meeting_selecttime.class);
+		Intent it = new Intent(this,Lm_meeting_selecttime_end.class);
 		it.putExtra("endtime", endtime);
-		sendBroadcast(new Intent(Constants.Action_Update_End_Time));
 		startActivityForResult(it, 1000);
+
 	}
 	
 	@OnClick(R.id.lm_meeting_update) public void update_meeting(){
 		title = EditTextUtils.getText(lm_meeting_title).toString();
 		address = EditTextUtils.getText(lm_meeting_address).toString();
 		intro = EditTextUtils.getText(lm_meeting_intro).toString();
-		starttime = "2014-11-16 18:30";
-		endtime = "2014-11-17 18:30";		
 		MeetingAPI.updateMeeting(meetid, title, intro, address, starttime, endtime, new JsonResponseHandler() {
 			
 			@Override
@@ -149,12 +146,13 @@ public class Update_meeting extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if(requestCode == 100 && resultCode == 101){
-			String updateTime = data.getStringExtra("updatetime");
-			lm_meeting_starttime.setText(updateTime);
+			 starttime = data.getStringExtra("updatetime");
+			lm_meeting_starttime.setText(starttime);
 		}
-		if(requestCode == 1000 && requestCode == 1001){
-			String updateTime = data.getStringExtra("updatetime");
-			lm_meeting_endtime.setText(updateTime);
+		if(requestCode == 1000 && resultCode == 1001){
+			endtime = data.getStringExtra("updatetime");
+			lm_meeting_endtime.setText(endtime);
+			
 		}
 	}
 	

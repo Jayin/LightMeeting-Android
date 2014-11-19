@@ -25,10 +25,7 @@ public class Lm_meeting_selecttime extends BaseActivity {
 	
 	@InjectView(R.id.lm_meeting_time) TextView lm_meeting_time;
 	@InjectView(R.id.lm_meeting_update_time) TextView lm_meeting_update_time;
-	String starttime,endtime;
-	boolean updateStartTime = false;
-	boolean	updateEndTime = false;
-	private BroadcastReceiver mBroadcastReceiver;
+	String starttime;
 	String date,time;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,63 +86,26 @@ public class Lm_meeting_selecttime extends BaseActivity {
 	@OnClick(R.id.lm_meeting_confirm) public void confirm_update(){
 		Intent intent = new Intent(this, Update_meeting.class);
 		intent.putExtra("updatetime", lm_meeting_update_time.getText().toString());
-		if(updateStartTime){
 			this.setResult(101, intent);
-		}
-		if(updateEndTime){
-			this.setResult(1001, intent);
-		}
+			this.setResult(21, intent);
+			
 		Lm_meeting_selecttime.this.finish();
 	}
 	
 
-	public void OpenReceiver(){
-		mBroadcastReceiver = new MyBroadcastReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Constants.Action_Update_Start_Time);
-		filter.addAction(Constants.Action_Update_End_Time);
-		registerReceiver(mBroadcastReceiver, filter);
-	}
 	
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
 		starttime = getIntent().getStringExtra("starttime");
-		endtime = getIntent().getStringExtra("endtime");
 	}
 	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		if(mBroadcastReceiver!= null)
-		unregisterReceiver(mBroadcastReceiver);
-	}
 
 	@Override
 	protected void initLayout() {
 		// TODO Auto-generated method stub
-		if(updateStartTime){
 			lm_meeting_time.setText(starttime);
-		}else if(updateEndTime){
-			lm_meeting_time.setText(endtime);
-		}
 
-	}
-	class MyBroadcastReceiver extends BroadcastReceiver{
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if(action.equals(Constants.Action_Update_Start_Time)){
-				updateStartTime = true;
-			}
-			if(action.equals(Constants.Action_Update_End_Time)){
-				updateEndTime = true;
-			}
-		}
-		
 	}
 
 }

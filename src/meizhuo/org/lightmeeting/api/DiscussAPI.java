@@ -10,9 +10,11 @@ public class DiscussAPI {
 	 * @param meetid
 	 * @param responseHandler
 	 */
-	public static void getdiscusslist(String meetid,AsyncHttpResponseHandler responseHandler){
+	public static void getdiscusslist(String meetid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("meetid", meetid);
+			params.add("page", page);
+			params.add("limit", limit);
 		RestClient.post("/home/discuss/lists", params, responseHandler);
 	}
 	
@@ -25,15 +27,9 @@ public class DiscussAPI {
 	 */
 	public static void createDiscuss(String meetid,String title,String content,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		if(!((meetid == null) || (meetid.equals("")))){
 			params.add("meetid", meetid);
-		}
-		if(!((title == null) || (title.equals("")))){
 			params.add("title", title);
-		}
-		if(!((content == null) || (content.equals("")))){
 			params.add("content", content);
-		}
 		RestClient.post("/home/discuss/create", params, responseHandler);
 	}
 	

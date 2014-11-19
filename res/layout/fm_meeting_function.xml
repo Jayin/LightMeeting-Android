@@ -5,14 +5,16 @@
     android:orientation="vertical" >
     
     <LinearLayout 
+        android:clickable="true"
+          android:id="@+id/meeting_function_discuss"
         android:layout_marginTop="20dp"
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
+        android:background="@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
         <TextView 
-            android:id="@+id/meeting_function_vote"
+          
             style="@style/TextView"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
@@ -22,14 +24,16 @@
     </LinearLayout>
     
        <LinearLayout 
+           android:clickable="true"
+              android:id="@+id/meeting_function_vote"
         android:layout_marginTop="20dp"
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
+        android:background="@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
         <TextView 
-            android:id="@+id/meeting_function_vote"
+         
             style="@style/TextView"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
@@ -43,13 +47,15 @@
             android:background="@drawable/ic_line_1"
             />
        <LinearLayout 
+           android:clickable="true"
+           android:id="@+id/meeting_function_research"
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
-        android:background="@android:color/white"
+        android:background="@@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
         <TextView 
-            android:id="@+id/meeting_function_vote"
+            
             style="@style/TextView"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"

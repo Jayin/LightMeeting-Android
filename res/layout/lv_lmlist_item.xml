@@ -11,33 +11,34 @@
         >
         
         <LinearLayout
-            android:background="#FF5534"
-            android:tag="Bottom3"
-            android:weightSum="10"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
-            <ImageView
-                android:id="@+id/trash"
-                android:src="@drawable/trash"
-                android:layout_weight="1"
-                android:layout_width="27dp"
-                android:layout_height="30dp" />
-            <TextView
-                android:text="Delete Item?"
-                android:textSize="17sp"
-                android:textColor="#fff"
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/delete"
-                android:textColor="#FF5534"
-                android:background="#ffffff"
-                android:text="Yes,Delete"
-                android:layout_weight="4"
-                android:layout_width="0dp"
-                android:layout_height="40dp" />
+              android:tag="Bottom2"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent">
+                      <ImageView
+            android:id="@+id/sweep_code"
+            android:src="@drawable/mz_qr_code"
+            android:layout_width="70dp"
+            android:background="#f7e79c"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/update"
+            android:src="@drawable/aa_edit"
+            android:layout_width="70dp"
+            android:background="#4cd964"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+               <ImageView
+                 android:clickable="true"
+            android:id="@+id/delete"
+            android:src="@drawable/trash"
+            android:layout_width="70dp"
+            android:background="#FF3B30"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
         </LinearLayout>
     <LinearLayout 
         style="@style/LinearLayout"
@@ -63,19 +64,6 @@
       	 	 android:layout_height="60dp"
  				android:text="name"
         	 />
-             </LinearLayout>
-             <LinearLayout 
-                 android:clickable="true"
-                 android:id="@+id/lm_icon_update_meeting"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 >
-                 <ImageView 
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/lm_icon_update_meeting"
-                 />
-                 
              </LinearLayout>
              
         </LinearLayout>

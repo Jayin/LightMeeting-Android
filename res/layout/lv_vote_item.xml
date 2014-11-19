@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/card_bg"
+    android:orientation="vertical" >
+    
+      <com.daimajia.swipe.SwipeLayout
+        android:id="@+id/swipe3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    
+           <LinearLayout
+                 android:tag="Bottom2"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+           >
+             <ImageView
+            android:id="@+id/update"
+            android:src="@drawable/aa_edit"
+            android:layout_width="70dp"
+            android:background="#4cd964"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+             <ImageView
+                 android:clickable="true"
+            android:id="@+id/delete"
+            android:src="@drawable/trash"
+            android:layout_width="70dp"
+            android:background="#FF3B30"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+        </LinearLayout>
+       
+
+      <LinearLayout
+        style="@style/LinearLayout"
+        android:orientation="vertical" >
+        <LinearLayout
+            style="@style/LinearLayout"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                android:id="@+id/minimalFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                bootstrap:bct_image="@drawable/aa_talker"
+                bootstrap:bct_minimal="true"
+                bootstrap:bct_size="small" >
+            </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail>
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/vote_title"
+                style="@style/TextView"
+                android:text="美卓大会" />
+        </LinearLayout>
+          <View 
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/lm_ic_line3"
+            />
+              <LinearLayout
+            android:layout_margin="15dp"
+            style="@style/LinearLayout"
+             android:orientation="vertical"
+            >
+            <TextView 
+                android:id="@+id/vote_intro"
+                style="@style/TextView"
+                android:text=" 食色招Android程序员了！！ 总感觉食堂吃不饱，晚上吃不好的吃货开发们，快私信 @plidezus 加入食色大家庭！！PS. @plidezus 是AnimeTaste的创始人，也是AT的设计师，EverMemo也是他主导的产品， 靠谱程度乃们自己感受！！ 想换工作的戳我或者直接私信"
+                />
+        </LinearLayout>
+         </LinearLayout>
+    
+</com.daimajia.swipe.SwipeLayout>
+</LinearLayout>

@@ -49,6 +49,7 @@ public class CoreService extends Service{
 		String password = AppInfo.getUserPSW(getApplicationContext());
 		if(username == null || username.equals("")||password == null || password.equals(""))
 		{
+			Log.i(TAG, "这里跑了");
 			sendBroadcast(new Intent(Constants.Action_First_Login));
 		}else{
 			UserAPI.login(username, password, new JsonResponseHandler() {
@@ -56,6 +57,7 @@ public class CoreService extends Service{
 				@Override
 				public void onOK(Header[] headers, JSONObject obj) {
 					// TODO Auto-generated method stub
+					Log.i(TAG, ""+obj.toString());
 					try {
 						if(obj.getString("code").equals("20000")){
 							Log.i(TAG, "重新登录了");
@@ -64,7 +66,7 @@ public class CoreService extends Service{
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.i(TAG, "重新登录异常了");
+						Log.i(TAG, "重新登录异常了"+e.getMessage());
 					}
 				}
 				
