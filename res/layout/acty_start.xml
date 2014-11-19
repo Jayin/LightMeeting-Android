@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lm_lucency_blue"
+    android:background="@drawable/aa_login_bg"
     tools:context = ".AppStart"
    >
     

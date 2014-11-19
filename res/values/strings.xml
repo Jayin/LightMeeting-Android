@@ -13,4 +13,14 @@
 	<string name="action_refresh_user">修改资料</string>
 	<string name="drawer_open">Open navigation drawer</string>
 	 <string name="drawer_close">Close navigation drawer</string>
+	 
+	 <!-- 讨论 -->
+	 <string name="action_create_discuss">创建讨论</string>
+	 <string name="action_update_discuss">更新讨论</string>
+	 
+	 
+	 <!-- 投票 -->
+	 
+	 
+	 <!-- 调查 -->
 </resources>

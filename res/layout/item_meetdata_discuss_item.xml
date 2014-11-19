@@ -4,5 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <android.support.v4.widget.SwipeRefreshLayout 
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical" >
+        
+       <ListView
+           android:layout_marginTop="10dp" 
+           android:id="@+id/comment_lv"
+           android:divider="@null"
+           ></ListView>
+           
+  </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+         android:background="@drawable/bottombar_bg"
+        >
+        
+    </LinearLayout>
 
 </LinearLayout>
