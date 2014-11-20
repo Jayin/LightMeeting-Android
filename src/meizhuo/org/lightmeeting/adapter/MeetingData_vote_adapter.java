@@ -55,6 +55,8 @@ public class MeetingData_vote_adapter extends BaseSwipeAdapter{
 		// TODO Auto-generated method stub
 		TextView vote_title = (TextView)convertView.findViewById(R.id.vote_title);
 		TextView vote_intro = (TextView)convertView.findViewById(R.id.vote_intro);
+		TextView vote_starttime = (TextView)convertView.findViewById(R.id.vote_starttime);
+		TextView vote_end_time = (TextView)convertView.findViewById(R.id.vote_end_time);
 		ImageView deletebtn = (ImageView)convertView.findViewById(R.id.delete);
 		deletebtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -80,6 +82,8 @@ public class MeetingData_vote_adapter extends BaseSwipeAdapter{
 		});
 		vote_title.setText(mData.get(position).getTitle());
 		vote_intro.setText(mData.get(position).getIntro());
+		vote_starttime.setText(mData.get(position).getStime());
+		vote_end_time.setText(mData.get(position).getEtime());
 		
 	}
 
