@@ -24,3 +24,10 @@ proguard/
 
 #Log Files
 *.log
+
+.classpath
+.project
+.factorypath
+.apt_generated/
+.settings/
+
