@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="保存"
+        android:text="讨论更新"
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_height="45dp"

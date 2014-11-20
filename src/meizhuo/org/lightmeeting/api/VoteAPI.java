@@ -15,9 +15,11 @@ public class VoteAPI {
 	 * @param meetid 会议id
 	 * @param responseHandler
 	 */
-	public static void getVoteList(String meetid,AsyncHttpResponseHandler responseHandler){
+	public static void getVoteList(String meetid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("meetid", meetid);
+		params.add("page", page);
+		params.add("limit", limit);
 		RestClient.post("/home/vote/lists", params, responseHandler);
 	}
 	
@@ -33,7 +35,7 @@ public class VoteAPI {
 		params.add("intro", intro);
 		params.add("stime", stime);
 		params.add("etime", etime);
-		RestClient.post("/home/vote/lists", params, responseHandler);
+		RestClient.post("/home/vote/create", params, responseHandler);
 	}
 	
 	public static void addOption(String voteid,String meetid,String vpintro,AsyncHttpResponseHandler responseHandler){
@@ -80,6 +82,7 @@ public class VoteAPI {
 	public static void getOptionList(String voteid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("voteid",voteid);
+		
 		RestClient.post("/home/vote/listOption", params, responseHandler);
 	}
 	
@@ -92,7 +95,7 @@ public class VoteAPI {
 	 * @param etime
 	 * @param responseHandler
 	 */
-	public static void updateOption(String id,String title,String intro,String stime,String etime,AsyncHttpResponseHandler responseHandler){
+	public static void updateVote(String id,String title,String intro,String stime,String etime,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("id",id);
 		params.add("title",title);
@@ -119,9 +122,9 @@ public class VoteAPI {
 	 * @param voteid
 	 * @param responseHandler
 	 */
-	public static void MemberVote(String vpotionsid,String voteid,AsyncHttpResponseHandler responseHandler){
+	public static void MemberVote(String optionsid,String voteid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		params.add("vpotionsid",vpotionsid);
+		params.add("optionsid",optionsid);
 		params.add("voteid",voteid);
 		RestClient.post("/home/vote/vote", params, responseHandler);
 	}	

@@ -14,14 +14,20 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Comment;
 import meizhuo.org.lightmeeting.model.Meeting;
+import meizhuo.org.lightmeeting.utils.L;
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /***
  * 评论列表（讨论中的一项）暂时处理：使用Listview 显示评论列表,不处理ListView跟ScollView的冲突事件
@@ -34,11 +40,13 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	String withComments = "1";
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.comment_lv)ListView   comment_lv;
+	@InjectView(R.id.to_comment) LinearLayout to_comment;
 	MeetingData_discuss_item_adapter adapter;
 	String discussid;
 	String page="1",limit="";
 	boolean hasMore = true,isloading=false;
 	List<Comment>data;
+	ActionBar mActionBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,14 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 		comment_lv.setAdapter(adapter);
 		comment_lv.setOnScrollListener(this);
 		onRefresh();
+		mActionBar  = getActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
+	}
+	
+	@OnClick(R.id.to_comment) public void to_comment(){
+		Intent intent = new Intent(this, MeetingData_discuss_item_tocomment.class);
+		intent.putExtra("discussid", discussid);
+		startActivity(intent);
 	}
 
 
@@ -77,7 +93,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		DiscussAPI.getCommentlist(discussid, new JsonResponseHandler() {
+		DiscussAPI.getCommentlist(discussid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -99,7 +115,6 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				}else{
 					hasMore = true;
 				}
-				
 			}
 			
 			@Override
@@ -109,12 +124,13 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				
 			}
 			
-			private void onFinsh() {
+			@Override
+			public void onFinish() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
-
 			}
+			
 		});
 		
 	}
@@ -122,7 +138,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		DiscussAPI.getCommentlist(discussid,new JsonResponseHandler() {
+		DiscussAPI.getCommentlist(discussid,page,limit,new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -155,6 +171,19 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				isloading = false;
 			}
 		});
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
+		}
+		return true;
 	}
 	
 	

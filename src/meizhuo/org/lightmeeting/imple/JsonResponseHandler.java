@@ -50,7 +50,7 @@ public abstract class JsonResponseHandler extends AsyncHttpResponseHandler{
 				//can't not create JSONObject , server response the wrong format json string !
 				String json =  new String(data);
 				onFaild(Error_JsonParse,JsonUtils.getErrorCode(json));
-				
+//				onOK(headers, obj);
 			}
 		} else {
 			// statusCode:201-204

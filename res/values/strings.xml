@@ -14,6 +14,10 @@
 	<string name="drawer_open">Open navigation drawer</string>
 	 <string name="drawer_close">Close navigation drawer</string>
 	 
+	 <!-- 会议资料 -->
+	 <string name="action_create_code">生成二维码</string>
+	 <string name="action_quit">退出会议</string>
+	 
 	 <!-- 讨论 -->
 	 <string name="action_create_discuss">创建讨论</string>
 	 <string name="action_update_discuss">更新讨论</string>

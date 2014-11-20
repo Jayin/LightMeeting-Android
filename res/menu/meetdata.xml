@@ -11,6 +11,10 @@
       			  android:showAsAction="always|withText" 
       			  android:title="@string/action_create_code"
                 />
+                 <item android:id="@+id/quite_meet"
+      			  android:showAsAction="always|withText" 
+      			  android:title="@string/action_quit"
+                />
             
         </menu>
     </item>

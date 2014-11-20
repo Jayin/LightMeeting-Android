@@ -14,6 +14,8 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -41,7 +43,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	@InjectView(R.id.discuss_lv) ListView discuss_lv;
 	private BroadcastReceiver mBroadcastReceiver;
 	
-	
+	LoadingDialog loadingDialog;
 	List<Discuss>data;
 	boolean hasMore = true,isloading = false;
 	MeetingData_discuss_adapter adapter;
@@ -79,11 +81,52 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		adapter.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
-			public void onItemClick(int position) {
+			public void onItemClick(final int position) {
 				// TODO Auto-generated method stub
-				data.remove(position);
-				adapter.notifyDataSetChanged();
-				onRefresh();
+				DiscussAPI.deleteDiscuss(data.get(position).getId(), new JsonResponseHandler() {
+					
+					@Override
+					public void onStart() {
+						// TODO Auto-generated method stub
+						if(loadingDialog == null){
+							loadingDialog = new LoadingDialog(MeetingData_discuss.this);
+						}
+						loadingDialog.setText("正在删除讨论！");
+						loadingDialog.show();
+						
+					}
+					
+					@Override
+					public void onOK(Header[] headers, JSONObject obj) {
+						// TODO Auto-generated method stub
+						try {
+							if(obj.getString("code").equals("20000")){
+								if(loadingDialog.isShowing()){
+									loadingDialog.dismiss();
+									loadingDialog = null;
+									toast("删除成功!");
+									data.remove(position);
+									data.clear();
+									adapter.notifyDataSetChanged();
+									onRefresh();
+								}
+								
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+					@Override
+					public void onFaild(int errorType, int errorCode) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+			
+//				
 			}
 		});
 		adapter.setOnUpdateListener(new OnUpdateListener() {
@@ -100,7 +143,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			@Override
 			public void onHandlerListener(int position) {
 				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
+				swipeRefreshLayout.setEnabled(true);
 				
 			}
 		});
@@ -128,7 +171,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		DiscussAPI.getdiscusslist(page,limit,meetid, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -195,8 +238,9 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
+				L.i("onloadmore"+ obj.toString());
 				try {
-					if(obj.get("code").equals("20000")){
+					if(obj.getString("code").equals("20000")){
 						List<Discuss>discusslist = Discuss.create_by_jsonarray(obj.toString());
 						data.addAll(discusslist);
 						adapter.notifyDataSetChanged();
@@ -204,12 +248,13 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 						if(obj.isNull("response")||discusslist.size()<10)
 						{
 							hasMore = false;
-							toast("数据记载完毕!");
+							toast("数据加载完毕!");
 						}
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					L.i("异常"+e.getMessage());
 				}
 			}
 			
@@ -263,6 +308,9 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			Intent intent =  new Intent(MeetingData_discuss.this, MeetingData_discuss_create.class);
 			intent.putExtra("meetid", meetid);
 			startActivity(intent);
+			break;
+		case android.R.id.home:
+			finish();
 			break;
 
 		default:

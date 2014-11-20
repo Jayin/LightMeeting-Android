@@ -6,8 +6,10 @@ import org.json.JSONObject;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import meizhuo.org.lightmeeting.R;
@@ -28,7 +30,7 @@ public class Update_userdata extends BaseActivity {
 	@InjectView(R.id.lm_usercard_contactphone) EditText lm_usercard_contactphone;
 	@InjectView(R.id.lm_usercard_contactemail) EditText lm_usercard_contactemail;
 	LoadingDialog dialog;
-	
+	ActionBar mActionBar;
 	String nickname,birth,sex,company,position,phone,email;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,8 @@ public class Update_userdata extends BaseActivity {
 		lm_usercard_position.setText(position);
 		lm_usercard_contactphone.setText(phone);
 		lm_usercard_contactemail.setText(email);
+		mActionBar = getActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
 
 	}
 	
@@ -122,7 +126,7 @@ public class Update_userdata extends BaseActivity {
 						it.putExtra("position", position1);
 						it.putExtra("phone", phone1);
 						it.putExtra("email", email1);
-						Update_userdata.this.setResult(1001, it);
+						Update_userdata.this.setResult(205, it);
 						Update_userdata.this.finish();
 						
 					}
@@ -140,6 +144,20 @@ public class Update_userdata extends BaseActivity {
 			}
 		});
 		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 
 }

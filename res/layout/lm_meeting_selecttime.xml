@@ -12,10 +12,10 @@
         android:background="@drawable/lm_btn_item_main"
         >
         <TextView 
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             style="@style/TextView"
-            android:text="时间"
+            android:text="时间:"
             />
       <TextView 
           android:id="@+id/lm_meeting_time"
@@ -54,6 +54,7 @@
         />
     
                   <LinearLayout 
+                      android:layout_marginTop="10dp"
               android:clickable="true"
               android:id="@+id/lm_meeting_dateitem"
         android:layout_width="match_parent"
@@ -62,7 +63,7 @@
         android:background="@drawable/lm_btn_item_main"
         >
         <TextView 
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             style="@style/TextView"
             android:text="更新时间为:"

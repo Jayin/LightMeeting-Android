@@ -2,6 +2,7 @@ package meizhuo.org.lightmeeting.fragment;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.MeetingData_discuss;
+import meizhuo.org.lightmeeting.acty.MeetingData_research;
 import meizhuo.org.lightmeeting.acty.MeetingData_vote;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +52,9 @@ public class Meeting_function_fm extends BaseFragment {
 	}
 	
 	@OnClick(R.id.meeting_function_research) public void to_research(){
-		
+		Intent it = new Intent(getActivity(), MeetingData_research.class);
+		it.putExtra("meetid", meetid);
+		startActivity(it);
 	}
 
 	@Override
