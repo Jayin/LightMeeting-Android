@@ -29,6 +29,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public class MeetingData_vote extends BaseActivity implements OnRefreshListener, OnScrollListener{
 
@@ -270,6 +271,15 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@OnItemClick(R.id.vote_lv) public void to_vote(int position){
+		String voteid = data.get(position).getId();
+		Intent it =  new Intent(this, MeetingData_vote_item.class);
+		it.putExtra("voteid", voteid);
+		it.putExtra("title", data.get(position).getTitle());
+		it.putExtra("intro", data.get(position).getIntro());
+		startActivity(it);
 	}
 
 

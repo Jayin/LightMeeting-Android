@@ -82,6 +82,7 @@ public class VoteAPI {
 	public static void getOptionList(String voteid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("voteid",voteid);
+		
 		RestClient.post("/home/vote/listOption", params, responseHandler);
 	}
 	
@@ -121,9 +122,9 @@ public class VoteAPI {
 	 * @param voteid
 	 * @param responseHandler
 	 */
-	public static void MemberVote(String vpotionsid,String voteid,AsyncHttpResponseHandler responseHandler){
+	public static void MemberVote(String optionsid,String voteid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		params.add("vpotionsid",vpotionsid);
+		params.add("optionsid",optionsid);
 		params.add("voteid",voteid);
 		RestClient.post("/home/vote/vote", params, responseHandler);
 	}	
