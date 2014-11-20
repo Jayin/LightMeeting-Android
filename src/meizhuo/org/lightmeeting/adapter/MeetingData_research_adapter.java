@@ -59,7 +59,7 @@ public class MeetingData_research_adapter extends BaseSwipeAdapter{
 	@Override
 	public void fillValues(final int position, View convertView) {
 		// TODO Auto-generated method stub
-		TextView research_title = (TextView)convertView.findViewById(R.id.discuss_title);
+		TextView research_title = (TextView)convertView.findViewById(R.id.research_title);
 		TextView research_intro = (TextView)convertView.findViewById(R.id.research_intro);
 		ImageView deletebtn = (ImageView)convertView.findViewById(R.id.delete);
 		deletebtn.setOnClickListener(new View.OnClickListener() {
