@@ -1,23 +1,34 @@
 package meizhuo.org.lightmeeting.fragment;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import butterknife.InjectView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.BusinessCard;
-import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
 import meizhuo.org.lightmeeting.adapter.DrawerAdapter;
+import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.User;
+import meizhuo.org.lightmeeting.utils.L;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DrawerMain extends BaseFragment{
 	
 	public static final String[] menuName={"会议列表","设置","关于"};
 	private MainActivity mainActivity;
+	TextView tv_username;
+	
+	User user;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -30,15 +41,20 @@ public class DrawerMain extends BaseFragment{
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+	
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+	
 		View v = inflater.inflate(R.layout.fragment_drawermain, container, false);
 		ListView lv = (ListView)v.findViewById(R.id.left_drawer);
+		 tv_username = (TextView)v.findViewById(R.id.tv_username);
+		initData();
 		View userinfo = v.findViewById(R.id.btn_userinfo);
+		
 		userinfo.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -83,7 +99,31 @@ public class DrawerMain extends BaseFragment{
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		
+			UserAPI.getMemberData(new JsonResponseHandler() {
+				
+				@Override
+				public void onOK(Header[] headers, JSONObject obj) {
+					// TODO Auto-generated method stub
+					try {
+						
+						if(obj.getString("code").equals("20000")){
+							
+							user = User.create_by_json(obj.getString("response"));
+							L.i("拿到了用户的名字" + user.getNickname().toString());
+							tv_username.setText(user.getNickname().toString());
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onFaild(int errorType, int errorCode) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 	}
 
 	@Override
