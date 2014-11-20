@@ -19,11 +19,11 @@
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
            >
-             <ImageView
+         <ImageView
             android:id="@+id/update"
             android:src="@drawable/aa_edit"
             android:layout_width="70dp"
-            android:background="#4cd964"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
@@ -32,7 +32,7 @@
             android:id="@+id/delete"
             android:src="@drawable/trash"
             android:layout_width="70dp"
-            android:background="#FF3B30"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
@@ -68,17 +68,58 @@
             android:layout_height="2dp"
             android:background="@drawable/lm_ic_line3"
             />
-              <LinearLayout
+           <LinearLayout
             android:layout_margin="15dp"
             style="@style/LinearLayout"
+            android:layout_height="wrap_content"
              android:orientation="vertical"
             >
             <TextView 
                 android:id="@+id/vote_intro"
                 style="@style/TextView"
-                android:text=" 食色招Android程序员了！！ 总感觉食堂吃不饱，晚上吃不好的吃货开发们，快私信 @plidezus 加入食色大家庭！！PS. @plidezus 是AnimeTaste的创始人，也是AT的设计师，EverMemo也是他主导的产品， 靠谱程度乃们自己感受！！ 想换工作的戳我或者直接私信"
+                android:text="asdasdsad"
                 />
         </LinearLayout>
+            	<LinearLayout 
+        	       android:layout_marginTop="4dp"
+        	    android:orientation="horizontal"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    >
+                <TextView
+                    android:text="开始时间:"
+                    android:layout_marginLeft="4dp"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  <TextView
+                      style="@style/TextView"
+                         android:layout_marginRight="10dp"
+                      android:id="@+id/vote_starttime"
+                      android:layout_gravity="right"
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  </LinearLayout>
+          <LinearLayout 
+        	       android:layout_marginTop="4dp"
+        	    android:orientation="horizontal"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    >
+                <TextView
+                    android:text="结束时间:"
+                    android:layout_marginLeft="4dp"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  <TextView
+                         android:layout_marginRight="10dp"
+                      android:id="@+id/vote_end_time"
+                      android:layout_gravity="right"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+              </LinearLayout>
          </LinearLayout>
     
 </com.daimajia.swipe.SwipeLayout>

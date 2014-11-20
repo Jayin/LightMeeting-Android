@@ -49,6 +49,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	MeetingData_discuss_adapter adapter;
 	String meetid;
 	String page = "1",limit="";
+	
 	ActionBar mActionBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +164,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		
+		mActionBar.setTitle("讨论列表");
 		onRefresh();
 	}
 	

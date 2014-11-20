@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-                 <LinearLayout
+     <LinearLayout
                  android:tag="Bottom2"
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
@@ -20,16 +20,21 @@
             android:id="@+id/update"
             android:src="@drawable/aa_edit"
             android:layout_width="70dp"
-            android:background="#4cd964"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
+              <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
              <ImageView
                  android:clickable="true"
             android:id="@+id/delete"
             android:src="@drawable/trash"
             android:layout_width="70dp"
-            android:background="#FF3B30"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
@@ -44,7 +49,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+         <!--    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
                 android:id="@+id/minimalFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,10 +57,19 @@
                 bootstrap:bct_image="@drawable/aa_talker"
                 bootstrap:bct_minimal="true"
                 bootstrap:bct_size="small" >
-            </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail>
+            </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail> -->
+            <TextView 
+		    style="@style/TextView"
+		      android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+		    android:text="调查标题:"
+		    />
 
             <TextView
-                android:layout_marginTop="4dp"
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/research_title"
                 style="@style/TextView"
                 android:text="美卓大会" />
@@ -68,14 +82,62 @@
               <LinearLayout
             android:layout_margin="15dp"
             style="@style/LinearLayout"
+            android:layout_height="wrap_content"
              android:orientation="vertical"
             >
+              <TextView 
+		    style="@style/TextView"
+		      android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+		    android:text="调查内容:"
+		    />
             <TextView 
                 android:id="@+id/research_intro"
                 style="@style/TextView"
                 android:text=" 食色招Android程序员了！！ 总感觉食堂吃不饱，晚上吃不好的吃货开发们，快私信 @plidezus 加入食色大家庭！！PS. @plidezus 是AnimeTaste的创始人，也是AT的设计师，EverMemo也是他主导的产品， 靠谱程度乃们自己感受！！ 想换工作的戳我或者直接私信"
                 />
         </LinearLayout>
+         	<LinearLayout 
+        	       android:layout_marginTop="4dp"
+        	    android:orientation="horizontal"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    >
+                <TextView
+                    android:text="开始时间:"
+                    android:layout_marginLeft="10dp"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  <TextView
+                      style="@style/TextView"
+                         android:layout_marginLeft="10dp"
+                      android:id="@+id/research_starttime"
+                      android:layout_gravity="right"
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  </LinearLayout>
+          <LinearLayout 
+        	       android:layout_marginTop="4dp"
+        	    android:orientation="horizontal"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    >
+                <TextView
+                    android:text="结束时间:"
+                    android:layout_marginLeft="10dp"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+                  <TextView
+                         android:layout_marginLeft="10dp"
+                      android:id="@+id/research_endtime"
+                      android:layout_gravity="right"
+                style="@style/TextView" 
+                android:textColor="@color/lm_grey_lv_two"
+                />
+              </LinearLayout>
          </LinearLayout>
 
 </com.daimajia.swipe.SwipeLayout>

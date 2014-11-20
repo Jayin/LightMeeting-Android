@@ -110,6 +110,7 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		});
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle("投票列表");
 		
 		onRefresh();
 		

@@ -18,14 +18,17 @@ import meizhuo.org.lightmeeting.model.Research;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public class MeetingData_research extends BaseActivity implements OnRefreshListener, OnScrollListener{
 	
@@ -71,9 +74,16 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 		research_lv.setOnScrollListener(this);
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		
+		mActionBar.setTitle("调查列表");
 		onRefresh();
 	}
+	
+	@OnItemClick(R.id.research_lv) public void research_item(int position){
+		Intent intent = new Intent(this, MeetingData_research_item.class);
+		intent.putExtra("research_id", data.get(position).getId());
+		startActivity(intent);
+	}
+	
 	
 	@Override
 	public void onRefresh() {
@@ -200,6 +210,20 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 
 

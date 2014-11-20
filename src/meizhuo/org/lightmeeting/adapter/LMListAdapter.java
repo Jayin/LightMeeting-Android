@@ -93,11 +93,17 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 		
 		
 	
-		tv_meeting_title.setText(mData.get(position).getTitle() + position);
+		tv_meeting_title.setText(mData.get(position).getTitle());
 		tv_meeting_address.setText(mData.get(position).getAddress());
 		tv_start_time.setText(mData.get(position).getStarttime());
 		tv_end_time.setText(mData.get(position).getEndtime());
-		tv_meeting_intro.setText(mData.get(position).getIntro());
+		if(mData.get(position).getIntro().equals("")){
+			tv_meeting_intro.setText("暂无会议简介!");
+		}else
+		{
+			tv_meeting_intro.setText(mData.get(position).getIntro());
+		}
+		
 		
 		
 	}

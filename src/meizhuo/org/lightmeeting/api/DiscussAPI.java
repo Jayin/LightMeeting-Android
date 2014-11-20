@@ -87,11 +87,11 @@ public class DiscussAPI {
 	 * @param discussid
 	 * @param responseHandler
 	 */
-	public static void getCommentlist(String discussid,AsyncHttpResponseHandler responseHandler){
+	public static void getCommentlist(String discussid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		if(!((discussid == null) || (discussid.equals("")))){
 			params.add("discussid", discussid);
-		}
+			params.add("page", page);
+			params.add("limit", limit);
 		RestClient.post("/home/discuss/listComment", params, responseHandler);
 	}
 	
@@ -104,13 +104,10 @@ public class DiscussAPI {
 	 */
 	public static void createComment(String discussid,String content,String reply_member,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		if(!((discussid == null) || (discussid.equals("")))){
 			params.add("discussid", discussid);
-		}
-		if(!((content == null) || (content.equals("")))){
 			params.add("content", content);
-		}
-		params.add("reply_member", reply_member);
+			if(!(reply_member == null || reply_member.equals("")))
+				params.add("reply_member", reply_member);
 		RestClient.post("/home/discuss/createComment", params, responseHandler);
 	}
 	

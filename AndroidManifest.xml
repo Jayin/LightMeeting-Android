@@ -130,6 +130,11 @@
             android:name=".acty.MeetingData_vote_item"
             android:launchMode="singleTask" >
         </activity>
+        <!-- Lm_meeting_selecttime_end -->
+          <activity
+            android:name=".acty.Lm_meeting_selecttime_end"
+            android:launchMode="standard" >
+        </activity>
         <!-- CaptureActivity -->
         <activity
             android:name=".acty.CaptureActivity"
@@ -137,6 +142,16 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- MeetingData_vote_create -->
+           <activity
+            android:name=".acty.MeetingData_vote_create"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetingData_discuss_item_tocomment -->
+             <activity
+            android:name=".acty.MeetingData_discuss_item_tocomment"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 

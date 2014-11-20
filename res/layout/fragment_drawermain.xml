@@ -26,7 +26,7 @@
             android:id="@+id/tv_username"
             style="@style/TextViewBase"
             android:layout_marginLeft="6dp"
-            android:text="代码家"
+            android:text=""
             android:textSize="20sp"
             android:textColor="@color/white"
             />

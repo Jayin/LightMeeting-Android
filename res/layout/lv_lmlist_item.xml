@@ -23,16 +23,21 @@
             android:id="@+id/update"
             android:src="@drawable/aa_edit"
             android:layout_width="70dp"
-            android:background="#4cd964"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
+                <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
              <ImageView
                  android:clickable="true"
             android:id="@+id/delete"
             android:src="@drawable/trash"
             android:layout_width="70dp"
-            android:background="#FF3B30"
+            android:background="@color/lm_lucency_blue"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:layout_height="match_parent" />
@@ -55,6 +60,7 @@
                 android:layout_height="60dp"
                 >
              <TextView
+                 android:layout_gravity="center"
       		  style="@style/TextView"
        		 android:id="@+id/tv_meeting_title"
       		  android:layout_width="wrap_content"

@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="确定更新"
+        android:text="确定"
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_height="45dp"
