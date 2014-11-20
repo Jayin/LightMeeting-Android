@@ -309,6 +309,9 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 			intent.putExtra("meetid", meetid);
 			startActivity(intent);
 			break;
+		case android.R.id.home:
+			finish();
+			break;
 
 		default:
 			break;

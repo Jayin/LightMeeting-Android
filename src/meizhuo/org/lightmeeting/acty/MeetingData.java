@@ -155,7 +155,7 @@ public class MeetingData extends BaseActivity{
 				e.printStackTrace();
 			}
 			AlertDialog.Builder builder =  new AlertDialog.Builder(this);
-			builder.setTitle("生成的二维码");
+			builder.setTitle("          会议二维码");
 			builder.setView(dialogView);
 			AlertDialog dialog = builder.create();
 			dialog.show();
