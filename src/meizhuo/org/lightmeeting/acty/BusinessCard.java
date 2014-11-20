@@ -14,9 +14,11 @@ import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
+import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,6 +48,8 @@ public class BusinessCard extends BaseActivity  {
 	BCHandler handler = new BCHandler();
 	DialogHandler dialogHandler =new DialogHandler(); 
 	User member;
+	ActionBar mActionBar ;
+	String nickname,birth,sex,company,position,phone,email;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class BusinessCard extends BaseActivity  {
 		super.onCreate(savedInstanceState,R.layout.fm_buinesscard);
 		loadingdialog = new LoadingDialog(this);
 		 initData();
+		 initLayout();
 		 
 	}
 	
@@ -96,16 +101,23 @@ public class BusinessCard extends BaseActivity  {
 					member_birth.setText(member.getBirth());
 					if(member.getSex().equals("m")){
 						member_sex.setText("男");
+						sex="男";
 					}else{
 						member_sex.setText("女");
+						sex = "女";
 					}
 					L.i(member.toString());
 					member_company.setText(member.getCompany());
 					member_position.setText(member.getPosition());
 					member_phone.setText(member.getPhone());
 					member_email.setText(member.getEmail());
-				
-					
+				//String nickname,birth,sex,company,position,phone,email;
+					nickname = member.getNickname();
+					birth = member.getBirth();
+					company = member.getCompany();
+					position = member.getPosition();
+					phone = member.getPhone();
+					email = member.getEmail();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -170,29 +182,14 @@ public class BusinessCard extends BaseActivity  {
 		switch (item.getItemId()) {
 		case R.id.action_refreshdata:
 			Intent intent = new Intent(this, Update_userdata.class);
-			/**
-			 	User member = User.create_by_json(obj1.getString("response"));
-					member_nickname.setText(member.getNickname());
-					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("m")){
-						member_sex.setText("男");
-					}else{
-						member_sex.setText("女");
-					}
-					L.i(member.toString());
-					member_company.setText(member.getCompany());
-					member_position.setText(member.getPosition());
-					member_phone.setText(member.getPhone());
-					member_email.setText(member.getEmail());
-			 */
-			intent.putExtra("nickname", member.getNickname());
-			intent.putExtra("birth", member.getBirth());
-			intent.putExtra("sex", member.getSex());
-			intent.putExtra("company", member.getCompany());
-			intent.putExtra("position", member.getPosition());
-			intent.putExtra("phone", member.getPhone());
-			intent.putExtra("email", member.getEmail());
-			startActivityForResult(intent, 1000);
+			intent.putExtra("nickname", nickname);
+			intent.putExtra("birth", birth);
+			intent.putExtra("sex", sex);
+			intent.putExtra("company", company);
+			intent.putExtra("position", position);
+			intent.putExtra("phone", phone);
+			intent.putExtra("email", email);
+			startActivityForResult(intent, 204);
 			
 			break;
 		case R.id.action_changePsw:
@@ -331,8 +328,8 @@ public class BusinessCard extends BaseActivity  {
 			});
 			
 			break;
-		case R.id.action_logout:
-			BusinessCard.this.finish();
+		case android.R.id.home:
+			finish();
 			break;
 		default:
 			break;
@@ -343,7 +340,7 @@ public class BusinessCard extends BaseActivity  {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		if(requestCode == 1000 && resultCode == 1001){
+		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
 				member_sex.setText(data.getStringExtra("sex"));
@@ -351,12 +348,24 @@ public class BusinessCard extends BaseActivity  {
 			member_position.setText(data.getStringExtra("position"));
 			member_phone.setText(data.getStringExtra("phone"));
 			member_email.setText(data.getStringExtra("email"));
+			nickname = data.getStringExtra("nickname");
+			birth = data.getStringExtra("birth");
+			sex = data.getStringExtra("sex");
+			company = data.getStringExtra("company");
+			position = data.getStringExtra("position");
+			phone = data.getStringExtra("phone");
+			email = data.getStringExtra("email");
 		}
 	}
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
+		if(!AndroidUtils.isNetworkConnected(BusinessCard.this))
+		{
+			toast("请先连接您的网络 !");
+			return ;
+		}
 		handler.sendEmptyMessage(Constants.Start);
 		final Message msg = handler.obtainMessage();
 		UserAPI.getMemberData(new JsonResponseHandler() {
@@ -389,6 +398,8 @@ public class BusinessCard extends BaseActivity  {
 	@Override
 	protected void initLayout() {
 		// TODO Auto-generated method stub
+		mActionBar = getActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
 		
 	}
 	

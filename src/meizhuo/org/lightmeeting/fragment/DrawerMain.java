@@ -12,6 +12,7 @@ import meizhuo.org.lightmeeting.adapter.DrawerAdapter;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
+import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.L;
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ import android.widget.TextView;
 
 public class DrawerMain extends BaseFragment{
 	
-	public static final String[] menuName={"会议列表","设置","关于"};
+	public static final String[] menuName={"会议列表","关于","退出"};
 	private MainActivity mainActivity;
 	TextView tv_username;
 	
@@ -83,10 +84,11 @@ public class DrawerMain extends BaseFragment{
 				mainActivity.setMainContent(new Dynamic_fm());
 				break;*/
 			case 1://设置
-				mainActivity.setMainContent(new Settings());
+				mainActivity.setMainContent(new About());
+//				mainActivity.setMainContent(new Settings());
 				break;
 			case 2://关于
-				mainActivity.setMainContent(new About());
+				getActivity().finish();
 				break; 
 			default:
 				break;
@@ -99,6 +101,7 @@ public class DrawerMain extends BaseFragment{
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
+		if(AndroidUtils.isNetworkConnected(getActivity())){
 			UserAPI.getMemberData(new JsonResponseHandler() {
 				
 				@Override
@@ -124,6 +127,7 @@ public class DrawerMain extends BaseFragment{
 					
 				}
 			});
+		}
 	}
 
 	@Override

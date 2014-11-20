@@ -20,6 +20,8 @@
            
   </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout 
+        android:clickable="true"
+        android:id="@+id/to_comment"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="bottom"
@@ -35,7 +37,8 @@
             />
            
               <TextView 
-                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="-2dp"
+                  android:layout_marginLeft="15dp"
                   android:layout_gravity="center"
                   style="@style/TextView"
                   android:textColor="#969696"

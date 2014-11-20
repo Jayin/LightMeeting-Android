@@ -19,10 +19,6 @@
       			  android:showAsAction="always|withText" 
       			  android:title="@string/action_logoff"
                 />
-            <item android:id="@+id/action_logout"
-                android:showAsAction="always|withText"
-                android:title="@string/action_logout" 
-                />
             
         </menu>
     </item>

@@ -38,8 +38,6 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.option_lv)ListView   option_lv;
 	@InjectView(R.id.option_select) TextView option_select;
-	@InjectView(R.id.option_title) TextView option_title;
-	@InjectView(R.id.option_intro) TextView option_intro; 
 	
 	ActionBar mActionBar;
 	MeetingData_vote_item_adapter adapter;
@@ -124,11 +122,9 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	@Override
 	protected void initLayout() {
 		// TODO Auto-generated method stub
-		option_title.setText(title);
-		option_intro.setText(intro);
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		
+		mActionBar.setTitle("进行投票");
 		
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,

@@ -18,9 +18,11 @@ public class ResearchAPI {
 	 * @param meetid
 	 * @param responseHandler
 	 */
-	public static void getResearchList(String meetid,AsyncHttpResponseHandler responseHandler){
+	public static void getResearchList(String meetid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params =  new RequestParams();
 		params.add("meetid", meetid);
+		params.add("page", page);
+		params.add("limit", limit);
 		RestClient.post("/home/research/lists", params, responseHandler);
 	}
 	

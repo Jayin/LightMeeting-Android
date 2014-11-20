@@ -15,7 +15,7 @@
 	 <string name="drawer_close">Close navigation drawer</string>
 	 
 	 <!-- 会议资料 -->
-	 <string name="action_create_code">生成二维码</string>
+	 <string name="action_create_code">会议二维码</string>
 	 <string name="action_quit">退出会议</string>
 	 
 	 <!-- 讨论 -->
@@ -24,7 +24,7 @@
 	 
 	 
 	 <!-- 投票 -->
-	 
+	  <string name="action_create_vote">创建投票</string>
 	 
 	 <!-- 调查 -->
 </resources>

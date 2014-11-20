@@ -80,6 +80,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 		onRefresh();
 		mActionBar  = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle("评论列表");
 	}
 	
 	@OnClick(R.id.to_comment) public void to_comment(){
