@@ -213,8 +213,7 @@ public class Login extends BaseActivity {
 							dialog = null;
 						}
 						String msg = obj.getString("msg");
-						toast("msg");
-						flipper.showPrevious();
+						toast(msg);
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -231,7 +230,7 @@ public class Login extends BaseActivity {
 						}
 						String message = obj.getString("response");
 						toast(message);
-						
+						flipper.showPrevious();
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
