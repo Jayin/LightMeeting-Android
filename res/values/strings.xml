@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LightMeeting</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">轻会议</string>
 	<string name="action_more">更多</string>
 	<string name="action_addmeet">增加会议</string>
 	<string name="action_sweep">扫一扫</string>
