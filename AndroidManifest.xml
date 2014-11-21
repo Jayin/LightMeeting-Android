@@ -153,6 +153,13 @@
             android:name=".acty.MeetingData_discuss_item_tocomment"
             android:launchMode="singleTask" >
         </activity>
+        
+             <!-- MeetingData_research_item_option -->
+             
+                  <activity
+            android:name=".acty.MeetingData_research_item_option"
+            android:launchMode="singleTask" >
+        </activity>
     </application>
 
 </manifest>

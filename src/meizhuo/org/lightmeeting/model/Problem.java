@@ -51,41 +51,56 @@ public class Problem implements Serializable{
 	}
 	
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getResearchid() {
+		return researchid;
+	}
+
+	public void setResearchid(String researchid) {
+		this.researchid = researchid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public JSONObject getOptions() {
+		return options;
+	}
+
+	public void setOptions(JSONObject options) {
+		this.options = options;
+	}
+
+
+
+
+	
 	@Override
 	public String toString() {
 		return "Problem [id=" + id + ", researchid=" + researchid + ", title="
 				+ title + ", options=" + options + "]";
 	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getResearchid() {
-		return researchid;
-	}
-	public void setResearchid(String researchid) {
-		this.researchid = researchid;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getOptions() {
-		return options;
-	}
-	public void setOptions(String options) {
-		this.options = options;
-	}
-	
+
+
+
 	private String id;
 	private String researchid;
 	private String title;
-	private String options;
+	private JSONObject options;
 	
 
 
