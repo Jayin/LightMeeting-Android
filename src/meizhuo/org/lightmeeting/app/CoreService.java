@@ -49,7 +49,7 @@ public class CoreService extends Service{
 		String password = AppInfo.getUserPSW(getApplicationContext());
 		if(username == null || username.equals("")||password == null || password.equals(""))
 		{
-			Log.i(TAG, "这里跑了");
+			Log.i(TAG, "第一次登录");
 			sendBroadcast(new Intent(Constants.Action_First_Login));
 		}else{
 			UserAPI.login(username, password, new JsonResponseHandler() {
@@ -66,7 +66,8 @@ public class CoreService extends Service{
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.i(TAG, "重新登录异常了"+e.getMessage());
+						Log.i(TAG, "重新登录失败"+e.getMessage());
+						sendBroadcast(new Intent(Constants.Action_Login_failed));
 					}
 				}
 				
@@ -74,7 +75,7 @@ public class CoreService extends Service{
 				public void onFaild(int errorType, int errorCode) {
 					// TODO Auto-generated method stub
 					sendBroadcast(new Intent(Constants.Action_Login_failed));
-					Log.i(TAG, "重新失败");
+					Log.i(TAG, "登录异常");
 				}
 			});
 		}

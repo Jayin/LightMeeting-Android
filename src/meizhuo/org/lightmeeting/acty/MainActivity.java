@@ -24,8 +24,8 @@ public class MainActivity extends BaseActivity {
 	
 	
 	
-	private String DefaultTitle = "LightMeeting";
-	private String MenuTitle = "Menu";
+	private String DefaultTitle = "轻会议";
+	private String MenuTitle = "菜单";
 	//获取Fragment的管理员权限
 	private FragmentManager manager = getSupportFragmentManager();
 	@InjectView(R.id.drawer_layout) DrawerLayout mDrawerLayout;

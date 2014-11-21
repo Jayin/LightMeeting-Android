@@ -16,38 +16,33 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 
-public class AppStart extends BaseActivity{
-	
+public class AppStart extends BaseActivity {
+
 	private static final String TAG = "AppStart";
-	
+
 	private long starttime;
 	private long waittime = 1500;
 	private BroadcastReceiver mReceiver = null;
-	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub 
+
+	@Override protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		super.onCreate(savedInstanceState,R.layout.acty_start);
-	/*	new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if(!AppStart.this.isFinishing()){
-					openActivity(MeetingData.class);
-					closeActivity();
-				}
-			}
-		}, 1500);*/
+		super.onCreate(savedInstanceState, R.layout.acty_start);
+		/*
+		 * new Handler().postDelayed(new Runnable() {
+		 * 
+		 * @Override public void run() { // TODO Auto-generated method stub
+		 * if(!AppStart.this.isFinishing()){ openActivity(MeetingData.class);
+		 * closeActivity(); } } }, 1500);
+		 */
 
 		initReceiver();
 		init();
 		starttime = System.currentTimeMillis();
-		
+
 	}
-	
-	private void initReceiver(){
+
+	private void initReceiver() {
 		mReceiver = new AppStartReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.Action_Login_In_Successful);
@@ -55,85 +50,74 @@ public class AppStart extends BaseActivity{
 		filter.addAction(Constants.Action_First_Login);
 		registerReceiver(mReceiver, filter);
 	}
-	
-	@Override
-	protected void onDestroy() {
+
+	@Override protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		if(mReceiver != null)
+		if (mReceiver != null) {
 			unregisterReceiver(mReceiver);
+		}
+
 	}
-	
-	//初始化工作
+
+	// 初始化工作
 	protected void init() {
 		Intent service = new Intent(getContext(), CoreService.class);
 		service.setAction(Constants.Action_To_Login);
 		startService(service);
-	} 
-	
+	}
+
 	private boolean checkLoginInfo() {
 		DataPool dp = new DataPool(DataPool.SP_Name_User, this);
-		if(dp.contains(DataPool.SP_Key_User))
+		if (dp.contains(DataPool.SP_Key_User))
 			return true;
 		else
 			return false;
 	}
-	
-	
-	
-	class AppStartReceiver extends BroadcastReceiver{
-		@Override
-		public void onReceive(Context context, Intent intent) {
+
+	class AppStartReceiver extends BroadcastReceiver {
+		@Override public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if(action.equals(Constants.Action_First_Login)){
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						if(!AppStart.this.isFinishing()){
-							openActivity(Login.class);
-							closeActivity();
-						}
-					}
-				}, 1500);
-			}
-			if(action.equals(Constants.Action_Login_In_Successful)){
-				Log.i(TAG, "执行了2");
-				L.i("Login Successfully");
-				if(checkLoginInfo()){
-					openActivity(MainActivity.class);
-				}else{
-					openActivity(Login.class);
-				}
-				closeActivity();
-			}
-		
-/*			long lasttime = System.currentTimeMillis() - starttime;
-			if(waittime > lasttime) {
+			final String action = intent.getAction();
+
+			long lasttime = System.currentTimeMillis() - starttime;
+			if (waittime > lasttime) {
 				try {
-					Thread.sleep(waittime-lasttime);
+					Thread.sleep(waittime - lasttime);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}*/
-		
+			}
+
+			new Handler().postDelayed(new Runnable() {
+
+				@Override public void run() {
+					if (action.equals(Constants.Action_First_Login)) {
+						L.i("第一次登录");
+						openActivity(Login.class);
+					}
+					if (action.equals(Constants.Action_Login_In_Successful)) {
+
+						L.i("Login Successfully");
+						openActivity(MainActivity.class);
+
+					} else {
+						openActivity(Login.class);
+					}
+					closeActivity();
+
+				}
+			}, waittime - lasttime);
+
 		}
 	}
 
+	@Override protected void initData() {
 
-
-	@Override
-	protected void initData() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
-	protected void initLayout() {
-		// TODO Auto-generated method stub
-		
-	}
+	@Override protected void initLayout() {
 
+	}
 
 }
