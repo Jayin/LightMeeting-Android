@@ -229,7 +229,7 @@ public class Login extends BaseActivity {
 							dialog = null;
 						}
 						String message = obj.getString("response");
-						toast(message);
+						toast("注册成功");
 						flipper.showPrevious();
 					}
 				} catch (JSONException e) {
