@@ -2,8 +2,15 @@ package meizhuo.org.lightmeeting.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import meizhuo.org.lightmeeting.model.KV;
 
 public class StringUtils {
 	
@@ -89,6 +96,21 @@ public class StringUtils {
 	        return split[0]; 
 	}
 	
-	
+	/*public static List<KV> sortkv(List<KV>list){
+		List<KV>data =  new ArrayList<KV>();
+		List<KV>newlist = new ArrayList<KV>();
+		KV kv= new KV();
+		String[] array = new String[list.size()];
+		for(int i=0;i<list.size();i++){
+			array[i] = list.get(i).getKey();
+		}
+		Arrays.sort(array);
+		List listkey=Arrays.asList(array);
+		for(int i=0;i<listkey.size();i++)
+		{
+			
+		}
+		
+	}*/
 
 }

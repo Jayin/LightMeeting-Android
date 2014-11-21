@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="@drawable/card_bg"
+    android:orientation="vertical" >
+       <LinearLayout
+        style="@style/LinearLayout"
+        android:orientation="vertical" >
+        <LinearLayout
+            style="@style/LinearLayout"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+         <!--    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                android:id="@+id/minimalFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                bootstrap:bct_image="@drawable/aa_talker"
+                bootstrap:bct_minimal="true"
+                bootstrap:bct_size="small" >
+            </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail> -->
+            <TextView 
+		    style="@style/TextView"
+		      android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+		    android:text="问题:"
+		    />
+
+            <TextView
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/research_title"
+                style="@style/TextView"
+                android:text="美卓大会" />
+        </LinearLayout>
+          <View 
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/lm_ic_line3"
+            />
+              <LinearLayout
+            android:layout_margin="15dp"
+            style="@style/LinearLayout"
+            android:layout_height="wrap_content"
+             android:orientation="vertical"
+            >
+              <TextView 
+		    style="@style/TextView"
+		      android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+		    android:text="调查内容:"
+		    />
+            <TextView 
+                android:id="@+id/research_intro"
+                style="@style/TextView"
+                android:text=" 食色招Android程序员了！！ 总感觉食堂吃不饱，晚上吃不好的吃货开发们，快私信 @plidezus 加入食色大家庭！！PS. @plidezus 是AnimeTaste的创始人，也是AT的设计师，EverMemo也是他主导的产品， 靠谱程度乃们自己感受！！ 想换工作的戳我或者直接私信"
+                />
+        </LinearLayout>
+         </LinearLayout>
+    
+
+</LinearLayout>

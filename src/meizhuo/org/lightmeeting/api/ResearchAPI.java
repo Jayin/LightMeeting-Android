@@ -92,9 +92,12 @@ public class ResearchAPI {
 	 * @param researchid
 	 * @param responseHandler
 	 */
-	public static void getQuestionList(String researchid,AsyncHttpResponseHandler responseHandler){
+	public static void getQuestionList(String researchid,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params =  new RequestParams();
 		params.add("researchid",researchid );
+		params.add("page",page );
+		if(!(limit == null || limit.equals("")))
+		params.add("limit",limit );
 		RestClient.get("/home/research/listQuestion", params, responseHandler);
 	}
 	

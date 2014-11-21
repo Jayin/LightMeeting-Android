@@ -3,33 +3,31 @@ package meizhuo.org.lightmeeting.acty;
 import java.util.ArrayList;
 import java.util.List;
 
+import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter.OnItemClickListener;
+import meizhuo.org.lightmeeting.api.VoteAPI;
+import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.Option;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.InjectView;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.DialerFilter;
-import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ListView;
 import android.widget.TextView;
-import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter;
-import meizhuo.org.lightmeeting.api.DiscussAPI;
-import meizhuo.org.lightmeeting.api.VoteAPI;
-import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.Discuss;
-import meizhuo.org.lightmeeting.model.Option;
-import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.widget.LoadingDialog;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MeetingData_vote_item extends BaseActivity implements OnRefreshListener,OnScrollListener{
 	
@@ -41,7 +39,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	
 	ActionBar mActionBar;
 	MeetingData_vote_item_adapter adapter;
-	String voteid,title,intro,select_content,optionsid;
+	String voteid,select_content,optionsid;
 	
 	boolean hasMore = true,isloading=false;
 	List<Option>data;
@@ -54,6 +52,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 		initData();
 		initLayout();
 	}
+	
 	@OnClick(R.id.vote_confirm) public void to_vote(){
 		VoteAPI.MemberVote(optionsid, voteid, new JsonResponseHandler() {
 			
@@ -100,20 +99,19 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 		 
 	}
 	
-	@OnItemClick(R.id.option_lv) public void to_select(int position){
+/*	@OnItemClick(R.id.option_lv) public void select_item(int position){
 		option_select.setText(data.get(position).getVpintro().toString());
 		select_content = data.get(position).getVpintro().toString();
 		optionsid = data.get(position).getId();
-	}
+	}*/
+	
+	
 
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
 		voteid =  getIntent().getStringExtra("voteid");
-		title = getIntent().getStringExtra("title");
-		intro = getIntent().getStringExtra("intro");
-		
 		data = new ArrayList<Option>();
 		adapter = new MeetingData_vote_item_adapter(this, data);
 		
@@ -133,6 +131,16 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 				android.R.color.holo_blue_light);
 		option_lv.setAdapter(adapter);
 		option_lv.setOnScrollListener(this);
+		adapter.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(int position) {
+				// TODO Auto-generated method stub
+				option_select.setText(data.get(position).getVpintro().toString());
+				select_content = data.get(position).getVpintro().toString();
+				optionsid = data.get(position).getId();
+			}
+		});
 		onRefresh();
 	}
 
@@ -274,7 +282,6 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
-			
 			break;
 
 		default:
