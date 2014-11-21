@@ -194,6 +194,9 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				data.addAll(meetinglist);
 				adapter.notifyDataSetChanged();
 				page = "1";
+				if(meetinglist.size() == 0){
+					toast("没有参加任何会议");
+				}
 				if(meetinglist.size()<5)
 				{
 					hasMore = false;
