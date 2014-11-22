@@ -118,9 +118,9 @@ public class CaptureActivity extends Activity implements Callback{
 		String resultString = result.getText();
 		//FIXME
 		if (resultString.equals("")) {
-			Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(CaptureActivity.this, "扫描失败", Toast.LENGTH_SHORT).show();
 		}else {
-			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
+//			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
 //			System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent(this,MeetingData_discuss.class);
 			resultIntent.putExtra("resultcode", RestClient.BASE_URL+"/home/meet/addjoin/meetid/"+resultString);
