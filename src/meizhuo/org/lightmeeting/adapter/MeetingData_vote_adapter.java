@@ -3,20 +3,24 @@ package meizhuo.org.lightmeeting.adapter;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.adapter.LMListAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.model.Vote;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-public class MeetingData_vote_adapter extends BaseSwipeAdapter{
+public class MeetingData_vote_adapter extends BaseAdapter{
 
 	
 	List<Vote>mData;
@@ -49,87 +53,45 @@ public class MeetingData_vote_adapter extends BaseSwipeAdapter{
 		// TODO Auto-generated method stub
 		return position;
 	}
-
-	@Override
-	public void fillValues(final int position, View convertView) {
-		// TODO Auto-generated method stub
-		TextView vote_title = (TextView)convertView.findViewById(R.id.vote_title);
-		TextView vote_intro = (TextView)convertView.findViewById(R.id.vote_intro);
-		TextView vote_starttime = (TextView)convertView.findViewById(R.id.vote_starttime);
-		TextView vote_end_time = (TextView)convertView.findViewById(R.id.vote_end_time);
-		ImageView deletebtn = (ImageView)convertView.findViewById(R.id.delete);
-		deletebtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(mOnItemClickListener!= null){
-					mOnItemClickListener.onItemClick(position);
-				}
-				
-			}
-		});
-		ImageView updatebtn = (ImageView)convertView.findViewById(R.id.update);
-		updatebtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(mOnEditListener != null){
-					mOnEditListener.onEditListener(position);
-				}
-				
-			}
-		});
 	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder h;
+		if(convertView == null)
+		{
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.lv_vote_item, null);
+			h = new ViewHolder(convertView);
+			convertView.setTag(h);
+		}else
+		{
+			h = (ViewHolder)convertView.getTag();
+		}
+		h.vote_title.setText(mData.get(position).getTitle());
+		h.vote_intro.setText(mData.get(position).getIntro());
+		h.vote_starttime.setText(mData.get(position).getStime());
+		h.vote_end_time.setText(mData.get(position).getEtime());
+		return convertView;
+	}
+
+	static class ViewHolder {
+		@InjectView(R.id.vote_title) TextView vote_title;
+		@InjectView(R.id.vote_intro) TextView  vote_intro;
+		@InjectView(R.id.vote_starttime) TextView vote_starttime;
+		@InjectView(R.id.vote_end_time) TextView vote_end_time;
+		
+		
+		public ViewHolder(View v) {
+			// TODO Auto-generated constructor stub
+			ButterKnife.inject(this, v);
+		}
 		
 	}
 
-	@Override
-	public View generateView(final int position, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		View v = LayoutInflater.from(mContext).inflate(R.layout.lv_vote_item, null);
-		SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
-		swipeLayout.addSwipeListener(new SimpleSwipeListener(){
-				@Override
-				public void onOpen(SwipeLayout layout) {
-					// TODO Auto-generated method stub
-				}
-				@Override
-				public void onUpdate(SwipeLayout layout, int leftOffset,
-					int topOffset) {
-				// TODO Auto-generated method stub
-					if(mOnUpdateListener != null){
-						mOnUpdateListener.onUpdateListener(position);
-					}
-				super.onUpdate(layout, leftOffset, topOffset);
-				}
-				
-				@Override
-				public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-				// TODO Auto-generated method stub
-					if(mOnHandleListener!= null){
-						mOnHandleListener.onHandlerListener(position);
-					}
-				super.onHandRelease(layout, xvel, yvel);
-				}
-		});
-		swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-			
-			@Override
-			public void onDoubleClick(SwipeLayout layout, boolean surface) {
-				// TODO Auto-generated method stub
-			}
-		});
-		return v;
-	}
 
-	@Override
-	public int getSwipeLayoutResourceId(int position) {
-		// TODO Auto-generated method stub
-		return  R.id.swipe3;
-	}
 	
 	/**
+	 * lv_vote_item
 	 	vote_title.setText(mData.get(position).getTitle());
 		vote_intro.setText(mData.get(position).getIntro());
 		vote_starttime.setText(mData.get(position).getStime());
