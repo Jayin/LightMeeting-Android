@@ -26,7 +26,7 @@
     </style>
     
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:icon">@drawable/lm_icon</item>
+        <item name="android:icon">@drawable/ic_app_icon_pure</item>
         <item name="android:background">@color/lm_lucency_blue</item>
     </style>
     

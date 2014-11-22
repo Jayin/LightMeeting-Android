@@ -2,38 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" 
-    >
+    android:background="@drawable/ic_img_about"
+    android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-         >
-         <ImageView 
-             android:layout_width="60dp"
-             android:layout_height="60dp"
-             android:scaleType="centerCrop"
-             android:src="@drawable/lm_icon"
-             />
-         <TextView 
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="6dp"
-             android:gravity="center_horizontal"
-             android:text="LightMeeting"
-             android:textColor="@android:color/black"
-             android:textSize="18sp"
-             />
-         <TextView 
-             android:id="@+id/tv_versionCode"
-             style="@style/TextView"
-             android:layout_marginTop="4dp"
-             android:gravity="center"
-             android:text="v1.0"
-             />
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_app_icon_pure" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_horizontal"
+            android:text="轻会议 重效率"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_versionCode"
+            style="@style/TextView"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="v1.0"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            style="@style/TextView"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="了解更多,点击访问:"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_homepage"
+            style="@style/TextView"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="http://meizhuo.github.io/LightMeeting"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </RelativeLayout>
