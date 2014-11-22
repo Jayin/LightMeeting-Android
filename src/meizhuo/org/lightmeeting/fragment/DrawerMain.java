@@ -16,6 +16,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.InjectView;
 import butterknife.OnClick;
 
 import android.app.Activity;
@@ -29,10 +30,9 @@ public class DrawerMain extends BaseFragment  {
 	
 	public static final String[] menuName={"会议列表","关于","退出"};
 	private MainActivity mainActivity;
-	TextView tv_username;
 	LoadingDialog loadingdialog;
-	
 	User user;
+	@InjectView(R.id.tv_username) TextView tv_username;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -45,7 +45,7 @@ public class DrawerMain extends BaseFragment  {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-	
+		 initData();
 	}
 	
 	@Override
@@ -53,7 +53,6 @@ public class DrawerMain extends BaseFragment  {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		 super.onCreateView(inflater, container, savedInstanceState,R.layout.fragment_drawermain);
-		 initData();
 		 return contentView;
 	}
 	@OnClick(R.id.btn_userinfo) public void to_userinfo(){

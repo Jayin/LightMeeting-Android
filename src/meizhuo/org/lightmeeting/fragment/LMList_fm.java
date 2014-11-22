@@ -48,7 +48,6 @@ import butterknife.OnItemClick;
  *
  */
 public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScrollListener {
-	private static final String TAG = "LMListFragment";
 	
 	@InjectView(R.id.lv) ListView lv;
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
@@ -80,72 +79,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	protected void initData(){
 		data = new ArrayList<Meeting>();
 		adapter = new LMListAdapter(getActivity(), data);
-		adapter.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(final int position) {
-				// TODO Auto-generated method stub
-				toast("" + position);
-				MeetingAPI.deleteMeeting(data.get(position).getId(), new JsonResponseHandler() {
-					
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-						if(dialog == null){
-							dialog = new LoadingDialog(getActivity());
-							dialog.setText("正在删除！");
-							dialog.show();
-						}
-					}
-					
-					@Override
-					public void onOK(Header[] headers, JSONObject obj) {
-						// TODO Auto-generated method stub
-						L.i(obj.toString());
-						try {
-							if(obj.getString("code").equals("20000")){
-								if(dialog.isShowing()){
-									dialog.dismiss();
-									dialog =null;
-								}
-								toast("删除成功");
-								data.remove(position);
-								adapter.notifyDataSetChanged();
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
-					@Override
-					public void onFaild(int errorType, int errorCode) {
-						// TODO Auto-generated method stub
-						toast("网络不给力,请检查你的网络设置!");
-						return ;
-						
-					}
-				});
-			
-				
-			}
-		});
-		adapter.setonEditListener(new OnEditListener() {
-			
-			@Override
-			public void onEditListener(int position) {
-				// TODO Auto-generated method stub
-				Intent intent = new  Intent(getActivity(), Update_meeting.class);
-				intent.putExtra("id", data.get(position).getId());
-				intent.putExtra("title", data.get(position).getTitle());
-				intent.putExtra("intro", data.get(position).getIntro());
-				intent.putExtra("address", data.get(position).getAddress());
-				intent.putExtra("starttime", data.get(position).getStarttime());
-				intent.putExtra("endtime", data.get(position).getEndtime());
-				startActivity(intent);
-				
-			}
-		});
 		
 	}
 	@Override
