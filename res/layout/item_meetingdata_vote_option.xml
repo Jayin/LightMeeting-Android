@@ -6,7 +6,7 @@
     
            <LinearLayout 
          android:clickable="true"
-       android:id="@+id/lm_meeting_endtime_item"
+       android:id="@+id/vote_option_item"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:orientation="horizontal"
