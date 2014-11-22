@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ImageView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.encoding.EncodingHandler;
 import meizhuo.org.lightmeeting.fragment.MeetingData_fm;
@@ -148,7 +149,7 @@ public class MeetingData extends BaseActivity{
 			View dialogView = inflater.inflate(R.layout.qr_code_dialog, null);
 			final ImageView qr_code = (ImageView)dialogView.findViewById(R.id.iv_qr_image);
 			try {
-				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(meetid, 350);
+				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/meet/addjoin/meetid/id/" + meetid, 350);
 				qr_code.setImageBitmap(qrCodeBitmap);
 			} catch (WriterException e) {
 				// TODO Auto-generated catch block
