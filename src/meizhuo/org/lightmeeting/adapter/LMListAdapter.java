@@ -78,9 +78,9 @@ public class LMListAdapter extends BaseAdapter  {
 		}
 		h.tv_meeting_title.setText(mData.get(position).getTitle());
 		h.tv_meeting_address.setText(mData.get(position).getAddress());
-		h.tv_meeting_intro.setText(mData.get(position).getIntro());
 		h.tv_start_time.setText(mData.get(position).getStarttime());
 		h.tv_end_time.setText(mData.get(position).getEndtime());
+		h.tv_meeting_intro.setText(mData.get(position).getIntro());
 		
 		return convertView;
 	}
@@ -88,9 +88,9 @@ public class LMListAdapter extends BaseAdapter  {
 	static class ViewHolder {
 		@InjectView(R.id.tv_meeting_title) TextView tv_meeting_title;
 		@InjectView(R.id.tv_meeting_address) TextView  tv_meeting_address;
-		@InjectView(R.id.tv_meeting_intro) TextView tv_meeting_intro;
 		@InjectView(R.id.tv_start_time) TextView tv_start_time;
 		@InjectView(R.id.tv_end_time) TextView tv_end_time;
+		@InjectView(R.id.tv_meeting_intro) TextView tv_meeting_intro;
 		
 		
 		public ViewHolder(View v) {

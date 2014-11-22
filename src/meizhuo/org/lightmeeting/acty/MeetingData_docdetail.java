@@ -44,7 +44,7 @@ public class MeetingData_docdetail extends BaseActivity{
 		docid = getIntent().getStringExtra("docid");
 		title = getIntent().getStringExtra("title");
 		String baseurl = RestClient.BASE_URL;
-		url = baseurl + "/home/document/listdoc/" + docid;
+		url = baseurl + "/admin/view/document/id/" + docid;
 		
 	}
 
@@ -53,6 +53,7 @@ public class MeetingData_docdetail extends BaseActivity{
 		
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle(title);
 		webview.getSettings().setJavaScriptEnabled(true);
 		
 		webview.loadUrl(url);

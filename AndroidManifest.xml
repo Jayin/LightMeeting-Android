@@ -160,6 +160,17 @@
             android:name=".acty.MeetingData_research_item_option"
             android:launchMode="singleTask" >
         </activity>
+        
+                  <!-- MeetingData_docdetail -->
+                          <activity
+            android:name=".acty.MeetingData_docdetail"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- ShowWebImageActivity -->
+                            <activity
+            android:name=".acty.ShowWebImageActivity"
+            android:launchMode="singleTask" >
+        </activity>
     </application>
 
 </manifest>
