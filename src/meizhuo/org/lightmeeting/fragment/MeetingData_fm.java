@@ -10,7 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.MeetingData_docdetail;
 import meizhuo.org.lightmeeting.adapter.MeetingData_fm_adapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.DocAPI;
@@ -20,6 +22,7 @@ import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.model.Doc;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -210,6 +213,17 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * 
+	 * @param position
+	 */
+	@OnItemClick(R.id.meetdata_lv) public void opendoc(int position){
+		Intent it = new Intent(getActivity(), MeetingData_docdetail.class);
+		it.putExtra("docid", data.get(position).getId());
+		it.putExtra("title", data.get(position).getTitle());
+		startActivity(it);
 	}
 
 
