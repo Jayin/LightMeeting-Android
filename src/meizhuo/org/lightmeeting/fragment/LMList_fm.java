@@ -24,6 +24,8 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.loopj.android.http.AsyncHttpClient;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -322,8 +324,56 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if(requestCode == 50 && resultCode == 51){
-			String meetid = data.getStringExtra("resultcode");
-			MeetingAPI.addjoin(meetid, new JsonResponseHandler() {
+			String qrurl = data.getStringExtra("resultcode");
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get("qrurl", new JsonResponseHandler() {
+				
+				
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					if(dialog == null)
+					{
+						dialog = new LoadingDialog(getActivity());
+					}
+					dialog.setText("正在加入会议..");
+					dialog.show();
+				}
+				
+				@Override
+				public void onOK(Header[] headers, JSONObject obj) {
+					// TODO Auto-generated method stub
+					try {
+						if(obj.getString("code").equals("20000")){
+							if(dialog.isShowing())
+							{
+								dialog.dismiss();
+								dialog = null;
+							}
+							toast("加入会议成功!");
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				@Override
+				public void onFaild(int errorType, int errorCode) {
+					// TODO Auto-generated method stub
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("加入会议失败，请检查你的网络!");
+					
+				}
+				
+			});
+			
+		/*	MeetingAPI.addjoin(meetid, new JsonResponseHandler() {
 				
 				@Override
 				public void onStart() {
@@ -364,7 +414,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 					}
 					toast("加入会议失败,请检查您的网络!");
 				}
-			});
+			});*/
 		}
 		
 	}
