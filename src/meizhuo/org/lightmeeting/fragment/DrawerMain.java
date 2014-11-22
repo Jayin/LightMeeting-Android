@@ -1,35 +1,38 @@
 package meizhuo.org.lightmeeting.fragment;
 
+import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.BusinessCard;
+import meizhuo.org.lightmeeting.acty.Login;
+import meizhuo.org.lightmeeting.acty.MainActivity;
+import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.app.App;
+import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.User;
+import meizhuo.org.lightmeeting.utils.AndroidUtils;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.InjectView;
-import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.acty.BusinessCard;
-import meizhuo.org.lightmeeting.acty.MainActivity;
-import meizhuo.org.lightmeeting.adapter.DrawerAdapter;
-import meizhuo.org.lightmeeting.api.UserAPI;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.User;
-import meizhuo.org.lightmeeting.utils.AndroidUtils;
-import meizhuo.org.lightmeeting.utils.L;
+import butterknife.OnClick;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-public class DrawerMain extends BaseFragment{
+ 
+public class DrawerMain extends BaseFragment  {
 	
 	public static final String[] menuName={"会议列表","关于","退出"};
 	private MainActivity mainActivity;
-	TextView tv_username;
-	
+	LoadingDialog loadingdialog;
 	User user;
+	@InjectView(R.id.tv_username) TextView tv_username;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -42,60 +45,79 @@ public class DrawerMain extends BaseFragment{
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-	
+		 initData();
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-	
-		View v = inflater.inflate(R.layout.fragment_drawermain, container, false);
-		ListView lv = (ListView)v.findViewById(R.id.left_drawer);
-		 tv_username = (TextView)v.findViewById(R.id.tv_username);
-		initData();
-		View userinfo = v.findViewById(R.id.btn_userinfo);
-		
-		userinfo.setOnClickListener(new View.OnClickListener() {
+		 super.onCreateView(inflater, container, savedInstanceState,R.layout.fragment_drawermain);
+		 return contentView;
+	}
+	@OnClick(R.id.btn_userinfo) public void to_userinfo(){
+		openActivity(BusinessCard.class);
+	}
+	@OnClick(R.id.lm_to_meetlist) public void to_meetlist(){
+		mainActivity.setMainContent(new LMList_fm());
+	}
+	@OnClick(R.id.lm_to_logoff) public void to_logoff(){
+		UserAPI.logout(new JsonResponseHandler() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onStart() {
 				// TODO Auto-generated method stub
-				openActivity(BusinessCard.class);
-			}
-		});
-		lv.setAdapter(new DrawerAdapter(mainActivity, menuName));
-		lv.setOnItemClickListener(new DrawerItemClickListener());
-		return v;
-	}
-	
-	private class DrawerItemClickListener implements ListView.OnItemClickListener{
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// TODO Auto-generated method stub
-			//public static final String[] menuName={"会议列表","动态","个人名片","会议资料","功能","会议成员"};
-			switch (position) {
-			case 0://会议列表
-				mainActivity.setMainContent(new LMList_fm());
-				break;
-		/*	case 1://动态   （暂时不显示吧）
-				mainActivity.setMainContent(new Dynamic_fm());
-				break;*/
-			case 1://设置
-				mainActivity.setMainContent(new About());
-//				mainActivity.setMainContent(new Settings());
-				break;
-			case 2://关于
-				getActivity().finish();
-				break; 
-			default:
-				break;
+				if(loadingdialog == null)
+				{
+					loadingdialog = new LoadingDialog(getActivity());
+					loadingdialog.setText("正在注销!");
+					loadingdialog.show();
+				}
 			}
 			
-		}
+			@Override
+			public void onOK(Header[] headers, JSONObject obj) {
+				// TODO Auto-generated method stub
+				try {
+					if(obj.getString("code").equals("20000"))
+					{
 		
+						new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								App app = (App)getActivity().getApplication();
+								app.cleanUpInfo();
+							}
+						}).start();
+						
+						if(loadingdialog.isShowing())
+						{
+							loadingdialog.dismiss();
+							loadingdialog = null;
+						}
+						toast("注销成功");
+						openActivity(Login.class);
+						getActivity().finish();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFaild(int errorType, int errorCode) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	@OnClick(R.id.lm_to_about) public void to_about(){
+		mainActivity.setMainContent(new About());
+	}
+	@OnClick(R.id.lm_to_logout) public void to_logout(){
+		getActivity().finish();
 	}
 
 	@Override

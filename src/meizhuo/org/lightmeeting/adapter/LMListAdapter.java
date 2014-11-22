@@ -12,17 +12,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-public class LMListAdapter extends BaseSwipeAdapter  {
+public class LMListAdapter extends BaseAdapter  {
 	
 	
 	List<Meeting>mData;
@@ -38,11 +41,14 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 		mData = data;
 	}
 
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return mData.size();
 	}
+
+
 
 	@Override
 	public Object getItem(int position) {
@@ -50,111 +56,52 @@ public class LMListAdapter extends BaseSwipeAdapter  {
 		return mData.get(position);
 	}
 
+
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
 
-
-
 	@Override
-	public void fillValues(final int position, View convertView) {
+	public View getView(int position, View convertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
-		TextView tv_meeting_title = (TextView)convertView.findViewById(R.id.tv_meeting_title);
-		TextView tv_meeting_address = (TextView)convertView.findViewById(R.id.tv_meeting_address);
-		TextView tv_start_time = (TextView)convertView.findViewById(R.id.tv_start_time);
-		TextView tv_end_time = (TextView)convertView.findViewById(R.id.tv_end_time);
-		TextView tv_meeting_intro = (TextView)convertView.findViewById(R.id.tv_meeting_intro);
-		ImageView deletebtn = (ImageView)convertView.findViewById(R.id.delete);
-		ImageView update = (ImageView)convertView.findViewById(R.id.update);
-		
-		deletebtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(mOnItemClickListener!= null){
-					mOnItemClickListener.onItemClick(position);
-				}
-				
-			}
-		});
-		update.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(mEditListener != null){
-					mEditListener.onEditListener(position);
-				}
-				
-			}
-		});
-		
-		
-	
-		tv_meeting_title.setText(mData.get(position).getTitle());
-		tv_meeting_address.setText(mData.get(position).getAddress());
-		tv_start_time.setText(mData.get(position).getStarttime());
-		tv_end_time.setText(mData.get(position).getEndtime());
-		if(mData.get(position).getIntro().equals("")){
-			tv_meeting_intro.setText("暂无会议简介!");
+		ViewHolder h;
+		if(convertView == null)
+		{
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.lv_lmlist_item, null);
+			h = new ViewHolder(convertView);
+			convertView.setTag(h);
 		}else
 		{
-			tv_meeting_intro.setText(mData.get(position).getIntro());
+			h = (ViewHolder)convertView.getTag();
 		}
+		h.tv_meeting_title.setText(mData.get(position).getTitle());
+		h.tv_meeting_address.setText(mData.get(position).getAddress());
+		h.tv_start_time.setText(mData.get(position).getStarttime());
+		h.tv_end_time.setText(mData.get(position).getEndtime());
+		h.tv_meeting_intro.setText(mData.get(position).getIntro());
+		
+		return convertView;
+	}
+	
+	static class ViewHolder {
+		@InjectView(R.id.tv_meeting_title) TextView tv_meeting_title;
+		@InjectView(R.id.tv_meeting_address) TextView  tv_meeting_address;
+		@InjectView(R.id.tv_start_time) TextView tv_start_time;
+		@InjectView(R.id.tv_end_time) TextView tv_end_time;
+		@InjectView(R.id.tv_meeting_intro) TextView tv_meeting_intro;
 		
 		
+		public ViewHolder(View v) {
+			// TODO Auto-generated constructor stub
+			ButterKnife.inject(this, v);
+		}
 		
 	}
 	
+	
 
-
-	@Override
-	public View generateView(final int position, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		View v = LayoutInflater.from(mContext).inflate(R.layout.lv_lmlist_item, null);
-		SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
-		swipeLayout.addSwipeListener(new SimpleSwipeListener(){
-				@Override
-				public void onOpen(SwipeLayout layout) {
-					// TODO Auto-generated method stub
-				}
-				
-				@Override
-				public void onUpdate(SwipeLayout layout, int leftOffset,
-					int topOffset) {
-				// TODO Auto-generated method stub
-					if(mOnUpdateListener != null){
-						mOnUpdateListener.onUpdateListener(position);
-					}
-				super.onUpdate(layout, leftOffset, topOffset);
-				}
-				
-				@Override
-				public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-				// TODO Auto-generated method stub
-					if(mOnHandleListener != null){
-						mOnHandleListener.onHandlerListener(position);
-					}
-				super.onHandRelease(layout, xvel, yvel);
-				}
-		});
-		swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-			
-			@Override
-			public void onDoubleClick(SwipeLayout layout, boolean surface) {
-				// TODO Auto-generated method stub
-			}
-		});
-		return v;
-	}
-
-	@Override
-	public int getSwipeLayoutResourceId(int position) {
-		// TODO Auto-generated method stub
-		return R.id.swipe4;
-	}
 	
 	public void setOnItemClickListener(OnItemClickListener listener){
 		this.mOnItemClickListener = listener;

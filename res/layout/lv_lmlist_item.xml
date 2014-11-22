@@ -4,164 +4,119 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:background="@drawable/card_bg"
-    android:orientation="vertical" 
-     >
-     
-   <com.daimajia.swipe.SwipeLayout
-        android:id="@+id/swipe4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-          
-           <LinearLayout
-                 android:tag="Bottom2"
-               android:layout_width="wrap_content"
-               android:layout_height="match_parent"
-           >     
-           
-             <ImageView
-            android:id="@+id/update"
-            android:src="@drawable/aa_edit"
-            android:layout_width="70dp"
-            android:background="@color/lm_lucency_blue"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_height="match_parent" />
-                <View 
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            />
-             <ImageView
-                 android:clickable="true"
-            android:id="@+id/delete"
-            android:src="@drawable/trash"
-            android:layout_width="70dp"
-            android:background="@color/lm_lucency_blue"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_height="match_parent" />
-        </LinearLayout>
+    android:orientation="vertical" >
 
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_margin="10dp"
-        android:orientation="vertical"
-        >
-        <LinearLayout 
-            android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="30dp"
-            >
-            <LinearLayout 
-                android:layout_width="match_parent"
+            android:layout_height="60dp" >
+
+            <TextView
+                android:id="@+id/tv_meeting_title"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                >
-             <TextView
-                 android:layout_gravity="center"
-      		  style="@style/TextView"
-       		 android:id="@+id/tv_meeting_title"
-      		  android:layout_width="wrap_content"
-      	 	 android:layout_height="60dp"
- 				android:text="name"
-        	 />
-             </LinearLayout>
-             
+                android:layout_gravity="center"
+                android:text="name" />
         </LinearLayout>
-           <View 
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/ic_line_1"
-            />
-        <LinearLayout 
-               android:layout_marginTop="4dp"
-               android:layout_marginLeft="8dp"
-            style="@style/LinearLayout"
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/ic_line_1" />
+
+    <LinearLayout
+        style="@style/LinearLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-             <LinearLayout 
-                 android:orientation="horizontal"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 >
-                     <TextView
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView"
                 android:layout_marginLeft="4dp"
                 android:text="会议地点:"
-                />
-              <TextView
-                  android:layout_marginRight="10dp"
-                 android:id="@+id/tv_meeting_address"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-             </LinearLayout>
-        	<LinearLayout 
-        	       android:layout_marginTop="4dp"
-        	    android:orientation="horizontal"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    >
-                <TextView
-                    android:text="开始时间:"
-                    android:layout_marginLeft="4dp"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-                  <TextView
-                         android:layout_marginRight="10dp"
-                      android:id="@+id/tv_start_time"
-                      android:layout_gravity="right"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-                  </LinearLayout>
-                   	<LinearLayout 
-        	       android:layout_marginTop="4dp"
-        	    android:orientation="horizontal"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    >
-                <TextView
-                    android:text="结束时间:"
-                    android:layout_marginLeft="4dp"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-                  <TextView
-                         android:layout_marginRight="10dp"
-                      android:id="@+id/tv_end_time"
-                      android:layout_gravity="right"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-                  </LinearLayout>
-                      	<LinearLayout 
-                      	    android:layout_marginTop="4dp"
-        	    android:orientation="horizontal"
-        	    android:layout_width="match_parent"
-        	    android:layout_height="wrap_content"
-        	    >
-                <TextView
-                    android:text="会议简介:"
-                    android:layout_marginLeft="4dp"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-                  <TextView
-                         android:layout_marginRight="10dp"
-                      android:id="@+id/tv_meeting_intro"
-                      android:layout_gravity="right"
-                      android:text="今晚打老虎"
-                style="@style/TextView" 
-                android:textColor="@color/lm_grey_lv_two"
-                />
-           </LinearLayout>
+                android:textColor="@color/lm_grey_lv_two" />
+
+            <TextView
+                android:id="@+id/tv_meeting_address"
+                style="@style/TextView"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/lm_grey_lv_two" />
         </LinearLayout>
-	</LinearLayout>
-	</com.daimajia.swipe.SwipeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView"
+                android:layout_marginLeft="4dp"
+                android:text="开始时间:"
+                android:textColor="@color/lm_grey_lv_two" />
+
+            <TextView
+                android:id="@+id/tv_start_time"
+                style="@style/TextView"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/lm_grey_lv_two" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView"
+                android:layout_marginLeft="4dp"
+                android:text="结束时间:"
+                android:textColor="@color/lm_grey_lv_two" />
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                style="@style/TextView"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/lm_grey_lv_two" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView"
+                android:layout_marginLeft="4dp"
+                android:text="会议简介:"
+                android:textColor="@color/lm_grey_lv_two" />
+
+            <TextView
+                android:id="@+id/tv_meeting_intro"
+                style="@style/TextView"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:text="今晚打老虎"
+                android:textColor="@color/lm_grey_lv_two" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

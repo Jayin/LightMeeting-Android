@@ -5,46 +5,155 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical" >
-    <LinearLayout 
-        android:clickable="true"
+
+    <LinearLayout
         android:id="@+id/btn_userinfo"
         android:layout_width="250dp"
         android:layout_height="200dp"
-        android:gravity="center"
         android:background="@drawable/aa_drawer_user_bg"
-        android:orientation="vertical"
-        >
-   <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
-                android:id="@+id/minimalFour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                bootstrap:bct_image="@drawable/aa_talker"
-                bootstrap:bct_size="medium"
-                bootstrap:bct_minimal="true"
-                android:layout_margin="10dp"/>
-        <TextView 
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+            android:id="@+id/minimalFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            bootstrap:bct_image="@drawable/aa_talker"
+            bootstrap:bct_minimal="true"
+            bootstrap:bct_size="medium" />
+
+        <TextView
             android:id="@+id/tv_username"
             style="@style/TextViewBase"
             android:layout_marginLeft="6dp"
             android:text=""
-            android:textSize="20sp"
             android:textColor="@color/white"
-            />
+            android:textSize="20sp" />
     </LinearLayout>
-    <ImageView 
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@drawable/lm_ic_line3"
-        />
-    <!--   android:divider="@drawable/lm_ic_line3" -->
-    <ListView 
-        android:id="@+id/left_drawer"
+        android:src="@drawable/lm_ic_line3" />
+
+    <LinearLayout
+        android:id="@+id/lm_to_meetlist"
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:divider="@null"
-        android:background="@android:color/white"
-      
-        ></ListView>
+        android:clickable="false"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:background="@drawable/lm_btn_white2grey"
+            style="@style/LinearLayout"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aa_lm_meetlist" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:text="会议列表"
+                 android:layout_marginLeft="8dp"
+                android:textColor="@color/lm_lucency_blue"
+                android:textSize="20sp" />
+        </LinearLayout>
+         <LinearLayout
+            android:id="@+id/lm_to_logoff"
+            style="@style/LinearLayout"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lm_btn_white2grey"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aa_meet_logoff" />
+
+            <TextView
+                android:id="@+id/tv_menuName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                 android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="注销"
+                android:textColor="@color/lm_lucency_blue"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lm_to_about"
+            style="@style/LinearLayout"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lm_btn_white2grey"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aa_lm_about" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                 android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="关于"
+                android:textColor="@color/lm_lucency_blue"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lm_to_logout"
+            style="@style/LinearLayout"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lm_btn_white2grey"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aa_lm_meetlist_logout" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="退出"
+                android:textColor="@color/lm_lucency_blue"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

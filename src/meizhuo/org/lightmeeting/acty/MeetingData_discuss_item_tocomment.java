@@ -76,7 +76,7 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		
+		mActionBar.setTitle("请写下您的评论");
 		
 	}
 	

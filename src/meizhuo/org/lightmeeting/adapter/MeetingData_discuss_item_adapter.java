@@ -61,12 +61,14 @@ public class MeetingData_discuss_item_adapter extends BaseAdapter{
 			h = (ViewHolder)convertView.getTag();
 		}
 		h.discuss_comment.setText(mData.get(position).getContent());
+		h.comment_author.setText(mData.get(position).getAuthor());
 		
 		return convertView;
 	}
 	
 		class ViewHolder{
 			@InjectView(R.id.discuss_comment) TextView discuss_comment;
+			@InjectView(R.id.comment_author) TextView comment_author;
 		
 		public ViewHolder(View v) {
 			// TODO Auto-generated constructor stub

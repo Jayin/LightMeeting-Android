@@ -39,9 +39,6 @@ public class Login extends BaseActivity {
 	@InjectView(R.id.radioMale) RadioButton maleRadio;
 	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
 	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
-//	@InjectView(R.id.acty_register_et_company) EditText register_et_company;
-//	@InjectView(R.id.acty_register_et_position) EditText register_et_position;
-//	@InjectView(R.id.acty_register_et_birth) EditText register_et_birth;
 	@InjectView(R.id.acty_register_btn_regist) Button register_btn_regist;
 	@InjectView(R.id.acty_register_btn_cancle) Button register_btn_cancle;
 	/**登录**/
@@ -99,7 +96,7 @@ public class Login extends BaseActivity {
 							dialog = null;
 						}
 						String msg = obj.getString("msg");
-						toast(msg);
+						toast("登录成功");
 						return ;
 					}
 				} catch (JSONException e) {

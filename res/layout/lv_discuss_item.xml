@@ -4,45 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
+    android:clickable="false"
     android:background="@drawable/card_bg"
     android:orientation="vertical" >
     
-      <com.daimajia.swipe.SwipeLayout
-        android:id="@+id/swipe3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-    
-           <LinearLayout
-                 android:tag="Bottom2"
-               android:layout_width="wrap_content"
-               android:layout_height="match_parent"
-           >
-             <ImageView
-            android:id="@+id/update"
-            android:src="@drawable/aa_edit"
-            android:layout_width="70dp"
-            android:background="@color/lm_lucency_blue"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_height="match_parent" />
-                <View 
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/lm_ic_line3"
-            />
-             <ImageView
-                 android:clickable="true"
-            android:id="@+id/delete"
-            android:src="@drawable/trash"
-            android:layout_width="70dp"
-            android:background="@color/lm_lucency_blue"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_height="match_parent" />
-        </LinearLayout>
-       
 
       <LinearLayout
         style="@style/LinearLayout"
@@ -52,15 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-    <!--         <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
-                android:id="@+id/minimalFour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                bootstrap:bct_image="@drawable/aa_talker"
-                bootstrap:bct_minimal="true"
-                bootstrap:bct_size="small" >
-            </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail> -->
 		<TextView 
 		    style="@style/TextView"
 		      android:layout_marginTop="10dp"
@@ -94,5 +50,4 @@
         </LinearLayout>
          </LinearLayout>
     
-</com.daimajia.swipe.SwipeLayout>
 </LinearLayout>

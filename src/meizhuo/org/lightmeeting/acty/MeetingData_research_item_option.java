@@ -2,6 +2,7 @@ package meizhuo.org.lightmeeting.acty;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.model.KV;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.utils.StringUtils;
 
 /**
  *  选项
@@ -63,6 +66,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 		research_title=getIntent().getStringExtra("research_title");
 		optionlist = new ArrayList<HashMap<String,String>>();
 		data= (ArrayList<KV>) getIntent().getSerializableExtra("researchobj");
+		Collections.sort(data);
 	       adapter  =new MeetingData_research_item_option_adapter(this, data);
 		
 	}

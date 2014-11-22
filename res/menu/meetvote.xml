@@ -7,10 +7,10 @@
         android:title="@string/action_more"
         >
         <menu>
-            <item android:id="@+id/create_vote"
+     <!--        <item android:id="@+id/create_vote"
                 android:showAsAction="always|withText"
                 android:title="@string/action_create_vote"
-                />
+                /> -->
             
         </menu>
     </item>

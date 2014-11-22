@@ -99,7 +99,7 @@ public class BusinessCard extends BaseActivity  {
 					 member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
 					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("m")){
+					if(member.getSex().equals("f")){
 						member_sex.setText("男");
 						sex="男";
 					}else{
@@ -275,59 +275,6 @@ public class BusinessCard extends BaseActivity  {
 			 AlertDialog dialog = builder.create();
 			dialog.show();
 			break;
-		case R.id.action_logoff:
-			UserAPI.logout(new JsonResponseHandler() {
-				
-				@Override
-				public void onStart() {
-					// TODO Auto-generated method stub
-					if(loadingdialog == null)
-					{
-						loadingdialog = new LoadingDialog(BusinessCard.this);
-						loadingdialog.setText("正在注销!");
-						loadingdialog.show();
-					}
-				}
-				
-				@Override
-				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
-					try {
-						if(obj.getString("code").equals("20000"))
-						{
-			
-							new Thread(new Runnable() {
-								
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									((App)getApplication()).cleanUpInfo();
-								}
-							}).start();
-							
-							if(loadingdialog.isShowing())
-							{
-								loadingdialog.dismiss();
-								loadingdialog = null;
-							}
-							toast("注销成功");
-							openActivity(Login.class);
-							BusinessCard.this.finish();
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				@Override
-				public void onFaild(int errorType, int errorCode) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-			
-			break;
 		case android.R.id.home:
 			finish();
 			break;
@@ -343,7 +290,11 @@ public class BusinessCard extends BaseActivity  {
 		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
-				member_sex.setText(data.getStringExtra("sex"));
+			if(data.getStringExtra("sex").equals("f")){
+				member_sex.setText("男");
+			}else{
+				member_sex.setText("女");
+			}
 			member_company.setText(data.getStringExtra("company"));
 			member_position.setText(data.getStringExtra("position"));
 			member_phone.setText(data.getStringExtra("phone"));
@@ -400,6 +351,7 @@ public class BusinessCard extends BaseActivity  {
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle("个人名片");
 		
 	}
 	

@@ -2,28 +2,56 @@ package meizhuo.org.lightmeeting.acty;
 
 
 
+
+
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import butterknife.InjectView;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.app.DownloadManager.Request;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.DialogInterface.OnKeyListener;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.app.CoreService;
 import meizhuo.org.lightmeeting.fragment.DrawerMain;
 import meizhuo.org.lightmeeting.fragment.LMList_fm;
+import meizhuo.org.lightmeeting.model.KV;
+import meizhuo.org.lightmeeting.utils.AndroidUtils;
+import meizhuo.org.lightmeeting.utils.Constants;
 
 public class MainActivity extends BaseActivity { 
-//	private static final String TAG = "MainActivity";
 	
 	
-	
+	private BroadcastReceiver mReceiver = null;
 	private String DefaultTitle = "轻会议";
 	private String MenuTitle = "菜单";
 	//获取Fragment的管理员权限
@@ -31,15 +59,20 @@ public class MainActivity extends BaseActivity {
 	@InjectView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ActionBar mActionBar;
-	private Menu mMenu;
+	private DownloadManager downloadManager;
+	private SharedPreferences prefs;
+	private static final String DL_ID = "downloadId";
+	
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.activity_main);
-
-//		setAppTitle("LightMeeting");
+		initDownload();
+		checkVersion();
+		initReceiver();
+	
 		initLayout();
 		
 	}
@@ -50,6 +83,11 @@ public class MainActivity extends BaseActivity {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void initDownload() {
+		downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 	}
 
 	@Override
@@ -71,8 +109,6 @@ public class MainActivity extends BaseActivity {
 	public void setMainContent(Fragment fragment)
 	{
 		mDrawerLayout.closeDrawers();
-		// you need to pop some stacks in case setMainContent called after
-		//add MainContent
 		//activity 的后退栈中弹出fragment们(这可以模拟后退键引发的动作)
 		getSupportFragmentManager().popBackStack();
 		//回退之后切换原来的界面
@@ -144,7 +180,155 @@ public class MainActivity extends BaseActivity {
 			mDrawerToggle.onDrawerStateChanged(newState);
 		}
 	}
+	private void initReceiver() {
+		mReceiver = new AppStartReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.Action_Receive_VersionInfo);
+		registerReceiver(mReceiver, filter);
+
+	}
+
+	class AppStartReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			List<KV>kvlist = new ArrayList<KV>();
+			String action = intent.getAction();
+			List<KV> updateInfo = (List<KV>) intent.getSerializableExtra("updateInfo");
+			String versionname = intent.getStringExtra("version_name");
+			final String url = intent.getStringExtra("url");
+			if (action.equals(Constants.Action_Receive_VersionInfo)) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				builder.setTitle("发现新版本");
+				try {
+					
+					builder.setMessage("当前版本:"
+							+ AndroidUtils.getAppVersionName(MainActivity.this)
+							+ "\n更新版本号:" + versionname + "\n" + updateInfo.get(0).getKey()+":" + updateInfo.get(0).getValue() + "\n" + 
+							updateInfo.get(1).getKey()+":" + updateInfo.get(1).getValue() + "\n"+
+							updateInfo.get(2).getKey()+":" + updateInfo.get(2).getValue() + "\n"
+							);
+				} catch (NameNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				builder.setPositiveButton("立刻更新 ",
+						new DialogInterface.OnClickListener() {
+
+							@SuppressLint("NewApi")
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+//								Intent intent = new Intent(Intent.ACTION_VIEW);
+								Uri uri = Uri.parse(url);
+//								 intent.setData(uri);
+//								 startActivity(intent);
+								
+									DownloadManager.Request request = new DownloadManager.Request(
+											uri);
+									request.setAllowedNetworkTypes(Request.NETWORK_MOBILE
+											| Request.NETWORK_WIFI);
+									request.setAllowedOverRoaming(false);
+									// 设置文件类型
+									MimeTypeMap mimeTypeMap = MimeTypeMap
+											.getSingleton();
+									String mimeString = mimeTypeMap
+											.getMimeTypeFromExtension(MimeTypeMap
+													.getFileExtensionFromUrl(url));
+									request.setMimeType(mimeString);
+									// 在通知栏中显示
+									request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+									request.setVisibleInDownloadsUi(true);
+									// sdcard的目录下的download文件夹
+									request.setDestinationInExternalPublicDir(
+											"/download/", "meizhuo.apk");
+									request.setTitle("东莞技能培训");
+									long id = downloadManager.enqueue(request);
+									// 保存id
+									prefs.edit().putLong(DL_ID, id).commit();
+
+								registerReceiver(
+										receiver,
+										new IntentFilter(
+												DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+							}
+						});
+				builder.setNegativeButton("稍后更新", null);
+				builder.setOnKeyListener(keylistener);
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		}
+	}
 	
+	OnKeyListener keylistener = new DialogInterface.OnKeyListener() {
+
+		@Override
+		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+			// TODO Auto-generated method stub
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+	};
+	
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// 这里可以取得下载的id，这样就可以知道哪个文件下载完成了。适用与多个下载任务的监听
+			queryDownloadStatus();
+			if(intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)){
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				String apkFilePath = new StringBuilder(Environment.getExternalStorageDirectory().getAbsolutePath())
+                .append(File.separator).append("/download/").append(File.separator)
+                .append("meizhuo.apk").toString();
+				 File file = new File(apkFilePath);
+			        if (file != null && file.length() > 0 && file.exists() && file.isFile()) {
+			            i.setDataAndType(Uri.parse("file://" + apkFilePath), "application/vnd.android.package-archive");
+			            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			           MainActivity.this.startActivity(i);
+			        }
+				
+			}
+		}
+	};
+	
+	private void checkVersion() {
+		Intent service = new Intent(getContext(), CoreService.class);
+		service.setAction(Constants.Action_checkVersion);
+		startService(service);
+	}
+	
+	private void queryDownloadStatus() {
+		DownloadManager.Query query = new DownloadManager.Query();
+		query.setFilterById(prefs.getLong(DL_ID, 0));
+		Cursor c = downloadManager.query(query);
+		if (c.moveToFirst()) {
+			int status = c.getInt(c
+					.getColumnIndex(DownloadManager.COLUMN_STATUS));
+			switch (status) {
+			case DownloadManager.STATUS_PAUSED:
+			case DownloadManager.STATUS_PENDING:
+			case DownloadManager.STATUS_RUNNING:
+				// 正在下载，不做任何事情
+				break;
+			case DownloadManager.STATUS_SUCCESSFUL:
+				// 完成
+			
+				break;
+			case DownloadManager.STATUS_FAILED:
+				// 清除已下载的内容，重新下载
+				downloadManager.remove(prefs.getLong(DL_ID, 0));
+				prefs.edit().clear().commit();
+				break;
+			}
+		}
+	}
 	
 
 

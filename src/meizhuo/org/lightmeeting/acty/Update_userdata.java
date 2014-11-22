@@ -59,7 +59,6 @@ public class Update_userdata extends BaseActivity {
 		position = getIntent().getStringExtra("position");
 		phone = getIntent().getStringExtra("phone");
 		email = getIntent().getStringExtra("email");
-		L.i(nickname);
 	}
 	/**
 	 @InjectView(R.id.lm_usercard_nickname) EditText lm_usercard_nickname;

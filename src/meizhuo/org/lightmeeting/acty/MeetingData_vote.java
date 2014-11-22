@@ -70,44 +70,8 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 				android.R.color.holo_blue_light);
 		vote_lv.setAdapter(adapter);
 		vote_lv.setOnScrollListener(this);
-		adapter.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(int position) {
-				// TODO Auto-generated method stub
-				data.remove(position);
-				adapter.notifyDataSetChanged();
-				onRefresh();
-			}
-		});
-		adapter.setOnUpdateListener(new OnUpdateListener() {
-			
-			@Override
-			public void onUpdateListener(int position) {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setEnabled(false);
-			}
-		});
-		adapter.setOnHandleListener(new OnHandleListener() {
-			
-			@Override
-			public void onHandlerListener(int position) {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setEnabled(false);
-			}
-		});
-		adapter.setOnEditListener(new OnEditListener() {
-			
-			@Override
-			public void onEditListener(int position) {
-				// TODO Auto-generated method stub
-				Intent it =  new Intent(MeetingData_vote.this, MeetingData_vote_update.class);
-				it.putExtra("voteid", data.get(position).getId());
-				it.putExtra("title", data.get(position).getTitle());
-				it.putExtra("intro", data.get(position).getIntro());
-				startActivity(it);
-			}
-		});
+	
+	
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		mActionBar.setTitle("投票列表");
@@ -239,11 +203,11 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		//创建投票
-		case R.id.create_vote:
+	/*	case R.id.create_vote:
 			Intent intent =  new Intent(MeetingData_vote.this, MeetingData_vote_create.class);
 			intent.putExtra("meetid", meetid);
 			startActivity(intent);
-			break;
+			break;*/
 		case  android.R.id.home:
 			finish();
 			break;

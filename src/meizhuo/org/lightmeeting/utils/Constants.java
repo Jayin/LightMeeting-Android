@@ -25,6 +25,14 @@ public class Constants {
 	/**更新讨论成功*/
 	public static final String Action_Update_discuss_successful ="Update_discuss_successful";
 	
+	/**接受版本信息*/
+	public static final String Action_Receive_VersionInfo ="Action_Receive_VersionInfo";
+	/**检查版本*/
+	public static final String Action_checkVersion ="checkVersion";
+	
+	
+
+	
 	
 	/**http请求状态*/
 	public final static int Start = 0;

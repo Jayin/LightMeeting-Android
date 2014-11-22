@@ -47,6 +47,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	boolean hasMore = true,isloading=false;
 	List<Comment>data;
 	ActionBar mActionBar;
+	String title;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	protected void initData() {
 		// TODO Auto-generated method stub
 		 discussid = getIntent().getStringExtra("discussid");
+		 title = getIntent().getStringExtra("title");
 		 data =new ArrayList<Comment>();
 		 adapter = new MeetingData_discuss_item_adapter(this, data);
 		
@@ -80,7 +82,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 		onRefresh();
 		mActionBar  = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		mActionBar.setTitle("评论列表");
+		mActionBar.setTitle(title);
 	}
 	
 	@OnClick(R.id.to_comment) public void to_comment(){
