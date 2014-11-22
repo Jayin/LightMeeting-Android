@@ -45,7 +45,7 @@ public class MeetingData extends BaseActivity{
 	@InjectView(R.id.tabs) com.astuetz.PagerSlidingTabStrip mPagerSlidingTabStrip;
 	@InjectView(R.id.viewpager) ViewPager mViewPager;
 	ActionBar mActionBar;
-	String meetid;
+	String meetid,meet_title;
 	LoadingDialog loadingDialog ;
 
 	List<Fragment>fragments = new ArrayList<Fragment>();
@@ -53,16 +53,14 @@ public class MeetingData extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState, R.layout.lm_list_one_meeting);
+		initData();
 		initLayout();
-		
-		 meetid = getIntent().getStringExtra("meetid");
 		
 		Member_fm member_fm = new Member_fm();
 		Bundle bundle = new Bundle();
 		bundle.putString("meetid", meetid);
 		member_fm.setArguments(bundle);
 		
-		/*bundle传给meetfunction*/
 		Meeting_function_fm meet_function = new Meeting_function_fm();
 		meet_function.setArguments(bundle);
 		
@@ -73,7 +71,7 @@ public class MeetingData extends BaseActivity{
 		fragments.add(meet_data);
 		fragments.add(meet_function);
 		fragments.add(member_fm);
-		
+	
 		
 		mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
@@ -116,7 +114,8 @@ public class MeetingData extends BaseActivity{
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		
+		 meetid = getIntent().getStringExtra("meetid");
+		 meet_title = getIntent().getStringExtra("title");
 	}
 
 
@@ -125,6 +124,7 @@ public class MeetingData extends BaseActivity{
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle(meet_title);
 		
 	}
 	
