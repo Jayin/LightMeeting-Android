@@ -203,11 +203,11 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		//创建投票
-		case R.id.create_vote:
+	/*	case R.id.create_vote:
 			Intent intent =  new Intent(MeetingData_vote.this, MeetingData_vote_create.class);
 			intent.putExtra("meetid", meetid);
 			startActivity(intent);
-			break;
+			break;*/
 		case  android.R.id.home:
 			finish();
 			break;
