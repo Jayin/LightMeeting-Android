@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.camera.CameraManager;
 import meizhuo.org.lightmeeting.decoding.CaptureActivityHandler;
 import meizhuo.org.lightmeeting.decoding.InactivityTimer;
@@ -122,7 +123,7 @@ public class CaptureActivity extends Activity implements Callback{
 			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
 //			System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent(this,MeetingData_discuss.class);
-			resultIntent.putExtra("resultcode", resultString);
+			resultIntent.putExtra("resultcode", RestClient.BASE_URL+"/home/meet/addjoin/meetid/"+resultString);
 			L.i("拿到的二维字符串" + resultString);
 			/*Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
