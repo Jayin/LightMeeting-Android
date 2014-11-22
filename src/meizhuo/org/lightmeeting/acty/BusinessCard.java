@@ -99,7 +99,7 @@ public class BusinessCard extends BaseActivity  {
 					 member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
 					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("m")){
+					if(member.getSex().equals("f")){
 						member_sex.setText("男");
 						sex="男";
 					}else{
@@ -290,7 +290,11 @@ public class BusinessCard extends BaseActivity  {
 		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
-				member_sex.setText(data.getStringExtra("sex"));
+			if(data.getStringExtra("sex").equals("f")){
+				member_sex.setText("男");
+			}else{
+				member_sex.setText("女");
+			}
 			member_company.setText(data.getStringExtra("company"));
 			member_position.setText(data.getStringExtra("position"));
 			member_phone.setText(data.getStringExtra("phone"));
@@ -347,6 +351,7 @@ public class BusinessCard extends BaseActivity  {
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle("个人名片");
 		
 	}
 	
