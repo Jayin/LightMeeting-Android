@@ -80,10 +80,7 @@ public class MeetingData_vote_adapter extends BaseSwipeAdapter{
 				
 			}
 		});
-		vote_title.setText(mData.get(position).getTitle());
-		vote_intro.setText(mData.get(position).getIntro());
-		vote_starttime.setText(mData.get(position).getStime());
-		vote_end_time.setText(mData.get(position).getEtime());
+	
 		
 	}
 
@@ -131,6 +128,14 @@ public class MeetingData_vote_adapter extends BaseSwipeAdapter{
 		// TODO Auto-generated method stub
 		return  R.id.swipe3;
 	}
+	
+	/**
+	 	vote_title.setText(mData.get(position).getTitle());
+		vote_intro.setText(mData.get(position).getIntro());
+		vote_starttime.setText(mData.get(position).getStime());
+		vote_end_time.setText(mData.get(position).getEtime());
+	 * @param listener
+	 */
 	
 	public void setOnItemClickListener(OnItemClickListener listener){
 		this.mOnItemClickListener = listener;

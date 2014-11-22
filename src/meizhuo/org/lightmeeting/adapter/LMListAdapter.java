@@ -74,7 +74,7 @@ public class LMListAdapter extends BaseAdapter  {
 			convertView.setTag(h);
 		}else
 		{
-			h =(ViewHolder) convertView.getTag();
+			h = (ViewHolder)convertView.getTag();
 		}
 		h.tv_meeting_title.setText(mData.get(position).getTitle());
 		h.tv_meeting_address.setText(mData.get(position).getAddress());
