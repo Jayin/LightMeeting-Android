@@ -20,7 +20,6 @@ import meizhuo.org.lightmeeting.fragment.DrawerMain;
 import meizhuo.org.lightmeeting.fragment.LMList_fm;
 
 public class MainActivity extends BaseActivity { 
-//	private static final String TAG = "MainActivity";
 	
 	
 	
@@ -31,7 +30,6 @@ public class MainActivity extends BaseActivity {
 	@InjectView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ActionBar mActionBar;
-	private Menu mMenu;
 
 	
 	@Override
@@ -39,7 +37,6 @@ public class MainActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.activity_main);
 
-//		setAppTitle("LightMeeting");
 		initLayout();
 		
 	}
@@ -71,8 +68,6 @@ public class MainActivity extends BaseActivity {
 	public void setMainContent(Fragment fragment)
 	{
 		mDrawerLayout.closeDrawers();
-		// you need to pop some stacks in case setMainContent called after
-		//add MainContent
 		//activity 的后退栈中弹出fragment们(这可以模拟后退键引发的动作)
 		getSupportFragmentManager().popBackStack();
 		//回退之后切换原来的界面
