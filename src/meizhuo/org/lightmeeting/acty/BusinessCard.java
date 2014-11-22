@@ -275,59 +275,6 @@ public class BusinessCard extends BaseActivity  {
 			 AlertDialog dialog = builder.create();
 			dialog.show();
 			break;
-		case R.id.action_logoff:
-			UserAPI.logout(new JsonResponseHandler() {
-				
-				@Override
-				public void onStart() {
-					// TODO Auto-generated method stub
-					if(loadingdialog == null)
-					{
-						loadingdialog = new LoadingDialog(BusinessCard.this);
-						loadingdialog.setText("正在注销!");
-						loadingdialog.show();
-					}
-				}
-				
-				@Override
-				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
-					try {
-						if(obj.getString("code").equals("20000"))
-						{
-			
-							new Thread(new Runnable() {
-								
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									((App)getApplication()).cleanUpInfo();
-								}
-							}).start();
-							
-							if(loadingdialog.isShowing())
-							{
-								loadingdialog.dismiss();
-								loadingdialog = null;
-							}
-							toast("注销成功");
-							openActivity(Login.class);
-							BusinessCard.this.finish();
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				@Override
-				public void onFaild(int errorType, int errorCode) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-			
-			break;
 		case android.R.id.home:
 			finish();
 			break;
