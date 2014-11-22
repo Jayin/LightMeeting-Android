@@ -7,11 +7,7 @@
         android:showAsAction="always"
         android:title="@string/action_more">
         <menu >
-            <item 
-                android:id="@+id/action_add_meeting"
-                android:showAsAction="always|withText"
-                android:title="@string/action_addmeet"
-                />
+          
             <item 
                 android:id="@+id/action_sweep"
                 android:showAsAction="always|withText"
