@@ -45,7 +45,6 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
 	 Bundle idbundle = getArguments();
 	 meetid = idbundle.getString("meetid");
-	 L.i(meetid + "meetid");
 	 initData();
 	 initLayout();
 	 return contentView;

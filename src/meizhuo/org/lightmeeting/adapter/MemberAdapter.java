@@ -1,6 +1,5 @@
 package meizhuo.org.lightmeeting.adapter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
@@ -60,7 +59,14 @@ public class MemberAdapter extends BaseAdapter  {
 		}
 		h.tv_username.setText(mData.get(position).getNickname());
 		
-		h.tv_userintro.setText(mData.get(position).getCompany() + mData.get(position).getPosition());
+//		h.tv_userintro.setText(mData.get(position).getCompany() + mData.get(position).getPosition());
+		if(mData.get(position).getSex().equals("f"))
+		{
+			h.tv_userintro.setText("女");
+		}else
+		{
+			h.tv_userintro.setText("男");
+		}
 		return convertView;
 	}
 	
