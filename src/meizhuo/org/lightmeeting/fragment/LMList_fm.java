@@ -289,6 +289,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@OnItemClick(R.id.lv) public void item_click(int position){
 		Intent it  =  new Intent(getActivity(), MeetingData.class);
 		it.putExtra("meetid", data.get(position).getId());
+		it.putExtra("title", data.get(position).getTitle());
 		startActivity(it);
 	}
 	

@@ -45,7 +45,7 @@ public class MeetingData extends BaseActivity{
 	@InjectView(R.id.tabs) com.astuetz.PagerSlidingTabStrip mPagerSlidingTabStrip;
 	@InjectView(R.id.viewpager) ViewPager mViewPager;
 	ActionBar mActionBar;
-	String meetid;
+	String meetid,meet_title;
 	LoadingDialog loadingDialog ;
 
 	List<Fragment>fragments = new ArrayList<Fragment>();
@@ -55,7 +55,7 @@ public class MeetingData extends BaseActivity{
 		super.onCreate(savedInstanceState, R.layout.lm_list_one_meeting);
 		initLayout();
 		
-		 meetid = getIntent().getStringExtra("meetid");
+		
 		
 		Member_fm member_fm = new Member_fm();
 		Bundle bundle = new Bundle();
@@ -116,7 +116,8 @@ public class MeetingData extends BaseActivity{
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		
+		 meetid = getIntent().getStringExtra("meetid");
+		 meet_title = getIntent().getStringExtra("title");
 	}
 
 
@@ -125,6 +126,7 @@ public class MeetingData extends BaseActivity{
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle(meet_title);
 		
 	}
 	
