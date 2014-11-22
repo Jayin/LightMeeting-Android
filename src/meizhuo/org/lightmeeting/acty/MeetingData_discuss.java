@@ -224,11 +224,11 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		/*创建讨论*/
-		case R.id.action_create_discuss:
+	/*	case R.id.action_create_discuss:
 			Intent intent =  new Intent(MeetingData_discuss.this, MeetingData_discuss_create.class);
 			intent.putExtra("meetid", meetid);
 			startActivity(intent);
-			break;
+			break;*/
 		case android.R.id.home:
 			finish();
 			break;

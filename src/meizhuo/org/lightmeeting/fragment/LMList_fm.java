@@ -241,9 +241,9 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		// TODO Auto-generated method stub
 		switch(item.getItemId())
 		{
-		case R.id.action_add_meeting:
-			openActivity(Lm_meeting_addnewmeet.class);
-			break;
+//		case R.id.action_add_meeting:
+//			openActivity(Lm_meeting_addnewmeet.class);
+//			break;
 		case R.id.action_sweep:
 			Intent openCameraIntent =  new Intent(getActivity(), CaptureActivity.class);
 			startActivityForResult(openCameraIntent, 50);
@@ -322,7 +322,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				@Override
 				public void onOK(Header[] headers, JSONObject obj) {
 					// TODO Auto-generated method stub
-					L.i("二维码扫出来了吗" + obj.toString());
 					try {
 						if(obj.getString("code").equals("20000")){
 							if(dialog.isShowing()){
