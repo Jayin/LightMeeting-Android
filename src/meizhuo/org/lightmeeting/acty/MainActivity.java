@@ -127,6 +127,13 @@ public class MainActivity extends BaseActivity {
 			mDrawerLayout.closeDrawers();
 		}
 	
+	@Override protected void onDestroy() {
+		super.onDestroy();
+		if(mReceiver != null){
+			unregisterReceiver(mReceiver);
+		}
+	}
+	
 	@Override
 		protected void onPostCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
