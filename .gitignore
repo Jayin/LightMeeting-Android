@@ -28,6 +28,7 @@ proguard/
 .classpath
 .project
 lint.xml
+project.properties
 .factorypath
 .apt_generated/
 .settings/
