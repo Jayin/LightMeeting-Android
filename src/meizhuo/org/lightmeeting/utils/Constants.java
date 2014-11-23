@@ -29,6 +29,8 @@ public class Constants {
 	public static final String Action_Receive_VersionInfo ="Action_Receive_VersionInfo";
 	/**检查版本*/
 	public static final String Action_checkVersion ="checkVersion";
+	/**成功退出会议*/
+	public static final String Action_Logout_Meeting_Successful ="Logout_Meeting_Successful";
 	
 	
 

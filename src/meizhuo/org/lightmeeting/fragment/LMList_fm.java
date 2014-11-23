@@ -15,6 +15,7 @@ import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
@@ -24,7 +25,10 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.AsyncHttpClient;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -54,6 +58,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	String page="1",limit="";
 	boolean hasMore = true, isloading=false;
 	LoadingDialog dialog;
+	BroadcastReceiver mBroadcastReceiver;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,11 +73,19 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
+	 openReceiver();
 	 initData();
 	 initLayout();
 	 onRefresh();
 	 return contentView;
 	}
+	
+	private void openReceiver(){
+		mBroadcastReceiver = new LogoutMeetingReceiver();
+		IntentFilter filter = new IntentFilter(Constants.Action_Logout_Meeting_Successful);
+		getActivity().registerReceiver(mBroadcastReceiver, filter);
+	}
+	
 	
 	protected void initData(){
 		data = new ArrayList<Meeting>();
@@ -296,6 +309,25 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				
 			});
 	
+		}
+		
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		if(mBroadcastReceiver!= null)
+			getActivity().unregisterReceiver(mBroadcastReceiver);
+	}
+	
+	class LogoutMeetingReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if(action.equals(Constants.Action_Logout_Meeting_Successful)){
+				onRefresh();
+			}
 		}
 		
 	}
