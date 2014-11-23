@@ -252,7 +252,7 @@ public class MainActivity extends BaseActivity {
 									request.setVisibleInDownloadsUi(true);
 									// sdcard的目录下的download文件夹
 									request.setDestinationInExternalPublicDir(
-											"/download/", "meizhuo.apk");
+											"/download/", "轻会议.apk");
 									request.setTitle("轻会议");
 									long id = downloadManager.enqueue(request);
 									// 保存id
