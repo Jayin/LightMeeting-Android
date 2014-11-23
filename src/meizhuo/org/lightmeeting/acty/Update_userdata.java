@@ -74,11 +74,7 @@ public class Update_userdata extends BaseActivity {
 		// TODO Auto-generated method stub
 		lm_usercard_nickname.setText(nickname);
 		lm_usercard_birth.setText(birth);
-		if(sex.equals("f")){
-			lm_usercard_sex.setText("女");
-		}else{
-			lm_usercard_sex.setText("男");
-		}
+			lm_usercard_sex.setText(sex);
 		lm_usercard_company.setText(company);
 		lm_usercard_position.setText(position);
 		lm_usercard_contactphone.setText(phone);
@@ -101,7 +97,7 @@ public class Update_userdata extends BaseActivity {
 		}else{
 			sex = "f";
 		}
-		UserAPI.update(nickname, sex, email, company, position, birth, new JsonResponseHandler() {
+		UserAPI.update(nickname, sex, phone, email, company, position, birth, new JsonResponseHandler() {
 			
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
