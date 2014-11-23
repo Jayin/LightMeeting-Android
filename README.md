@@ -7,9 +7,9 @@ The Android client for LightMeeting
 Getting Start
 ===
 
-1. °Ñlibs/ÏÂµÄËùÓĞ¿â¶¼Ìí¼Ó¶¼¹¹½¨Â·¾¶
-2.ÒıÈë2¸öÒÀÀµ¿â**PagerSlidingTabStrip** and **AndroidBootstrap**
-
+- 1. æŠŠlibs/ä¸‹çš„æ‰€æœ‰åº“éƒ½æ·»åŠ éƒ½æ„å»ºè·¯å¾„
+- 2. å¼•å…¥2ä¸ªä¾èµ–åº“[PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip)å’Œ [AndroidBootstrap](https://github.com/AndroidBootstrap/android-bootstrap)
+- 3. é…ç½®[ButterKnife](https://github.com/JakeWharton/butterknife)
 
 License
 ===
