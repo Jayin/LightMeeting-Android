@@ -17,6 +17,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_fm_adapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.DocAPI;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.model.Doc;
@@ -88,9 +89,7 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-	DocAPI.getDocList(meetid,page, limit, new JsonResponseHandler() {
-			
+		DocAPI.getDocList(meetid,page, limit,new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
@@ -98,40 +97,31 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
-				L.i("会议资料obj" + obj);
-				try {
-					if(obj.getString("code").equals("20000"))
-					{
-						
-						List<Doc>Doclist =  Doc.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(Doclist);
-						adapter.notifyDataSetChanged();
-						page = "1";
-						if(Doclist.size() <10){
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						if(Doclist.size() == 0){
-							toast("暂无会议文档!");
-							return ;
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				List<Doc>Doclist =  Doc.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(Doclist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(Doclist.size() <10){
+					hasMore = false;
+				}else{
+					hasMore = true;
 				}
-				
+				if(Doclist.size() == 0){
+					toast("暂无会议文档!");
+					return ;
+				}
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				// TODO Auto-generated method stub
 				toast("出错了，请检查你的网络设置!");
-				
+				return ;
 			}
 			@Override
 			public void onFinish() {
@@ -140,14 +130,14 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 				isloading = false;
 			}
 		});
+
 	}
 	
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		DocAPI.getDocList(meetid,page, limit, new JsonResponseHandler() {
-			
+		DocAPI.getDocList(meetid, page, limit, new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
@@ -155,44 +145,35 @@ public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, 
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
-				L.i("onloadmore"+ obj.toString());
-				try {
-					if(obj.getString("code").equals("20000")){
-						List<Doc>doclist = Doc.create_by_jsonarray(obj.toString());
-						data.addAll(doclist);
-						adapter.notifyDataSetChanged();
-						hasMore = true;
-						if(obj.isNull("response")||doclist.size()<10)
-						{
-							hasMore = false;
-							toast("数据加载完毕!");
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					L.i("异常"+e.getMessage());
+				List<Doc>doclist = Doc.create_by_jsonarray(obj.toString());
+				data.addAll(doclist);
+				adapter.notifyDataSetChanged();
+				hasMore = true;
+				if(obj.isNull("response")||doclist.size()<10)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
 				}
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
-				
+				return ;
 			}
-			
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
-				
 			}
 		});
+
 	}
 	
 

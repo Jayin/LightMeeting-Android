@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MemberAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Member;
 import meizhuo.org.lightmeeting.utils.L;
@@ -69,7 +70,42 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		MeetingAPI.getJoinMember(meetid, new JsonResponseHandler() {
+		MeetingAPI.getJoinMember(meetid, new JsonHandler(){
+			
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Member>member = Member.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(member);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(member.size() < 20){
+					hasMore = false;
+				}else{
+					hasMore = true;
+				}
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				toast("网络不给力,请检查你的网络设置!");
+				return ;
+			}
+			
+			@Override
+			public void onFinish() {
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+/*		MeetingAPI.getJoinMember(meetid, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -113,14 +149,46 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-		});
+		});*/
 	}
 	
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		MeetingAPI.getJoinMember(meetid, new JsonResponseHandler() {
+		MeetingAPI.getJoinMember(meetid,new JsonHandler(){
+			
+				@Override
+				public void onStart() {
+					swipeRefreshLayout.setRefreshing(true);
+				}
+				@Override
+				public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+					List<Member>memberlist = Member.create_by_jsonarray(obj.toString());
+					data.addAll(memberlist);
+					adapter.notifyDataSetChanged();
+					if(obj.isNull("response")||memberlist.size()<20)
+					{
+						hasMore = false;
+						toast("数据加载完毕!");
+					}
+				}
+				
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+					toast("网络不给力,请检查你的网络设置!");
+					return ;
+				}
+				@Override
+				public void onFinish() {
+					swipeRefreshLayout.setRefreshing(false);
+					isloading = false;
+				}
+		});
+/*		MeetingAPI.getJoinMember(meetid, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -155,7 +223,7 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-		});
+		});*/
 	}
 
 
