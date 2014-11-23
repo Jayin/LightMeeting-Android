@@ -113,7 +113,7 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 							hasMore = true;
 						}
 						if(researchlist.size() == 0){
-							toast("暂无讨论数据!");
+							toast("暂无调查数据!");
 							return ;
 						}
 					}
