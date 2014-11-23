@@ -53,20 +53,24 @@ public class UserAPI {
 	 * @param position
 	 * @param birth
 	 */
-	public static void update(String nickname,String sex,String email,String company,String position,
+	public static void update(String nickname,String sex,String phone,String email,String company,String position,
 			String birth,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
-		if(!(nickname.equals("")||nickname == null))
+		if(!(nickname == null || nickname.equals("")))
 			params.add("nickname", nickname);
-		if(!(sex.equals("")||sex == null)){
+		if(sex.equals("")||sex == null){
 			if(sex.equals("男")){
 				params.add("sex", "m");
 			}else{
 				params.add("sex", "f");
 			}
 		}
-		if(!(email.equals("") || email == null))
+		if(!(phone == null || phone.equals("")))
+			params.add("phone", phone);
+		if(email.equals("") || email == null)
 			params.add("email", email);
+		if(birth.equals("") || birth == null)
+		params.add("birth", birth);
 		RestClient.post("/home/member/updatemember", params, responseHandler);
 	}
 	
