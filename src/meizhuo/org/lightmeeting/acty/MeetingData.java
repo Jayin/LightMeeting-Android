@@ -149,7 +149,7 @@ public class MeetingData extends BaseActivity{
 			View dialogView = inflater.inflate(R.layout.qr_code_dialog, null);
 			final ImageView qr_code = (ImageView)dialogView.findViewById(R.id.iv_qr_image);
 			try {
-				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/meet/addjoin/meetid/id/" + meetid, 350);
+				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/meet/addjoinClient/meetid/" + meetid, 350);
 				qr_code.setImageBitmap(qrCodeBitmap);
 			} catch (WriterException e) {
 				// TODO Auto-generated catch block
