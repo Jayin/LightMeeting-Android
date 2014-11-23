@@ -116,6 +116,7 @@ public class CaptureActivity extends Activity implements Callback{
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 		String resultString = result.getText();
+		L.i( "resultString" + resultString);
 		//FIXME
 		if (resultString.equals("")) {
 			Toast.makeText(CaptureActivity.this, "扫描失败", Toast.LENGTH_SHORT).show();
@@ -123,8 +124,7 @@ public class CaptureActivity extends Activity implements Callback{
 //			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
 //			System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent(this,MeetingData_discuss.class);
-			resultIntent.putExtra("resultcode", RestClient.BASE_URL+"/home/meet/addjoin/meetid/id/"+resultString);
-			L.i("拿到的二维字符串" + resultString);
+			resultIntent.putExtra("resultcode", resultString);
 			/*Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
 			resultIntent.putExtras(bundle);*/
