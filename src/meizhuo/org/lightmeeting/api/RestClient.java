@@ -69,4 +69,8 @@ public class RestClient {
 	private static String getAbsoluteUrl(String relativeUrl){
 		return BASE_URL + relativeUrl;
 	}
+	public static AsyncHttpClient getClient(){
+		initClient();
+		return client;
+	}
 }
