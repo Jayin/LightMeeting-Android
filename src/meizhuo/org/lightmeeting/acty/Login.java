@@ -8,6 +8,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.AppInfo;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
@@ -71,9 +72,7 @@ public class Login extends BaseActivity {
 			toast("不能为空");
 			return ;
 		}
-		//用户登录
-		UserAPI.login(EditTextUtils.getText(login_et_username), EditTextUtils.getText(login_et_password), new JsonResponseHandler() {
-			
+		UserAPI.login(EditTextUtils.getText(login_et_username), EditTextUtils.getText(login_et_password),new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
@@ -82,62 +81,114 @@ public class Login extends BaseActivity {
 				dialog.setText("正在登录");
 				dialog.show();
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				
-				try {
-					if(obj.getString("error_code").equals("40000"))
-					{
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						String msg = obj.getString("msg");
-						toast(msg);
-						return ;
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				String message = obj.getString("response");
+				saveLoginInfo();
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
 				}
+				toast("登录成功");
+				closeActivity();
 				
-				try {
-					if(obj.getString("code").equals("20000")){
-					
-						String message = obj.getString("response");
-						saveLoginInfo();
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						toast("登录成功");
-						closeActivity();
-						
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					toast("出现了异常!");
+				
+				
+			
+			}
+
+			@Override
+			public void onError(int error_code, Header[] headers, JSONObject obj)
+					throws Exception {
+				
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
 				}
-				
-		
+				String msg = obj.getString("msg");
+				toast(msg);
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				if(dialog.isShowing()){
 					dialog.dismiss();
 					dialog = null;
 				}
 				toast("网络不给力,请检查你的网络设置 ！");
-				
 			}
 		});
+		//用户登录
+//		UserAPI.login(EditTextUtils.getText(login_et_username), EditTextUtils.getText(login_et_password), new JsonResponseHandler() {
+//			
+//			@Override
+//			public void onStart() {
+//				// TODO Auto-generated method stub
+//				if (dialog == null)
+//					dialog = new LoadingDialog(Login.this);
+//				dialog.setText("正在登录");
+//				dialog.show();
+//			}
+//			
+//			@Override
+//			public void onOK(Header[] headers, JSONObject obj) {
+//				// TODO Auto-generated method stub
+//				
+//				try {
+//					if(obj.getString("error_code").equals("40000"))
+//					{
+//						if(dialog.isShowing())
+//						{
+//							dialog.dismiss();
+//							dialog = null;
+//						}
+//						String msg = obj.getString("msg");
+//						toast(msg);
+//						return ;
+//					}
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				try {
+//					if(obj.getString("code").equals("20000")){
+//					
+//						String message = obj.getString("response");
+//						saveLoginInfo();
+//						if(dialog.isShowing())
+//						{
+//							dialog.dismiss();
+//							dialog = null;
+//						}
+//						toast("登录成功");
+//						closeActivity();
+//						
+//					}
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//					toast("出现了异常!");
+//				}
+//				
+//		
+//			}
+//			
+//			@Override
+//			public void onFaild(int errorType, int errorCode) {
+//				// TODO Auto-generated method stub
+//				if(dialog.isShowing()){
+//					dialog.dismiss();
+//					dialog = null;
+//				}
+//				toast("网络不给力,请检查你的网络设置 ！");
+//				
+//			}
+//		});
 	}
 	//去注册
 	@OnClick(R.id.acty_login_btn_regist) public void to_regist(){
