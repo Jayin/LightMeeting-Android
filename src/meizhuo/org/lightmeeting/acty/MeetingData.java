@@ -13,6 +13,7 @@ import butterknife.InjectView;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,6 @@ import meizhuo.org.lightmeeting.fragment.MeetingData_fm;
 import meizhuo.org.lightmeeting.fragment.Meeting_function_fm;
 import meizhuo.org.lightmeeting.fragment.Member_fm;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 /***
@@ -163,47 +163,60 @@ public class MeetingData extends BaseActivity{
 			
 			break;
 		case R.id.quite_meet:
-			MeetingAPI.quiteMeet(meetid, new JsonResponseHandler() {
+			AlertDialog.Builder logoutBuilder =  new AlertDialog.Builder(this);
+			logoutBuilder.setTitle("      确定退出会议 ?");
+			logoutBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 				
 				@Override
-				public void onStart() {
+				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					if(loadingDialog == null){
-						loadingDialog = new LoadingDialog(MeetingData.this);
-					}
-					loadingDialog.setText("正在退出会议...");
-					loadingDialog.show();
-				}
-				
-				@Override
-				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
-					try {
-						if(obj.getString("code").equals("20000")){
-							if(loadingDialog.isShowing()){
-								loadingDialog.dismiss();
-								loadingDialog = null;
-								toast("成功退出会议!");
+					MeetingAPI.quiteMeet(meetid, new JsonResponseHandler() {
+						
+						@Override
+						public void onStart() {
+							// TODO Auto-generated method stub
+							if(loadingDialog == null){
+								loadingDialog = new LoadingDialog(MeetingData.this);
+							}
+							loadingDialog.setText("正在退出会议...");
+							loadingDialog.show();
+						}
+						
+						@Override
+						public void onOK(Header[] headers, JSONObject obj) {
+							// TODO Auto-generated method stub
+							try {
+								if(obj.getString("code").equals("20000")){
+									if(loadingDialog.isShowing()){
+										loadingDialog.dismiss();
+										loadingDialog = null;
+										toast("成功退出会议!");
+									}
+									
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
 							
 						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						
+						@Override
+						public void onFaild(int errorType, int errorCode) {
+							// TODO Auto-generated method stub
+							if(loadingDialog.isShowing()){
+								loadingDialog.dismiss();
+								loadingDialog = null;
+							}
+							toast("网络不给力，请检查你的网络设置!");
+						}
+					});
 					
 				}
-				
-				@Override
-				public void onFaild(int errorType, int errorCode) {
-					// TODO Auto-generated method stub
-					if(loadingDialog.isShowing()){
-						loadingDialog.dismiss();
-						loadingDialog = null;
-					}
-					toast("网络不给力，请检查你的网络设置!");
-				}
 			});
+			logoutBuilder.setNegativeButton("暂不退出会议", null);
+			AlertDialog logoutDialog = logoutBuilder.create();
+			logoutDialog.show();
 			break;
 			
 
