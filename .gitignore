@@ -27,6 +27,7 @@ proguard/
 
 .classpath
 .project
+lint.xml
 .factorypath
 .apt_generated/
 .settings/
