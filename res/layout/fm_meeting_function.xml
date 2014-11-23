@@ -13,11 +13,18 @@
         android:background="@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
+        <ImageView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            style="@style/ImageView"
+            android:src="@drawable/aa_meetdata_discuss"
+            />
+        
         <TextView 
           
             style="@style/TextView"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:textSize="17dp"
             android:text="讨论"
             />
@@ -32,11 +39,18 @@
         android:background="@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
+           <ImageView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/aa_meetdata_vote"
+            />
         <TextView 
          
             style="@style/TextView"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:textSize="17dp"
             android:text="投票"
             />
@@ -54,11 +68,18 @@
         android:background="@@drawable/lm_btn_white2grey"
         android:layout_height="50dp"
         >
+           <ImageView 
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/aa_meetdata_research"
+            />
         <TextView 
             
             style="@style/TextView"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:textSize="17dp"
             android:text="调查"
             />

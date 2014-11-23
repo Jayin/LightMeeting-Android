@@ -99,7 +99,7 @@ public class BusinessCard extends BaseActivity  {
 					 member = User.create_by_json(obj1.getString("response"));
 					member_nickname.setText(member.getNickname());
 					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("f")){
+					if(member.getSex().equals("m")){
 						member_sex.setText("男");
 						sex="男";
 					}else{
