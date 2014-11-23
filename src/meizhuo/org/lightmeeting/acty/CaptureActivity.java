@@ -125,9 +125,6 @@ public class CaptureActivity extends Activity implements Callback{
 //			System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent(this,MeetingData_discuss.class);
 			resultIntent.putExtra("resultcode", resultString);
-			/*Bundle bundle = new Bundle();
-			bundle.putString("result", resultString);
-			resultIntent.putExtras(bundle);*/
 			this.setResult(51, resultIntent);
 		}
 		CaptureActivity.this.finish();
