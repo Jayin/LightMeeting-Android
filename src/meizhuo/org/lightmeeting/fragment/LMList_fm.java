@@ -12,6 +12,7 @@ import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.L;
@@ -109,9 +110,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		MeetingAPI.getMeetingList(page,limit,new JsonResponseHandler() {
-			
-			
+		MeetingAPI.getMeetingList(page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
@@ -119,7 +118,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				List<Meeting> meetinglist=Meeting.create_by_jsonarray(obj.toString());
 				data.clear();
@@ -138,20 +138,21 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onError(int error_code, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				toast("出错了，请检查你的网络设置!");
-				
+				return ;
 			}
+			
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-			
-			
 		});
+
 		
 	}
 	
@@ -159,15 +160,17 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		MeetingAPI.getMeetingList(page,limit,new JsonResponseHandler() {
-			
+		
+		MeetingAPI.getMeetingList(page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
+			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				List<Meeting> meetings = Meeting.create_by_jsonarray(obj.toString());
 				data.addAll(meetings);
@@ -180,9 +183,11 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				// TODO Auto-generated method stub
 				toast("网络不给力,请检查你的网络设置!");
+				return ;
 			}
 			
 			@Override
@@ -192,6 +197,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				isloading = false;
 			}
 		});
+		
+
 	}
 	
 
