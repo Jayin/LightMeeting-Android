@@ -96,7 +96,7 @@ public class Login extends BaseActivity {
 							dialog = null;
 						}
 						String msg = obj.getString("msg");
-						toast("登录成功");
+						toast(msg);
 						return ;
 					}
 				} catch (JSONException e) {
@@ -114,7 +114,7 @@ public class Login extends BaseActivity {
 							dialog.dismiss();
 							dialog = null;
 						}
-						toast(message);
+						toast("登录成功");
 						closeActivity();
 						
 					}
@@ -283,8 +283,6 @@ public class Login extends BaseActivity {
 		AppInfo.setUsername(getContext(), login_et_username.getText().toString());
 		AppInfo.setUserPSW(getContext(), login_et_password.getText().toString());
 		openActivity(MainActivity.class);
-		toast("登录成功!");
-	
 	}
 	
 
