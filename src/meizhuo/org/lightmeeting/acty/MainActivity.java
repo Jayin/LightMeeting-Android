@@ -244,7 +244,7 @@ public class MainActivity extends BaseActivity {
 									// sdcard的目录下的download文件夹
 									request.setDestinationInExternalPublicDir(
 											"/download/", "meizhuo.apk");
-									request.setTitle("东莞技能培训");
+									request.setTitle("轻会议");
 									long id = downloadManager.enqueue(request);
 									// 保存id
 									prefs.edit().putLong(DL_ID, id).commit();
