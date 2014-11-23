@@ -84,7 +84,6 @@ public class Login extends BaseActivity {
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				String message = obj.getString("response");
 				saveLoginInfo();
 				if(dialog.isShowing())
 				{
