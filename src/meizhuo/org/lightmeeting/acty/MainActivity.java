@@ -203,12 +203,14 @@ public class MainActivity extends BaseActivity {
 				builder.setTitle("发现新版本");
 				try {
 					
+					String update_content = "";
+					for(KV kv : updateInfo){
+						update_content += kv.getKey() + "." +kv.getValue() + "\n";
+					}
+					
 					builder.setMessage("当前版本:"
 							+ AndroidUtils.getAppVersionName(MainActivity.this)
-							+ "\n更新版本号:" + versionname + "\n" + updateInfo.get(0).getKey()+":" + updateInfo.get(0).getValue() + "\n" + 
-							updateInfo.get(1).getKey()+":" + updateInfo.get(1).getValue() + "\n"+
-							updateInfo.get(2).getKey()+":" + updateInfo.get(2).getValue() + "\n"
-							);
+							+ "\n更新版本号:" + versionname + "\n" + update_content);
 				} catch (NameNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
