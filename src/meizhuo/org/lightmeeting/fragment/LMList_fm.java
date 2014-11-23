@@ -6,15 +6,12 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.CaptureActivity;
-import meizhuo.org.lightmeeting.acty.Lm_meeting_addnewmeet;
 import meizhuo.org.lightmeeting.acty.MeetingData;
-import meizhuo.org.lightmeeting.acty.Update_meeting;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnEditListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnItemClickListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.L;
@@ -258,8 +255,10 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		// TODO Auto-generated method stub
 		if(requestCode == 50 && resultCode == 51){
 			String qrurl = data.getStringExtra("resultcode");
-			AsyncHttpClient client = new AsyncHttpClient();
-			client.get("qrurl", new JsonResponseHandler() {
+			L.i(qrurl);
+			AsyncHttpClient client ;
+			client = RestClient.getClient();
+			client.get(qrurl, new JsonResponseHandler() {
 				
 				
 				@Override
@@ -276,7 +275,25 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				@Override
 				public void onOK(Header[] headers, JSONObject obj) {
 					// TODO Auto-generated method stub
+					L.i("obj" + obj.toString());
 					try {
+						if(obj.getString("error_code").equals("40000"))
+						{
+							if(dialog.isShowing())
+							{
+								dialog.dismiss();
+								dialog=null;
+							}
+							String msg = obj.getString("msg");
+							toast(msg);
+						}
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					try {
+						
 						if(obj.getString("code").equals("20000")){
 							if(dialog.isShowing())
 							{
