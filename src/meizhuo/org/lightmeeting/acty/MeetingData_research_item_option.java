@@ -6,10 +6,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,13 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter;
+import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.KV;
-import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.utils.StringUtils;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 /**
- *  选项
+ * 调查 选项
  * @author Jason
  *
  */
@@ -33,7 +36,10 @@ public class MeetingData_research_item_option extends BaseActivity{
 	String research_title;
 	ActionBar mActionBar;
 	JSONObject option;
-	
+	String select_option;
+	String questionid;
+	String optionid; 
+	String option_content;
 	
 	MeetingData_research_item_option_adapter adapter;
 	
@@ -44,26 +50,29 @@ public class MeetingData_research_item_option extends BaseActivity{
 	HashMap<String, String>optionmap;
 	List<KV>data;
 	KV kv;
-//	String option_key,option_value;
+	LoadingDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_research_item_option);
 		
 		initData();
 		initLayout();
 	}
 
-
-	/**
-	 it.putExtra("research_title", data.get(position).getTitle());
-		it.putExtra("research_option", data.get(position).getOptions());
-	 */
+	/**选择了某项 */
+	@OnItemClick(R.id.research_option_lv) public void select_option(int position){
+		research_option_value.setText(data.get(position).getKey() + ":" + data.get(position).getValue());
+		select_option = data.get(position).getKey() + ":" + data.get(position).getValue();
+		optionid = data.get(position).getKey();
+		option_content = data.get(position).getValue();
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		research_title=getIntent().getStringExtra("research_title");
+		questionid = getIntent().getStringExtra("questionid");
 		optionlist = new ArrayList<HashMap<String,String>>();
 		data= (ArrayList<KV>) getIntent().getSerializableExtra("researchobj");
 		Collections.sort(data);
@@ -73,7 +82,44 @@ public class MeetingData_research_item_option extends BaseActivity{
 	
 	/**确定选项*/
 	@OnClick(R.id.research_confirm) public void research_confirm(){
-		
+		ResearchAPI.answer(questionid, optionid, option_content, new JsonHandler(){
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					if(dialog == null)
+					{
+						dialog = new LoadingDialog(getContext());
+						dialog.setText("正在提交答案...");
+					}
+					dialog.show();
+				}
+				@Override
+				public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("提交答案成功!");
+					MeetingData_research_item_option.this.finish();
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("网络不给力，请检查你的网络设置！");
+					return ;
+					
+				}
+				
+		});
 	}
 
 	@Override
@@ -92,6 +138,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
+			adapter.notifyDataSetChanged();
 			finish();
 			break;
 
@@ -101,5 +148,4 @@ public class MeetingData_research_item_option extends BaseActivity{
 		return true;
 	}
 	
-
 }

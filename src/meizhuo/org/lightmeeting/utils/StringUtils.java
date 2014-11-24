@@ -1,12 +1,15 @@
 package meizhuo.org.lightmeeting.utils;
 
+import android.annotation.SuppressLint;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -96,38 +99,19 @@ public class StringUtils {
 	        return split[0]; 
 	}
 	
-/*	
-	public static List<KV> sortkv(List<KV>list){
-		List<KV>data =  new ArrayList<KV>();
-		KV kv= new KV();
-		String[] array = new String[list.size()];
-		for(int i=0;i<array.length-1;i++){
-			array[i] = list.get(i).getKey();
-		}
-		Arrays.sort(array);
-		List listkey=Arrays.asList(array);
-		for(int g=0;g<listkey.size();g++)
-		{
-			String p = String.valueOf(listkey.get(g));
-			
-		}
-		for(int i=0;i<listkey.size();i++)
-		{
-			String key = (String) listkey.get(i);
-			String value;
-			for(int j=0;i<list.size();j++)
-			{
-				if(list.get(j).getKey().equals(key))
-				{
-					value = list.get(j).getValue();
-					kv.setKey(key);
-					kv.setValue(value);
-				}
-			}
-			data.add(kv);
-		}
-		return data;
-		
-	}*/
+	/**
+	 * 时间戳转换成正常日期
+	 * @param timestamp
+	 * @return
+	 */
+	@SuppressLint({ "SimpleDateFormat", "UseValueOf" })
+	public static String timestampToDate(String time)
+	{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Long timestamp = new Long(time);
+		String date = format.format(timestamp*1000);
+		return date;
+	}
+	
 
 }
