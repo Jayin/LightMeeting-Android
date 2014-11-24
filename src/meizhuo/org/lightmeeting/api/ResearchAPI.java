@@ -136,9 +136,11 @@ public class ResearchAPI {
 	 * @param questionid
 	 * @param responseHandler
 	 */
-	public static void answer(String questionid,AsyncHttpResponseHandler responseHandler){
+	public static void answer(String questionid,String optionid,String option_content, AsyncHttpResponseHandler responseHandler){
 		RequestParams params =  new RequestParams();
 		params.add("questionid", questionid);
+		params.add("optionid", optionid);
+		params.add("option_content", option_content);
 		RestClient.post("/home/research/answer", params, responseHandler);
 	}
 	
