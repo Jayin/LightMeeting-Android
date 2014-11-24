@@ -9,12 +9,9 @@ import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter.OnEditListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter.OnHandleListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Vote;
 import meizhuo.org.lightmeeting.utils.L;
@@ -62,7 +59,6 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light,
@@ -83,116 +79,89 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		VoteAPI.getVoteList(meetid,page,limit, new JsonResponseHandler() {
-			
+		VoteAPI.getVoteList(meetid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000"))
-					{
-						List<Vote>votelist =  Vote.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(votelist);
-						adapter.notifyDataSetChanged();
-						page = "1";
-						if(votelist.size() <10){
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						if(votelist.size() == 0){
-							toast("暂无投票数据!");
-							return ;
-						}
-						L.i(hasMore +"");
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Vote>votelist =  Vote.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(votelist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(votelist.size() <10){
+					hasMore = false;
+				}else{
+					hasMore = true;
 				}
-				
+				if(votelist.size() == 0){
+					toast("暂无投票数据!");
+					return ;
+				}
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
 				toast("出错了，请检查你的网络设置!");
-				
+				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});
-		
 	}
 	
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		VoteAPI.getVoteList(meetid,page,limit, new JsonResponseHandler() {
-			
+		VoteAPI.getVoteList(meetid, page, limit, new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						List<Vote>votelist = Vote.create_by_jsonarray(obj.toString());
-						data.addAll(votelist);
-						adapter.notifyDataSetChanged();
-						hasMore = true;
-						if(obj.isNull("response")||votelist.size()<10)
-						{
-							hasMore = false;
-							toast("数据加载完毕!");
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					L.i("异常"+e.getMessage());
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Vote>votelist = Vote.create_by_jsonarray(obj.toString());
+				data.addAll(votelist);
+				adapter.notifyDataSetChanged();
+				hasMore = true;
+				if(obj.isNull("response")||votelist.size()<10)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
 				}
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
-				
+				return ;
 			}
 			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
-				
 			}
+			
+			
 		});
-		
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.meetvote, menu);
 		return true;
 	}
@@ -200,14 +169,7 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-		//创建投票
-	/*	case R.id.create_vote:
-			Intent intent =  new Intent(MeetingData_vote.this, MeetingData_vote_create.class);
-			intent.putExtra("meetid", meetid);
-			startActivity(intent);
-			break;*/
 		case  android.R.id.home:
 			finish();
 			break;
