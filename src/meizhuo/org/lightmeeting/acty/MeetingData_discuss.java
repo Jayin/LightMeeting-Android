@@ -11,6 +11,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnItemClickL
 import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -91,7 +92,45 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(meetid,page,limit,new JsonHandler(){
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				// TODO Auto-generated method stub
+				List<Discuss>discusslist =  Discuss.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(discusslist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(discusslist.size() <10){
+					hasMore = false;
+				}else{
+					hasMore = true;
+				}
+				if(discusslist.size() == 0){
+					toast("暂无讨论数据!");
+					return ;
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
+				toast("出错了，请检查你的网络设置!");
+				return ;
+			}
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+/*		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -139,7 +178,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-		});
+		});*/
 		
 	}
 	
@@ -147,7 +186,41 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
+		DiscussAPI.getdiscusslist(meetid,page,limit,new JsonHandler(){
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Discuss>discusslist = Discuss.create_by_jsonarray(obj.toString());
+				data.addAll(discusslist);
+				adapter.notifyDataSetChanged();
+				hasMore = true;
+				if(obj.isNull("response")||discusslist.size()<10)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				toast("网络不给力，请检查你的网络设置!");
+				return ;
+			}
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+	/*	DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -193,7 +266,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 				isloading = false;
 				
 			}
-		});
+		});*/
 	}
 	
 	@Override
