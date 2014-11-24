@@ -94,7 +94,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	@OnItemClick(R.id.problem_lv) public void to_option(int position){
 		Intent it = new Intent(this, MeetingData_research_item_option.class);
 		it.putExtra("research_title", data.get(position).getTitle());
-//		it.putExtra("researchobj", (Serializable)data.get(position));
 		try {
 			JSONArray array = optionsobj.getJSONArray("response");
 			optionobj = array.getJSONObject(position);
@@ -103,7 +102,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		kvlist.clear();
 		for(Iterator<String> keylter = realoption.keys();keylter.hasNext();){
 			try {
 				String key  = keylter.next();

@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,11 +20,9 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.model.KV;
-import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.utils.StringUtils;
 
 /**
- *  选项
+ * 调查 选项
  * @author Jason
  *
  */
@@ -53,6 +52,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 		initLayout();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void initData() {
 		research_title=getIntent().getStringExtra("research_title");
@@ -84,6 +84,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
+			adapter.notifyDataSetChanged();
 			finish();
 			break;
 
@@ -93,5 +94,4 @@ public class MeetingData_research_item_option extends BaseActivity{
 		return true;
 	}
 	
-
 }
