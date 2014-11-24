@@ -25,6 +25,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
@@ -108,14 +109,10 @@ public class Update_userdata extends BaseActivity {
 		if(birthday!= null)
 		{
 			birth = birthday;
-		}else{
-			birth = lm_usercard_birth.getText().toString();
 		}
 		if(chooseSex != null)
 		{
 			sex = chooseSex;
-		}else{
-			sex = lm_usercard_sex.getText().toString();
 		}
 		company = lm_usercard_company.getText().toString();
 		position = lm_usercard_position.getText().toString();
@@ -126,7 +123,58 @@ public class Update_userdata extends BaseActivity {
 		}else{
 			sex = "m";
 		}
-		UserAPI.update(nickname, sex, phone, email, company, position, birth, new JsonResponseHandler() {
+		UserAPI.update(nickname, sex, phone, email, company, position, birth, new JsonHandler(){
+			@Override
+			public void onStart() {
+				if(dialog==null)
+				{
+					dialog = new LoadingDialog(getContext());
+					dialog.setText("正在更新资料!");
+				}
+				dialog.show();
+			}
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				toast("更新成功");
+				Intent it = new Intent(Update_userdata.this, BusinessCard.class);
+				String nickname1 = nickname;
+				String birth1 = birth;
+				String sex1 = sex;
+				String company1 = birth;
+				String position1 = position;
+				String phone1 = phone;
+				String email1 = email;
+				
+				it.putExtra("nickname", nickname1);
+				it.putExtra("birth",birth1);
+				it.putExtra("sex", sex1);
+				it.putExtra("company",company1);
+				it.putExtra("position", position1);
+				it.putExtra("phone", phone1);
+				it.putExtra("email", email1);
+				Update_userdata.this.setResult(205, it);
+				Update_userdata.this.finish();
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				return ;
+			}
+			
+		});
+		/*UserAPI.update(nickname, sex, phone, email, company, position, birth, new JsonResponseHandler() {
+			
 			
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
@@ -166,7 +214,7 @@ public class Update_userdata extends BaseActivity {
 				// TODO Auto-generated method stub
 				
 			}
-		});
+		});*/
 		
 	}
 	
