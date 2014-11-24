@@ -146,7 +146,7 @@ public class Update_userdata extends BaseActivity {
 				String nickname1 = nickname;
 				String birth1 = birth;
 				String sex1 = sex;
-				String company1 = birth;
+				String company1 = company;
 				String position1 = position;
 				String phone1 = phone;
 				String email1 = email;
