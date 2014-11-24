@@ -94,15 +94,22 @@ public class Comment implements Serializable{
 	public void setCip(String cip) {
 		this.cip = cip;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	/**评论id*/
+	private String id;
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", discussid=" + discussid
 				+ ", reply_menber=" + reply_menber + ", author=" + author
 				+ ", content=" + content + ", ctime=" + ctime + ", cip=" + cip
-				+ "]";
+				+ ", nickname=" + nickname + "]";
 	}
-	/**评论id*/
-	private String id;
 	/**讨论id*/
 	private String discussid;
 	/**回复数量*/
@@ -115,5 +122,7 @@ public class Comment implements Serializable{
 	private String ctime;
 	/**ip*/
 	private String cip;
+	/**用户昵称*/
+	private String nickname;
 
 }
