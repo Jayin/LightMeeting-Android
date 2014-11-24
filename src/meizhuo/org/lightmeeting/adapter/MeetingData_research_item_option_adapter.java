@@ -55,14 +55,6 @@ public class MeetingData_research_item_option_adapter extends BaseAdapter {
 		}else{
 			h = (ViewHolder)convertView.getTag();
 		}
-		/*datamap = mData.get(position);
-		
-		   Set<Map.Entry<String, String>> entrySet=datamap.entrySet();  
-	       for(Map.Entry<String, String> entry: entrySet){  
-	        h.option_key.setText(entry.getKey());
-	        h.option_value.setText(entry.getValue());
-	        L.i("hashkey" + entry.getKey() + "hashvalue" + entry.getValue());
-	       }  */
 		h.option_key.setText(mData.get(position).getKey());
 		h.option_value.setText(mData.get(position).getValue());
 		return convertView;
@@ -74,7 +66,6 @@ public class MeetingData_research_item_option_adapter extends BaseAdapter {
 		@InjectView(R.id.option_value) TextView  option_value;
 		
 		public ViewHolder(View v) {
-			// TODO Auto-generated constructor stub
 			ButterKnife.inject(this, v);
 		}
 		

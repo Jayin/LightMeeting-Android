@@ -15,22 +15,5 @@
                 android:layout_marginBottom="10dp"
                 style="@style/TextView"
                 android:text="选项" />
-    <!--       <LinearLayout 
-         android:clickable="true"
-       android:id="@+id/vote_option_item"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:background="@drawable/lm_btn_item_main"
-        >
-    <TextView 
-        android:layout_marginLeft="20dp"
-        android:id="@+id/vote_option"
-        android:layout_gravity="left"
-        style="@style/TextView"
-        android:text="涅米"
-        /> 
-    </LinearLayout> -->
-    
         </LinearLayout>
 </LinearLayout>

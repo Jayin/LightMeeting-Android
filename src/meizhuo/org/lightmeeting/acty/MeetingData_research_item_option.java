@@ -44,25 +44,17 @@ public class MeetingData_research_item_option extends BaseActivity{
 	HashMap<String, String>optionmap;
 	List<KV>data;
 	KV kv;
-//	String option_key,option_value;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_research_item_option);
 		
 		initData();
 		initLayout();
 	}
 
-
-	/**
-	 it.putExtra("research_title", data.get(position).getTitle());
-		it.putExtra("research_option", data.get(position).getOptions());
-	 */
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		research_title=getIntent().getStringExtra("research_title");
 		optionlist = new ArrayList<HashMap<String,String>>();
 		data= (ArrayList<KV>) getIntent().getSerializableExtra("researchobj");
