@@ -3,8 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-           <LinearLayout 
+        <LinearLayout
+             android:id="@+id/vote_option_item"
+        style="@style/LinearLayout"
+        android:background="@drawable/card_bg"
+        android:orientation="vertical" >
+         <TextView
+                 android:id="@+id/vote_option"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                style="@style/TextView"
+                android:text="选项" />
+    <!--       <LinearLayout 
          android:clickable="true"
        android:id="@+id/vote_option_item"
         android:layout_width="match_parent"
@@ -18,8 +29,8 @@
         android:layout_gravity="left"
         style="@style/TextView"
         android:text="涅米"
-        />
-    </LinearLayout>
+        /> 
+    </LinearLayout> -->
     
-
+        </LinearLayout>
 </LinearLayout>

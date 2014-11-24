@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
@@ -12,9 +11,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Vote;
-import meizhuo.org.lightmeeting.utils.L;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
