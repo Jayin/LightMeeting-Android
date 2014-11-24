@@ -130,55 +130,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 				isloading = false;
 			}
 		});
-/*		DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000"))
-					{
-						List<Discuss>discusslist =  Discuss.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(discusslist);
-						adapter.notifyDataSetChanged();
-						page = "1";
-						if(discusslist.size() <10){
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						if(discusslist.size() == 0){
-							toast("暂无讨论数据!");
-							return ;
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				toast("出错了，请检查你的网络设置!");
-				
-			}
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-			}
-		});*/
+
 		
 	}
 	
@@ -220,53 +172,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 				isloading = false;
 			}
 		});
-	/*	DiscussAPI.getdiscusslist(meetid,page,limit, new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				L.i("onloadmore"+ obj.toString());
-				try {
-					if(obj.getString("code").equals("20000")){
-						List<Discuss>discusslist = Discuss.create_by_jsonarray(obj.toString());
-						data.addAll(discusslist);
-						adapter.notifyDataSetChanged();
-						hasMore = true;
-						if(obj.isNull("response")||discusslist.size()<10)
-						{
-							hasMore = false;
-							toast("数据加载完毕!");
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					L.i("异常"+e.getMessage());
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				toast("网络不给力，请检查你的网络设置!");
-				
-			}
-			
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-				
-			}
-		});*/
+
 	}
 	
 	@Override

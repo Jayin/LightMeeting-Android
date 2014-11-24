@@ -130,45 +130,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				isloading = false;
 			}
 		});
-	/*	DiscussAPI.getCommentlist(discussid,page,limit, new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				List<Comment>commentlist = Comment.create_by_jsonarray(obj.toString());
-				data.clear();
-				data.addAll(commentlist);
-				adapter.notifyDataSetChanged();
-				page = "1";
-				if(commentlist.size() <10)
-				{
-					hasMore = false;
-				}else{
-					hasMore = true;
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				toast("出错了，请检查你的网络设置!");
-				
-			}
-			
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-			}
-			
-		});*/
+
 		
 	}
 	private void onLoadMore(){
@@ -208,39 +170,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				isloading = false;
 			}
 		});
-	/*	DiscussAPI.getCommentlist(discussid,page,limit,new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				List<Comment> commentlist =Comment.create_by_jsonarray(obj.toString());
-				data.addAll(commentlist);
-				adapter.notifyDataSetChanged();
-				if(obj.isNull("response")||commentlist.size()<5)
-				{
-					hasMore = false;
-					toast("数据加载完毕!");
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				toast("网络不给力,请检查你的网络设置!");
-			}
-			
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-			}
-		});*/
+
 	}
 	
 	@Override
