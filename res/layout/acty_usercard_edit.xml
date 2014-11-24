@@ -38,21 +38,26 @@
         android:background="@drawable/ic_line_1" />
         
     <LinearLayout 
+        android:clickable="true"
+         android:id="@+id/lm_usercard_birth_item"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:background="@drawable/lm_btn_item_main"
         >
         <TextView 
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             style="@style/TextView"
             android:text="生日:"
             />
-        <EditText 
-            android:id="@+id/lm_usercard_birth"
-            style="@style/EditText_EditUserDataItem"
-            android:text="1992-5-6"
+              <TextView 
+                  android:id="@+id/lm_usercard_birth"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            style="@style/TextView"
+            android:text="男"
             />
     </LinearLayout>
     <View
@@ -62,6 +67,7 @@
         
     <LinearLayout 
         android:id="@+id/lm_usercard_changesex"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"

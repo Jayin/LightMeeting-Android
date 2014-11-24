@@ -3,7 +3,6 @@ package meizhuo.org.lightmeeting.acty;
 
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.InjectView;
@@ -13,11 +12,12 @@ import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.Member;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -42,7 +42,7 @@ public class BusinessCard extends BaseActivity  {
 	@InjectView(R.id.lm_member_email) TextView member_email;
 	
 	 LoadingDialog loadingdialog;
-	User member;
+	Member member;
 	ActionBar mActionBar ;
 	String nickname,birth,sex,company,position,phone,email;
 	
@@ -80,7 +80,7 @@ public class BusinessCard extends BaseActivity  {
 		case R.id.action_refreshdata:
 			Intent intent = new Intent(this, Update_userdata.class);
 			intent.putExtra("nickname", nickname);
-			intent.putExtra("birth", birth);
+			intent.putExtra("birth",StringUtils.timestampToDate(birth) );
 			intent.putExtra("sex", sex);
 			intent.putExtra("company", company);
 			intent.putExtra("position", position);
@@ -184,7 +184,7 @@ public class BusinessCard extends BaseActivity  {
 		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
-			if(data.getStringExtra("sex").equals("f")){
+			if(data.getStringExtra("sex").equals("m")){
 				sex = "男";
 				member_sex.setText(sex);
 			}else{
@@ -213,7 +213,7 @@ public class BusinessCard extends BaseActivity  {
 			toast("请先连接您的网络 !");
 			return ;
 		}
-		UserAPI.getMemberData(new JsonHandler(){
+		UserAPI.getOneMember(new JsonHandler(){
 			@Override
 			public void onStart() {
 				if(loadingdialog==null){
@@ -231,9 +231,9 @@ public class BusinessCard extends BaseActivity  {
 					loadingdialog.dismiss();
 					loadingdialog = null;
 				}
-				member = User.create_by_json(obj.getString("response"));
+				member = Member.create_by_json(obj.getString("response"));
 				member_nickname.setText(member.getNickname());
-				member_birth.setText(member.getBirth());
+				member_birth.setText(StringUtils.timestampToDate(member.getBirth()));
 				if(member.getSex().equals("m")){
 					member_sex.setText("男");
 					sex="男";
