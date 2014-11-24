@@ -55,7 +55,7 @@ public class MeetingData_research_item_option_adapter extends BaseAdapter {
 		}else{
 			h = (ViewHolder)convertView.getTag();
 		}
-		h.option_key.setText(mData.get(position).getKey());
+		h.option_key.setText(mData.get(position).getKey() + ":");
 		h.option_value.setText(mData.get(position).getValue());
 		return convertView;
 	}
