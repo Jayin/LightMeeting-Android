@@ -175,55 +175,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 				isloading = false;
 			}
 		});
-/*		ResearchAPI.getQuestionList(researchid, page, limit,new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						L.i("调查列表" + obj.toString());
-						optionsobj = obj;
-						problemlist = Problem.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(problemlist);
-						adapter.notifyDataSetChanged();
-						page = "1";
-						if(problemlist.size() <10)
-						{
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
-				
-			}
-			
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-			}
-		});*/
 	}
 	
 	private void onLoadMore(){
@@ -261,40 +212,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 				isloading = false;
 			}
 		});
-/*		ResearchAPI.getQuestionList(researchid,page,limit,new JsonResponseHandler() {
-			
-			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(true);
-			}
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				List<Problem> problemlists =Problem.create_by_jsonarray(obj.toString());
-				data.addAll(problemlists);
-				adapter.notifyDataSetChanged();
-				if(obj.isNull("response")||problemlists.size()<10)
-				{
-					hasMore = false;
-					toast("数据加载完毕!");
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				toast("网络不给力,请检查你的网络设置!");
-			}
-			
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setRefreshing(false);
-				isloading = false;
-			}
-		});*/
-		
 	}
 	
 	@Override
