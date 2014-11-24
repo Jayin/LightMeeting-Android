@@ -191,6 +191,7 @@ public class MainActivity extends BaseActivity {
 		mReceiver = new AppStartReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.Action_Receive_VersionInfo);
+		filter.addAction(Constants.Action_ChangePSW_Successful);
 		registerReceiver(mReceiver, filter);
 
 	}
@@ -268,6 +269,10 @@ public class MainActivity extends BaseActivity {
 				builder.setOnKeyListener(keylistener);
 				AlertDialog dialog = builder.create();
 				dialog.show();
+			}
+			if(action.equals(Constants.Action_ChangePSW_Successful))
+			{
+				MainActivity.this.finish();
 			}
 		}
 	}

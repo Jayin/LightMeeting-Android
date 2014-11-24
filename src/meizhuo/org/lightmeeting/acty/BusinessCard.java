@@ -12,6 +12,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
@@ -23,14 +24,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -45,8 +42,6 @@ public class BusinessCard extends BaseActivity  {
 	@InjectView(R.id.lm_member_email) TextView member_email;
 	
 	 LoadingDialog loadingdialog;
-	BCHandler handler = new BCHandler();
-	DialogHandler dialogHandler =new DialogHandler(); 
 	User member;
 	ActionBar mActionBar ;
 	String nickname,birth,sex,company,position,phone,email;
@@ -69,104 +64,6 @@ public class BusinessCard extends BaseActivity  {
 	
 	 return contentView;
 	}*/
-	
-	
-	
-	class BCHandler extends Handler{
-		LoadingDialog dialog;
-		
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			switch (msg.what) {
-			case Constants.Start:
-				if(dialog == null)
-				{
-					dialog = new LoadingDialog(BusinessCard.this);
-				}
-				dialog.setText("正在加载个人资料");
-				dialog.show();
-				break;
-			case Constants.Finish:
-				if(dialog.isShowing())
-				{
-					dialog.setText("加载完毕");
-					dialog.dismiss();
-					dialog = null;
-				}
-				JSONObject obj1 = (JSONObject)msg.obj;
-				try {
-					 member = User.create_by_json(obj1.getString("response"));
-					member_nickname.setText(member.getNickname());
-					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("m")){
-						member_sex.setText("男");
-						sex="男";
-					}else{
-						member_sex.setText("女");
-						sex = "女";
-					}
-					L.i(member.toString());
-					member_company.setText(member.getCompany());
-					member_position.setText(member.getPosition());
-					member_phone.setText(member.getPhone());
-					member_email.setText(member.getEmail());
-				//String nickname,birth,sex,company,position,phone,email;
-					nickname = member.getNickname();
-					birth = member.getBirth();
-					company = member.getCompany();
-					position = member.getPosition();
-					phone = member.getPhone();
-					email = member.getEmail();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			default:
-				break;
-			}
-		}
-		
-	}
-	
-	class DialogHandler extends Handler{
-		LoadingDialog dialog;
-		
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			switch (msg.what) {
-			case Constants.Start:
-				if(dialog==null){
-					dialog = new LoadingDialog(BusinessCard.this);
-					dialog.setText("正在修改密码");
-					dialog.show();
-				}
-				break;
-			case Constants.Finish:
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						((App)getApplication()).cleanUpInfo();
-					}
-				}).start();
-				if(dialog.isShowing()){
-					dialog.dismiss();
-					dialog = null;
-				}
-				toast("修改成功,请重新登录");
-				openActivity(Login.class);
-				BusinessCard.this.finish();
-				break;
-			default:
-				break;
-			}
-		}
-		
-	}
-	
 	
 	
 	@Override
@@ -225,50 +122,47 @@ public class BusinessCard extends BaseActivity  {
 						toast("两次新密码输入不一致,修改失败!");
 						return ;
 					}
-					UserAPI.changePsw(et_change_oldpsw.getText().toString(), et_change_newpsw.getText().toString(), new JsonResponseHandler() {
-						
+					UserAPI.changePsw(et_change_oldpsw.getText().toString(), et_change_newpsw.getText().toString(), new JsonHandler(){
 						@Override
 						public void onStart() {
-							// TODO Auto-generated method stub
-							dialogHandler.sendEmptyMessage(Constants.Start);
+							if(loadingdialog==null){
+								loadingdialog = new LoadingDialog(BusinessCard.this);
+								loadingdialog.setText("正在修改密码");
+							}
+							loadingdialog.show();
 						}
 						
 						@Override
-						public void onOK(Header[] headers, JSONObject obj) {
-							// TODO Auto-generated method stub
-							
-							try {
-								if(obj.getString("code").equals("40000")){
-									String message = obj.getString("msg");
-									toast(message);
-									return ;
+						public void onOK(int statusCode, Header[] headers,
+								JSONObject obj) throws Exception {
+							new Thread(new Runnable() {
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									((App)getApplication()).cleanUpInfo();
 								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							}).start();
+							if(loadingdialog.isShowing()){
+								loadingdialog.dismiss();
+								loadingdialog = null;
 							}
-							
-							try {
-								if(obj.getString("code").equals("20000"))
-								{
-									dialogHandler.sendEmptyMessage(Constants.Finish);
-								
-								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						
+							toast("修改成功,请重新登录");
+							sendBroadcast(new Intent(Constants.Action_ChangePSW_Successful));
+							openActivity(Login.class);
+							BusinessCard.this.finish();
 							
 						}
 						
 						@Override
-						public void onFaild(int errorType, int errorCode) {
-							// TODO Auto-generated method stub
-							
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] data, Throwable arg3) {
+							if(loadingdialog.isShowing()){
+								loadingdialog.dismiss();
+								loadingdialog = null;
+							}
+							toast("网络不给力，请检查你的网络设置!");
 						}
 					});
-					
 				}
 			});
 			builder.setNegativeButton("取消", null);
@@ -291,9 +185,11 @@ public class BusinessCard extends BaseActivity  {
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
 			if(data.getStringExtra("sex").equals("f")){
-				member_sex.setText("男");
+				sex = "男";
+				member_sex.setText(sex);
 			}else{
-				member_sex.setText("女");
+				sex = "女";
+				member_sex.setText(sex);
 			}
 			member_company.setText(data.getStringExtra("company"));
 			member_position.setText(data.getStringExtra("position"));
@@ -317,31 +213,51 @@ public class BusinessCard extends BaseActivity  {
 			toast("请先连接您的网络 !");
 			return ;
 		}
-		handler.sendEmptyMessage(Constants.Start);
-		final Message msg = handler.obtainMessage();
-		UserAPI.getMemberData(new JsonResponseHandler() {
-			
-			
+		UserAPI.getMemberData(new JsonHandler(){
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						msg.obj =obj;
-						msg.what = Constants.Finish;
-						handler.sendMessage(msg);
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					toast("解析错误");
+			public void onStart() {
+				if(loadingdialog==null){
+					loadingdialog = new LoadingDialog(BusinessCard.this);
+					loadingdialog.setText("正在加载个人信息");
 				}
+				loadingdialog.show();
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(loadingdialog.isShowing())
+				{
+					loadingdialog.setText("加载完毕");
+					loadingdialog.dismiss();
+					loadingdialog = null;
+				}
+				member = User.create_by_json(obj.getString("response"));
+				member_nickname.setText(member.getNickname());
+				member_birth.setText(member.getBirth());
+				if(member.getSex().equals("m")){
+					member_sex.setText("男");
+					sex="男";
+				}else{
+					member_sex.setText("女");
+					sex = "女";
+				}
+				L.i(member.toString());
+				member_company.setText(member.getCompany());
+				member_position.setText(member.getPosition());
+				member_phone.setText(member.getPhone());
+				member_email.setText(member.getEmail());
+				nickname = member.getNickname();
+				birth = member.getBirth();
+				company = member.getCompany();
+				position = member.getPosition();
+				phone = member.getPhone();
+				email = member.getEmail();
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				// TODO Auto-generated method stub
-				
+				super.onFailure(statusCode, headers, data, arg3);
 			}
 		});
 	}
