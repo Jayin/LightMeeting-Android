@@ -57,7 +57,7 @@ public class MeetingData_vote_item_adapter extends BaseAdapter{
 		}else{
 			h = (ViewHolder)convertView.getTag();
 		}
-		h.vote_option.setText(mData.get(position).getVpintro());
+		
 		h.vote_option_item.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -66,7 +66,7 @@ public class MeetingData_vote_item_adapter extends BaseAdapter{
 				mOnItemClickListener.onItemClick(position);
 			}
 		});
-		
+		h.vote_option.setText(position+1 + ":" + mData.get(position).getVpintro());
 		return convertView;
 	}
 	

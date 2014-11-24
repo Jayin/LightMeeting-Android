@@ -8,6 +8,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter;
 import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter.OnItemClickListener;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Option;
 import meizhuo.org.lightmeeting.utils.L;
@@ -98,15 +99,6 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 		});
 		 
 	}
-	
-/*	@OnItemClick(R.id.option_lv) public void select_item(int position){
-		option_select.setText(data.get(position).getVpintro().toString());
-		select_content = data.get(position).getVpintro().toString();
-		optionsid = data.get(position).getId();
-	}*/
-	
-	
-
 
 	@Override
 	protected void initData() {
@@ -149,106 +141,73 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-	VoteAPI.getOptionList(voteid,new JsonResponseHandler() {
-			
+		VoteAPI.getOptionList(voteid,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				
-				try {
-					if(obj.getString("code").equals("20000"))
-					{
-						List<Option>optionlist =  Option.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(optionlist);
-						adapter.notifyDataSetChanged();
-						if(optionlist.size() <10){
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						if(optionlist.size() == 0){
-							toast("暂无投票项!");
-							return ;
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Option>optionlist =  Option.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(optionlist);
+				adapter.notifyDataSetChanged();
+				if(optionlist.size() <10){
+					hasMore = false;
+				}else{
+					hasMore = true;
 				}
-				
+				if(optionlist.size() == 0){
+					toast("暂无投票项!");
+					return ;
+				}
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				toast("errorcode" + errorCode);
-				toast("errortype" + errorType);
-				toast("voteid" + voteid);
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
 				toast("出错了，请检查你的网络设置!");
-				
+				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});
-		
 	}
 	
 	private void onLoadMore(){
-		VoteAPI.getOptionList(voteid,new JsonResponseHandler() {
-			
+		VoteAPI.getOptionList(voteid,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				L.i("onloadmore"+ obj.toString());
-				try {
-					if(obj.getString("code").equals("20000")){
-						List<Option>optionlist = Option.create_by_jsonarray(obj.toString());
-						data.addAll(optionlist);
-						adapter.notifyDataSetChanged();
-						hasMore = true;
-						if(obj.isNull("response")||optionlist.size()<10)
-						{
-							hasMore = false;
-							toast("数据加载完毕!");
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Option>optionlist = Option.create_by_jsonarray(obj.toString());
+				data.addAll(optionlist);
+				adapter.notifyDataSetChanged();
+				hasMore = true;
+				if(obj.isNull("response")||optionlist.size()<10)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
 				}
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
-				
+				return ;
 			}
-			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
-				
 			}
 		});
 	}

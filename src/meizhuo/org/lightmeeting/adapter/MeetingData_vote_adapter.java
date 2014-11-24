@@ -5,6 +5,7 @@ import java.util.List;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.model.Vote;
+import meizhuo.org.lightmeeting.utils.StringUtils;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +26,6 @@ public class MeetingData_vote_adapter extends BaseAdapter{
 	
 	List<Vote>mData;
 	private Context mContext;
-	private OnItemClickListener mOnItemClickListener = null;
-	private OnUpdateListener mOnUpdateListener = null;
-	private OnHandleListener mOnHandleListener = null;
-	private OnEditListener mOnEditListener = null;
 
 	public MeetingData_vote_adapter(Context context,List<Vote>data) {
 		// TODO Auto-generated constructor stub
@@ -69,8 +66,8 @@ public class MeetingData_vote_adapter extends BaseAdapter{
 		}
 		h.vote_title.setText(mData.get(position).getTitle());
 		h.vote_intro.setText(mData.get(position).getIntro());
-		h.vote_starttime.setText(mData.get(position).getStime());
-		h.vote_end_time.setText(mData.get(position).getEtime());
+		h.vote_starttime.setText(StringUtils.timestampToDate(mData.get(position).getStime()));
+		h.vote_end_time.setText(StringUtils.timestampToDate(mData.get(position).getEtime()));
 		return convertView;
 	}
 
@@ -86,53 +83,6 @@ public class MeetingData_vote_adapter extends BaseAdapter{
 			ButterKnife.inject(this, v);
 		}
 		
-	}
-
-
-	
-	/**
-	 * lv_vote_item
-	 	vote_title.setText(mData.get(position).getTitle());
-		vote_intro.setText(mData.get(position).getIntro());
-		vote_starttime.setText(mData.get(position).getStime());
-		vote_end_time.setText(mData.get(position).getEtime());
-	 * @param listener
-	 */
-	
-	public void setOnItemClickListener(OnItemClickListener listener){
-		this.mOnItemClickListener = listener;
-	}
-	
-	
-	public interface OnItemClickListener{
-		public void onItemClick(int position);
-	}
-	
-	
-	public void setOnUpdateListener(OnUpdateListener listener){
-		this.mOnUpdateListener = listener;
-	}
-	
-	
-	public interface OnUpdateListener{
-		public void onUpdateListener(int position);
-	}
-	
-	public void setOnHandleListener(OnHandleListener listener){
-		this.mOnHandleListener = listener;
-	}
-
-	public interface OnHandleListener{
-		public void onHandlerListener(int position);
-	}
-	
-	
-	public void setOnEditListener(OnEditListener listener){
-		this.mOnEditListener = listener;
-	}
-	
-	public interface OnEditListener{
-		public void onEditListener(int position);
 	}
 	
 }

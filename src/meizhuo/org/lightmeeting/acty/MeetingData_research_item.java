@@ -15,6 +15,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_adapter;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.model.Problem;
@@ -47,7 +48,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	List<Problem>data;
 	String page="1",limit;
 	List<HashMap<String, String>>optionlist = new ArrayList<HashMap<String,String>>();
-//	HashMap<String, String>optionmap;
 	boolean hasMore = true,isloading=false;
 	JSONObject optionobj;
 	Problem problem;
@@ -59,7 +59,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_research_item);
 		
 		initData();
@@ -71,7 +70,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		researchid = getIntent().getStringExtra("research_id");
 		data = new ArrayList<Problem>();
 		adapter  =  new MeetingData_research_item_adapter(this, data);
@@ -80,7 +78,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, 
 				android.R.color.holo_blue_light,
@@ -88,9 +85,6 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 				android.R.color.holo_blue_light);
 		problem_lv.setAdapter(adapter);
 		problem_lv.setOnScrollListener(this);
-		
-		
-		
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		mActionBar.setTitle("问题列表");
@@ -100,7 +94,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	@OnItemClick(R.id.problem_lv) public void to_option(int position){
 		Intent it = new Intent(this, MeetingData_research_item_option.class);
 		it.putExtra("research_title", data.get(position).getTitle());
-//		it.putExtra("researchobj", (Serializable)data.get(position));
+		it.putExtra("questionid", data.get(position).getId());
 		try {
 			JSONArray array = optionsobj.getJSONArray("response");
 			optionobj = array.getJSONObject(position);
@@ -109,7 +103,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		kvlist.clear();
 		for(Iterator<String> keylter = realoption.keys();keylter.hasNext();){
 			try {
 				String key  = keylter.next();
@@ -117,10 +111,8 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 				KV kv = new KV();
 				kv.setKey(key);
 				kv.setValue(realoption.getString(key));
-//				List<KV> oldlist = new ArrayList<KV>();
 				kvlist.add(kv);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -149,60 +141,40 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		ResearchAPI.getQuestionList(researchid, page, limit,new JsonResponseHandler() {
-			
+		ResearchAPI.getQuestionList(researchid, page, limit,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						L.i("调查列表" + obj.toString());
-						/**
-						 解析options
-						 */
-						optionsobj = obj;
-						problemlist = Problem.create_by_jsonarray(obj.toString());
-						data.clear();
-						data.addAll(problemlist);
-						adapter.notifyDataSetChanged();
-						page = "1";
-						if(problemlist.size() <10)
-						{
-							hasMore = false;
-						}else{
-							hasMore = true;
-						}
-						
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				optionsobj = obj;
+				problemlist = Problem.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(problemlist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(problemlist.size() <10)
+				{
+					hasMore = false;
+				}else{
+					hasMore = true;
 				}
-				
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
-				
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
+				toast("网络不给力,请检查你的网络设置!");
+				return ;
 			}
-			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});
-		
 	}
 	
 	private void onLoadMore(){
@@ -210,16 +182,14 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		ResearchAPI.getQuestionList(researchid,page,limit,new JsonResponseHandler() {
-			
+		ResearchAPI.getQuestionList(researchid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				List<Problem> problemlists =Problem.create_by_jsonarray(obj.toString());
 				data.addAll(problemlists);
 				adapter.notifyDataSetChanged();
@@ -229,21 +199,19 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 					toast("数据加载完毕!");
 				}
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力,请检查你的网络设置!");
+				return ;
 			}
-			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});
-		
 	}
 	
 	@Override
