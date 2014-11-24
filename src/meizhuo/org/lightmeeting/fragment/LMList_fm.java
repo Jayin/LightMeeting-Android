@@ -312,9 +312,10 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		}
 		
 	}
+	
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
+		super.onDestroy();
 		if(mBroadcastReceiver!= null)
 			getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
