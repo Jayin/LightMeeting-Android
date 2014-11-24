@@ -12,6 +12,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_research_adapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.model.Research;
@@ -87,8 +88,43 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 	
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-	ResearchAPI.getResearchList(meetid,page,limit, new JsonResponseHandler() {
+		ResearchAPI.getResearchList(meetid,page,limit,new JsonHandler(){
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Research>researchlist =  Research.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(researchlist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(researchlist.size() <10){
+					hasMore = false;
+				}else{
+					hasMore = true;
+				}
+				if(researchlist.size() == 0){
+					toast("暂无调查数据!");
+					return ;
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
+				toast("出错了，请检查你的网络设置!");
+				return ;
+			}
+			@Override
+			public void onFinish() {
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+/*	ResearchAPI.getResearchList(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -136,15 +172,47 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-		});
-		
+		});*/
 	}
 	
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		ResearchAPI.getResearchList(meetid,page,limit, new JsonResponseHandler() {
+		ResearchAPI.getResearchList(meetid,page,limit,new JsonHandler(){
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Research>researchlist = Research.create_by_jsonarray(obj.toString());
+				data.addAll(researchlist);
+				adapter.notifyDataSetChanged();
+				hasMore = true;
+				if(obj.isNull("response")||researchlist.size()<10)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
+				toast("网络不给力，请检查你的网络设置!");
+				return ;
+			}
+			
+			@Override
+			public void onFinish() {
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+/*		ResearchAPI.getResearchList(meetid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -189,7 +257,7 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 				isloading = false;
 				
 			}
-		});
+		});*/
 	}
 
 	@Override
