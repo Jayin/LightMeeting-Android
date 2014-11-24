@@ -50,56 +50,103 @@ public class Member implements Serializable{
 		return list;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", username=" + username + ", nickname="
 				+ nickname + ", sex=" + sex + ", company=" + company
-				+ ", position=" + position + ", stime=" + stime + "]";
+				+ ", position=" + position + ", phone=" + phone + ", email="
+				+ email + ", birth=" + birth + ", ctime=" + ctime
+				+ ", lasttime=" + lasttime + "]";
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public String getSex() {
 		return sex;
 	}
+
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+
 	public String getCompany() {
 		return company;
 	}
+
 	public void setCompany(String company) {
 		this.company = company;
 	}
+
 	public String getPosition() {
 		return position;
 	}
+
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	public String getStime() {
-		return stime;
+
+	public String getPhone() {
+		return phone;
 	}
-	public void setStime(String stime) {
-		this.stime = stime;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
+	public String getLasttime() {
+		return lasttime;
+	}
+
+	public void setLasttime(String lasttime) {
+		this.lasttime = lasttime;
+	}
+
 	/**成员id*/
 	private String id;
 	/**用户名字*/
@@ -112,8 +159,18 @@ public class Member implements Serializable{
 	private String company;
 	/**位置*/
 	private String position;
-	/**时间*/
-	private String stime;
+	/**电话号码*/
+	private String phone;
+	/**电子邮箱*/
+	private String email;
+	/**生日*/
+	private String birth;
+	/**ctime*/
+	private String ctime;
+	/**最后一次登录*/
+	private String lasttime;
+	
+	
 
 
 }
