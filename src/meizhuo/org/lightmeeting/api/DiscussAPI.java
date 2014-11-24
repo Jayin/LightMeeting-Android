@@ -87,11 +87,12 @@ public class DiscussAPI {
 	 * @param discussid
 	 * @param responseHandler
 	 */
-	public static void getCommentlist(String discussid,String page,String limit,AsyncHttpResponseHandler responseHandler){
+	public static void getCommentlist(String discussid,String with_member,String page,String limit,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 			params.add("discussid", discussid);
 			params.add("page", page);
 			params.add("limit", limit);
+			params.add("with_member", with_member);
 		RestClient.post("/home/discuss/listComment", params, responseHandler);
 	}
 	

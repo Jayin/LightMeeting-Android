@@ -14,6 +14,7 @@ import butterknife.InjectView;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,9 @@ import meizhuo.org.lightmeeting.encoding.EncodingHandler;
 import meizhuo.org.lightmeeting.fragment.MeetingData_fm;
 import meizhuo.org.lightmeeting.fragment.Meeting_function_fm;
 import meizhuo.org.lightmeeting.fragment.Member_fm;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 /***
@@ -170,7 +173,44 @@ public class MeetingData extends BaseActivity{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					MeetingAPI.quiteMeet(meetid, new JsonResponseHandler() {
+					MeetingAPI.quiteMeet(meetid, new JsonHandler(){
+						
+						@Override
+						public void onStart() {
+							if(loadingDialog == null){
+								loadingDialog = new LoadingDialog(MeetingData.this);
+							}
+							loadingDialog.setText("正在退出会议...");
+							loadingDialog.show();
+						}
+						
+						@Override
+						public void onOK(int statusCode, Header[] headers,
+								JSONObject obj) throws Exception {
+							// TODO Auto-generated method stub
+							if(loadingDialog.isShowing()){
+								loadingDialog.dismiss();
+								loadingDialog = null;
+								toast("成功退出会议!");
+							}
+							sendBroadcast(new Intent(Constants.Action_Logout_Meeting_Successful));
+							MeetingData.this.finish();
+						}
+						
+						@Override
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] data, Throwable arg3) {
+							// TODO Auto-generated method stub
+							if(loadingDialog.isShowing()){
+								loadingDialog.dismiss();
+								loadingDialog = null;
+							}
+							toast("网络不给力，请检查你的网络设置!");
+						}
+						
+					});
+					
+			/*		MeetingAPI.quiteMeet(meetid, new JsonResponseHandler() {
 						
 						@Override
 						public void onStart() {
@@ -210,7 +250,7 @@ public class MeetingData extends BaseActivity{
 							}
 							toast("网络不给力，请检查你的网络设置!");
 						}
-					});
+					});*/
 					
 				}
 			});

@@ -12,8 +12,10 @@ import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
@@ -23,7 +25,10 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.AsyncHttpClient;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -53,6 +58,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	String page="1",limit="";
 	boolean hasMore = true, isloading=false;
 	LoadingDialog dialog;
+	BroadcastReceiver mBroadcastReceiver;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,11 +73,19 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
+	 openReceiver();
 	 initData();
 	 initLayout();
 	 onRefresh();
 	 return contentView;
 	}
+	
+	private void openReceiver(){
+		mBroadcastReceiver = new LogoutMeetingReceiver();
+		IntentFilter filter = new IntentFilter(Constants.Action_Logout_Meeting_Successful);
+		getActivity().registerReceiver(mBroadcastReceiver, filter);
+	}
+	
 	
 	protected void initData(){
 		data = new ArrayList<Meeting>();
@@ -109,9 +123,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		MeetingAPI.getMeetingList(page,limit,new JsonResponseHandler() {
-			
-			
+		MeetingAPI.getMeetingList(page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
@@ -119,7 +131,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				List<Meeting> meetinglist=Meeting.create_by_jsonarray(obj.toString());
 				data.clear();
@@ -138,20 +151,21 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onError(int error_code, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				toast("出错了，请检查你的网络设置!");
-				
+				return ;
 			}
+			
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-			
-			
 		});
+
 		
 	}
 	
@@ -159,15 +173,17 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		MeetingAPI.getMeetingList(page,limit,new JsonResponseHandler() {
-			
+		
+		MeetingAPI.getMeetingList(page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
+			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
 				// TODO Auto-generated method stub
 				List<Meeting> meetings = Meeting.create_by_jsonarray(obj.toString());
 				data.addAll(meetings);
@@ -180,9 +196,11 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				// TODO Auto-generated method stub
 				toast("网络不给力,请检查你的网络设置!");
+				return ;
 			}
 			
 			@Override
@@ -192,6 +210,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				isloading = false;
 			}
 		});
+		
+
 	}
 	
 
@@ -227,7 +247,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.main, menu);
 	}
 
@@ -235,18 +254,13 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch(item.getItemId())
 		{
-//		case R.id.action_add_meeting:
-//			openActivity(Lm_meeting_addnewmeet.class);
-//			break;
 		case R.id.action_sweep:
 			Intent openCameraIntent =  new Intent(getActivity(), CaptureActivity.class);
 			startActivityForResult(openCameraIntent, 50);
 			break;
 		}
-		
 		return true;
 	}
 	
@@ -258,12 +272,9 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 			L.i(qrurl);
 			AsyncHttpClient client ;
 			client = RestClient.getClient();
-			client.get(qrurl, new JsonResponseHandler() {
-				
-				
+			client.get(qrurl, new JsonHandler(){
 				@Override
 				public void onStart() {
-					// TODO Auto-generated method stub
 					if(dialog == null)
 					{
 						dialog = new LoadingDialog(getActivity());
@@ -273,44 +284,20 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				}
 				
 				@Override
-				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
-					L.i("obj" + obj.toString());
-					try {
-						if(obj.getString("error_code").equals("40000"))
-						{
-							if(dialog.isShowing())
-							{
-								dialog.dismiss();
-								dialog=null;
-							}
-							String msg = obj.getString("msg");
-							toast(msg);
-						}
-					} catch (JSONException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				public void onOK(int statusCode, Header[] headers,
+						JSONObject obj) throws Exception {
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
 					}
-					
-					try {
-						
-						if(obj.getString("code").equals("20000")){
-							if(dialog.isShowing())
-							{
-								dialog.dismiss();
-								dialog = null;
-							}
-							toast("加入会议成功!");
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
+					toast("加入会议成功!");
+					onRefresh();
 				}
 				
 				@Override
-				public void onFaild(int errorType, int errorCode) {
+				public void onError(int error_code, Header[] headers,
+						JSONObject obj) throws Exception {
 					// TODO Auto-generated method stub
 					if(dialog.isShowing())
 					{
@@ -318,52 +305,29 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 						dialog = null;
 					}
 					toast("加入会议失败，请检查你的网络!");
-					
 				}
 				
 			});
-			
-		/*	MeetingAPI.addjoin(meetid, new JsonResponseHandler() {
-				
-				@Override
-				public void onStart() {
-					// TODO Auto-generated method stub
-					if(dialog == null){
-						dialog = new LoadingDialog(getActivity());
-						dialog.setText("正在加入会议");
-					}
-					dialog.show();
-					
-				}
-				
-				@Override
-				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
-					try {
-						if(obj.getString("code").equals("20000")){
-							if(dialog.isShowing()){
-								dialog.dismiss();
-								dialog = null;
-							}
-							toast("加入会议成功!");
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-				}
-				
-				@Override
-				public void onFaild(int errorType, int errorCode) {
-					// TODO Auto-generated method stub
-					if(dialog.isShowing()){
-						dialog.dismiss();
-						dialog = null;
-					}
-					toast("加入会议失败,请检查您的网络!");
-				}
-			});*/
+	
+		}
+		
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		if(mBroadcastReceiver!= null)
+			getActivity().unregisterReceiver(mBroadcastReceiver);
+	}
+	
+	class LogoutMeetingReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if(action.equals(Constants.Action_Logout_Meeting_Successful)){
+				onRefresh();
+			}
 		}
 		
 	}

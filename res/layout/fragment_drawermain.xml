@@ -37,6 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@drawable/lm_ic_line3" />
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="@null"
+        >
 
     <LinearLayout
         android:id="@+id/lm_to_meetlist"
@@ -155,5 +160,5 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
-
+</ScrollView>
 </LinearLayout>

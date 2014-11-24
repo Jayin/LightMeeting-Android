@@ -11,6 +11,7 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_item_adapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Comment;
 import meizhuo.org.lightmeeting.model.Meeting;
@@ -48,6 +49,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	List<Comment>data;
 	ActionBar mActionBar;
 	String title;
+	String with_member = "1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +97,40 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		DiscussAPI.getCommentlist(discussid,page,limit, new JsonResponseHandler() {
+		DiscussAPI.getCommentlist(discussid,with_member,page,limit,new JsonHandler(){
+			@Override
+			public void onStart() {
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				List<Comment>commentlist = Comment.create_by_jsonarray(obj.toString());
+				data.clear();
+				data.addAll(commentlist);
+				adapter.notifyDataSetChanged();
+				page = "1";
+				if(commentlist.size() <10)
+				{
+					hasMore = false;
+				}else{
+					hasMore = true;
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				toast("出错了，请检查你的网络设置!");
+			}
+			@Override
+			public void onFinish() {
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+	/*	DiscussAPI.getCommentlist(discussid,page,limit, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -134,14 +168,47 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				isloading = false;
 			}
 			
-		});
+		});*/
 		
 	}
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		DiscussAPI.getCommentlist(discussid,page,limit,new JsonResponseHandler() {
+		DiscussAPI.getCommentlist(discussid,with_member, page, limit, new JsonHandler(){
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(true);
+			}
+			@Override
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				// TODO Auto-generated method stub
+				List<Comment> commentlist =Comment.create_by_jsonarray(obj.toString());
+				data.addAll(commentlist);
+				adapter.notifyDataSetChanged();
+				if(obj.isNull("response")||commentlist.size()<5)
+				{
+					hasMore = false;
+					toast("数据加载完毕!");
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
+				toast("网络不给力,请检查你的网络设置!");
+				return ;
+			}
+			@Override
+			public void onFinish() {
+				swipeRefreshLayout.setRefreshing(false);
+				isloading = false;
+			}
+		});
+	/*	DiscussAPI.getCommentlist(discussid,page,limit,new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -173,7 +240,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-		});
+		});*/
 	}
 	
 	@Override

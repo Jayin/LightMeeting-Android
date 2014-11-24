@@ -61,7 +61,7 @@ public class MeetingData_discuss_item_adapter extends BaseAdapter{
 			h = (ViewHolder)convertView.getTag();
 		}
 		h.discuss_comment.setText(mData.get(position).getContent());
-		h.comment_author.setText(mData.get(position).getAuthor());
+		h.comment_author.setText(mData.get(position).getNickname());
 		
 		return convertView;
 	}

@@ -22,14 +22,29 @@
        android:background="@drawable/lm_message_card_bg"
        android:orientation="vertical"
         >
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
         <TextView 
             style="@style/TextView"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/comment_author"
-            android:text="真练"
+            android:textColor="@color/lm_grey_lv_two"
+            android:text="评论人:"
             />
+          <TextView 
+            style="@style/TextView"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/lm_grey_lv_two"
+            android:id="@+id/comment_author"
+            android:text=""
+            />
+          </LinearLayout>
         <View 
             android:layout_width="match_parent"
             android:layout_height="2dp"
