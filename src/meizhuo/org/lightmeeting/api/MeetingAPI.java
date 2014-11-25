@@ -113,6 +113,17 @@ public class MeetingAPI {
 	}
 	
 	/**
+	 * 获取会议成员列表中某个成员的信息
+	 * @param memberid
+	 * @param responseHandler
+	 */
+	public static void getOneMember(String memberid, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		params.add("memberid", memberid);
+		RestClient.post("/home/member/getonemember", params, responseHandler);
+	}
+	
+	/**
 	 * 退出会议
 	 * @param meetid
 	 * @param responseHandler

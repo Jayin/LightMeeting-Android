@@ -58,18 +58,14 @@ public class UserAPI {
 		RequestParams params = new RequestParams();
 		if(!(nickname == null || nickname.equals("")))
 			params.add("nickname", nickname);
-		if(sex.equals("")||sex == null){
-			if(sex.equals("男")){
-				params.add("sex", "m");
-			}else{
-				params.add("sex", "f");
-			}
+		if(!(sex.equals("")||sex == null)){
+				params.add("sex", sex);
 		}
 		if(!(phone == null || phone.equals("")))
 			params.add("phone", phone);
-		if(email.equals("") || email == null)
+		if(!(email.equals("") || email == null))
 			params.add("email", email);
-		if(birth.equals("") || birth == null)
+		if(!(birth.equals("") || birth == null))
 		params.add("birth", birth);
 		RestClient.post("/home/member/updatemember", params, responseHandler);
 	}
@@ -97,11 +93,19 @@ public class UserAPI {
 	}
 	
 	/**
-	 * 获取登录会员信息
+	 * 获取登录会员信息(descapte)
 	 * @param responseHandler
 	 */
 	public static void getMemberData(AsyncHttpResponseHandler responseHandler){
 		RestClient.post("/home/member/getloginmember", null, responseHandler);
+	}
+	
+	/**
+	 * 获取登录会员信息
+	 * @param responseHandler
+	 */
+	public static void getOneMember(AsyncHttpResponseHandler responseHandler){
+		RestClient.post("/home/member/getonemember", null, responseHandler);
 	}
 	
 }

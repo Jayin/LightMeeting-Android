@@ -112,6 +112,5 @@ public class StringUtils {
 		String date = format.format(timestamp*1000);
 		return date;
 	}
-	
 
 }
