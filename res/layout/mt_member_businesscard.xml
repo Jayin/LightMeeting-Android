@@ -65,7 +65,7 @@
             android:text="昵称"
             />
              <TextView 
-                   android:id="@+id/lm_member_nickname"
+                   android:id="@+id/mt_member_nickname"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -93,7 +93,7 @@
             android:text="生日"
             />
                <TextView 
-                   android:id="@+id/lm_member_birth"
+                   android:id="@+id/mt_member_birth"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -121,7 +121,7 @@
             android:text="性别"
             />
                <TextView 
-                   android:id="@+id/lm_member_sex"
+                   android:id="@+id/mt_member_sex"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -151,7 +151,7 @@
             android:text="公司名称"
             />
                <TextView 
-                   android:id="@+id/lm_member_company"
+                   android:id="@+id/mt_member_company"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -180,7 +180,7 @@
             android:text="职位"
             />
                <TextView 
-                   android:id="@+id/lm_member_position"
+                   android:id="@+id/mt_member_position"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -208,7 +208,7 @@
             android:text="联系电话"
             />
              <TextView 
-                   android:id="@+id/lm_member_phone"
+                   android:id="@+id/mt_member_phone"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"
@@ -236,7 +236,7 @@
             android:text="联系邮箱"
             />
                 <TextView 
-                   android:id="@+id/lm_member_email"
+                   android:id="@+id/mt_member_email"
                    android:layout_marginRight="30dp"
             style="@style/TextView"
             android:textColor="@color/lm_grey2"

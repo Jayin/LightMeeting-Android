@@ -15,11 +15,6 @@
                 android:showAsAction="always|withText" 
                 android:title="@string/action_changePsw"
                 />
-            <item android:id="@+id/action_logoff"
-      			  android:showAsAction="always|withText" 
-      			  android:title="@string/action_logoff"
-                />
-            
         </menu>
     </item>
 

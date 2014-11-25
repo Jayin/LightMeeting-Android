@@ -73,6 +73,7 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 	@OnItemClick(R.id.lv) public void ToBusinessCard(int position){
 		Intent intent =  new Intent(getActivity(), MdMemberBusinessCard.class);
 		intent.putExtra("memberid", data.get(position).getId());
+		intent.putExtra("nickname", data.get(position).getNickname());
 		startActivity(intent);
 	}
 	
