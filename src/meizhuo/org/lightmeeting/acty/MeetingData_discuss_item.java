@@ -115,6 +115,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 
 	@Override
 	public void onRefresh() {
+		page="1";
 		DiscussAPI.getCommentlist(discussid,with_member,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {

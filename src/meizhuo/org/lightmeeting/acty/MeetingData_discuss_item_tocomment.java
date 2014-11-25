@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
@@ -61,33 +62,24 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 			return ;
 			
 		}
-		DiscussAPI.createComment(discussid, comment_content, reply_member, new JsonResponseHandler() {
-			
+		DiscussAPI.createComment(discussid, comment_content, reply_member, new JsonHandler(){
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						toast("评论成功!");
-						sendBroadcast(new Intent(Constants.Action_Comment_Successful));
-						MeetingData_discuss_item_tocomment.this.finish();
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				toast("评论成功!");
+				sendBroadcast(new Intent(Constants.Action_Comment_Successful));
+				MeetingData_discuss_item_tocomment.this.finish();
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
 				toast("网络不给力，评论失败!请重新评论!");
 				return ;
-				
 			}
+			
+			
 		});
-		
+	
 	}
 	
 	@Override
