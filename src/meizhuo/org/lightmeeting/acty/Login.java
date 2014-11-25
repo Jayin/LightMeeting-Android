@@ -121,73 +121,7 @@ public class Login extends BaseActivity {
 				toast("网络不给力,请检查你的网络设置 ！");
 			}
 		});
-		//用户登录
-//		UserAPI.login(EditTextUtils.getText(login_et_username), EditTextUtils.getText(login_et_password), new JsonResponseHandler() {
-//			
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				if (dialog == null)
-//					dialog = new LoadingDialog(Login.this);
-//				dialog.setText("正在登录");
-//				dialog.show();
-//			}
-//			
-//			@Override
-//			public void onOK(Header[] headers, JSONObject obj) {
-//				// TODO Auto-generated method stub
-//				
-//				try {
-//					if(obj.getString("error_code").equals("40000"))
-//					{
-//						if(dialog.isShowing())
-//						{
-//							dialog.dismiss();
-//							dialog = null;
-//						}
-//						String msg = obj.getString("msg");
-//						toast(msg);
-//						return ;
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//				try {
-//					if(obj.getString("code").equals("20000")){
-//					
-//						String message = obj.getString("response");
-//						saveLoginInfo();
-//						if(dialog.isShowing())
-//						{
-//							dialog.dismiss();
-//							dialog = null;
-//						}
-//						toast("登录成功");
-//						closeActivity();
-//						
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//					toast("出现了异常!");
-//				}
-//				
-//		
-//			}
-//			
-//			@Override
-//			public void onFaild(int errorType, int errorCode) {
-//				// TODO Auto-generated method stub
-//				if(dialog.isShowing()){
-//					dialog.dismiss();
-//					dialog = null;
-//				}
-//				toast("网络不给力,请检查你的网络设置 ！");
-//				
-//			}
-//		});
+
 	}
 	//去注册
 	@OnClick(R.id.acty_login_btn_regist) public void to_regist(){
@@ -227,6 +161,10 @@ public class Login extends BaseActivity {
 			toast("电子邮箱不能为空");
 			return;
 		}
+		if(!StringUtils.isEmail(EditTextUtils.getText(register_et_email))){
+			toast("电子邮箱格式不正确");
+			return ;
+		}
 		String username =EditTextUtils.getText(register_et_username); 
 		String nickname =EditTextUtils.getText(register_et_nickname); 
 		String password =EditTextUtils.getText(register_et_password); 
@@ -236,6 +174,7 @@ public class Login extends BaseActivity {
 		if(maleIsChecked) sex = "男";
 		boolean femaleIsChecked = femaleRadio.isChecked(); //女性被点击
 		if(femaleIsChecked) sex = "女";
+	
 		UserAPI.regist(username, nickname, password, sex, email, new JsonResponseHandler() {
 			
 			@Override
@@ -275,7 +214,6 @@ public class Login extends BaseActivity {
 							dialog.dismiss();
 							dialog = null;
 						}
-						String message = obj.getString("response");
 						toast("注册成功");
 						flipper.showPrevious();
 					}
