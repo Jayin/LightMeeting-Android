@@ -3,11 +3,13 @@ package meizhuo.org.lightmeeting.utils;
 import android.annotation.SuppressLint;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
@@ -111,6 +113,54 @@ public class StringUtils {
 		Long timestamp = new Long(time);
 		String date = format.format(timestamp*1000);
 		return date;
+	}
+	/**
+	 * 解析生日的
+	 * @param time
+	 * @return2014-11-302014-11-302014-11-302014-11-302014-11-302014-11-30
+	 */
+	@SuppressLint({ "SimpleDateFormat", "UseValueOf" })
+	public static String timestampToDate2(String time)
+	{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Long timestamp = new Long(time);
+		String date = format.format(timestamp*1000);
+		return date;
+	}
+	
+	/**
+	 * 正常时间转为时间戳
+	 * @param time
+	 * @return
+	 */
+	public static Long dateToTimestamp(String time)
+	{
+		Date date = null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			 date = format.parse(time);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date.getTime()/1000;
+	}
+	/**
+	 * 正常时间转为时间戳 (转化生日)
+	 * @param time
+	 * @return
+	 */
+	public static Long dateToTimestamp2(String time)
+	{
+		Date date = null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			 date = format.parse(time);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date.getTime()/1000;
 	}
 
 }
