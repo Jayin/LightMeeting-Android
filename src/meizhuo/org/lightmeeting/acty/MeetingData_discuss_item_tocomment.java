@@ -10,7 +10,10 @@ import org.json.JSONObject;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import android.app.ActionBar;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -21,6 +24,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
 
 /**
@@ -35,14 +39,19 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 	@InjectView(R.id.et_comment) EditText et_comment;
 	@InjectView(R.id.to_comment) LinearLayout to_comment;
 	ActionBar mActionBar;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_discuss_item_tocomment);
+		
 		initData();
 		initLayout();
 	}
+	
+	
+	
 	
 	@OnClick(R.id.to_comment) public void comment(){
 		String comment_content = EditTextUtils.getText(et_comment);
@@ -60,6 +69,7 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 				try {
 					if(obj.getString("code").equals("20000")){
 						toast("评论成功!");
+						sendBroadcast(new Intent(Constants.Action_Comment_Successful));
 						MeetingData_discuss_item_tocomment.this.finish();
 					}
 				} catch (JSONException e) {
@@ -86,6 +96,7 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 		discussid  = getIntent().getStringExtra("discussid");
 		
 	}
+
 
 	@Override
 	protected void initLayout() {
@@ -122,5 +133,7 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 		}
 		return true;
 	}
+	
+	
 
 }
