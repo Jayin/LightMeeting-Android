@@ -15,9 +15,13 @@ import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Comment;
 import meizhuo.org.lightmeeting.model.Meeting;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import android.app.ActionBar;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -50,14 +54,21 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	ActionBar mActionBar;
 	String title;
 	String with_member = "1";
+	BroadcastReceiver mBroadcastReceiver;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_discuss_item);
-		
+		openReceiver();
 		initData();
 		initLayout();
+	}
+	
+	private void openReceiver(){
+		mBroadcastReceiver = new CommentBroadcastReceiver();
+		IntentFilter filter = new IntentFilter(Constants.Action_Comment_Successful);
+		registerReceiver(mBroadcastReceiver, filter);
 	}
 	
 
@@ -92,11 +103,19 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 		intent.putExtra("discussid", discussid);
 		startActivity(intent);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(mBroadcastReceiver!= null)
+			unregisterReceiver(mBroadcastReceiver);
+	}
 
 
 
 	@Override
 	public void onRefresh() {
+		page="1";
 		DiscussAPI.getCommentlist(discussid,with_member,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
@@ -206,6 +225,19 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	class CommentBroadcastReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if(action.equals(Constants.Action_Comment_Successful)){
+				onRefresh();
+			}
+			
+		}
 		
 	}
 

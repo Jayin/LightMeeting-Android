@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.MdMemberBusinessCard;
 import meizhuo.org.lightmeeting.adapter.MemberAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -16,6 +17,7 @@ import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Member;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -26,6 +28,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public class Member_fm extends BaseFragment implements OnRefreshListener, OnScrollListener {
 
@@ -65,6 +68,13 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 		lv.setAdapter(adapter);
 		lv.setOnScrollListener(this);
 		onRefresh();
+	}
+	
+	@OnItemClick(R.id.lv) public void ToBusinessCard(int position){
+		Intent intent =  new Intent(getActivity(), MdMemberBusinessCard.class);
+		intent.putExtra("memberid", data.get(position).getId());
+		intent.putExtra("nickname", data.get(position).getNickname());
+		startActivity(intent);
 	}
 	
 	@Override

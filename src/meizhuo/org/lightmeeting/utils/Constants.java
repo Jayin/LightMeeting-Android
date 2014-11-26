@@ -32,6 +32,8 @@ public class Constants {
 	public static final String Action_Logout_Meeting_Successful ="Logout_Meeting_Successful";
 	/**修改密码成功*/
 	public static final String Action_ChangePSW_Successful ="Logout_Meeting_Successful";
+	/**评论成功**/
+	public  static final String Action_Comment_Successful = "Comment_Successful";
 	
 	
 

@@ -13,7 +13,6 @@ import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Member;
-import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
@@ -45,6 +44,7 @@ public class BusinessCard extends BaseActivity  {
 	Member member;
 	ActionBar mActionBar ;
 	String nickname,birth,sex,company,position,phone,email;
+	boolean isTime=false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,14 @@ public class BusinessCard extends BaseActivity  {
 		case R.id.action_refreshdata:
 			Intent intent = new Intent(this, Update_userdata.class);
 			intent.putExtra("nickname", nickname);
-			intent.putExtra("birth",StringUtils.timestampToDate(birth) );
+			if(isTime)
+			{
+				L.i("字符串" + birth);
+				Long tempbirth = StringUtils.dateToTimestamp2(birth);
+				L.i(" lOng" + tempbirth);
+				birth = String.valueOf(tempbirth);
+			}
+			intent.putExtra("birth",StringUtils.timestampToDate2(birth) );
 			intent.putExtra("sex", sex);
 			intent.putExtra("company", company);
 			intent.putExtra("position", position);
@@ -197,6 +204,7 @@ public class BusinessCard extends BaseActivity  {
 			member_email.setText(data.getStringExtra("email"));
 			nickname = data.getStringExtra("nickname");
 			birth = data.getStringExtra("birth");
+			isTime=true;
 			sex = data.getStringExtra("sex");
 			company = data.getStringExtra("company");
 			position = data.getStringExtra("position");
@@ -233,7 +241,7 @@ public class BusinessCard extends BaseActivity  {
 				}
 				member = Member.create_by_json(obj.getString("response"));
 				member_nickname.setText(member.getNickname());
-				member_birth.setText(StringUtils.timestampToDate(member.getBirth()));
+				member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
 				if(member.getSex().equals("m")){
 					member_sex.setText("男");
 					sex="男";
