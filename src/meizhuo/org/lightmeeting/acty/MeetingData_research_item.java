@@ -95,6 +95,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 		Intent it = new Intent(this, MeetingData_research_item_option.class);
 		it.putExtra("research_title", data.get(position).getTitle());
 		it.putExtra("questionid", data.get(position).getId());
+		it.putExtra("option_type", data.get(position).getOption_type());
 		try {
 			JSONArray array = optionsobj.getJSONArray("response");
 			optionobj = array.getJSONObject(position);

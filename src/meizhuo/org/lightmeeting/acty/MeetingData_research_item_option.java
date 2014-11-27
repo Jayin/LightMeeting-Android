@@ -6,24 +6,29 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
-import butterknife.InjectView;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-import android.app.ActionBar;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.TextView;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter.ViewHolder;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import android.app.ActionBar;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * 调查 选项
@@ -40,7 +45,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 	String questionid;
 	String optionid; 
 	String option_content;
-	
+	String option_type;
 	MeetingData_research_item_option_adapter adapter;
 	
 	@InjectView(R.id.research_option_lv) ListView research_option_lv;
@@ -59,14 +64,17 @@ public class MeetingData_research_item_option extends BaseActivity{
 		initData();
 		initLayout();
 	}
-
-	/**选择了某项 */
+	
+	
+	
+/*	
 	@OnItemClick(R.id.research_option_lv) public void select_option(int position){
 		research_option_value.setText(data.get(position).getKey() + ":" + data.get(position).getValue());
 		select_option = data.get(position).getKey() + ":" + data.get(position).getValue();
+		
 		optionid = data.get(position).getKey();
 		option_content = data.get(position).getValue();
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -75,6 +83,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 		questionid = getIntent().getStringExtra("questionid");
 		optionlist = new ArrayList<HashMap<String,String>>();
 		data= (ArrayList<KV>) getIntent().getSerializableExtra("researchobj");
+		option_type = getIntent().getStringExtra("option_type");
 		Collections.sort(data);
 	       adapter  =new MeetingData_research_item_option_adapter(this, data);
 		
@@ -121,12 +130,46 @@ public class MeetingData_research_item_option extends BaseActivity{
 				
 		});
 	}
+	
+	
 
 	@Override
 	protected void initLayout() {
 		// TODO Auto-generated method stub
 		
 		research_option_lv.setAdapter(adapter);
+		research_option_lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				ViewHolder holder=(ViewHolder)view.getTag();
+				if(option_type.equals("1")){
+					if(data.get(position).isIsclick() == true)
+					{
+						holder.option_iv.setVisibility(View.GONE);
+						data.get(position).setIsclick(false);
+					}else{
+						for(int i=0;i<data.size();i++)
+						{
+							data.get(i).setIsclick(false);
+						}
+						adapter.notifyDataSetChanged();
+						holder.option_iv.setVisibility(View.VISIBLE);
+						data.get(position).setIsclick(true);
+					}
+				}
+				if(data.get(position).isIsclick() == true)
+				{
+					holder.option_iv.setVisibility(View.GONE);
+					data.get(position).setIsclick(false);
+				}else{
+					holder.option_iv.setVisibility(View.VISIBLE);
+					data.get(position).setIsclick(true);
+				}
+				
+			}
+		});
 		
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
