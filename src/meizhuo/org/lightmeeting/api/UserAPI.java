@@ -19,7 +19,7 @@ public class UserAPI {
 	 * @param responseHandler
 	 */
 	public static void regist(String username,String nickname,String password,
-			String sex,String email,AsyncHttpResponseHandler responseHandler){
+			String sex,String email,String company,String position,String phone,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("username", username);
 		params.add("nickname", nickname);
@@ -30,6 +30,12 @@ public class UserAPI {
 			params.add("sex", "f");
 		}
 		params.add("email", email);
+		if(!(company==null || company.equals("")))
+		params.add("company", company);
+		if(!(position==null || position.equals("")))
+			params.add("position", position);
+		if(!(phone==null || phone.equals("")))
+			params.add("phone", phone);
 		RestClient.post("/home/member/addmember", params, responseHandler);
 	}
 	/**
