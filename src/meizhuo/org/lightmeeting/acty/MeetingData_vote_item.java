@@ -71,6 +71,24 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
 				// TODO Auto-generated method stub
+				L.i("obj" + obj.toString());
+				
+				try {
+					if(obj.getString("error_code").equals("40000")){
+						if(loadingDialog.isShowing()){
+							loadingDialog.dismiss();
+							loadingDialog = null;
+						}
+						String message = obj.getString("msg");
+						toast(message);
+						return ;
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
 				try {
 					if(obj.getString("code").equals("20000")){
 						if(loadingDialog.isShowing()){
@@ -84,6 +102,8 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+		
 			}
 			
 			@Override
@@ -128,7 +148,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 			@Override
 			public void onItemClick(int position) {
 				// TODO Auto-generated method stub
-				option_select.setText(data.get(position).getVpintro().toString());
+				option_select.setText(position + 1 + ":" + data.get(position).getVpintro().toString());
 				select_content = data.get(position).getVpintro().toString();
 				optionsid = data.get(position).getId();
 			}

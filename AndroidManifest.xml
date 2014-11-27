@@ -171,6 +171,11 @@
             android:name=".acty.ShowWebImageActivity"
             android:launchMode="singleTask" >
         </activity>
+      <!-- MdMemberBusinessCard -->
+                          <activity
+            android:name=".acty.MdMemberBusinessCard"
+            android:launchMode="singleTask" >
+        </activity>
     </application>
 
 </manifest>
