@@ -13,7 +13,6 @@ import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Member;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
@@ -66,7 +65,7 @@ public class MdMemberBusinessCard extends BaseActivity{
 					}
 					member = Member.create_by_json(obj.getString("response"));
 					mt_member_nickname.setText(member.getNickname());
-					mt_member_birth.setText(StringUtils.timestampToDate(member.getBirth()));
+					mt_member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
 					if(member.getSex().equals("m"))
 					{
 						mt_member_sex.setText("男");
