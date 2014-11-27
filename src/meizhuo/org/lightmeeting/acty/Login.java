@@ -37,6 +37,11 @@ public class Login extends BaseActivity {
 	@InjectView(R.id.acty_register_et_username) EditText register_et_username;
 	@InjectView(R.id.acty_register_et_nickname) EditText register_et_nickname;
 	@InjectView(R.id.acty_register_et_password) EditText register_et_password;
+	
+	@InjectView(R.id.acty_register_et_company) EditText acty_register_et_company;
+	@InjectView(R.id.acty_register_et_position) EditText acty_register_et_position;
+	@InjectView(R.id.acty_register_et_phone) EditText acty_register_et_phone;
+	
 	@InjectView(R.id.radioMale) RadioButton maleRadio;
 	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
 	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
@@ -134,6 +139,7 @@ public class Login extends BaseActivity {
 	@InjectView(R.id.radioMale) RadioButton maleRadio;
 	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
 	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
+		
 	 */
 	//点击就进行注册
 	@OnClick(R.id.acty_register_btn_regist) public void regist(){
@@ -174,8 +180,16 @@ public class Login extends BaseActivity {
 		if(maleIsChecked) sex = "男";
 		boolean femaleIsChecked = femaleRadio.isChecked(); //女性被点击
 		if(femaleIsChecked) sex = "女";
-	
-		UserAPI.regist(username, nickname, password, sex, email, new JsonResponseHandler() {
+		String company =EditTextUtils.getText(acty_register_et_company); 
+		String position =EditTextUtils.getText(acty_register_et_position); 
+		String phone =EditTextUtils.getText(acty_register_et_phone); 
+
+		/**
+		 @InjectView(R.id.acty_register_et_company) EditText acty_register_et_company;
+	@InjectView(R.id.acty_register_et_position) EditText acty_register_et_position;
+	@InjectView(R.id.acty_register_et_phone) EditText acty_register_et_phone;
+		 */
+		UserAPI.regist(username, nickname, password, sex, email,company,position,phone, new JsonResponseHandler() {
 			
 			@Override
 			public void onStart() {
