@@ -184,12 +184,12 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	}
 	
 	
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.acty_discuss, menu);
 		return true;
-	}
+	}*/
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -220,7 +220,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		it.putExtra("content", data.get(position).getContent());
 		startActivity(it);
 	}
-
+ 
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
