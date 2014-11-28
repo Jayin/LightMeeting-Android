@@ -5,21 +5,14 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnEditListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnHandleListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ActionBar;

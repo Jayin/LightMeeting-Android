@@ -8,8 +8,6 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.CaptureActivity;
 import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnHandleListener;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -97,22 +95,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 				android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light);
 		lv.setAdapter(adapter);
-		adapter.setOnUpdateListener(new OnUpdateListener() {
-			
-			@Override
-			public void onUpdateListener(int position) {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setEnabled(false);
-			}
-		});
-		adapter.setOnHandleListener(new OnHandleListener() {
-			
-			@Override
-			public void onHandlerListener(int position) {
-				// TODO Auto-generated method stub
-				swipeRefreshLayout.setEnabled(true);
-			}
-		});
 		lv.setOnScrollListener(this);
 		
 	}
