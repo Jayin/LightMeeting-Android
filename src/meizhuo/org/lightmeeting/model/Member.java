@@ -50,14 +50,17 @@ public class Member implements Serializable{
 		return list;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", username=" + username + ", nickname="
 				+ nickname + ", sex=" + sex + ", company=" + company
 				+ ", position=" + position + ", phone=" + phone + ", email="
 				+ email + ", birth=" + birth + ", ctime=" + ctime
-				+ ", lasttime=" + lasttime + "]";
+				+ ", lasttime=" + lasttime + ", stime=" + stime + ", checkin="
+				+ checkin + ", checkin_time=" + checkin_time + "]";
 	}
+
 
 	public String getId() {
 		return id;
@@ -147,6 +150,31 @@ public class Member implements Serializable{
 		this.lasttime = lasttime;
 	}
 
+	public String getStime() {
+		return stime;
+	}
+
+	public void setStime(String stime) {
+		this.stime = stime;
+	}
+
+	public String getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+
+	public String getCheckin_time() {
+		return checkin_time;
+	}
+
+	public void setCheckin_time(String checkin_time) {
+		this.checkin_time = checkin_time;
+	}
+
+
 	/**成员id*/
 	private String id;
 	/**用户名字*/
@@ -169,8 +197,12 @@ public class Member implements Serializable{
 	private String ctime;
 	/**最后一次登录*/
 	private String lasttime;
+	/**会议开始时间*/
+	private String stime;
+	/**是否签到  0不签到 1签到*/
+	private String checkin;
+	/***签到时间*/
+	private String checkin_time;
 	
-	
-
 
 }
