@@ -42,7 +42,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	
 	ActionBar mActionBar;
 	MeetingData_vote_item_adapter adapter;
-	String voteid,select_content,optionsid;
+	String voteid,select_content,optionsid,title;
 	
 	boolean hasMore = true,isloading=false;
 	List<Option>data;
@@ -126,6 +126,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	protected void initData() {
 		// TODO Auto-generated method stub
 		voteid =  getIntent().getStringExtra("voteid");
+		title = getIntent().getStringExtra("title");
 		data = new ArrayList<Option>();
 		adapter = new MeetingData_vote_item_adapter(this, data);
 		
@@ -136,7 +137,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		mActionBar.setTitle("进行投票");
+		mActionBar.setTitle("投票:" + title);
 		
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -160,7 +161,6 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				toast("" + position);
 				ViewHolder holder = (ViewHolder)view.getTag();
 				if(data.get(position).isClick() == true){
 					holder.vote_iv.setVisibility(View.GONE);

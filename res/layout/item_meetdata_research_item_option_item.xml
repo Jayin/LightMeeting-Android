@@ -6,10 +6,9 @@
     
       <LinearLayout
         style="@style/LinearLayout"
-        android:background="@drawable/card_bg"
         android:orientation="vertical" >
         <LinearLayout
-            
+            android:background="@drawable/lm_btn_item_main"
             style="@style/LinearLayout"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >

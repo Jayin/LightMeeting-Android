@@ -19,7 +19,7 @@
            ></ListView>
 	</LinearLayout>
   			     
-       <LinearLayout 
+    <!--    <LinearLayout 
            android:layout_marginTop="20dp"
          android:clickable="true"
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             style="@style/TextView"
             android:text=""
             />
-    </LinearLayout>
+    </LinearLayout> -->
        
 	<Button 
         android:id="@+id/research_confirm"

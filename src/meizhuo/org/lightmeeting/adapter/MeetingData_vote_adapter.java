@@ -66,8 +66,16 @@ public class MeetingData_vote_adapter extends BaseAdapter{
 		}
 		h.vote_title.setText(mData.get(position).getTitle());
 		h.vote_intro.setText(mData.get(position).getIntro());
+		if(mData.get(position).getStime().equals("0")){
+			h.vote_starttime.setText("暂无开始时间");
+		}else{
 		h.vote_starttime.setText(StringUtils.timestampToDate(mData.get(position).getStime()));
+		}
+		if(mData.get(position).getEtime().equals("0")){
+			h.vote_end_time.setText("暂无结束时间");
+		}{
 		h.vote_end_time.setText(StringUtils.timestampToDate(mData.get(position).getEtime()));
+		}
 		return convertView;
 	}
 

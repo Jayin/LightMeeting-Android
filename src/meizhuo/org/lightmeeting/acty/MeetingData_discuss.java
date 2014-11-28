@@ -5,21 +5,15 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnEditListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnHandleListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnItemClickListener;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
@@ -73,7 +67,6 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light,
@@ -91,7 +84,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
+		page="1";
 		DiscussAPI.getdiscusslist(meetid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
@@ -191,12 +184,12 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	}
 	
 	
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.acty_discuss, menu);
 		return true;
-	}
+	}*/
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -227,7 +220,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 		it.putExtra("content", data.get(position).getContent());
 		startActivity(it);
 	}
-
+ 
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,

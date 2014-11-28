@@ -19,10 +19,6 @@ public class MeetingData_discuss_adapter extends BaseAdapter{
 	
 	List<Discuss>mData;
 	private Context mContext;
-	private OnItemClickListener mOnItemClickListener = null;
-	private OnUpdateListener mOnUpdateListener = null;
-	private OnHandleListener mOnHandleListener = null;
-	private OnEditListener mEditListener = null;
 
 	public MeetingData_discuss_adapter(Context context,List<Discuss>data) {
 		// TODO Auto-generated constructor stub
@@ -81,41 +77,7 @@ public class MeetingData_discuss_adapter extends BaseAdapter{
 
 
 	
-	public void setOnItemClickListener(OnItemClickListener listener){
-		this.mOnItemClickListener = listener;
-	}
 	
 	
-	public interface OnItemClickListener{
-		public void onItemClick(int position);
-	}
-	
-	
-	public void setOnUpdateListener(OnUpdateListener listener){
-		this.mOnUpdateListener = listener;
-	}
-	
-	
-	public interface OnUpdateListener{
-		public void onUpdateListener(int position);
-	}
-	
-	public void setOnHandleListener(OnHandleListener listener){
-		this.mOnHandleListener = listener;
-	}
-
-	public interface OnHandleListener{
-		public void onHandlerListener(int position);
-	}
-	
-	public void setonEditListener(OnEditListener listener){
-		this.mEditListener = listener;
-	}
-	
-	
-	public interface OnEditListener{
-		
-		public void onEditListener(int position);
-	}
 
 }

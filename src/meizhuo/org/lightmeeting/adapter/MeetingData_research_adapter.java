@@ -63,9 +63,16 @@ public class MeetingData_research_adapter extends BaseAdapter{
 		}
 		h.research_title.setText(mData.get(position).getTitle());
 		h.research_intro.setText(mData.get(position).getIntro());
+		if(mData.get(position).getStime().equals("0")){
+			h.research_starttime.setText("暂无开始时间");	
+		}else{
 		h.research_starttime.setText(StringUtils.timestampToDate(mData.get(position).getStime()));
+		}
+		if(mData.get(position).getEtime().equals("0")){
+			h.research_endtime.setText("暂无结束时间");
+		}else{
 		h.research_endtime.setText(StringUtils.timestampToDate(mData.get(position).getEtime()));
-		
+		}
 		return convertView;
 	}
 
