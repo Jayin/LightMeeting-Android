@@ -76,6 +76,7 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 
 	@Override
 	public void onRefresh() {
+		page="1";
 		VoteAPI.getVoteList(meetid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {

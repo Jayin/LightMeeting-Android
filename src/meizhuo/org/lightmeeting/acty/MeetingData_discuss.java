@@ -10,6 +10,7 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
+import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
@@ -66,7 +67,6 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light,
@@ -84,7 +84,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
+		page="1";
 		DiscussAPI.getdiscusslist(meetid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {

@@ -83,6 +83,7 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 	
 	@Override
 	public void onRefresh() {
+		page="1";
 		ResearchAPI.getResearchList(meetid,page,limit,new JsonHandler(){
 			@Override
 			public void onStart() {
