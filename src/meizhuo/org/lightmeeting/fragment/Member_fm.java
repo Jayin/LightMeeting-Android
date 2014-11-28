@@ -70,6 +70,7 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 		Intent intent =  new Intent(getActivity(), MdMemberBusinessCard.class);
 		intent.putExtra("memberid", data.get(position).getId());
 		intent.putExtra("nickname", data.get(position).getNickname());
+		intent.putExtra("checkin", data.get(position).getCheckin());
 		startActivity(intent);
 	}
 	

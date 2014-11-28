@@ -19,7 +19,7 @@ import meizhuo.org.lightmeeting.widget.LoadingDialog;
 public class MdMemberBusinessCard extends BaseActivity{
 
 	ActionBar mActionBar;
-	String memberid,mNickname;
+	String memberid,mNickname,checkIn;
 	
 	@InjectView(R.id.mt_member_nickname) TextView mt_member_nickname;
 	@InjectView(R.id.mt_member_birth) TextView mt_member_birth;
@@ -48,6 +48,13 @@ public class MdMemberBusinessCard extends BaseActivity{
 		// TODO Auto-generated method stub
 		memberid = getIntent().getStringExtra("memberid");
 		mNickname = getIntent().getStringExtra("nickname");
+		if(getIntent().getStringExtra("checkin").equals("0"))
+		{
+			checkIn = "未签到";
+		}else{
+			checkIn = "已签到";
+		}
+		
 		MeetingAPI.getOneMember(memberid, new JsonHandler(){
 				@Override
 				public void onStart() {
@@ -80,14 +87,13 @@ public class MdMemberBusinessCard extends BaseActivity{
 					
 					mActionBar = getActionBar();
 					mActionBar.setDisplayHomeAsUpEnabled(true);
-					mActionBar.setTitle(mNickname + "名片");
+					mActionBar.setTitle(mNickname + ":" + checkIn);
 				}
 				
 				@Override
 				public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-					if(loadingDialog.isShowing())
-					{
+					if(loadingDialog.isShowing()){
 						loadingDialog.dismiss();
 					}
 					toast("网络不给力吗,请检查你的网络设置!");
