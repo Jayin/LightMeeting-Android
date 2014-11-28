@@ -13,9 +13,12 @@ import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.KV;
+import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
@@ -91,6 +94,8 @@ public class MeetingData_research_item_option extends BaseActivity{
 	
 	/**确定选项*/
 	@OnClick(R.id.research_confirm) public void research_confirm(){
+		L.i("提交的答案" + optionid + "内容" + option_content);
+		if(option_type.equals("1")){
 		ResearchAPI.answer(questionid, optionid, option_content, new JsonHandler(){
 				@Override
 				public void onStart() {
@@ -127,8 +132,63 @@ public class MeetingData_research_item_option extends BaseActivity{
 					return ;
 					
 				}
-				
 		});
+		}
+		if(option_type.equals("2")){
+			String multi_option = "";
+			JSONObject obj = new JSONObject();
+			String objset="";
+			for(int i=0;i<data.size();i++){
+				if(data.get(i).isIsclick()){
+					try {
+						obj.put("optionid", data.get(i).getKey());
+						obj.put("option_content", data.get(i).getValue());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					objset += obj.toString() +",";
+				}
+			}
+			objset = objset.substring(0, objset.length()-1);
+			multi_option = "[" +objset + "]";
+			L.i("多选提交" + multi_option.toString());
+			ResearchAPI.answerMulti(questionid, multi_option, new JsonHandler(){
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					super.onStart();
+				}
+				
+				@Override
+				public void onOK(int statusCode, Header[] headers,
+						JSONObject obj) throws Exception {
+					// TODO Auto-generated method stub
+					super.onOK(statusCode, headers, obj);
+				}
+				
+				@Override
+				public void onError(int error_code, Header[] headers,
+						JSONObject obj) throws Exception {
+					// TODO Auto-generated method stub
+					super.onError(error_code, headers, obj);
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						byte[] data, Throwable arg3) {
+					// TODO Auto-generated method stub
+					super.onFailure(statusCode, headers, data, arg3);
+				}
+				
+				@Override
+				public void onFinish() {
+					// TODO Auto-generated method stub
+					super.onFinish();
+				}
+				
+			});
+		}
 	}
 	
 	
@@ -157,17 +217,19 @@ public class MeetingData_research_item_option extends BaseActivity{
 						adapter.notifyDataSetChanged();
 						holder.option_iv.setVisibility(View.VISIBLE);
 						data.get(position).setIsclick(true);
+						optionid=data.get(position).getKey();
+						option_content=data.get(position).getValue();
 					}
 				}
-				if(data.get(position).isIsclick() == true)
-				{
+				if(option_type.equals("2")){
+				if(data.get(position).isIsclick() == true){
 					holder.option_iv.setVisibility(View.GONE);
 					data.get(position).setIsclick(false);
 				}else{
 					holder.option_iv.setVisibility(View.VISIBLE);
 					data.get(position).setIsclick(true);
 				}
-				
+				}
 			}
 		});
 		
