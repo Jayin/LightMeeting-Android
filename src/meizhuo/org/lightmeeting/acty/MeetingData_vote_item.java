@@ -160,7 +160,6 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				toast("" + position);
 				ViewHolder holder = (ViewHolder)view.getTag();
 				if(data.get(position).isClick() == true){
 					holder.vote_iv.setVisibility(View.GONE);
