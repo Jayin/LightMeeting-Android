@@ -209,49 +209,6 @@ public class MeetingData extends BaseActivity{
 						}
 						
 					});
-					
-			/*		MeetingAPI.quiteMeet(meetid, new JsonResponseHandler() {
-						
-						@Override
-						public void onStart() {
-							// TODO Auto-generated method stub
-							if(loadingDialog == null){
-								loadingDialog = new LoadingDialog(MeetingData.this);
-							}
-							loadingDialog.setText("正在退出会议...");
-							loadingDialog.show();
-						}
-						
-						@Override
-						public void onOK(Header[] headers, JSONObject obj) {
-							// TODO Auto-generated method stub
-							try {
-								if(obj.getString("code").equals("20000")){
-									if(loadingDialog.isShowing()){
-										loadingDialog.dismiss();
-										loadingDialog = null;
-										toast("成功退出会议!");
-									}
-									
-								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-						}
-						
-						@Override
-						public void onFaild(int errorType, int errorCode) {
-							// TODO Auto-generated method stub
-							if(loadingDialog.isShowing()){
-								loadingDialog.dismiss();
-								loadingDialog = null;
-							}
-							toast("网络不给力，请检查你的网络设置!");
-						}
-					});*/
-					
 				}
 			});
 			logoutBuilder.setNegativeButton("暂不退出会议", null);
