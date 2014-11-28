@@ -32,7 +32,7 @@
 		      android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-		    android:text="调查问题："
+		    android:text="Q："
 		    />
             <TextView
                 android:layout_marginTop="10dp"

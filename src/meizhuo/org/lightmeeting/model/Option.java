@@ -53,35 +53,56 @@ public class Option implements Serializable{
 	}
 	
 	
+	
+	
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getVoteid() {
 		return voteid;
 	}
+
 	public void setVoteid(String voteid) {
 		this.voteid = voteid;
 	}
+
 	public String getMeetid() {
 		return meetid;
 	}
+
 	public void setMeetid(String meetid) {
 		this.meetid = meetid;
 	}
+
 	public String getVpintro() {
 		return vpintro;
 	}
+
 	public void setVpintro(String vpintro) {
 		this.vpintro = vpintro;
 	}
+
+	public boolean isClick() {
+		return click;
+	}
+
+	public void setClick(boolean click) {
+		this.click = click;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Option [id=" + id + ", voteid=" + voteid + ", meetid=" + meetid
-				+ ", vpintro=" + vpintro + "]";
+				+ ", vpintro=" + vpintro + ", click=" + click + "]";
 	}
+
+
 	/**选项id*/
 	private String id;
 	/**投票id*/
@@ -90,6 +111,8 @@ public class Option implements Serializable{
 	private String meetid;
 	/**投票项*/
 	private String vpintro;
+	/**是否已经点击*/
+	private boolean click;
 
 
 }

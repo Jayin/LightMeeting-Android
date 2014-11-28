@@ -144,6 +144,20 @@ public class ResearchAPI {
 		RestClient.post("/home/research/answer", params, responseHandler);
 	}
 	
+	/**
+	 * 多选
+	 * @param questionid
+	 * @param multi_option
+	 * @param responseHandler
+	 */
+	public static void answerMulti(String questionid,String multi_option,AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		params.add("questionid", questionid);
+		params.add("multi_option", multi_option);
+		RestClient.post("/home/research/answerMulti", params, responseHandler);
+	}
+	
+	
 	public static void getOneResearch(String researchid,AsyncHttpResponseHandler responseHandler){
 		RequestParams params =  new RequestParams();
 		params.add("researchid", researchid);
