@@ -20,6 +20,8 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,7 @@ import android.widget.TextView;
  
 public class DrawerMain extends BaseFragment  {
 	
-	public static final String[] menuName={"会议列表","关于","退出"};
+//	public static final String[] menuName={"会议列表","关于","退出"};
 	private MainActivity mainActivity;
 	LoadingDialog loadingdialog;
 	User user;
@@ -62,56 +64,68 @@ public class DrawerMain extends BaseFragment  {
 		mainActivity.setMainContent(new LMList_fm());
 	}
 	@OnClick(R.id.lm_to_logoff) public void to_logoff(){
-		UserAPI.logout(new JsonResponseHandler() {
-			
+		AlertDialog.Builder logoffBuilder = new AlertDialog.Builder(getActivity());
+		logoffBuilder.setTitle("      确定进行注销吗 ?");
+		logoffBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				if(loadingdialog == null)
-				{
-					loadingdialog = new LoadingDialog(getActivity());
-					loadingdialog.setText("正在注销!");
-					loadingdialog.show();
-				}
-			}
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000"))
-					{
-		
-						new Thread(new Runnable() {
-							
-							@Override
-							public void run() {
-								App app = (App)getActivity().getApplication();
-								app.cleanUpInfo();
-							}
-						}).start();
-						
-						if(loadingdialog.isShowing())
+			public void onClick(DialogInterface dialog, int which) {
+				UserAPI.logout(new JsonResponseHandler() {
+					
+					@Override
+					public void onStart() {
+						// TODO Auto-generated method stub
+						if(loadingdialog == null)
 						{
-							loadingdialog.dismiss();
-							loadingdialog = null;
+							loadingdialog = new LoadingDialog(getActivity());
 						}
-						toast("注销成功");
-						openActivity(Login.class);
-						getActivity().finish();
+						loadingdialog.setText("正在注销!");
+						loadingdialog.show();
 					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
+					
+					@Override
+					public void onOK(Header[] headers, JSONObject obj) {
+						// TODO Auto-generated method stub
+						try {
+							if(obj.getString("code").equals("20000"))
+							{
+				
+								new Thread(new Runnable() {
+									
+									@Override
+									public void run() {
+										App app = (App)getActivity().getApplication();
+										app.cleanUpInfo();
+									}
+								}).start();
+								
+								if(loadingdialog.isShowing())
+								{
+									loadingdialog.dismiss();
+									loadingdialog = null;
+								}
+								toast("注销成功");
+								openActivity(Login.class);
+								getActivity().finish();
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					@Override
+					public void onFaild(int errorType, int errorCode) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 				
 			}
 		});
+		logoffBuilder.setNegativeButton("暂不注销", null);
+		AlertDialog logoffDialog = logoffBuilder.create();
+		logoffDialog.show();
+		
 	}
 	@OnClick(R.id.lm_to_about) public void to_about(){
 		mainActivity.setMainContent(new About());
