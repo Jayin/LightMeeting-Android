@@ -33,13 +33,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/lm_grey_lv_two"
-            android:text="评论人:"
+            android:text=""
             />
           <TextView 
             style="@style/TextView"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="4dp"
             android:textColor="@color/lm_grey_lv_two"
             android:id="@+id/comment_author"
             android:text=""
