@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -58,21 +59,26 @@ public class MeetingData_vote_item_adapter extends BaseAdapter{
 			h = (ViewHolder)convertView.getTag();
 		}
 		
-		h.vote_option_item.setOnClickListener(new OnClickListener() {
+	/*	h.vote_option_item.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mOnItemClickListener.onItemClick(position);
 			}
-		});
+		});*/
 		h.vote_option.setText(position+1 + ":" + mData.get(position).getVpintro());
+		if(mData.get(position).isClick()==false)
+		{
+			h.vote_iv.setVisibility(View.INVISIBLE);
+		}
 		return convertView;
 	}
 	
-	static class ViewHolder{
-		@InjectView(R.id.vote_option) TextView vote_option;
-		@InjectView(R.id.vote_option_item) LinearLayout vote_option_item;
+	public class ViewHolder{
+		@InjectView(R.id.vote_option) public TextView vote_option;
+//		@InjectView(R.id.vote_option_item) public LinearLayout vote_option_item;
+		@InjectView(R.id.vote_iv) public ImageView vote_iv;
 		
 		public ViewHolder(View v) {
 			// TODO Auto-generated constructor stub
