@@ -72,7 +72,11 @@ public class MdMemberBusinessCard extends BaseActivity{
 					}
 					member = Member.create_by_json(obj.getString("response"));
 					mt_member_nickname.setText(member.getNickname());
+					if(member.getBirth().equals("0")){
+						mt_member_birth.setText("暂无生日资料");
+					}else{
 					mt_member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
+					}
 					if(member.getSex().equals("m"))
 					{
 						mt_member_sex.setText("男");

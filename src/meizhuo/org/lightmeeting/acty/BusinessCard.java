@@ -241,7 +241,11 @@ public class BusinessCard extends BaseActivity  {
 				}
 				member = Member.create_by_json(obj.getString("response"));
 				member_nickname.setText(member.getNickname());
+				if(member.getBirth().equals("0")){
+					member_birth.setText("暂无生日资料");
+				}else{
 				member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
+				}
 				if(member.getSex().equals("m")){
 					member_sex.setText("男");
 					sex="男";
