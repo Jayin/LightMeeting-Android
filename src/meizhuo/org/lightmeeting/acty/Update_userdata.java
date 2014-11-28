@@ -237,12 +237,10 @@ public class Update_userdata extends BaseActivity {
 		case 1:
 			lm_usercard_sex.setText("男");
 			chooseSex ="男";
-			toast("男");
 			break;
 		case 2:
 			lm_usercard_sex.setText("女");
 			chooseSex = "女";
-			toast("女");
 			break;
 
 		default:
