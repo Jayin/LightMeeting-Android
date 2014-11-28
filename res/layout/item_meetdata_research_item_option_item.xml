@@ -28,6 +28,14 @@
                 android:layout_marginBottom="10dp"
                 style="@style/TextView"
                 android:text="选项" />
+            <ImageView 
+                android:id="@+id/option_iv"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/yes"
+                android:visibility="invisible"
+                />
         </LinearLayout>
          </LinearLayout>
 

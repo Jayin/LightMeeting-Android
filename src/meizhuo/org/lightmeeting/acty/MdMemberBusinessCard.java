@@ -13,14 +13,13 @@ import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Member;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 public class MdMemberBusinessCard extends BaseActivity{
 
 	ActionBar mActionBar;
-	String memberid,mNickname;
+	String memberid,mNickname,checkIn;
 	
 	@InjectView(R.id.mt_member_nickname) TextView mt_member_nickname;
 	@InjectView(R.id.mt_member_birth) TextView mt_member_birth;
@@ -49,6 +48,13 @@ public class MdMemberBusinessCard extends BaseActivity{
 		// TODO Auto-generated method stub
 		memberid = getIntent().getStringExtra("memberid");
 		mNickname = getIntent().getStringExtra("nickname");
+		if(getIntent().getStringExtra("checkin").equals("0"))
+		{
+			checkIn = "未签到";
+		}else{
+			checkIn = "已签到";
+		}
+		
 		MeetingAPI.getOneMember(memberid, new JsonHandler(){
 				@Override
 				public void onStart() {
@@ -66,7 +72,11 @@ public class MdMemberBusinessCard extends BaseActivity{
 					}
 					member = Member.create_by_json(obj.getString("response"));
 					mt_member_nickname.setText(member.getNickname());
-					mt_member_birth.setText(StringUtils.timestampToDate(member.getBirth()));
+					if(member.getBirth().equals("0")){
+						mt_member_birth.setText("暂无生日资料");
+					}else{
+					mt_member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
+					}
 					if(member.getSex().equals("m"))
 					{
 						mt_member_sex.setText("男");
@@ -81,14 +91,13 @@ public class MdMemberBusinessCard extends BaseActivity{
 					
 					mActionBar = getActionBar();
 					mActionBar.setDisplayHomeAsUpEnabled(true);
-					mActionBar.setTitle(mNickname + "名片");
+					mActionBar.setTitle(mNickname + ":" + checkIn);
 				}
 				
 				@Override
 				public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-					if(loadingDialog.isShowing())
-					{
+					if(loadingDialog.isShowing()){
 						loadingDialog.dismiss();
 					}
 					toast("网络不给力吗,请检查你的网络设置!");

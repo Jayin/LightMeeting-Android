@@ -52,7 +52,9 @@ public class Problem implements Serializable{
 	
 	
 	
-	
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -85,22 +87,38 @@ public class Problem implements Serializable{
 		this.options = options;
 	}
 
+	public String getOption_type() {
+		return option_type;
+	}
 
-
-
-	
-	@Override
-	public String toString() {
-		return "Problem [id=" + id + ", researchid=" + researchid + ", title="
-				+ title + ", options=" + options + "]";
+	public void setOption_type(String option_type) {
+		this.option_type = option_type;
 	}
 
 
 
+
+
+
 	private String id;
+	@Override
+	public String toString() {
+		return "Problem [id=" + id + ", researchid=" + researchid + ", title="
+				+ title + ", options=" + options + ", option_type="
+				+ option_type + "]";
+	}
+
+
+
+
+
+
 	private String researchid;
+	/**调查标题*/
 	private String title;
 	private JSONObject options;
+	/**选项类型*/
+	private String option_type;
 	
 
 

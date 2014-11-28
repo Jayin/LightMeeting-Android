@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
@@ -13,10 +12,7 @@ import meizhuo.org.lightmeeting.acty.MdMemberBusinessCard;
 import meizhuo.org.lightmeeting.adapter.MemberAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Member;
-import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -74,6 +70,7 @@ public class Member_fm extends BaseFragment implements OnRefreshListener, OnScro
 		Intent intent =  new Intent(getActivity(), MdMemberBusinessCard.class);
 		intent.putExtra("memberid", data.get(position).getId());
 		intent.putExtra("nickname", data.get(position).getNickname());
+		intent.putExtra("checkin", data.get(position).getCheckin());
 		startActivity(intent);
 	}
 	

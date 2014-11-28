@@ -60,12 +60,12 @@ public class MemberAdapter extends BaseAdapter  {
 		h.tv_username.setText(mData.get(position).getNickname());
 		
 //		h.tv_userintro.setText(mData.get(position).getCompany() + mData.get(position).getPosition());
-		if(mData.get(position).getSex().equals("f"))
+		if(mData.get(position).getCheckin().equals("1"))
 		{
-			h.tv_userintro.setText("女");
+			h.tv_userintro.setText("已签到");
 		}else
 		{
-			h.tv_userintro.setText("男");
+			h.tv_userintro.setText("未签到");
 		}
 		return convertView;
 	}
