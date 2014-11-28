@@ -201,6 +201,7 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		String voteid = data.get(position).getId();
 		Intent it =  new Intent(this, MeetingData_vote_item.class);
 		it.putExtra("voteid", voteid);
+		it.putExtra("title", data.get(position).getTitle());
 		startActivity(it);
 	}
 
