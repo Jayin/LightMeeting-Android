@@ -3,8 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
     android:paddingRight="8dp"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp"
     android:orientation="horizontal" >
 
     
@@ -13,7 +11,8 @@
         android:background="@drawable/card_bg"
         android:orientation="vertical" >
         <LinearLayout
-            
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             style="@style/LinearLayout"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -29,15 +28,11 @@
             </com.beardedhen.androidbootstrap.BootstrapCircleThumbnail> -->
 		<TextView 
 		    style="@style/TextView"
-		      android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
 		    android:text="Q："
 		    />
             <TextView
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
                 android:id="@+id/research_problem"
                 style="@style/TextView"
                 android:text="今天吃饭了吗" />

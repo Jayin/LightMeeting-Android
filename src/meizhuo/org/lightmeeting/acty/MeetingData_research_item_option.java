@@ -52,8 +52,8 @@ public class MeetingData_research_item_option extends BaseActivity{
 	MeetingData_research_item_option_adapter adapter;
 	
 	@InjectView(R.id.research_option_lv) ListView research_option_lv;
-	@InjectView(R.id.research_option_value) TextView research_option_value;
-	@InjectView(R.id.research_option_key) TextView research_option_key;
+//	@InjectView(R.id.research_option_value) TextView research_option_value;
+//	@InjectView(R.id.research_option_key) TextView research_option_key;
 	List<HashMap<String, String>>optionlist;
 	HashMap<String, String>optionmap;
 	List<KV>data;
