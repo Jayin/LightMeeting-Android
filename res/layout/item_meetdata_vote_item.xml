@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
     
-     
-    
     <android.support.v4.widget.SwipeRefreshLayout 
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
@@ -15,7 +13,6 @@
         
        <ListView
            android:layout_margin="10dp" 
-           
            android:id="@+id/option_lv"
            style="@style/ListView"
            android:layout_width = "match_parent"
@@ -24,7 +21,7 @@
            
   </android.support.v4.widget.SwipeRefreshLayout>
   
-       
+  <!--      
        <LinearLayout 
            android:layout_marginTop="20dp"
          android:clickable="true"
@@ -48,7 +45,7 @@
             style="@style/TextView"
             android:text=""
             />
-    </LinearLayout>
+    </LinearLayout> -->
        
 	<Button 
         android:id="@+id/vote_confirm"

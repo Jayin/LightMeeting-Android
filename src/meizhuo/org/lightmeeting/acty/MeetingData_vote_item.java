@@ -5,7 +5,7 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter.OnItemClickListener;
+import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter.ViewHolder;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -23,10 +23,12 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -36,7 +38,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 	
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.option_lv)ListView   option_lv;
-	@InjectView(R.id.option_select) TextView option_select;
+//	@InjectView(R.id.option_select) TextView option_select;
 	
 	ActionBar mActionBar;
 	MeetingData_vote_item_adapter adapter;
@@ -143,14 +145,36 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 				android.R.color.holo_blue_light);
 		option_lv.setAdapter(adapter);
 		option_lv.setOnScrollListener(this);
-		adapter.setOnItemClickListener(new OnItemClickListener() {
+/*		adapter.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
 			public void onItemClick(int position) {
 				// TODO Auto-generated method stub
-				option_select.setText(position + 1 + ":" + data.get(position).getVpintro().toString());
+//				option_select.setText(position + 1 + ":" + data.get(position).getVpintro().toString());
 				select_content = data.get(position).getVpintro().toString();
 				optionsid = data.get(position).getId();
+			}
+		});*/
+		option_lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				toast("" + position);
+				ViewHolder holder = (ViewHolder)view.getTag();
+				if(data.get(position).isClick() == true){
+					holder.vote_iv.setVisibility(View.GONE);
+					data.get(position).setClick(false);
+				}else{
+					for(int i=0;i<data.size();i++){
+						data.get(i).setClick(false);
+					}
+					adapter.notifyDataSetChanged();
+					holder.vote_iv.setVisibility(View.VISIBLE);
+					data.get(position).setClick(true);
+					optionsid = data.get(position).getId();
+				}
+				
 			}
 		});
 		onRefresh();
