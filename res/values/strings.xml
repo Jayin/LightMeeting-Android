@@ -3,6 +3,7 @@
 
     <string name="app_name">轻会议</string>
 	<string name="action_more">更多</string>
+	<string name="action_signup">会议签到</string>
 	<string name="action_addmeet">增加会议</string>
 	<string name="action_sweep">扫一扫</string>
 	<string name="action_user">个人设置</string>
