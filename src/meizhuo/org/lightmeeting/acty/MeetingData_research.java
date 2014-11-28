@@ -4,19 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_research_adapter;
-import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.model.Research;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -25,7 +20,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
 import butterknife.InjectView;
@@ -82,6 +76,7 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 	@OnItemClick(R.id.research_lv) public void research_item(int position){
 		Intent intent = new Intent(this, MeetingData_research_item.class);
 		intent.putExtra("research_id", data.get(position).getId());
+		intent.putExtra("research_title", data.get(position).getTitle());
 		startActivity(intent);
 	}
 	

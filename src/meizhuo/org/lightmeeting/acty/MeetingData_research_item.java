@@ -16,11 +16,9 @@ import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_adapter;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.model.Problem;
 import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.utils.StringUtils;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,6 +53,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	JSONObject optionsobj;
 	JSONObject realoption;
 	List<KV>kvlist;
+	String research_title;
 	
 	
 	@Override
@@ -71,6 +70,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	@Override
 	protected void initData() {
 		researchid = getIntent().getStringExtra("research_id");
+		research_title = getIntent().getStringExtra("research_title");
 		data = new ArrayList<Problem>();
 		adapter  =  new MeetingData_research_item_adapter(this, data);
 		kvlist = new ArrayList<KV>();
@@ -87,7 +87,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 		problem_lv.setOnScrollListener(this);
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
-		mActionBar.setTitle("问题列表");
+		mActionBar.setTitle(research_title);
 		onRefresh();
 	}
 	
@@ -161,6 +161,10 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 					hasMore = false;
 				}else{
 					hasMore = true;
+				}
+				if(problemlist.size()==0)
+				{
+					toast("该调查暂无问题");
 				}
 			}
 			@Override
