@@ -13,14 +13,12 @@ import meizhuo.org.lightmeeting.adapter.LMListAdapter.OnUpdateListener;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -59,7 +57,6 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	boolean hasMore = true, isloading=false;
 	LoadingDialog dialog;
 	BroadcastReceiver mBroadcastReceiver;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -247,6 +244,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.main, menu);
 	}
 
@@ -269,7 +267,7 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 		// TODO Auto-generated method stub
 		if(requestCode == 50 && resultCode == 51){
 			String qrurl = data.getStringExtra("resultcode");
-			L.i(qrurl);
+			L.i("resultcode" +qrurl );
 			AsyncHttpClient client ;
 			client = RestClient.getClient();
 			client.get(qrurl, new JsonHandler(){
@@ -291,7 +289,8 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 						dialog.dismiss();
 						dialog = null;
 					}
-					toast("加入会议成功!");
+					String response=obj.getString("response");
+					toast(response);
 					onRefresh();
 				}
 				
@@ -304,12 +303,21 @@ public class LMList_fm extends BaseFragment implements OnRefreshListener, OnScro
 						dialog.dismiss();
 						dialog = null;
 					}
-					toast("加入会议失败，请检查你的网络!");
+					String msg = obj.getString("msg");
+					toast(msg);
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						byte[] data, Throwable arg3) {
+					toast("网络不给力,请检查你的网络设置!");
+					return ;
 				}
 				
 			});
 	
 		}
+		
 		
 	}
 	
