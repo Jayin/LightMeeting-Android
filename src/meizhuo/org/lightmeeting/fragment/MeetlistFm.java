@@ -10,6 +10,7 @@ import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.adapter.LMListAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
+import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -18,8 +19,6 @@ import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
-
-import com.loopj.android.http.AsyncHttpClient;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,6 +38,8 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+
+import com.loopj.android.http.AsyncHttpClient;
 
 /**
  * 会议列表fragment
@@ -113,20 +114,31 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener, OnScr
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
 				// TODO Auto-generated method stub
-				List<Meeting> meetinglist=Meeting.create_by_jsonarray(obj.toString());
+				List<Meeting> meetings=Meeting.create_by_jsonarray(obj.toString());
 				data.clear();
-				data.addAll(meetinglist);
+				data.addAll(meetings);
 				adapter.notifyDataSetChanged();
 				page = "1";
-				if(meetinglist.size() == 0){
+				if(meetings.size() == 0){
 					toast("没有参加任何会议");
 				}
-				if(meetinglist.size()<5)
+				if(meetings.size()<5)
 				{
 					hasMore = false;
 				}else{
 					hasMore = true;
 				}
+				String[] t = new String[meetings.size()];
+//				for(Meeting m : meetings){
+//					System.out.println("get meeting--> "+m.getId());
+//					
+//				}
+				for(int i=0;i<meetings.size();i++){
+					System.out.println("get meeting--> "+meetings.get(i).getId());
+					t[i] = meetings.get(i).getId();
+				}
+				App app = (App)(getActivity().getApplication());
+				app.addTags(t, App.TAG_TYPE_MEET);
 			}
 			
 			@Override
@@ -171,6 +183,11 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener, OnScr
 				{
 					hasMore = false;
 					toast("数据加载完毕!");
+				}
+				
+				for(Meeting m : meetings){
+					App app = (App)(getActivity().getApplication());
+					app.addTag(m.getId(), App.TAG_TYPE_MEET);
 				}
 			}
 			
