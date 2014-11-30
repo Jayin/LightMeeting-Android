@@ -1,9 +1,9 @@
 package meizhuo.org.lightmeeting.fragment;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.acty.MeetingData_discuss;
-import meizhuo.org.lightmeeting.acty.MeetingData_research;
-import meizhuo.org.lightmeeting.acty.MeetingData_vote;
+import meizhuo.org.lightmeeting.acty.MeetDiscuss;
+import meizhuo.org.lightmeeting.acty.MeetResearch;
+import meizhuo.org.lightmeeting.acty.MeetVote;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class Meeting_function_fm extends BaseFragment {
+public class MeetfunctionFm extends BaseFragment {
 
 
 	/**讨论*/
@@ -38,13 +38,13 @@ public class Meeting_function_fm extends BaseFragment {
 	}
 	
 	@OnClick(R.id.meeting_function_discuss) public void to_discuss(){
-		Intent it = new Intent(getActivity(), MeetingData_discuss.class);
+		Intent it = new Intent(getActivity(), MeetDiscuss.class);
 		it.putExtra("meetid", meetid);
 		startActivity(it);
 	}
 	
 	@OnClick(R.id.meeting_function_vote) public void to_vote(){
-		Intent it = new Intent(getActivity(), MeetingData_vote.class);
+		Intent it = new Intent(getActivity(), MeetVote.class);
 		it.putExtra("meetid", meetid);
 		startActivity(it);
 		
@@ -52,7 +52,7 @@ public class Meeting_function_fm extends BaseFragment {
 	}
 	
 	@OnClick(R.id.meeting_function_research) public void to_research(){
-		Intent it = new Intent(getActivity(), MeetingData_research.class);
+		Intent it = new Intent(getActivity(), MeetResearch.class);
 		it.putExtra("meetid", meetid);
 		startActivity(it);
 	}

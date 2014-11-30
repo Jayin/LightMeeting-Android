@@ -1,180 +1,179 @@
-package meizhuo.org.lightmeeting.acty;
+package meizhuo.org.lightmeeting.fragment;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.InjectView;
+import butterknife.OnItemClick;
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter;
-import meizhuo.org.lightmeeting.api.VoteAPI;
-import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.acty.MeetingData_docdetail;
+import meizhuo.org.lightmeeting.adapter.MeetingData_fm_adapter;
+import meizhuo.org.lightmeeting.api.DiscussAPI;
+import meizhuo.org.lightmeeting.api.DocAPI;
+import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.model.Vote;
-import android.app.ActionBar;
+import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
+import meizhuo.org.lightmeeting.model.Discuss;
+import meizhuo.org.lightmeeting.model.Doc;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
-import butterknife.InjectView;
-import butterknife.OnItemClick;
+import android.widget.AbsListView.OnScrollListener;
 
-public class MeetingData_vote extends BaseActivity implements OnRefreshListener, OnScrollListener{
+/**
+ * 会议资料的fragment
+ * @author Jason
+ *
+ */
+public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnScrollListener{
 
-	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
-	@InjectView(R.id.vote_lv) ListView vote_lv;
 	String meetid;
-	List<Vote>data;
-	MeetingData_vote_adapter adapter;
-	boolean hasMore = true,isloading =false;
-	String page = "1",limit="";
-	ActionBar mActionBar;
+	LoadingDialog loadingDialog ;
+	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
+	@InjectView(R.id.meetdata_lv) ListView meetdata_lv;
+	MeetingData_fm_adapter adapter;
+	List<Doc>data;
+	String page="1",limit="";
+	boolean hasMore = true,isloading = false;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	@Override 
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState,R.layout.lv_meetingdata_vote);
-		
-		initData();
-		initLayout();
+	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_meetingdata);
+	 Bundle mBundle = getArguments();
+		meetid = mBundle.getString("meetid");
+		L.i("meetid" + meetid);
+	 initData();
+	 initLayout();
+	 return contentView;
 	}
 
+	
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		meetid = getIntent().getStringExtra("meetid");
-		data = new ArrayList<Vote>();
-		adapter = new MeetingData_vote_adapter(this, data);
 		
+		data = new ArrayList<Doc>();
+		adapter = new MeetingData_fm_adapter(getActivity(), data);
 	}
+
 
 	@Override
 	protected void initLayout() {
+		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light,
 				android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light);
-		vote_lv.setAdapter(adapter);
-		vote_lv.setOnScrollListener(this);
-	
-	
-		mActionBar = getActionBar();
-		mActionBar.setDisplayHomeAsUpEnabled(true);
-		mActionBar.setTitle("投票列表");
-		
+		meetdata_lv.setAdapter(adapter);
+		meetdata_lv.setOnScrollListener(this);
 		onRefresh();
-		
 	}
 	
 
 	@Override
 	public void onRefresh() {
-		page="1";
-		VoteAPI.getVoteList(meetid,page,limit,new JsonHandler(){
+		DocAPI.getDocList(meetid,page, limit,new JsonHandler(){
 			@Override
 			public void onStart() {
+				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				List<Vote>votelist =  Vote.create_by_jsonarray(obj.toString());
+				// TODO Auto-generated method stub
+				List<Doc>Doclist =  Doc.create_by_jsonarray(obj.toString());
 				data.clear();
-				data.addAll(votelist);
+				data.addAll(Doclist);
 				adapter.notifyDataSetChanged();
 				page = "1";
-				if(votelist.size() <10){
+				if(Doclist.size() <10){
 					hasMore = false;
 				}else{
 					hasMore = true;
 				}
-				if(votelist.size() == 0){
-					toast("暂无投票数据!");
+				if(Doclist.size() == 0){
+					toast("暂无会议文档!");
 					return ;
 				}
 			}
+			
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				swipeRefreshLayout.setRefreshing(false);
+				// TODO Auto-generated method stub
 				toast("出错了，请检查你的网络设置!");
 				return ;
 			}
 			@Override
 			public void onFinish() {
+				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
 		});
+
 	}
 	
 	private void onLoadMore(){
 		int i = Integer.parseInt(page);
 		i+=1;
 		page = String.valueOf(i);
-		VoteAPI.getVoteList(meetid, page, limit, new JsonHandler(){
+		DocAPI.getDocList(meetid, page, limit, new JsonHandler(){
 			@Override
 			public void onStart() {
+				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				List<Vote>votelist = Vote.create_by_jsonarray(obj.toString());
-				data.addAll(votelist);
+				// TODO Auto-generated method stub
+				List<Doc>doclist = Doc.create_by_jsonarray(obj.toString());
+				data.addAll(doclist);
 				adapter.notifyDataSetChanged();
 				hasMore = true;
-				if(obj.isNull("response")||votelist.size()<10)
+				if(obj.isNull("response")||doclist.size()<10)
 				{
 					hasMore = false;
 					toast("数据加载完毕!");
 				}
 			}
-			
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
+				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
 				return ;
 			}
-			
 			@Override
 			public void onFinish() {
+				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
-			
-			
 		});
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.meetvote, menu);
-		return true;
-	}
-	
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case  android.R.id.home:
-			finish();
-			break;
-		default:
-			break;
-		}
-		return true;
+
 	}
 	
 
@@ -185,7 +184,6 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		if(swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if(firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount  !=0 && hasMore){
-			
 			isloading = true;
 			onLoadMore();
 		}
@@ -198,13 +196,22 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 		
 	}
 	
-	@OnItemClick(R.id.vote_lv) public void to_vote(int position){
-		String voteid = data.get(position).getId();
-		Intent it =  new Intent(this, MeetingData_vote_item.class);
-		it.putExtra("voteid", voteid);
+	/**
+	 * 
+	 * @param position
+	 */
+	@OnItemClick(R.id.meetdata_lv) public void opendoc(int position){
+		Intent it = new Intent(getActivity(), MeetingData_docdetail.class);
+		it.putExtra("docid", data.get(position).getId());
 		it.putExtra("title", data.get(position).getTitle());
 		startActivity(it);
 	}
 
+
+
+
+
+	
+	
 
 }

@@ -25,7 +25,7 @@ import android.widget.AbsListView.OnScrollListener;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class MeetingData_research extends BaseActivity implements OnRefreshListener, OnScrollListener{
+public class MeetResearch extends BaseActivity implements OnRefreshListener, OnScrollListener{
 	
 	
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
@@ -74,7 +74,7 @@ public class MeetingData_research extends BaseActivity implements OnRefreshListe
 	}
 	
 	@OnItemClick(R.id.research_lv) public void research_item(int position){
-		Intent intent = new Intent(this, MeetingData_research_item.class);
+		Intent intent = new Intent(this, MeetResearchList.class);
 		intent.putExtra("research_id", data.get(position).getId());
 		intent.putExtra("research_title", data.get(position).getTitle());
 		startActivity(intent);

@@ -1,5 +1,7 @@
 package meizhuo.org.lightmeeting.api;
 
+import meizhuo.org.lightmeeting.utils.StringUtils;
+
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -73,6 +75,10 @@ public class UserAPI {
 			params.add("email", email);
 		if(!(birth.equals("") || birth == null))
 		params.add("birth", birth);
+		if(!StringUtils.isEmpty(company))
+			params.add("company", company);
+		if(!StringUtils.isEmpty(position))
+			params.add("position", position);
 		RestClient.post("/home/member/updatemember", params, responseHandler);
 	}
 	

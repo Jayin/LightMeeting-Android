@@ -32,7 +32,7 @@ import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class MeetingData_discuss extends BaseActivity implements OnRefreshListener, OnScrollListener{
+public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnScrollListener{
 	
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.discuss_lv) ListView discuss_lv;
@@ -177,7 +177,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	
 	private void openReceiver(){
 		mBroadcastReceiver = new CreateDiscussBroadcast();
-		IntentFilter filter = new IntentFilter();
+		IntentFilter filter =  new IntentFilter();
 		filter.addAction(Constants.Action_Create_discuss_successful);
 		filter.addAction(Constants.Action_Update_discuss_successful);
 		registerReceiver(mBroadcastReceiver, filter);
@@ -214,7 +214,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	
 	@OnItemClick(R.id.discuss_lv) public void item_click(int position){
 		String discussid = data.get(position).getId();
-		Intent it =  new Intent(this, MeetingData_discuss_item.class);
+		Intent it =  new Intent(this, MeetDiscussToCommentlist.class);
 		it.putExtra("discussid", discussid);
 		it.putExtra("title", data.get(position).getTitle());
 		it.putExtra("content", data.get(position).getContent());

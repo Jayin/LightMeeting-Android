@@ -78,7 +78,7 @@ public class BusinessCard extends BaseActivity  {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.action_refreshdata:
-			Intent intent = new Intent(this, Update_userdata.class);
+			Intent intent = new Intent(this, UpdateUser.class);
 			intent.putExtra("nickname", nickname);
 			if(isTime)
 			{

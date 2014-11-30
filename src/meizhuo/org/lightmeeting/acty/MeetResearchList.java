@@ -36,7 +36,7 @@ import butterknife.OnItemClick;
  * @author Jason
  *
  */
-public class MeetingData_research_item extends BaseActivity implements OnRefreshListener,OnScrollListener{
+public class MeetResearchList extends BaseActivity implements OnRefreshListener,OnScrollListener{
 
 	String researchid;
 	MeetingData_research_item_adapter adapter;
@@ -92,7 +92,7 @@ public class MeetingData_research_item extends BaseActivity implements OnRefresh
 	}
 	
 	@OnItemClick(R.id.problem_lv) public void to_option(int position){
-		Intent it = new Intent(this, MeetingData_research_item_option.class);
+		Intent it = new Intent(this, MeetResearchListOption.class);
 		it.putExtra("research_title", data.get(position).getTitle());
 		it.putExtra("questionid", data.get(position).getId());
 		it.putExtra("option_type", data.get(position).getOption_type());

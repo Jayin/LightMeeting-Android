@@ -9,14 +9,10 @@ import org.json.JSONObject;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_item_adapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
-import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.Comment;
-import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.Constants;
-import meizhuo.org.lightmeeting.utils.L;
 import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,7 +26,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -39,7 +34,7 @@ import butterknife.OnClick;
  * @author Jason
  *
  */
-public class MeetingData_discuss_item extends BaseActivity implements OnRefreshListener,OnScrollListener{
+public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshListener,OnScrollListener{
 	
 	
 	String withComments = "1";
@@ -99,7 +94,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	}
 	
 	@OnClick(R.id.to_comment) public void to_comment(){
-		Intent intent = new Intent(this, MeetingData_discuss_item_tocomment.class);
+		Intent intent = new Intent(this, MeetDiscussToComment.class);
 		intent.putExtra("discussid", discussid);
 		startActivity(intent);
 	}

@@ -61,7 +61,7 @@ public class DrawerMain extends BaseFragment  {
 		openActivity(BusinessCard.class);
 	}
 	@OnClick(R.id.lm_to_meetlist) public void to_meetlist(){
-		mainActivity.setMainContent(new LMList_fm());
+		mainActivity.setMainContent(new MeetlistFm());
 	}
 	@OnClick(R.id.lm_to_logoff) public void to_logoff(){
 		AlertDialog.Builder logoffBuilder = new AlertDialog.Builder(getActivity());

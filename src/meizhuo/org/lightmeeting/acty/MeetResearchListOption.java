@@ -38,7 +38,7 @@ import butterknife.OnItemClick;
  * @author Jason
  *
  */
-public class MeetingData_research_item_option extends BaseActivity{
+public class MeetResearchListOption extends BaseActivity{
 	
 	
 	String research_title;
@@ -116,7 +116,7 @@ public class MeetingData_research_item_option extends BaseActivity{
 						dialog = null;
 					}
 					toast("提交答案成功!");
-					MeetingData_research_item_option.this.finish();
+					MeetResearchListOption.this.finish();
 				}
 				
 				@Override

@@ -61,80 +61,47 @@
 
         <!-- Update_userdata -->
         <activity
-            android:name=".acty.Update_userdata"
+            android:name=".acty.UpdateUser"
             android:launchMode="standard" >
         </activity>
-        <!-- Lm_meeting_addnewmeet -->
-        <activity
-            android:name=".acty.Lm_meeting_addnewmeet"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- Update_meeting -->
-        <activity
-            android:name=".acty.Update_meeting"
-            android:launchMode="standard" >
-        </activity>
-
-        <!-- Lm_meeting_selecttime -->
-        <activity
-            android:name=".acty.Lm_meeting_selecttime"
-            android:launchMode="standard" >
-        </activity>
-        <!-- BusinessCard -->
+     
         <activity
             android:name=".acty.BusinessCard"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_discuss -->
         <activity
-            android:name=".acty.MeetingData_discuss"
+            android:name=".acty.MeetDiscuss"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_discuss_item -->
         <activity
-            android:name=".acty.MeetingData_discuss_item"
+            android:name=".acty.MeetDiscussToCommentlist"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_research -->
         <activity
-            android:name=".acty.MeetingData_research"
+            android:name=".acty.MeetResearch"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_research_item -->
         <activity
-            android:name=".acty.MeetingData_research_item"
+            android:name=".acty.MeetResearchList"
             android:launchMode="singleTask" >
         </activity>
-        <!-- MeetingData_discuss_update -->
-        <activity
-            android:name=".acty.MeetingData_discuss_update"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- MeetingData_discuss_create -->
-        <activity
-            android:name=".acty.MeetingData_discuss_create"
-            android:launchMode="singleTask" >
-        </activity>
+     
+   
         <!-- MeetingData_vote -->
         <activity
-            android:name=".acty.MeetingData_vote"
+            android:name=".acty.MeetVote"
             android:launchMode="singleTask" >
         </activity>
-        <!-- MeetingData_vote_update -->
-        <activity
-            android:name=".acty.MeetingData_vote_update"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- MeetingData_vote_item -->
+       
             <activity
-            android:name=".acty.MeetingData_vote_item"
+            android:name=".acty.MeetVoteOption"
             android:launchMode="singleTask" >
         </activity>
-        <!-- Lm_meeting_selecttime_end -->
-          <activity
-            android:name=".acty.Lm_meeting_selecttime_end"
-            android:launchMode="standard" >
-        </activity>
+      
         <!-- CaptureActivity -->
         <activity
             android:name=".acty.CaptureActivity"
@@ -143,21 +110,17 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <!-- MeetingData_vote_create -->
-           <activity
-            android:name=".acty.MeetingData_vote_create"
-            android:launchMode="singleTask" >
-        </activity>
+      
         <!-- MeetingData_discuss_item_tocomment -->
              <activity
-            android:name=".acty.MeetingData_discuss_item_tocomment"
+            android:name=".acty.MeetDiscussToComment"
             android:launchMode="singleTask" >
         </activity>
         
              <!-- MeetingData_research_item_option -->
              
                   <activity
-            android:name=".acty.MeetingData_research_item_option"
+            android:name=".acty.MeetResearchListOption"
             android:launchMode="singleTask" >
         </activity>
         
@@ -176,6 +139,7 @@
             android:name=".acty.MdMemberBusinessCard"
             android:launchMode="singleTask" >
         </activity>
+       
     </application>
 
 </manifest>

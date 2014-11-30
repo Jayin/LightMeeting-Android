@@ -33,7 +33,7 @@ import meizhuo.org.lightmeeting.utils.EditTextUtils;
  * @author Jason
  *
  */
-public class MeetingData_discuss_item_tocomment extends BaseActivity{
+public class MeetDiscussToComment extends BaseActivity{
 
 	String discussid,reply_member = "";
 	
@@ -68,7 +68,7 @@ public class MeetingData_discuss_item_tocomment extends BaseActivity{
 					throws Exception {
 				toast("评论成功!");
 				sendBroadcast(new Intent(Constants.Action_Comment_Successful));
-				MeetingData_discuss_item_tocomment.this.finish();
+				MeetDiscussToComment.this.finish();
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
