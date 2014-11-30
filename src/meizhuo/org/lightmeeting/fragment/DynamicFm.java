@@ -14,7 +14,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class Dynamic_fm extends BaseFragment implements OnRefreshListener,
+public class DynamicFm extends BaseFragment implements OnRefreshListener,
 		OnScrollListener {
 
 	@InjectView(R.id.dynamic_lv) ListView dynamic_lv;

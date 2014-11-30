@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class Meeting_function_fm extends BaseFragment {
+public class MeetfunctionFm extends BaseFragment {
 
 
 	/**讨论*/

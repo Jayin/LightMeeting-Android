@@ -39,7 +39,7 @@ import android.widget.AbsListView.OnScrollListener;
  * @author Jason
  *
  */
-public class MeetingData_fm extends BaseFragment  implements OnRefreshListener, OnScrollListener{
+public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnScrollListener{
 
 	String meetid;
 	LoadingDialog loadingDialog ;

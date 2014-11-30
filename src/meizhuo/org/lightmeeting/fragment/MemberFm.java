@@ -26,7 +26,7 @@ import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class Member_fm extends BaseFragment implements OnRefreshListener, OnScrollListener {
+public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrollListener {
 
 	@InjectView(R.id.lv) ListView lv;
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
