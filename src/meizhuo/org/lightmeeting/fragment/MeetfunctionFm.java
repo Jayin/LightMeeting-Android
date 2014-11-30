@@ -3,7 +3,7 @@ package meizhuo.org.lightmeeting.fragment;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.MeetDiscuss;
 import meizhuo.org.lightmeeting.acty.MeetingData_research;
-import meizhuo.org.lightmeeting.acty.MeetingData_vote;
+import meizhuo.org.lightmeeting.acty.MeetVote;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,7 +44,7 @@ public class MeetfunctionFm extends BaseFragment {
 	}
 	
 	@OnClick(R.id.meeting_function_vote) public void to_vote(){
-		Intent it = new Intent(getActivity(), MeetingData_vote.class);
+		Intent it = new Intent(getActivity(), MeetVote.class);
 		it.putExtra("meetid", meetid);
 		startActivity(it);
 		

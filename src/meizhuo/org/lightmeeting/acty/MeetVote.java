@@ -25,7 +25,7 @@ import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class MeetingData_vote extends BaseActivity implements OnRefreshListener, OnScrollListener{
+public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrollListener{
 
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.vote_lv) ListView vote_lv;
@@ -200,7 +200,7 @@ public class MeetingData_vote extends BaseActivity implements OnRefreshListener,
 	
 	@OnItemClick(R.id.vote_lv) public void to_vote(int position){
 		String voteid = data.get(position).getId();
-		Intent it =  new Intent(this, MeetingData_vote_item.class);
+		Intent it =  new Intent(this, MeetVoteOption.class);
 		it.putExtra("voteid", voteid);
 		it.putExtra("title", data.get(position).getTitle());
 		startActivity(it);

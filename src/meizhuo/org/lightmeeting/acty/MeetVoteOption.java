@@ -32,7 +32,7 @@ import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class MeetingData_vote_item extends BaseActivity implements OnRefreshListener,OnScrollListener{
+public class MeetVoteOption extends BaseActivity implements OnRefreshListener,OnScrollListener{
 	
 	
 	
@@ -64,7 +64,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 				// TODO Auto-generated method stub
 				if(loadingDialog == null)
 				{
-					loadingDialog = new LoadingDialog(MeetingData_vote_item.this);
+					loadingDialog = new LoadingDialog(MeetVoteOption.this);
 				}
 				loadingDialog.setText("正在投票");
 				loadingDialog.show();
@@ -98,7 +98,7 @@ public class MeetingData_vote_item extends BaseActivity implements OnRefreshList
 							loadingDialog = null;
 						}
 						toast("投票成功!");
-						MeetingData_vote_item.this.finish();
+						MeetVoteOption.this.finish();
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
