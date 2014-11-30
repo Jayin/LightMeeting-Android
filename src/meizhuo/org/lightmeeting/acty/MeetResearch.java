@@ -7,7 +7,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_research_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetResearchAdapter;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -34,7 +34,7 @@ public class MeetResearch extends BaseActivity implements OnRefreshListener, OnS
 	String meetid;
 	List<Research>data;
 	boolean hasMore = true,isloading = false;
-	MeetingData_research_adapter adapter;
+	MeetResearchAdapter adapter;
 	ActionBar mActionBar;
 	String page = "1",limit="";
 	LoadingDialog loadingDialog;
@@ -53,7 +53,7 @@ public class MeetResearch extends BaseActivity implements OnRefreshListener, OnS
 		// TODO Auto-generated method stub
 		meetid  = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Research>();
-		adapter = new MeetingData_research_adapter(this, data);
+		adapter = new MeetResearchAdapter(this, data);
 		
 	}
 

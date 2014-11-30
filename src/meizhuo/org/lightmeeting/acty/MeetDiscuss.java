@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetDiscussAdapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -41,7 +41,7 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 	LoadingDialog loadingDialog;
 	List<Discuss>data;
 	boolean hasMore = true,isloading = false;
-	MeetingData_discuss_adapter adapter;
+	MeetDiscussAdapter adapter;
 	String meetid;
 	String page = "1",limit="";
 	
@@ -62,7 +62,7 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Discuss>();
-		adapter  = new MeetingData_discuss_adapter(this, data);
+		adapter  = new MeetDiscussAdapter(this, data);
 	}
 
 	@Override

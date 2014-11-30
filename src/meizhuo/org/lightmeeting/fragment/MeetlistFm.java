@@ -7,7 +7,7 @@ import java.util.List;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.CaptureActivity;
 import meizhuo.org.lightmeeting.acty.MeetingData;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter;
+import meizhuo.org.lightmeeting.adapter.MeetListAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -49,7 +49,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener, OnScr
 	
 	@InjectView(R.id.lv) ListView lv;
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
-	LMListAdapter adapter ;
+	MeetListAdapter adapter ;
 	List<Meeting>data;
 	String page="1",limit="";
 	boolean hasMore = true, isloading=false;
@@ -84,7 +84,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener, OnScr
 	
 	protected void initData(){
 		data = new ArrayList<Meeting>();
-		adapter = new LMListAdapter(getActivity(), data);
+		adapter = new MeetListAdapter(getActivity(), data);
 		
 	}
 	@Override

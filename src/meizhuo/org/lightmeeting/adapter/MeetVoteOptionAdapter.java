@@ -16,13 +16,13 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class MeetingData_vote_item_adapter extends BaseAdapter{
+public class MeetVoteOptionAdapter extends BaseAdapter{
 
 	private Context mContext;
 	private List<Option>mData;
 	private OnItemClickListener mOnItemClickListener = null;
 	
-	public MeetingData_vote_item_adapter(Context context,List<Option>data) {
+	public MeetVoteOptionAdapter(Context context,List<Option>data) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		mData = data;

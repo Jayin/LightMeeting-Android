@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetResearchProblemAdapter;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -39,7 +39,7 @@ import butterknife.OnItemClick;
 public class MeetResearchList extends BaseActivity implements OnRefreshListener,OnScrollListener{
 
 	String researchid;
-	MeetingData_research_item_adapter adapter;
+	MeetResearchProblemAdapter adapter;
 	ActionBar mActionBar;
 	@InjectView(R.id.problem_lv) ListView problem_lv;
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
@@ -72,7 +72,7 @@ public class MeetResearchList extends BaseActivity implements OnRefreshListener,
 		researchid = getIntent().getStringExtra("research_id");
 		research_title = getIntent().getStringExtra("research_title");
 		data = new ArrayList<Problem>();
-		adapter  =  new MeetingData_research_item_adapter(this, data);
+		adapter  =  new MeetResearchProblemAdapter(this, data);
 		kvlist = new ArrayList<KV>();
 	}
 

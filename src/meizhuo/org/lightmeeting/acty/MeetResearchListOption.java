@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_research_item_option_adapter.ViewHolder;
+import meizhuo.org.lightmeeting.adapter.MeetResearchOptionAdapter;
+import meizhuo.org.lightmeeting.adapter.MeetResearchOptionAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -49,7 +49,7 @@ public class MeetResearchListOption extends BaseActivity{
 	String optionid; 
 	String option_content;
 	String option_type;
-	MeetingData_research_item_option_adapter adapter;
+	MeetResearchOptionAdapter adapter;
 	
 	@InjectView(R.id.research_option_lv) ListView research_option_lv;
 //	@InjectView(R.id.research_option_value) TextView research_option_value;
@@ -88,7 +88,7 @@ public class MeetResearchListOption extends BaseActivity{
 		data= (ArrayList<KV>) getIntent().getSerializableExtra("researchobj");
 		option_type = getIntent().getStringExtra("option_type");
 		Collections.sort(data);
-	       adapter  =new MeetingData_research_item_option_adapter(this, data);
+	       adapter  =new MeetResearchOptionAdapter(this, data);
 		
 	}
 	

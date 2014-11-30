@@ -7,7 +7,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_discuss_item_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetDiscussToCommentAdapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -41,7 +41,7 @@ public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshL
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.comment_lv)ListView   comment_lv;
 	@InjectView(R.id.to_comment) LinearLayout to_comment;
-	MeetingData_discuss_item_adapter adapter;
+	MeetDiscussToCommentAdapter adapter;
 	String discussid;
 	String page="1",limit="";
 	boolean hasMore = true,isloading=false;
@@ -73,7 +73,7 @@ public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshL
 		 discussid = getIntent().getStringExtra("discussid");
 		 title = getIntent().getStringExtra("title");
 		 data =new ArrayList<Comment>();
-		 adapter = new MeetingData_discuss_item_adapter(this, data);
+		 adapter = new MeetDiscussToCommentAdapter(this, data);
 		
 	}
 

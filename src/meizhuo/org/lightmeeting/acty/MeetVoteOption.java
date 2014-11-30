@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_item_adapter.ViewHolder;
+import meizhuo.org.lightmeeting.adapter.MeetVoteOptionAdapter;
+import meizhuo.org.lightmeeting.adapter.MeetVoteOptionAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -41,7 +41,7 @@ public class MeetVoteOption extends BaseActivity implements OnRefreshListener,On
 //	@InjectView(R.id.option_select) TextView option_select;
 	
 	ActionBar mActionBar;
-	MeetingData_vote_item_adapter adapter;
+	MeetVoteOptionAdapter adapter;
 	String voteid,select_content,optionsid,title;
 	
 	boolean hasMore = true,isloading=false;
@@ -128,7 +128,7 @@ public class MeetVoteOption extends BaseActivity implements OnRefreshListener,On
 		voteid =  getIntent().getStringExtra("voteid");
 		title = getIntent().getStringExtra("title");
 		data = new ArrayList<Option>();
-		adapter = new MeetingData_vote_item_adapter(this, data);
+		adapter = new MeetVoteOptionAdapter(this, data);
 		
 	}
 
