@@ -30,7 +30,7 @@ import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
-public class Update_userdata extends BaseActivity {
+public class UpdateUser extends BaseActivity {
 	
 	
 	@InjectView(R.id.lm_usercard_nickname) EditText lm_usercard_nickname;
@@ -142,7 +142,7 @@ public class Update_userdata extends BaseActivity {
 					dialog = null;
 				}
 				toast("更新成功");
-				Intent it = new Intent(Update_userdata.this, BusinessCard.class);
+				Intent it = new Intent(UpdateUser.this, BusinessCard.class);
 				String nickname1 = nickname;
 				String birth1 = birth;
 				String sex1 = sex;
@@ -158,8 +158,8 @@ public class Update_userdata extends BaseActivity {
 				it.putExtra("position", position1);
 				it.putExtra("phone", phone1);
 				it.putExtra("email", email1);
-				Update_userdata.this.setResult(205, it);
-				Update_userdata.this.finish();
+				UpdateUser.this.setResult(205, it);
+				UpdateUser.this.finish();
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
