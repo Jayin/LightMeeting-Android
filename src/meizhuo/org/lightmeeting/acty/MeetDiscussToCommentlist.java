@@ -39,7 +39,7 @@ import butterknife.OnClick;
  * @author Jason
  *
  */
-public class MeetingData_discuss_item extends BaseActivity implements OnRefreshListener,OnScrollListener{
+public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshListener,OnScrollListener{
 	
 	
 	String withComments = "1";
@@ -99,7 +99,7 @@ public class MeetingData_discuss_item extends BaseActivity implements OnRefreshL
 	}
 	
 	@OnClick(R.id.to_comment) public void to_comment(){
-		Intent intent = new Intent(this, MeetingData_discuss_item_tocomment.class);
+		Intent intent = new Intent(this, MeetDiscussToComment.class);
 		intent.putExtra("discussid", discussid);
 		startActivity(intent);
 	}
