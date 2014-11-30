@@ -43,7 +43,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.app.CoreService;
 import meizhuo.org.lightmeeting.fragment.DrawerMain;
-import meizhuo.org.lightmeeting.fragment.LMList_fm;
+import meizhuo.org.lightmeeting.fragment.MeetlistFm;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity {
 		//决定左上角是否可以点击
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		setActionBarTitle(DefaultTitle);
-		manager.beginTransaction().add(R.id.container, new LMList_fm(),"LMList_fm").commit();
+		manager.beginTransaction().add(R.id.container, new MeetlistFm(),"LMList_fm").commit();
 		manager.beginTransaction().add(R.id.left_container, new DrawerMain(),"DrawerMain").commit();
 	}
 	

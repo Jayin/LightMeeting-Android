@@ -177,7 +177,7 @@ public class MeetingData_discuss extends BaseActivity implements OnRefreshListen
 	
 	private void openReceiver(){
 		mBroadcastReceiver = new CreateDiscussBroadcast();
-		IntentFilter filter = new IntentFilter();
+		IntentFilter filter =  new IntentFilter();
 		filter.addAction(Constants.Action_Create_discuss_successful);
 		filter.addAction(Constants.Action_Update_discuss_successful);
 		registerReceiver(mBroadcastReceiver, filter);

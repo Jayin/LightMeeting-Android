@@ -31,9 +31,9 @@ import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.encoding.EncodingHandler;
-import meizhuo.org.lightmeeting.fragment.MeetingData_fm;
-import meizhuo.org.lightmeeting.fragment.Meeting_function_fm;
-import meizhuo.org.lightmeeting.fragment.Member_fm;
+import meizhuo.org.lightmeeting.fragment.MeetdataFm;
+import meizhuo.org.lightmeeting.fragment.MeetfunctionFm;
+import meizhuo.org.lightmeeting.fragment.MemberFm;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.utils.Constants;
@@ -60,15 +60,15 @@ public class MeetingData extends BaseActivity{
 		initData();
 		initLayout();
 		
-		Member_fm member_fm = new Member_fm();
+		MemberFm member_fm = new MemberFm();
 		Bundle bundle = new Bundle();
 		bundle.putString("meetid", meetid);
 		member_fm.setArguments(bundle);
 		
-		Meeting_function_fm meet_function = new Meeting_function_fm();
+		MeetfunctionFm meet_function = new MeetfunctionFm();
 		meet_function.setArguments(bundle);
 		
-		MeetingData_fm meet_data =  new MeetingData_fm();
+		MeetdataFm meet_data =  new MeetdataFm();
 		meet_data.setArguments(bundle);
 		
 		
