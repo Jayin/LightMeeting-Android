@@ -142,7 +142,7 @@
 
         <!-- MeetingData_docdetail -->
         <activity
-            android:name=".acty.MeetingData_docdetail"
+            android:name=".acty.MeetDocDetail"
             android:launchMode="singleTask" >
         </activity>
         <!-- ShowWebImageActivity -->
