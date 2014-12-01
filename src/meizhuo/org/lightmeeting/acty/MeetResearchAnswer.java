@@ -33,7 +33,7 @@ public class MeetResearchAnswer extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-		super.onCreate(savedInstanceState,R.layout.item_meetdata_discuss_item_tocomment);
+		super.onCreate(savedInstanceState,R.layout.item_meetdata_research_answer);
 		
 		initData();
 		initLayout();
