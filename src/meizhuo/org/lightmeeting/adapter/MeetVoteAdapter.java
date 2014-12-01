@@ -3,7 +3,7 @@ package meizhuo.org.lightmeeting.adapter;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.LMListAdapter.ViewHolder;
+import meizhuo.org.lightmeeting.adapter.MeetListAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.model.Vote;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import android.content.Context;
@@ -21,13 +21,13 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-public class MeetingData_vote_adapter extends BaseAdapter{
+public class MeetVoteAdapter extends BaseAdapter{
 
 	
 	List<Vote>mData;
 	private Context mContext;
 
-	public MeetingData_vote_adapter(Context context,List<Vote>data) {
+	public MeetVoteAdapter(Context context,List<Vote>data) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		mData = data;
