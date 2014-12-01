@@ -140,7 +140,6 @@
             android:launchMode="singleTask" >
         </activity>
 
-        <!-- MeetingData_docdetail -->
         <activity
             android:name=".acty.MeetDocDetail"
             android:launchMode="singleTask" >
@@ -154,6 +153,11 @@
         <activity
             android:name=".acty.MdMemberBusinessCard"
             android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetResearchAnswer -->
+        <activity
+            android:name=".acty.MeetResearchAnswer"
+            android:launchMode="standard" >
         </activity>
 
         <!-- JPUSH -->
