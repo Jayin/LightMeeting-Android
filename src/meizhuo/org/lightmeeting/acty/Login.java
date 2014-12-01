@@ -1,11 +1,8 @@
 package meizhuo.org.lightmeeting.acty;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.AppInfo;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -16,6 +13,11 @@ import meizhuo.org.lightmeeting.utils.EditTextUtils;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
@@ -96,11 +98,10 @@ public class Login extends BaseActivity {
 					dialog = null;
 				}
 				toast("登录成功");
+				//设置推送标签
+				App app = (App)getApplication();
+				app.addTag(obj.getJSONObject("response").getString("id"), App.TAG_TYPE_PERSON);
 				closeActivity();
-				
-				
-				
-			
 			}
 
 			@Override
@@ -203,7 +204,6 @@ public class Login extends BaseActivity {
 			
 			@Override
 			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
 				
 				try {
 					if(obj.getString("error_code").equals("40000")){
@@ -216,7 +216,6 @@ public class Login extends BaseActivity {
 						toast(msg);
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -232,7 +231,6 @@ public class Login extends BaseActivity {
 						flipper.showPrevious();
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

@@ -72,15 +72,16 @@ public class CoreService extends Service{
 				
 				@Override
 				public void onOK(Header[] headers, JSONObject obj) {
-					// TODO Auto-generated method stub
 					Log.i(TAG, ""+obj.toString());
 					try {
 						if(obj.getString("code").equals("20000")){
 							Log.i(TAG, "重新登录了");
 							sendBroadcast(new Intent(Constants.Action_Login_In_Successful));
+							//设置推送标签
+							App app = (App)getApplication();
+							app.addTag(obj.getJSONObject("response").getString("id"), App.TAG_TYPE_PERSON);
 						}
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						Log.i(TAG, "重新登录失败"+e.getMessage());
 						sendBroadcast(new Intent(Constants.Action_Login_failed));
