@@ -7,7 +7,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetingData_vote_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetVoteAdapter;
 import meizhuo.org.lightmeeting.api.VoteAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -31,7 +31,7 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 	@InjectView(R.id.vote_lv) ListView vote_lv;
 	String meetid;
 	List<Vote>data;
-	MeetingData_vote_adapter adapter;
+	MeetVoteAdapter adapter;
 	boolean hasMore = true,isloading =false;
 	String page = "1",limit="";
 	ActionBar mActionBar;
@@ -50,7 +50,7 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Vote>();
-		adapter = new MeetingData_vote_adapter(this, data);
+		adapter = new MeetVoteAdapter(this, data);
 		
 	}
 

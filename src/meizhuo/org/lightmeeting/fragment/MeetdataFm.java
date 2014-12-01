@@ -13,7 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnItemClick;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.MeetingData_docdetail;
-import meizhuo.org.lightmeeting.adapter.MeetingData_fm_adapter;
+import meizhuo.org.lightmeeting.adapter.MeetFunctionAdapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.DocAPI;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
@@ -45,7 +45,7 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 	LoadingDialog loadingDialog ;
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.meetdata_lv) ListView meetdata_lv;
-	MeetingData_fm_adapter adapter;
+	MeetFunctionAdapter adapter;
 	List<Doc>data;
 	String page="1",limit="";
 	boolean hasMore = true,isloading = false;
@@ -69,7 +69,7 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 		// TODO Auto-generated method stub
 		
 		data = new ArrayList<Doc>();
-		adapter = new MeetingData_fm_adapter(getActivity(), data);
+		adapter = new MeetFunctionAdapter(getActivity(), data);
 	}
 
 
