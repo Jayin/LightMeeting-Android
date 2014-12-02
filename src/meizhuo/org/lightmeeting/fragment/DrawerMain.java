@@ -6,6 +6,7 @@ import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
@@ -69,6 +70,54 @@ public class DrawerMain extends BaseFragment  {
 		logoffBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				UserAPI.logout(new JsonHandler(){
+					@Override
+					public void onStart() {
+						if(loadingdialog == null)
+						{
+							loadingdialog = new LoadingDialog(getActivity());
+						}
+						loadingdialog.setText("正在注销!");
+						loadingdialog.show();
+					}
+					
+					@Override
+					public void onOK(int statusCode, Header[] headers,
+							JSONObject obj) throws Exception {
+						new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								App app = (App)getActivity().getApplication();
+								app.cleanUpInfo();
+							}
+						}).start();
+						
+						if(loadingdialog.isShowing())
+						{
+							loadingdialog.dismiss();
+							loadingdialog = null;
+						}
+						toast("注销成功");
+						openActivity(Login.class);
+						getActivity().finish();
+					}
+					
+					@Override
+					public void onError(int error_code, Header[] headers,
+							JSONObject obj) throws Exception {
+						// TODO Auto-generated method stub
+						super.onError(error_code, headers, obj);
+					}
+					
+					@Override
+					public void onFailure(int statusCode, Header[] headers,
+							byte[] data, Throwable arg3) {
+						toast("网络不给力,注销失败!");
+						return ;
+					}
+				});
+		/*		
 				UserAPI.logout(new JsonResponseHandler() {
 					
 					@Override
@@ -118,7 +167,7 @@ public class DrawerMain extends BaseFragment  {
 						// TODO Auto-generated method stub
 						
 					}
-				});
+				});*/
 				
 			}
 		});
