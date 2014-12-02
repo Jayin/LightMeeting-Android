@@ -18,7 +18,6 @@ import android.view.Window;
 
 public class AppStart extends BaseActivity {
 
-	private static final String TAG = "AppStart";
 
 	private long starttime;
 	private long waittime = 1500;
@@ -88,7 +87,6 @@ public class AppStart extends BaseActivity {
 					e.printStackTrace();
 				}
 			}
-
 			new Handler().postDelayed(new Runnable() {
 
 				@Override public void run() {
@@ -97,12 +95,13 @@ public class AppStart extends BaseActivity {
 						openActivity(Login.class);
 					}
 					if (action.equals(Constants.Action_Login_In_Successful)) {
-
-						L.i("Login Successfully");
 						openActivity(MainActivity.class);
-
-					} else {
+					}/* else {
 						openActivity(Login.class);
+					}*/
+					if (action.equals(Constants.Action_Login_failed)){
+						//登录失败的话  一样进入主界面
+						openActivity(MainActivity.class);
 					}
 					closeActivity();
 
