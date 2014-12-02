@@ -20,7 +20,7 @@
 		      android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-		    android:text="调查标题:"
+		    android:text=""
 		    />
 
             <TextView
@@ -45,7 +45,7 @@
               <TextView 
 		    style="@style/TextView"
                 android:layout_marginBottom="10dp"
-		    android:text="调查内容:"
+		    android:text=""
 		    />
             <TextView 
                 android:id="@+id/research_intro"

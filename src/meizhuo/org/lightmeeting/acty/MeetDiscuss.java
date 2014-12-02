@@ -10,7 +10,6 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.utils.Constants;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
@@ -24,7 +23,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;

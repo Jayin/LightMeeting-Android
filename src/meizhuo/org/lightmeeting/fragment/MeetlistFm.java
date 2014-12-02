@@ -133,9 +133,18 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 
 			@Override public void onError(int error_code, Header[] headers,
 					JSONObject obj) throws Exception {
-				toast("出错了，请检查你的网络设置!");
+				String msg = obj.getString("msg");
+				toast(msg);
 				return;
 			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				toast("网络不给力，请检查你的网络设置!");
+				return ;
+			}
+			
 
 			@Override public void onFinish() {
 				swipeRefreshLayout.setRefreshing(false);

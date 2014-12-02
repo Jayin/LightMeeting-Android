@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.acty.MeetingData_docdetail;
+import meizhuo.org.lightmeeting.acty.MeetDocDetail;
 import meizhuo.org.lightmeeting.adapter.MeetFunctionAdapter;
 import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.DocAPI;
@@ -201,7 +201,7 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 	 * @param position
 	 */
 	@OnItemClick(R.id.meetdata_lv) public void opendoc(int position){
-		Intent it = new Intent(getActivity(), MeetingData_docdetail.class);
+		Intent it = new Intent(getActivity(), MeetDocDetail.class);
 		it.putExtra("docid", data.get(position).getId());
 		it.putExtra("title", data.get(position).getTitle());
 		startActivity(it);

@@ -38,7 +38,6 @@ public class MeetVoteOption extends BaseActivity implements OnRefreshListener,On
 	
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.option_lv)ListView   option_lv;
-//	@InjectView(R.id.option_select) TextView option_select;
 	
 	ActionBar mActionBar;
 	MeetVoteOptionAdapter adapter;
@@ -50,7 +49,6 @@ public class MeetVoteOption extends BaseActivity implements OnRefreshListener,On
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_vote_item);
 		initData();
 		initLayout();
@@ -61,7 +59,6 @@ public class MeetVoteOption extends BaseActivity implements OnRefreshListener,On
 			
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				if(loadingDialog == null)
 				{
 					loadingDialog = new LoadingDialog(MeetVoteOption.this);

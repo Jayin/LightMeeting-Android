@@ -18,31 +18,7 @@
            style="@style/ListView"
            ></ListView>
 	</LinearLayout>
-  			     
-    <!--    <LinearLayout 
-           android:layout_marginTop="20dp"
-         android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:background="@drawable/lm_btn_item_main"
-        >
-        <TextView 
-            android:id="@+id/research_option_key"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            style="@style/TextView"
-            android:text="你选择的选项是:"
-            />
-      <TextView 
-          android:id="@+id/research_option_value"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            style="@style/TextView"
-            android:text=""
-            />
-    </LinearLayout> -->
+ 
        
 	<Button 
         android:id="@+id/research_confirm"

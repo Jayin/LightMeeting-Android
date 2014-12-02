@@ -8,6 +8,7 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.MeetResearchOptionAdapter;
+import meizhuo.org.lightmeeting.adapter.MeetResearchOptionAdapter.OnPositionClickListener;
 import meizhuo.org.lightmeeting.adapter.MeetResearchOptionAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.api.ResearchAPI;
 import meizhuo.org.lightmeeting.app.BaseActivity;
@@ -17,21 +18,19 @@ import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 /**
  * 调查 选项
@@ -50,6 +49,8 @@ public class MeetResearchListOption extends BaseActivity{
 	String option_content;
 	String option_type;
 	MeetResearchOptionAdapter adapter;
+	ViewHolder holder;
+	String answer;
 	
 	@InjectView(R.id.research_option_lv) ListView research_option_lv;
 //	@InjectView(R.id.research_option_value) TextView research_option_value;
@@ -67,17 +68,6 @@ public class MeetResearchListOption extends BaseActivity{
 		initData();
 		initLayout();
 	}
-	
-	
-	
-/*	
-	@OnItemClick(R.id.research_option_lv) public void select_option(int position){
-		research_option_value.setText(data.get(position).getKey() + ":" + data.get(position).getValue());
-		select_option = data.get(position).getKey() + ":" + data.get(position).getValue();
-		
-		optionid = data.get(position).getKey();
-		option_content = data.get(position).getValue();
-	}*/
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -122,7 +112,6 @@ public class MeetResearchListOption extends BaseActivity{
 				@Override
 				public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
 					if(dialog.isShowing())
 					{
 						dialog.dismiss();
@@ -141,44 +130,56 @@ public class MeetResearchListOption extends BaseActivity{
 			for(int i=0;i<data.size();i++){
 				if(data.get(i).isIsclick()){
 					try {
-						obj.put("optionid", data.get(i).getKey());
 						obj.put("option_content", data.get(i).getValue());
+						obj.put("optionid", data.get(i).getKey());
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					objset += obj.toString() +",";
 				}
 			}
 			objset = objset.substring(0, objset.length()-1);
-			multi_option = "[" +objset + "]";
+			multi_option = "[" +objset +  "]";
 			L.i("多选提交" + multi_option.toString());
 			ResearchAPI.answerMulti(questionid, multi_option, new JsonHandler(){
 				@Override
 				public void onStart() {
-					// TODO Auto-generated method stub
-					super.onStart();
+					if(dialog == null)
+					{
+						dialog = new LoadingDialog(getContext());
+						dialog.setText("正在提交答案...");
+					}
+					dialog.show();
 				}
 				
 				@Override
 				public void onOK(int statusCode, Header[] headers,
 						JSONObject obj) throws Exception {
-					// TODO Auto-generated method stub
-					super.onOK(statusCode, headers, obj);
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("提交答案成功!");
+					MeetResearchListOption.this.finish();
 				}
-				
+				 
 				@Override
 				public void onError(int error_code, Header[] headers,
 						JSONObject obj) throws Exception {
-					// TODO Auto-generated method stub
 					super.onError(error_code, headers, obj);
 				}
 				
 				@Override
 				public void onFailure(int statusCode, Header[] headers,
 						byte[] data, Throwable arg3) {
-					// TODO Auto-generated method stub
-					super.onFailure(statusCode, headers, data, arg3);
+					if(dialog.isShowing())
+					{
+						dialog.dismiss();
+						dialog = null;
+					}
+					toast("网络不给力，请检查你的网络设置！");
+					return ;
 				}
 				
 				@Override
@@ -198,12 +199,19 @@ public class MeetResearchListOption extends BaseActivity{
 		// TODO Auto-generated method stub
 		
 		research_option_lv.setAdapter(adapter);
+		adapter.setOnItemClickListener(new OnPositionClickListener() {
+			@Override
+			public void onItemClick(int position) {
+				Intent it =  new Intent(MeetResearchListOption.this,MeetResearchAnswer.class);
+				startActivityForResult(it, 320);
+			}
+		});
 		research_option_lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				ViewHolder holder=(ViewHolder)view.getTag();
+				 holder=(ViewHolder)view.getTag();
 				if(option_type.equals("1")){
 					if(data.get(position).isIsclick() == true)
 					{
@@ -222,12 +230,17 @@ public class MeetResearchListOption extends BaseActivity{
 					}
 				}
 				if(option_type.equals("2")){
+				
 				if(data.get(position).isIsclick() == true){
 					holder.option_iv.setVisibility(View.GONE);
 					data.get(position).setIsclick(false);
 				}else{
-					holder.option_iv.setVisibility(View.VISIBLE);
-					data.get(position).setIsclick(true);
+					if(data.get(position).getValue().equals("")){
+						holder.option_iv.setVisibility(View.GONE);
+					}else{
+						holder.option_iv.setVisibility(View.VISIBLE);
+						data.get(position).setIsclick(true);
+					}
 				}
 				}
 			}
@@ -251,6 +264,21 @@ public class MeetResearchListOption extends BaseActivity{
 			break;
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data1) {
+		if(requestCode == 320 && resultCode == 321){
+			answer = data1.getStringExtra("answer");
+			for(int i=0;i<data.size();i++){
+				if(data.get(i).getValue().equals("")){
+					data.get(i).setKey(data.get(i).getKey());
+					data.get(i).setValue(answer);
+					data.get(i).setIsclick(true);
+				}
+			}
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 }

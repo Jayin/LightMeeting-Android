@@ -22,7 +22,7 @@ import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class MeetingData_docdetail extends BaseActivity{
+public class MeetDocDetail extends BaseActivity{
 	
 	@InjectView(R.id.webview) WebView webview;
 	@InjectView(R.id.pb)ProgressBar pb;

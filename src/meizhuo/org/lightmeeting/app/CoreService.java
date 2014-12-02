@@ -15,6 +15,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.api.VersionAPI;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
@@ -68,7 +69,38 @@ public class CoreService extends Service{
 			Log.i(TAG, "第一次登录");
 			sendBroadcast(new Intent(Constants.Action_First_Login));
 		}else{
-			UserAPI.login(username, password, new JsonResponseHandler() {
+			UserAPI.login(username, password,new JsonHandler(){
+				@Override
+				public void onStart() {
+					// TODO Auto-generated method stub
+					super.onStart();
+				}
+				
+				@Override
+				public void onOK(int statusCode, Header[] headers,
+						JSONObject obj) throws Exception {
+					Log.i(TAG, "重新登录了");
+					sendBroadcast(new Intent(Constants.Action_Login_In_Successful));
+					//设置推送标签
+					App app = (App)getApplication();
+					app.addTag(obj.getJSONObject("response").getString("id"), App.TAG_TYPE_PERSON);
+				}
+				
+				@Override
+				public void onError(int error_code, Header[] headers,
+						JSONObject obj) throws Exception {
+					return ;
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						byte[] data, Throwable arg3) {
+					sendBroadcast(new Intent(Constants.Action_Login_failed));
+					return ;
+				}
+			});
+			
+	/*		UserAPI.login(username, password, new JsonResponseHandler() {
 				
 				@Override
 				public void onOK(Header[] headers, JSONObject obj) {
@@ -94,7 +126,7 @@ public class CoreService extends Service{
 					sendBroadcast(new Intent(Constants.Action_Login_failed));
 					Log.i(TAG, "登录异常");
 				}
-			});
+			});*/
 		}
 	}
 	

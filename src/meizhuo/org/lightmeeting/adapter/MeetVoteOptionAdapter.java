@@ -7,11 +7,9 @@ import meizhuo.org.lightmeeting.model.Option;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -20,7 +18,6 @@ public class MeetVoteOptionAdapter extends BaseAdapter{
 
 	private Context mContext;
 	private List<Option>mData;
-	private OnItemClickListener mOnItemClickListener = null;
 	
 	public MeetVoteOptionAdapter(Context context,List<Option>data) {
 		// TODO Auto-generated constructor stub
@@ -77,27 +74,12 @@ public class MeetVoteOptionAdapter extends BaseAdapter{
 	
 	public class ViewHolder{
 		@InjectView(R.id.vote_option) public TextView vote_option;
-//		@InjectView(R.id.vote_option_item) public LinearLayout vote_option_item;
 		@InjectView(R.id.vote_iv) public ImageView vote_iv;
 		
 		public ViewHolder(View v) {
-			// TODO Auto-generated constructor stub
 			ButterKnife.inject(this, v);
 		}
 	}
 	
-	public void setOnItemClickListener(OnItemClickListener listener){
-		this.mOnItemClickListener=listener;
-	}
-	
-	public interface OnItemClickListener{
-		/**
-		 * 
-		 * 
-		 * @param position 当前位置
-		 * @param view
-		 */
-		public void onItemClick(int position);
-	}
 
 }
