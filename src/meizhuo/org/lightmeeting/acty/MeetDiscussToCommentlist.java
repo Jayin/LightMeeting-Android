@@ -41,6 +41,7 @@ public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshL
 	@InjectView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 	@InjectView(R.id.comment_lv)ListView   comment_lv;
 	@InjectView(R.id.to_comment) LinearLayout to_comment;
+	
 	MeetDiscussToCommentAdapter adapter;
 	String discussid;
 	String page="1",limit="";
@@ -53,7 +54,6 @@ public class MeetDiscussToCommentlist extends BaseActivity implements OnRefreshL
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.item_meetdata_discuss_item);
 		openReceiver();
 		initData();

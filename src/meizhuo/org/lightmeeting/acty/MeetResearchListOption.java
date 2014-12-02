@@ -15,7 +15,6 @@ import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
