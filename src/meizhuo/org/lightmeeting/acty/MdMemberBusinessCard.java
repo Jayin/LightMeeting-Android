@@ -4,7 +4,10 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 import android.app.ActionBar;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -118,12 +121,20 @@ public class MdMemberBusinessCard extends BaseActivity{
 	@Override
 	protected void initLayout() {
 
-		
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		mActionBar.setTitle(mNickname + "名片");
+	}
 	
-		
+	@OnClick(R.id.dial) public void dial(){
+		if(StringUtils.isEmpty(member.getPhone())){
+			toast("该成员暂无电话号码，无法拨打");
+			return ;
+		}
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.DIAL");
+		intent.setData(Uri.parse("tel:" + member.getPhone()));
+		startActivity(intent);
 	}
 	
 	@Override
