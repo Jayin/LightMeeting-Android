@@ -123,9 +123,10 @@ public class CaptureActivity extends Activity implements Callback{
 		}else {
 //			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
 //			System.out.println("Result:"+resultString);
-			Intent resultIntent = new Intent(this,MeetDiscuss.class);
+			Intent resultIntent = new Intent();
 			resultIntent.putExtra("resultcode", resultString);
 			this.setResult(51, resultIntent);
+			this.setResult(331,resultIntent);
 		}
 		CaptureActivity.this.finish();
 	}
