@@ -159,6 +159,14 @@
             android:name=".acty.MeetResearchAnswer"
             android:launchMode="standard" >
         </activity>
+        <!-- RelationList -->
+          <activity
+            android:name=".acty.RelationList"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        
+        
 
         <!-- JPUSH -->
         <!-- Required -->
