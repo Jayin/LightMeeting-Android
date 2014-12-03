@@ -28,4 +28,9 @@
 	  <string name="action_create_vote">创建投票</string>
 	 
 	 <!-- 调查 -->
+	 
+	 <!-- 人脉 -->
+	  <string name="action_add_relation">添加人脉</string>
+	 
+	 
 </resources>
