@@ -22,7 +22,9 @@ public class RelationAPI {
 	 * 获取人脉列表
 	 * @param responseHandler
 	 */
-	public static void getRelationList(AsyncHttpResponseHandler responseHandler){
+	public static void getRelationList(String page,String limit,AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		params.add("page", page);
 		RestClient.post("/home/relation/lists", null, responseHandler);
 	}
 
