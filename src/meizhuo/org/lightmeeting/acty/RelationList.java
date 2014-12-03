@@ -4,13 +4,23 @@ package meizhuo.org.lightmeeting.acty;
 import java.util.ArrayList;
 import java.util.List;
 
+import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.adapter.RelationListAdapter;
+import meizhuo.org.lightmeeting.adapter.RelationListAdapter.OnItemClickListener;
+import meizhuo.org.lightmeeting.api.RelationAPI;
+import meizhuo.org.lightmeeting.api.RestClient;
+import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
+import meizhuo.org.lightmeeting.model.Relation;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import com.loopj.android.http.AsyncHttpClient;
-
-import butterknife.InjectView;
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,15 +30,9 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
-import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.RelationListAdapter;
-import meizhuo.org.lightmeeting.api.RelationAPI;
-import meizhuo.org.lightmeeting.api.RestClient;
-import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.model.Relation;
-import meizhuo.org.lightmeeting.utils.L;
-import meizhuo.org.lightmeeting.widget.LoadingDialog;
+import butterknife.InjectView;
+
+import com.loopj.android.http.AsyncHttpClient;
 
 public class RelationList extends BaseActivity implements OnRefreshListener,OnScrollListener {
 
@@ -57,6 +61,65 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	protected void initData() {
 		data  =  new ArrayList<Relation>();
 		adapter = new RelationListAdapter(this, data);
+		adapter.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(final int position) {
+				AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(RelationList.this);
+				deleteBuilder.setTitle("确定你的人脉列表中删除此人?");
+				deleteBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						RelationAPI.deleteRelation(data.get(position).getRelationid(), new JsonHandler(){
+							@Override
+							public void onStart() {
+								if(RelationList.this.dialog==null){
+									RelationList.this.dialog = new LoadingDialog(RelationList.this);
+								}
+								RelationList.this.dialog.setText("正在删除");
+								RelationList.this.dialog.show();
+							}
+							@Override
+							public void onOK(int statusCode, Header[] headers,
+									JSONObject obj) throws Exception {
+								if(RelationList.this.dialog.isShowing()){
+									RelationList.this.dialog.dismiss();
+									RelationList.this.dialog=null;
+								}
+								toast("删除成功!");
+								return ;
+							}
+							@Override
+							public void onError(int error_code,
+									Header[] headers, JSONObject obj)
+									throws Exception {
+								if(RelationList.this.dialog.isShowing()){
+									RelationList.this.dialog.dismiss();
+									RelationList.this.dialog=null;
+								}
+								String msg = obj.getString("msg");
+								toast(msg);
+								return ;
+							}
+							
+							@Override
+							public void onFailure(int statusCode,
+									Header[] headers, byte[] data,
+									Throwable arg3) {
+								if(RelationList.this.dialog.isShowing()){
+									RelationList.this.dialog.dismiss();
+									RelationList.this.dialog=null;
+								}
+								toast("网络不给力");
+								return ;
+							}
+						});
+					}
+				});
+				deleteBuilder.setNegativeButton("暂不删除", null);
+				AlertDialog deleteDialog = deleteBuilder.create();
+				deleteDialog.show();
+			}
+		});
 		mActionBar = getActionBar();
 		mActionBar.setTitle("人脉");
 		mActionBar.setDisplayHomeAsUpEnabled(true);
