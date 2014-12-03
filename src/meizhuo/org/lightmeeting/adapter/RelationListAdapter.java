@@ -2,7 +2,6 @@ package meizhuo.org.lightmeeting.adapter;
 
 import java.util.List;
 
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.model.Relation;
 import android.content.Context;
@@ -60,13 +59,23 @@ public class RelationListAdapter extends BaseAdapter{
 		}else{
 			h.tv_relation_company.setText(mData.get(position).getCompany());
 		}
+		h.iv_delete_relation.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(mOnItemClickListener!=null){
+					mOnItemClickListener.onItemClick(position);
+				}
+				
+			}
+		});
 		return convertView;
 	}
 	
-	static class ViewHolder{
+	public class ViewHolder{
 		@InjectView(R.id.tv_relation_nickname) TextView tv_relation_nickname;
 		@InjectView(R.id.tv_relation_company) TextView tv_relation_company;
-		
+		@InjectView(R.id.iv_delete_relation)  ImageView iv_delete_relation;
 		public ViewHolder(View v) {
 			ButterKnife.inject(this, v);
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.RelationListAdapter;
+import meizhuo.org.lightmeeting.adapter.RelationListAdapter.OnItemClickListener;
 import meizhuo.org.lightmeeting.api.RelationAPI;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
@@ -18,6 +19,8 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -66,7 +69,13 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	protected void initData() {
 		data  =  new ArrayList<Relation>();
 		adapter = new RelationListAdapter(this, data);
-		/*adapter.setOnItemClickListener(new OnItemClickListener() {
+		adapter.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(int position) {
+				
+			}
+		});
+		adapter.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(final int position) {
 				AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(RelationList.this);
@@ -124,7 +133,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 				AlertDialog deleteDialog = deleteBuilder.create();
 				deleteDialog.show();
 			}
-		});*/
+		});
 		mActionBar = getActionBar();
 		mActionBar.setTitle("人脉");
 		mActionBar.setDisplayHomeAsUpEnabled(true);
