@@ -100,6 +100,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 	}
 
 	@Override public void onRefresh() {
+		page="1";
 		MeetingAPI.getMeetingList(page, limit, new JsonHandler() {
 			@Override public void onStart() {
 				swipeRefreshLayout.setRefreshing(true);
@@ -133,6 +134,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 
 			@Override public void onError(int error_code, Header[] headers,
 					JSONObject obj) throws Exception {
+				swipeRefreshLayout.setRefreshing(false);
 				String msg = obj.getString("msg");
 				toast(msg);
 				return;
@@ -141,6 +143,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
 				return ;
 			}
@@ -183,6 +186,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 
 			@Override public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
+				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力,请检查你的网络设置!");
 				return;
 			}
