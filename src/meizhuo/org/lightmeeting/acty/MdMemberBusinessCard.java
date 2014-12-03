@@ -51,12 +51,15 @@ public class MdMemberBusinessCard extends BaseActivity{
 		// TODO Auto-generated method stub
 		memberid = getIntent().getStringExtra("memberid");
 		mNickname = getIntent().getStringExtra("nickname");
-		if(getIntent().getStringExtra("checkin").equals("0"))
-		{
-			checkIn = "未签到";
-		}else{
-			checkIn = "已签到";
+		if(getIntent().getStringExtra("checkin")!=null){
+			if(getIntent().getStringExtra("checkin").equals("0"))
+			{
+				checkIn = "未签到";
+			}else{
+				checkIn = "已签到";
+			}
 		}
+		
 		
 		MeetingAPI.getOneMember(memberid, new JsonHandler(){
 				@Override
@@ -94,7 +97,12 @@ public class MdMemberBusinessCard extends BaseActivity{
 					
 					mActionBar = getActionBar();
 					mActionBar.setDisplayHomeAsUpEnabled(true);
-					mActionBar.setTitle(mNickname + ":" + checkIn);
+					if(checkIn!=null){
+						mActionBar.setTitle(mNickname + ":" + checkIn);
+					}else{
+						mActionBar.setTitle(mNickname);
+					}
+					
 				}
 				
 				@Override
@@ -128,7 +136,7 @@ public class MdMemberBusinessCard extends BaseActivity{
 	
 	@OnClick(R.id.dial) public void dial(){
 		if(StringUtils.isEmpty(member.getPhone())){
-			toast("该成员暂无电话号码，无法拨打");
+			toast("暂无电话号码，无法拨打");
 			return ;
 		}
 		Intent intent = new Intent();
@@ -136,6 +144,17 @@ public class MdMemberBusinessCard extends BaseActivity{
 		intent.setData(Uri.parse("tel:" + member.getPhone()));
 		startActivity(intent);
 	}
+	
+/*	@OnClick(R.id.sendEmail) public void sendEmail(){
+		if(StringUtils.isEmpty(member.getEmail())){
+			toast("暂无电子邮件，无法发送");
+			return ;
+		}
+		Intent data =  new Intent(Intent.ACTION_SEND);
+		data.setData(Uri.parse("782394631@qq.com"));
+		startActivity(data);
+		
+	}*/
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

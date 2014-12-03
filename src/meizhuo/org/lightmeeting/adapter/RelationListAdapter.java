@@ -55,39 +55,17 @@ public class RelationListAdapter extends BaseAdapter{
 			h = (ViewHolder)convertView.getTag();
 		}
 		h.tv_relation_nickname.setText(mData.get(position).getNickname());
-		if(mData.get(position).getSex().equals("m")){
-			h.tv_relation_sex.setText("男");
-		}else{
-			h.tv_relation_sex.setText("女");
-		}
 		if(mData.get(position).getCompany() == null || mData.get(position).getCompany().equals("")){
 			h.tv_relation_company.setText("暂无公司信息");
 		}else{
 			h.tv_relation_company.setText(mData.get(position).getCompany());
 		}
-		if(mData.get(position).getPosition() == null || mData.get(position).getPosition().equals("")){
-			h.tv_relation_position.setText("暂无职位信息");
-		}else{
-			h.tv_relation_position.setText(mData.get(position).getPosition());
-		}
-		h.iv_delete_relation.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(mOnItemClickListener!= null){
-					mOnItemClickListener.onItemClick(position);
-				}
-			}
-		});
 		return convertView;
 	}
 	
 	static class ViewHolder{
 		@InjectView(R.id.tv_relation_nickname) TextView tv_relation_nickname;
-		@InjectView(R.id.tv_relation_sex) TextView tv_relation_sex;
 		@InjectView(R.id.tv_relation_company) TextView tv_relation_company;
-		@InjectView(R.id.tv_relation_position) TextView tv_relation_position;
-		@InjectView(R.id.iv_delete_relation) ImageView iv_delete_relation;
 		
 		public ViewHolder(View v) {
 			ButterKnife.inject(this, v);
