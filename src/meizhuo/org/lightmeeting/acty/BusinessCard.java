@@ -5,12 +5,16 @@ package meizhuo.org.lightmeeting.acty;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.google.zxing.WriterException;
+
 import butterknife.InjectView;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
+import meizhuo.org.lightmeeting.encoding.EncodingHandler;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Member;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
@@ -22,12 +26,14 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BusinessCard extends BaseActivity  {
@@ -77,6 +83,24 @@ public class BusinessCard extends BaseActivity  {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
+		case R.id.action_my_qrcode:
+			LayoutInflater layoutinflater = LayoutInflater.from(this);
+			View view = layoutinflater.inflate(R.layout.qr_code_dialog, null);
+			final ImageView qr_code = (ImageView)view.findViewById(R.id.iv_qr_image);
+			try {
+				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/relation/create/vicememberid/" + member.getId(), 350);
+				qr_code.setImageBitmap(qrCodeBitmap);
+			} catch (WriterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			AlertDialog.Builder dialogbuilder =  new AlertDialog.Builder(this);
+			dialogbuilder.setTitle("          我的二维码");
+			dialogbuilder.setView(view);
+			AlertDialog qrdialog = dialogbuilder.create();
+			qrdialog.show();
+			
+			break;
 		case R.id.action_refreshdata:
 			Intent intent = new Intent(this, UpdateUser.class);
 			intent.putExtra("nickname", nickname);

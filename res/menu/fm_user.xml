@@ -7,6 +7,10 @@
         android:title="@string/action_more"
         >
         <menu>
+             <item android:id="@+id/action_my_qrcode"
+                android:showAsAction="always|withText"
+                android:title="@string/action_user_qrcode"
+                />
             <item android:id="@+id/action_refreshdata"
                 android:showAsAction="always|withText"
                 android:title="@string/action_refresh_user"
