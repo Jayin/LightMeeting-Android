@@ -30,7 +30,7 @@
 	 <!-- 调查 -->
 	 
 	 <!-- 人脉 -->
-	  <string name="action_add_relation">添加人脉</string>
+	  <string name="action_add_relation">扫一扫添加</string>
 	 
 	 
 </resources>
