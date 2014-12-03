@@ -4,6 +4,7 @@ import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.BusinessCard;
 import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
+import meizhuo.org.lightmeeting.acty.RelationList;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -31,7 +32,6 @@ import android.widget.TextView;
  
 public class DrawerMain extends BaseFragment  {
 	
-//	public static final String[] menuName={"会议列表","关于","退出"};
 	private MainActivity mainActivity;
 	LoadingDialog loadingdialog;
 	User user;
@@ -39,14 +39,12 @@ public class DrawerMain extends BaseFragment  {
 	
 	@Override
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		mainActivity = (MainActivity)activity;
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		 initData();
 	}
@@ -54,13 +52,16 @@ public class DrawerMain extends BaseFragment  {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		 super.onCreateView(inflater, container, savedInstanceState,R.layout.fragment_drawermain);
 		 return contentView;
 	}
 	@OnClick(R.id.btn_userinfo) public void to_userinfo(){
 		openActivity(BusinessCard.class);
 	}
+	@OnClick(R.id.lm_to_relation) public void to_relation(){
+		openActivity(RelationList.class);
+	}
+	
 	@OnClick(R.id.lm_to_meetlist) public void to_meetlist(){
 		mainActivity.setMainContent(new MeetlistFm());
 	}
