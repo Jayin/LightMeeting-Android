@@ -5,13 +5,31 @@
     android:background="@drawable/card_bg"
     android:orientation="vertical" >
      <LinearLayout 
-             android:background="@drawable/lm_btn_white2grey"
-             android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-         
+        <!-- <item name="android:clickable">true</item>
+          <item name="android:layout_width">match_parent</item>
+               <item name="android:layout_height">wrap_content</item>
+               <item name="android:background">@drawable/lm_btn_white2grey</item> -->
+             <LinearLayout 
+                 android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="right"
+        android:layout_gravity="center_vertical"
+        >
+        <ImageView 
+            android:clickable="true"
+            android:id="@+id/iv_delete_relation"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/aa_delete_relation"
+            />
+          </LinearLayout>
           <LinearLayout 
         style="@style/LinearLayout.item"
         android:orientation="horizontal"

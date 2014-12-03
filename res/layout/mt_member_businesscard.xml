@@ -226,6 +226,8 @@
             android:background="@drawable/ic_line_1"
             />
           <LinearLayout 
+             android:id="@+id/sendEmail" 
+             android:clickable="true"
         style="@style/LinearLayout.item"
         android:orientation="horizontal"
         android:layout_height="50dp"
