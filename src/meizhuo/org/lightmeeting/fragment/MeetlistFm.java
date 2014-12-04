@@ -19,6 +19,8 @@ import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import com.loopj.android.http.AsyncHttpClient;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,7 +40,6 @@ import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-import com.loopj.android.http.AsyncHttpClient;
 
 /**
  * 会议列表fragment
@@ -58,11 +59,11 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 	LoadingDialog dialog;
 	BroadcastReceiver mBroadcastReceiver;
 
-	@Override public void onCreate(Bundle savedInstanceState) {
+/*	@Override public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-	}
+	}*/
 
 	@Override public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
@@ -77,8 +78,9 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 
 	private void openReceiver() {
 		mBroadcastReceiver = new LogoutMeetingReceiver();
-		IntentFilter filter = new IntentFilter(
-				Constants.Action_Logout_Meeting_Successful);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.Action_Logout_Meeting_Successful);
+		filter.addAction(Constants.Action_Refresh_Successful);
 		getActivity().registerReceiver(mBroadcastReceiver, filter);
 	}
 
@@ -228,7 +230,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 		inflater.inflate(R.menu.main, menu);
 	}
 
-	@Override public boolean onOptionsItemSelected(MenuItem item) {
+/*	@Override public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_sweep:
 			Intent openCameraIntent = new Intent(getActivity(),
@@ -237,9 +239,9 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 			break;
 		}
 		return true;
-	}
+	}*/
 
-	@Override public void onActivityResult(int requestCode, int resultCode,
+/*	@Override public void onActivityResult(int requestCode, int resultCode,
 			Intent data) {
 		if (requestCode == 50 && resultCode == 51) {
 			String qrurl = data.getStringExtra("resultcode");
@@ -286,7 +288,7 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 
 		}
 
-	}
+	}*/
 
 	@Override public void onDestroy() {
 		super.onDestroy();
@@ -299,6 +301,9 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 		@Override public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			if (action.equals(Constants.Action_Logout_Meeting_Successful)) {
+				onRefresh();
+			}
+			if(action.equals(Constants.Action_Refresh_Successful)){
 				onRefresh();
 			}
 		}

@@ -12,6 +12,7 @@ import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Relation;
+import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
@@ -267,7 +268,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 			Intent openCameraIntent = new Intent(this,
 					CaptureActivity.class);
 			startActivityForResult(openCameraIntent, 330);
-
+			
 		default:
 			break;
 		}
@@ -276,7 +277,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == 330 && resultCode == 331){
+		if(requestCode == 330 && resultCode == 51){
 			String qrurl = data.getStringExtra("resultcode");
 			L.i("resultcode执行" + qrurl);
 			AsyncHttpClient client;

@@ -3,6 +3,11 @@ package meizhuo.org.lightmeeting.acty;
 import java.io.File;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import com.loopj.android.http.AsyncHttpClient;
+
 import butterknife.InjectView;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -29,17 +34,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.app.CoreService;
 import meizhuo.org.lightmeeting.fragment.DrawerMain;
 import meizhuo.org.lightmeeting.fragment.MeetlistFm;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.KV;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
+import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 public class MainActivity extends BaseActivity {
 
@@ -54,6 +64,7 @@ public class MainActivity extends BaseActivity {
 	private DownloadManager downloadManager;
 	private SharedPreferences prefs;
 	private static final String DL_ID = "downloadId";
+	LoadingDialog dialog;
 
 	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.activity_main);
@@ -127,14 +138,6 @@ public class MainActivity extends BaseActivity {
 		mDrawerToggle.syncState();
 	}
 
-	@Override public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		// handler the select
-		return super.onOptionsItemSelected(item);
-	}
 
 	@Override public void onConfigurationChanged(Configuration newConfig) {
 		// TODO Auto-generated method stub
@@ -324,5 +327,78 @@ public class MainActivity extends BaseActivity {
 			}
 		}
 	}
+	
+
+	@Override public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_sweep:
+			Intent openCameraIntent = new Intent(MainActivity.this,
+					CaptureActivity.class);
+			startActivityForResult(openCameraIntent, 50);
+			
+			break;
+		}
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		// handler the select
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override public void onActivityResult(int requestCode, int resultCode,
+			Intent data) {
+		if (requestCode == 50 && resultCode == 51) {
+			String qrurl = data.getStringExtra("resultcode");
+			L.i("resultcode" + qrurl);
+			AsyncHttpClient client;
+			client = RestClient.getClient();
+			client.get(qrurl, new JsonHandler() {
+				@Override public void onStart() {
+					if (dialog == null) {
+						dialog = new LoadingDialog(MainActivity.this);
+					}
+					dialog.setText("正在加入会议..");
+					dialog.show();
+				}
+
+				@Override public void onOK(int statusCode, Header[] headers,
+						JSONObject obj) throws Exception {
+					if (dialog.isShowing()) {
+						dialog.dismiss();
+						dialog = null;
+					}
+					String response = obj.getString("response");
+					sendBroadcast(new Intent(Constants.Action_Refresh_Successful));
+					toast(response);
+				}
+
+				@Override public void onError(int error_code, Header[] headers,
+						JSONObject obj) throws Exception {
+					if (dialog.isShowing()) {
+						dialog.dismiss();
+						dialog = null;
+					}
+					String msg = obj.getString("msg");
+					toast(msg);
+				}
+
+				@Override public void onFailure(int statusCode,
+						Header[] headers, byte[] data, Throwable arg3) {
+					toast("网络不给力,请检查你的网络设置!");
+					return;
+				}
+
+			});
+
+		}
+
+	}
+
 
 }
