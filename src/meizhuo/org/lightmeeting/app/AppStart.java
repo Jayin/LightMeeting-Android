@@ -3,17 +3,16 @@ package meizhuo.org.lightmeeting.app;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.Login;
 import meizhuo.org.lightmeeting.acty.MainActivity;
-import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.DataPool;
 import meizhuo.org.lightmeeting.utils.L;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Window;
 
 public class AppStart extends BaseActivity {
@@ -27,18 +26,15 @@ public class AppStart extends BaseActivity {
 		// TODO Auto-generated method stub
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState, R.layout.acty_start);
-		/*
-		 * new Handler().postDelayed(new Runnable() {
-		 * 
-		 * @Override public void run() { // TODO Auto-generated method stub
-		 * if(!AppStart.this.isFinishing()){ openActivity(MeetingData.class);
-		 * closeActivity(); } } }, 1500);
-		 */
-
-		initReceiver();
+	 	
+	 	initReceiver();
 		init();
 		starttime = System.currentTimeMillis();
-
+		
+		//移除消息推送的通知栏
+		NotificationManager mNotifyMgr =
+		        (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotifyMgr.cancel(JpushRecevier.JpushNotificationId);
 	}
 
 	private void initReceiver() {
