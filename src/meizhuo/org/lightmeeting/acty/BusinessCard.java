@@ -54,7 +54,6 @@ public class BusinessCard extends BaseActivity  {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.fm_buinesscard);
 		loadingdialog = new LoadingDialog(this);
 		 initData();
@@ -74,14 +73,12 @@ public class BusinessCard extends BaseActivity  {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.fm_user, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.action_my_qrcode:
 			LayoutInflater layoutinflater = LayoutInflater.from(this);
@@ -91,7 +88,6 @@ public class BusinessCard extends BaseActivity  {
 				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/relation/create/vicememberid/" + member.getId(), 350);
 				qr_code.setImageBitmap(qrCodeBitmap);
 			} catch (WriterException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			AlertDialog.Builder dialogbuilder =  new AlertDialog.Builder(this);
@@ -133,7 +129,6 @@ public class BusinessCard extends BaseActivity  {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
 					if((et_change_oldpsw.getText().toString()) == null || (et_change_oldpsw.getText().toString()).equals(""))
 					{
 						toast("旧密码不能为空!");
@@ -169,7 +164,6 @@ public class BusinessCard extends BaseActivity  {
 							new Thread(new Runnable() {
 								@Override
 								public void run() {
-									// TODO Auto-generated method stub
 									((App)getApplication()).cleanUpInfo();
 								}
 							}).start();
@@ -211,7 +205,6 @@ public class BusinessCard extends BaseActivity  {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
@@ -239,7 +232,6 @@ public class BusinessCard extends BaseActivity  {
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		if(!AndroidUtils.isNetworkConnected(BusinessCard.this))
 		{
 			toast("请先连接您的网络 !");
@@ -292,7 +284,6 @@ public class BusinessCard extends BaseActivity  {
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
 				super.onFailure(statusCode, headers, data, arg3);
 			}
 		});
@@ -300,7 +291,6 @@ public class BusinessCard extends BaseActivity  {
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		mActionBar.setTitle("个人名片");

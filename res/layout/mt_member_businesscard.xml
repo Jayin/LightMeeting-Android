@@ -1,255 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    android:background="@drawable/card_bg"
     android:orientation="vertical" >
-    <ScrollView 
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout 
+        android:layout_height="match_parent" >
+
+        <LinearLayout
             style="@style/LinearLayout"
-            android:orientation="vertical"
-            >
-    
-    <LinearLayout 
-             android:background="@drawable/lm_btn_white2grey"
-             android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView 
-            android:width="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="15dp"
-            android:text="头像"
-            android:layout_gravity="center_vertical"
-            style="@style/TextView"
-            />
-        <LinearLayout 
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
-                android:id="@+id/minimalThree"
-                android:layout_width="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                bootstrap:bct_image="@drawable/aa_talker"
-                bootstrap:bct_size="medium"
-                bootstrap:bct_minimal="true"
-                android:layout_margin="10dp"/>
+                android:background="@drawable/lm_btn_white2grey"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                    android:id="@+id/minimalThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    bootstrap:bct_image="@drawable/aa_talker"
+                    bootstrap:bct_minimal="true"
+                    bootstrap:bct_size="medium" />
             </LinearLayout>
-    </LinearLayout>
-    <View 
-        android:background="@drawable/ic_line_1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        /> 
-        
-          <LinearLayout 
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-          	android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="昵称"
-            />
-             <TextView 
-                   android:id="@+id/mt_member_nickname"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-    </LinearLayout>
-      <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line_1"
-            />
-         <LinearLayout 
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-            android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="生日"
-            />
-               <TextView 
-                   android:id="@+id/mt_member_birth"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-    </LinearLayout>
-      <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line_1"
-            />
-           <LinearLayout 
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-            android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="性别"
-            />
-               <TextView 
-                   android:id="@+id/mt_member_sex"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-        
-    </LinearLayout>
-      <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            />
-           <LinearLayout 
-               
-               android:layout_marginTop="20dp"
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView
-			android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="公司名称"
-            />
-               <TextView 
-                   android:id="@+id/mt_member_company"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-       
-    </LinearLayout>
-       <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line_1"
-            />
-           <LinearLayout 
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-            android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="职位"
-            />
-               <TextView 
-                   android:id="@+id/mt_member_position"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-    </LinearLayout>
-      <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line_1"
-            />
-          <LinearLayout 
-              android:clickable="true"
-              android:id="@+id/dial"
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-            android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="联系电话"
-            />
-             <TextView 
-                 android:clickable="true"
-                   android:id="@+id/mt_member_phone"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-    </LinearLayout>
-        <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line_1"
-            />
-          <LinearLayout 
-             android:id="@+id/sendEmail" 
-             android:clickable="true"
-        style="@style/LinearLayout.item"
-        android:orientation="horizontal"
-        android:layout_height="50dp"
-        >
-        <TextView 
-            android:layout_width="0dp"
-          	android:layout_weight="1"
-            style="@style/TextView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text="联系邮箱"
-            />
-                <TextView 
-                   android:id="@+id/mt_member_email"
-                   android:layout_marginRight="30dp"
-            style="@style/TextView"
-            android:textColor="@color/lm_grey2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:text=""
-            />
-    </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="昵称" />
+
+                <TextView
+                    android:id="@+id/mt_member_nickname"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="生日" />
+
+                <TextView
+                    android:id="@+id/mt_member_birth"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/mt_member_sex"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" 
+                android:background="@drawable/ic_line_1"
+                />
+
+            <LinearLayout
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="公司" />
+
+                <TextView
+                    android:id="@+id/mt_member_company"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="职位" />
+
+                <TextView
+                    android:id="@+id/mt_member_position"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                android:id="@+id/dial"
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="联系电话" />
+
+                <TextView
+                    android:id="@+id/mt_member_phone"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_line_1" />
+
+            <LinearLayout
+                android:id="@+id/sendEmail"
+                style="@style/LinearLayout.item"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="联系邮箱" />
+
+                <TextView
+                    android:id="@+id/mt_member_email"
+                    style="@style/TextView"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/lm_grey2" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
