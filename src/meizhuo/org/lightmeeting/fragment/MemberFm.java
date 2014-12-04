@@ -76,7 +76,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
 		MeetingAPI.getJoinMember(meetid, new JsonHandler(){
 			
 			@Override

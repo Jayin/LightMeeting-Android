@@ -2,18 +2,21 @@ package meizhuo.org.lightmeeting.adapter;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.acty.MdMemberBusinessCard;
 import meizhuo.org.lightmeeting.model.Comment;
-
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 
 /***
  * 评论
@@ -44,7 +47,7 @@ public class MeetDiscussToCommentAdapter extends BaseAdapter {
 		return position;
 	}
 
-	@Override public View getView(int position, View convertView,
+	@Override public View getView(final int position, View convertView,
 			ViewGroup parent) {
 		ViewHolder h;
 		if (convertView == null) {
@@ -57,6 +60,15 @@ public class MeetDiscussToCommentAdapter extends BaseAdapter {
 		}
 		h.discuss_comment.setText(mData.get(position).getContent());
 		h.comment_author.setText(mData.get(position).getNickname());
+		h.avatar.setOnClickListener(new OnClickListener() {
+			
+			@Override public void onClick(View v) {
+				Intent it = new Intent(mContext, MdMemberBusinessCard.class);
+				it.putExtra("memberid", mData.get(position).getAuthor());
+				it.putExtra("nickname", mData.get(position).getNickname());
+				mContext.startActivity(it);
+			}
+		});
 
 		return convertView;
 	}
@@ -64,6 +76,7 @@ public class MeetDiscussToCommentAdapter extends BaseAdapter {
 	class ViewHolder {
 		@InjectView(R.id.discuss_comment) TextView discuss_comment;
 		@InjectView(R.id.comment_author) TextView comment_author;
+		@InjectView(R.id.chat_person_headershot) BootstrapCircleThumbnail avatar;
 
 		public ViewHolder(View v) {
 			ButterKnife.inject(this, v);
