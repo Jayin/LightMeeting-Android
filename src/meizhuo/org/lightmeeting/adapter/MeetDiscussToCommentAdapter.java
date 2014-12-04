@@ -17,65 +17,56 @@ import android.widget.TextView;
 
 /***
  * 评论
+ * 
  * @author Jason
- *
+ * 
  */
-public class MeetDiscussToCommentAdapter extends BaseAdapter{
-	
+public class MeetDiscussToCommentAdapter extends BaseAdapter {
+
 	private Context mContext;
-	private List<Comment>mData;
-	public MeetDiscussToCommentAdapter(Context context,List<Comment>data) {
-		// TODO Auto-generated constructor stub
+	private List<Comment> mData;
+
+	public MeetDiscussToCommentAdapter(Context context, List<Comment> data) {
 		mContext = context;
 		mData = data;
-		
-	} 
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
+	}
+
+	@Override public int getCount() {
 		return mData.size();
 	}
 
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+	@Override public Object getItem(int position) {
 		return mData.get(position);
 	}
 
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+	@Override public long getItemId(int position) {
 		return position;
 	}
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+	@Override public View getView(int position, View convertView,
+			ViewGroup parent) {
 		ViewHolder h;
-		if(convertView == null){
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_meetingdata_discuss_comment, null);
-			h=new ViewHolder(convertView);
+		if (convertView == null) {
+			convertView = LayoutInflater.from(mContext).inflate(
+					R.layout.item_meetingdata_discuss_comment, null);
+			h = new ViewHolder(convertView);
 			convertView.setTag(h);
-		}else{
-			h = (ViewHolder)convertView.getTag();
+		} else {
+			h = (ViewHolder) convertView.getTag();
 		}
 		h.discuss_comment.setText(mData.get(position).getContent());
 		h.comment_author.setText(mData.get(position).getNickname());
-		
+
 		return convertView;
 	}
-	
-		class ViewHolder{
-			@InjectView(R.id.discuss_comment) TextView discuss_comment;
-			@InjectView(R.id.comment_author) TextView comment_author;
-		
+
+	class ViewHolder {
+		@InjectView(R.id.discuss_comment) TextView discuss_comment;
+		@InjectView(R.id.comment_author) TextView comment_author;
+
 		public ViewHolder(View v) {
-			// TODO Auto-generated constructor stub
 			ButterKnife.inject(this, v);
 		}
-		
 	}
-
-
 }

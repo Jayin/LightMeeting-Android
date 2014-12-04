@@ -1,65 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:paddingRight="8dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp"
-    android:orientation="horizontal" >
-    
-    <ImageView 
+    android:paddingRight="8dp"
+    android:paddingTop="10dp" >
+
+    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
         android:id="@+id/chat_person_headershot"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:src="@drawable/aa_talker"
-        />
-    
-       <LinearLayout 
-           android:layout_width="0dp"
-           android:layout_weight="1"
-       android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        bootstrap:bct_image="@drawable/aa_talker"
+        bootstrap:bct_minimal="true"
+        bootstrap:bct_size="medium" />
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-       android:background="@drawable/lm_message_card_bg"
-       android:orientation="vertical"
-        >
-        <LinearLayout 
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/lm_message_card_bg"
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView 
-            style="@style/TextView"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/lm_grey_lv_two"
-            android:text=""
-            />
-          <TextView 
-            style="@style/TextView"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="4dp"
-            android:textColor="@color/lm_grey_lv_two"
-            android:id="@+id/comment_author"
-            android:text=""
-            />
-          </LinearLayout>
-        <View 
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textColor="@color/lm_grey_lv_two" />
+
+            <TextView
+                android:id="@+id/comment_author"
+                style="@style/TextView"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="@color/lm_grey_lv_two"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@drawable/ic_line_1"
-            />
-        <TextView 
-            android:layout_margin="10dp"
+            android:background="@drawable/ic_line_1" />
+
+        <TextView
             android:id="@+id/discuss_comment"
             style="@style/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="就卡死见到剑氨基酸到静安寺经典款拉伸件到"
-            />
+            android:layout_margin="10dp"
+            android:text="233333333333333" />
     </LinearLayout>
-     
+
 </LinearLayout>
