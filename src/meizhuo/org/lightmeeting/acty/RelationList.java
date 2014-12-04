@@ -100,6 +100,8 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 									RelationList.this.dialog.dismiss();
 									RelationList.this.dialog=null;
 								}
+								data.remove(position);
+								adapter.notifyDataSetChanged();
 								toast("删除成功!");
 								return ;
 							}
