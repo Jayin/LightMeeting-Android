@@ -34,6 +34,10 @@ public class Constants {
 	public static final String Action_ChangePSW_Successful ="ChangePSW_Successful";
 	/**评论成功**/
 	public  static final String Action_Comment_Successful = "Comment_Successful";
+	/**会议刷新*/
+	public  static final String Action_Refresh_Successful = "Refresh_Successful";
+	
+	
 	
 	
 

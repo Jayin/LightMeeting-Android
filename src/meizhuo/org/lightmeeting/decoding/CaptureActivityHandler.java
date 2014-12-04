@@ -45,6 +45,7 @@ public final class CaptureActivityHandler extends Handler{
 	    CameraManager.get().startPreview();
 	    restartPreviewAndDecode();
 	  }
+	  
 
 	  @Override
 	  public void handleMessage(Message message) {
