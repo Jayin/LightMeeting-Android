@@ -2,12 +2,9 @@ package meizhuo.org.lightmeeting.acty;
 
 import java.io.File;
 import java.util.List;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
-
 import com.loopj.android.http.AsyncHttpClient;
-
 import butterknife.InjectView;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -77,7 +74,6 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override protected void initData() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -87,7 +83,6 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override protected void initLayout() {
-		// TODO Auto-generated method stub
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
@@ -133,14 +128,12 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override protected void onPostCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onPostCreate(savedInstanceState);
 		mDrawerToggle.syncState();
 	}
 
 
 	@Override public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
@@ -148,24 +141,20 @@ public class MainActivity extends BaseActivity {
 	public class MyDrawerListener implements DrawerLayout.DrawerListener {
 
 		@Override public void onDrawerClosed(View drawerView) {
-			// TODO Auto-generated method stub
 			mDrawerToggle.onDrawerClosed(drawerView);
 			mActionBar.setTitle(DefaultTitle);
 		}
 
 		@Override public void onDrawerOpened(View drawerView) {
-			// TODO Auto-generated method stub
 			mDrawerToggle.onDrawerOpened(drawerView);
 			mActionBar.setTitle(MenuTitle);
 		}
 
 		@Override public void onDrawerSlide(View drawerView, float slideOffset) {
-			// TODO Auto-generated method stub
 			mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
 		}
 
 		@Override public void onDrawerStateChanged(int newState) {
-			// TODO Auto-generated method stub
 			mDrawerToggle.onDrawerStateChanged(newState);
 		}
 	}
@@ -203,7 +192,6 @@ public class MainActivity extends BaseActivity {
 							+ AndroidUtils.getAppVersionName(MainActivity.this)
 							+ "\n更新版本号:" + versionname + "\n" + update_content);
 				} catch (NameNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				builder.setPositiveButton("立刻更新 ",
@@ -211,7 +199,6 @@ public class MainActivity extends BaseActivity {
 
 							@SuppressLint("NewApi") @Override public void onClick(
 									DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
 								// Intent intent = new
 								// Intent(Intent.ACTION_VIEW);
 								Uri uri = Uri.parse(url);
