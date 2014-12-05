@@ -41,7 +41,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
 	 Bundle idbundle = getArguments();
 	 meetid = idbundle.getString("meetid");

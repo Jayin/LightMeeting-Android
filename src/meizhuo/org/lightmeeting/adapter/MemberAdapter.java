@@ -4,6 +4,7 @@ import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.model.Member;
+import meizhuo.org.lightmeeting.utils.StringUtils;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,25 +52,28 @@ public class MemberAdapter extends BaseAdapter  {
 			h = (ViewHolder)convertView.getTag();
 		}
 		h.tv_username.setText(mData.get(position).getNickname());
-		
-//		h.tv_userintro.setText(mData.get(position).getCompany() + mData.get(position).getPosition());
 		if(mData.get(position).getCheckin().equals("1"))
 		{
-			h.tv_userintro.setText("已签到");
+			h.tv_signup.setText("已签到");
+			h.tv_signup.setTextColor(mContext.getResources().getColor(R.color.lm_lucency_blue));
 		}else
 		{
-			h.tv_userintro.setText("未签到");
+			h.tv_signup.setText("未签到");
+			h.tv_signup.setTextColor(mContext.getResources().getColor(R.color.lm_sign_grey));
 		}
+			h.tv_usercompany.setText(mData.get(position).getCompany());
+			h.tv_userposition.setText(mData.get(position).getPosition());
 		return convertView;
 	}
 	
 	
 	static class ViewHolder{
 		@InjectView(R.id.tv_username) TextView tv_username;
-		@InjectView(R.id.tv_userintro) TextView tv_userintro;
+		@InjectView(R.id.tv_signup) TextView tv_signup;
+		@InjectView(R.id.tv_usercompany) TextView tv_usercompany;
+		@InjectView(R.id.tv_userposition) TextView tv_userposition;
 		
 		public ViewHolder(View v) {
-			// TODO Auto-generated constructor stub
 			ButterKnife.inject(this, v);
 		}
 	}
