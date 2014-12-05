@@ -46,7 +46,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 	ActionBar mActionBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.lv_meetingdata_discuss);
 		
 		openReceiver();
@@ -57,7 +56,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Discuss>();
 		adapter  = new MeetDiscussAdapter(this, data);
@@ -91,7 +89,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				// TODO Auto-generated method stub
 				List<Discuss>discusslist =  Discuss.create_by_jsonarray(obj.toString());
 				data.clear();
 				data.addAll(discusslist);
@@ -110,13 +107,12 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
+				swipeRefreshLayout.setRefreshing(false);
 				toast("出错了，请检查你的网络设置!");
 				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
@@ -151,14 +147,12 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
 				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
@@ -168,7 +162,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		unregisterReceiver(mBroadcastReceiver);
 	}
@@ -182,23 +175,9 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 	}
 	
 	
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		getMenuInflater().inflate(R.menu.acty_discuss, menu);
-		return true;
-	}*/
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-		/*创建讨论*/
-	/*	case R.id.action_create_discuss:
-			Intent intent =  new Intent(MeetingData_discuss.this, MeetingData_discuss_create.class);
-			intent.putExtra("meetid", meetid);
-			startActivity(intent);
-			break;*/
 		case android.R.id.home:
 			finish();
 			break;
@@ -223,7 +202,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if(swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if(firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount  !=0 && hasMore){
@@ -236,7 +214,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -244,7 +221,6 @@ public class MeetDiscuss extends BaseActivity implements OnRefreshListener, OnSc
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			if(action.equals(Constants.Action_Create_discuss_successful)||action.equals(Constants.Action_Update_discuss_successful)){
 				onRefresh();

@@ -3,7 +3,6 @@ package meizhuo.org.lightmeeting.acty;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.RelationListAdapter;
 import meizhuo.org.lightmeeting.adapter.RelationListAdapter.OnItemClickListener;
@@ -12,13 +11,10 @@ import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Relation;
-import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
-
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,7 +29,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-
 import com.loopj.android.http.AsyncHttpClient;
 
 public class RelationList extends BaseActivity implements OnRefreshListener,OnScrollListener {

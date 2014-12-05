@@ -38,7 +38,6 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.lv_meetingdata_vote);
 		
 		initData();
@@ -47,7 +46,6 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		meetid = getIntent().getStringExtra("meetid");
 		data = new ArrayList<Vote>();
 		adapter = new MeetVoteAdapter(this, data);
@@ -181,7 +179,6 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if(swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if(firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount  !=0 && hasMore){
@@ -194,7 +191,6 @@ public class MeetVote extends BaseActivity implements OnRefreshListener, OnScrol
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 	
