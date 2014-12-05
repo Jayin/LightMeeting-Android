@@ -91,7 +91,7 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 				data.addAll(member);
 				adapter.notifyDataSetChanged();
 				page = "1";
-				if(member.size() < 20){
+				if(member.size() < 10){
 					hasMore = false;
 				}else{
 					hasMore = true;
@@ -157,7 +157,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if (swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if (firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount !=0 && hasMore){
@@ -168,7 +167,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 

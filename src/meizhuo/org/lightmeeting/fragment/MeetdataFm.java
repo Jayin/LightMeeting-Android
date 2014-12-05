@@ -4,22 +4,15 @@ package meizhuo.org.lightmeeting.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.acty.MeetDocDetail;
 import meizhuo.org.lightmeeting.adapter.MeetFunctionAdapter;
-import meizhuo.org.lightmeeting.api.DiscussAPI;
 import meizhuo.org.lightmeeting.api.DocAPI;
-import meizhuo.org.lightmeeting.api.MeetingAPI;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.Discuss;
 import meizhuo.org.lightmeeting.model.Doc;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
@@ -53,7 +46,6 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 	@Override 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_meetingdata);
 	 Bundle mBundle = getArguments();
 		meetid = mBundle.getString("meetid");
@@ -66,7 +58,6 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 	
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		
 		data = new ArrayList<Doc>();
 		adapter = new MeetFunctionAdapter(getActivity(), data);
@@ -75,7 +66,6 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_light,
@@ -92,14 +82,12 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 		DocAPI.getDocList(meetid,page, limit,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				// TODO Auto-generated method stub
 				List<Doc>Doclist =  Doc.create_by_jsonarray(obj.toString());
 				data.clear();
 				data.addAll(Doclist);
@@ -119,13 +107,11 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
 				toast("出错了，请检查你的网络设置!");
 				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
@@ -140,14 +126,12 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 		DocAPI.getDocList(meetid, page, limit, new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
 			}
 			
 			@Override
 			public void onOK(int statusCode, Header[] headers, JSONObject obj)
 					throws Exception {
-				// TODO Auto-generated method stub
 				List<Doc>doclist = Doc.create_by_jsonarray(obj.toString());
 				data.addAll(doclist);
 				adapter.notifyDataSetChanged();
@@ -161,14 +145,12 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] data, Throwable arg3) {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				toast("网络不给力，请检查你的网络设置!");
 				return ;
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(false);
 				isloading = false;
 			}
@@ -180,7 +162,6 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if(swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if(firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount  !=0 && hasMore){
@@ -192,7 +173,6 @@ public class MeetdataFm extends BaseFragment  implements OnRefreshListener, OnSc
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 	

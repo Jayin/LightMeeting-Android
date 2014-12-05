@@ -29,7 +29,6 @@ public class MeetfunctionFm extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_meeting_function);
 	 Bundle idbundle = getArguments();
 	 meetid = idbundle.getString("meetid");
@@ -59,13 +58,11 @@ public class MeetfunctionFm extends BaseFragment {
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		
 	}
 	

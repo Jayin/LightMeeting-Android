@@ -118,58 +118,7 @@ public class DrawerMain extends BaseFragment  {
 						return ;
 					}
 				});
-		/*		
-				UserAPI.logout(new JsonResponseHandler() {
-					
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-						if(loadingdialog == null)
-						{
-							loadingdialog = new LoadingDialog(getActivity());
-						}
-						loadingdialog.setText("正在注销!");
-						loadingdialog.show();
-					}
-					
-					@Override
-					public void onOK(Header[] headers, JSONObject obj) {
-						// TODO Auto-generated method stub
-						try {
-							if(obj.getString("code").equals("20000"))
-							{
-				
-								new Thread(new Runnable() {
-									
-									@Override
-									public void run() {
-										App app = (App)getActivity().getApplication();
-										app.cleanUpInfo();
-									}
-								}).start();
-								
-								if(loadingdialog.isShowing())
-								{
-									loadingdialog.dismiss();
-									loadingdialog = null;
-								}
-								toast("注销成功");
-								openActivity(Login.class);
-								getActivity().finish();
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
-					@Override
-					public void onFaild(int errorType, int errorCode) {
-						// TODO Auto-generated method stub
-						
-					}
-				});*/
-				
+	
 			}
 		});
 		logoffBuilder.setNegativeButton("暂不注销", null);
@@ -198,7 +147,6 @@ public class DrawerMain extends BaseFragment  {
 						if(obj.getString("code").equals("20000")){
 							
 							user = User.create_by_json(obj.getString("response"));
-							L.i("拿到了用户的名字" + user.getNickname().toString());
 							tv_username.setText(user.getNickname().toString());
 						}
 					} catch (JSONException e) {

@@ -3,23 +3,17 @@ package meizhuo.org.lightmeeting.adapter;
 import java.util.List;
 
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.adapter.MeetListAdapter.ViewHolder;
 import meizhuo.org.lightmeeting.model.Vote;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.daimajia.swipe.SimpleSwipeListener;
-import com.daimajia.swipe.SwipeLayout;
-import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 public class MeetVoteAdapter extends BaseAdapter{
 
