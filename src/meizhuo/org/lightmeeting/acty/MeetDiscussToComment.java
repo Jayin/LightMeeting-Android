@@ -84,7 +84,6 @@ public class MeetDiscussToComment extends BaseActivity{
 	
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		discussid  = getIntent().getStringExtra("discussid");
 		
 	}
@@ -92,7 +91,6 @@ public class MeetDiscussToComment extends BaseActivity{
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		et_comment.setFocusable(true);
 		et_comment.setFocusableInTouchMode(true);
 		et_comment.requestFocus();
@@ -114,7 +112,6 @@ public class MeetDiscussToComment extends BaseActivity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();

@@ -3,7 +3,6 @@ package meizhuo.org.lightmeeting.acty;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.adapter.RelationListAdapter;
 import meizhuo.org.lightmeeting.adapter.RelationListAdapter.OnItemClickListener;
@@ -12,13 +11,10 @@ import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Relation;
-import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
-
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,7 +29,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-
 import com.loopj.android.http.AsyncHttpClient;
 
 public class RelationList extends BaseActivity implements OnRefreshListener,OnScrollListener {
@@ -49,7 +44,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	String page = "1", limit = "";
 	boolean hasMore = true, isloading = false;
 	LoadingDialog dialog;
-	
+	 List<Integer>pics;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.acty_relation_list);
@@ -68,8 +63,15 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	
 	@Override
 	protected void initData() {
+		pics = new ArrayList<Integer>();
+		pics.add(R.drawable.aa_pic_head1);
+		pics.add(R.drawable.aa_pic_head2);
+		pics.add(R.drawable.aa_pic_head3);
+		pics.add(R.drawable.aa_pic_head4);
+		pics.add(R.drawable.aa_pic_head5);
+		pics.add(R.drawable.aa_pic_head6);
 		data  =  new ArrayList<Relation>();
-		adapter = new RelationListAdapter(this, data);
+		adapter = new RelationListAdapter(this, data,pics);
 		adapter.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -176,7 +178,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 					if (relationList.size() == 0) {
 						toast("暂无人脉");
 					}
-					if (relationList.size() < 5) {
+					if (relationList.size() < 10) {
 						hasMore = false;
 					} else {
 						hasMore = true;
@@ -214,7 +216,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 						.toString());
 				data.addAll(relationList);
 				adapter.notifyDataSetChanged();
-				if (obj.isNull("response") || relationList.size() < 5) {
+				if (obj.isNull("response") || relationList.size() < 10) {
 					hasMore = false;
 					toast("数据加载完毕!");
 				}

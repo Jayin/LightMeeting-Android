@@ -185,63 +185,49 @@ public class Login extends BaseActivity {
 		String position =EditTextUtils.getText(acty_register_et_position); 
 		String phone =EditTextUtils.getText(acty_register_et_phone); 
 
-		/**
-		 @InjectView(R.id.acty_register_et_company) EditText acty_register_et_company;
-	@InjectView(R.id.acty_register_et_position) EditText acty_register_et_position;
-	@InjectView(R.id.acty_register_et_phone) EditText acty_register_et_phone;
-		 */
-		UserAPI.regist(username, nickname, password, sex, email,company,position,phone, new JsonResponseHandler() {
-			
+		UserAPI.regist(username, nickname, password, sex, email,company,position,phone,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				if(dialog == null){
 					dialog = new LoadingDialog(Login.this);
 				}
 				dialog.show();
 				dialog.setText("正在注册");
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				
-				try {
-					if(obj.getString("error_code").equals("40000")){
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						String msg = obj.getString("msg");
-						toast(msg);
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
 				}
-				
-				try {
-					if(obj.getString("code").equals("20000")){
-						L.i(obj.toString());
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						toast("注册成功");
-						flipper.showPrevious();
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				
-		
-				
+				toast("注册成功");
+				flipper.showPrevious();
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
+			public void onError(int error_code, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				String msg = obj.getString("msg");
+				toast(msg);
+				return ;
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				toast("网络不给力");
+				return ;
 			}
 		});
 		

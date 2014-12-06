@@ -53,8 +53,6 @@ public class MeetResearchListOption extends BaseActivity{
 	String answer;
 	
 	@InjectView(R.id.research_option_lv) ListView research_option_lv;
-//	@InjectView(R.id.research_option_value) TextView research_option_value;
-//	@InjectView(R.id.research_option_key) TextView research_option_key;
 	List<HashMap<String, String>>optionlist;
 	HashMap<String, String>optionmap;
 	List<KV>data;
@@ -89,7 +87,6 @@ public class MeetResearchListOption extends BaseActivity{
 		ResearchAPI.answer(questionid, optionid, option_content, new JsonHandler(){
 				@Override
 				public void onStart() {
-					// TODO Auto-generated method stub
 					if(dialog == null)
 					{
 						dialog = new LoadingDialog(getContext());
@@ -184,7 +181,6 @@ public class MeetResearchListOption extends BaseActivity{
 				
 				@Override
 				public void onFinish() {
-					// TODO Auto-generated method stub
 					super.onFinish();
 				}
 				
@@ -192,12 +188,8 @@ public class MeetResearchListOption extends BaseActivity{
 		}
 	}
 	
-	
-
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
-		
 		research_option_lv.setAdapter(adapter);
 		adapter.setOnItemClickListener(new OnPositionClickListener() {
 			@Override
@@ -253,7 +245,6 @@ public class MeetResearchListOption extends BaseActivity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			adapter.notifyDataSetChanged();

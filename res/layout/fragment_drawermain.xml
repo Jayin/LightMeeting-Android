@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            bootstrap:bct_image="@drawable/aa_talker"
+            bootstrap:bct_image="@drawable/aa_pic_head1"
             bootstrap:bct_minimal="true"
             bootstrap:bct_size="medium" />
 

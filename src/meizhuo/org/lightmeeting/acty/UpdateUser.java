@@ -173,56 +173,12 @@ public class UpdateUser extends BaseActivity {
 			}
 			
 		});
-		/*UserAPI.update(nickname, sex, phone, email, company, position, birth, new JsonResponseHandler() {
-			
-			
-			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						toast("更新成功");
-						Intent it = new Intent(Update_userdata.this, BusinessCard.class);
-						String nickname1 = nickname;
-						String birth1 = birth;
-						String sex1 = sex;
-						String company1 = birth;
-						String position1 = position;
-						String phone1 = phone;
-						String email1 = email;
-						
-						it.putExtra("nickname", nickname1);
-						it.putExtra("birth",birth1);
-						it.putExtra("sex", sex1);
-						it.putExtra("company",company1);
-						it.putExtra("position", position1);
-						it.putExtra("phone", phone1);
-						it.putExtra("email", email1);
-						Update_userdata.this.setResult(205, it);
-						Update_userdata.this.finish();
-						
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-			
-			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
-		
 	}
 	
 	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		// TODO Auto-generated method stub
 		menu.add(0, 1, 0, "男");
 		menu.add(0, 2, 0, "女");
 
@@ -231,7 +187,6 @@ public class UpdateUser extends BaseActivity {
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		AdapterContextMenuInfo itemInfo = (AdapterContextMenuInfo)item.getMenuInfo();
 		switch (item.getItemId()) {
 		case 1:
@@ -251,7 +206,6 @@ public class UpdateUser extends BaseActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();

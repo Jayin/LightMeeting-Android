@@ -38,7 +38,6 @@ public class MdMemberBusinessCard extends BaseActivity{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.mt_member_businesscard);
 		loadingDialog = new LoadingDialog(this);
 		 initData();
@@ -48,7 +47,6 @@ public class MdMemberBusinessCard extends BaseActivity{
 	
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		memberid = getIntent().getStringExtra("memberid");
 		mNickname = getIntent().getStringExtra("nickname");
 		if(getIntent().getStringExtra("checkin")!=null){
@@ -117,15 +115,6 @@ public class MdMemberBusinessCard extends BaseActivity{
 		});
 	}
 
-	/**
-	 @InjectView(R.id.mt_member_nickname) TextView mt_member_nickname;
-	@InjectView(R.id.mt_member_birth) TextView mt_member_birth;
-	@InjectView(R.id.mt_member_sex) TextView mt_member_sex;
-	@InjectView(R.id.mt_member_company) TextView mt_member_company;
-	@InjectView(R.id.mt_member_position) TextView mt_member_position;
-	@InjectView(R.id.mt_member_phone) TextView mt_member_phone;
-	@InjectView(R.id.mt_member_email) TextView mt_member_email;
-	 */
 	@Override
 	protected void initLayout() {
 
@@ -145,16 +134,6 @@ public class MdMemberBusinessCard extends BaseActivity{
 		startActivity(intent);
 	}
 	
-/*	@OnClick(R.id.sendEmail) public void sendEmail(){
-		if(StringUtils.isEmpty(member.getEmail())){
-			toast("暂无电子邮件，无法发送");
-			return ;
-		}
-		Intent data =  new Intent(Intent.ACTION_SEND);
-		data.setData(Uri.parse("782394631@qq.com"));
-		startActivity(data);
-		
-	}*/
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -162,7 +141,6 @@ public class MdMemberBusinessCard extends BaseActivity{
 		case android.R.id.home:
 			finish();
 			break;
-
 		default:
 			
 		}

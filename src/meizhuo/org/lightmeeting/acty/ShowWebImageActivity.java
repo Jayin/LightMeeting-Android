@@ -59,7 +59,6 @@ public class ShowWebImageActivity extends BaseActivity {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				try {
 					Log.i(TAG, "进入线程了");
 //					imageView.setImageBitmap(((BitmapDrawable) ShowWebImageActivity.loadImageFromUrl(ShowWebImageActivity.this.imagePath)).getBitmap());
@@ -82,7 +81,6 @@ public class ShowWebImageActivity extends BaseActivity {
 		LoadingDialog dialog;
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			switch (msg.what) {
 			case status_start:
 					dialog =  new LoadingDialog(ShowWebImageActivity.this);
@@ -120,7 +118,6 @@ public class ShowWebImageActivity extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
@@ -135,13 +132,11 @@ public class ShowWebImageActivity extends BaseActivity {
 	
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		
 	}
 }

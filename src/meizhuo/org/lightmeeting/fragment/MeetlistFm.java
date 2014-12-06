@@ -2,25 +2,17 @@ package meizhuo.org.lightmeeting.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.acty.CaptureActivity;
 import meizhuo.org.lightmeeting.acty.MeetingData;
 import meizhuo.org.lightmeeting.adapter.MeetListAdapter;
 import meizhuo.org.lightmeeting.api.MeetingAPI;
-import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.model.Meeting;
 import meizhuo.org.lightmeeting.utils.Constants;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
-
-import com.loopj.android.http.AsyncHttpClient;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +23,6 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -59,11 +50,6 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 	LoadingDialog dialog;
 	BroadcastReceiver mBroadcastReceiver;
 
-/*	@Override public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
-	}*/
 
 	@Override public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
@@ -214,7 +200,6 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 	}
 
 	@Override public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -230,65 +215,6 @@ public class MeetlistFm extends BaseFragment implements OnRefreshListener,
 		inflater.inflate(R.menu.main, menu);
 	}
 
-/*	@Override public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_sweep:
-			Intent openCameraIntent = new Intent(getActivity(),
-					CaptureActivity.class);
-			startActivityForResult(openCameraIntent, 50);
-			break;
-		}
-		return true;
-	}*/
-
-/*	@Override public void onActivityResult(int requestCode, int resultCode,
-			Intent data) {
-		if (requestCode == 50 && resultCode == 51) {
-			String qrurl = data.getStringExtra("resultcode");
-			L.i("resultcode" + qrurl);
-			AsyncHttpClient client;
-			client = RestClient.getClient();
-			client.get(qrurl, new JsonHandler() {
-				@Override public void onStart() {
-					if (dialog == null) {
-						dialog = new LoadingDialog(getActivity());
-					}
-					dialog.setText("正在加入会议..");
-					dialog.show();
-				}
-
-				@Override public void onOK(int statusCode, Header[] headers,
-						JSONObject obj) throws Exception {
-					if (dialog.isShowing()) {
-						dialog.dismiss();
-						dialog = null;
-					}
-					String response = obj.getString("response");
-					toast(response);
-					onRefresh();
-				}
-
-				@Override public void onError(int error_code, Header[] headers,
-						JSONObject obj) throws Exception {
-					if (dialog.isShowing()) {
-						dialog.dismiss();
-						dialog = null;
-					}
-					String msg = obj.getString("msg");
-					toast(msg);
-				}
-
-				@Override public void onFailure(int statusCode,
-						Header[] headers, byte[] data, Throwable arg3) {
-					toast("网络不给力,请检查你的网络设置!");
-					return;
-				}
-
-			});
-
-		}
-
-	}*/
 
 	@Override public void onDestroy() {
 		super.onDestroy();

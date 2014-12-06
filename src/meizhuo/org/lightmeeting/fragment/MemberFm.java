@@ -33,6 +33,7 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	
 	MemberAdapter adapter; 
 	 String meetid ;
+	 List<Integer>pics;
 	
 	List<Member>data;
 	String page = "1";
@@ -41,7 +42,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 	 super.onCreateView(inflater, container, savedInstanceState,R.layout.fm_lmlist);
 	 Bundle idbundle = getArguments();
 	 meetid = idbundle.getString("meetid");
@@ -51,8 +51,15 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	}
 	
 	protected void initData(){
+		pics = new ArrayList<Integer>();
+		pics.add(R.drawable.aa_pic_head1);
+		pics.add(R.drawable.aa_pic_head2);
+		pics.add(R.drawable.aa_pic_head3);
+		pics.add(R.drawable.aa_pic_head4);
+		pics.add(R.drawable.aa_pic_head5);
 		data = new ArrayList<Member>();
-		adapter = new MemberAdapter(getActivity(),data);
+		adapter = new MemberAdapter(getActivity(),data,pics);
+	
 	}
 	
 	protected void initLayout(){
@@ -91,7 +98,7 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 				data.addAll(member);
 				adapter.notifyDataSetChanged();
 				page = "1";
-				if(member.size() < 20){
+				if(member.size() < 10){
 					hasMore = false;
 				}else{
 					hasMore = true;
@@ -157,7 +164,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if (swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if (firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount !=0 && hasMore){
@@ -168,7 +174,6 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 

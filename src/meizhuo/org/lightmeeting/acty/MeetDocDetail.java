@@ -40,7 +40,6 @@ public class MeetDocDetail extends BaseActivity{
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		docid = getIntent().getStringExtra("docid");
 		title = getIntent().getStringExtra("title");
 		String baseurl = RestClient.BASE_URL;
@@ -66,7 +65,6 @@ public class MeetDocDetail extends BaseActivity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
@@ -101,7 +99,6 @@ public class MeetDocDetail extends BaseActivity{
 		private Context context;
 		
 		public JavascriptInterface(Context context) {
-			// TODO Auto-generated constructor stub
 			this.context = context;
 		}
 		
@@ -120,14 +117,12 @@ public class MeetDocDetail extends BaseActivity{
 	private class MyWebViewClient extends WebViewClient {
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			// TODO Auto-generated method stub
 			return super.shouldOverrideUrlLoading(view, url);
 		}
 		
 		@SuppressLint("SetJavaScriptEnabled")
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			// TODO Auto-generated method stub
 			view.getSettings().setJavaScriptEnabled(true);
 			super.onPageFinished(view, url);
 			//html加载完成之后,添加监听图片的点击js函数
@@ -137,7 +132,6 @@ public class MeetDocDetail extends BaseActivity{
 		@SuppressLint("SetJavaScriptEnabled")
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			// TODO Auto-generated method stub
 			view.getSettings().setJavaScriptEnabled(true);
 			super.onPageStarted(view, url, favicon);
 		}
@@ -147,8 +141,6 @@ public class MeetDocDetail extends BaseActivity{
 		@Override
 		public void onReceivedError(WebView view, int errorCode,
 				String description, String failingUrl) {
-			// TODO Auto-generated method stub
-			
 			super.onReceivedError(view, errorCode, description, failingUrl);
 		}
 	}
@@ -156,7 +148,6 @@ public class MeetDocDetail extends BaseActivity{
 	private class MyWebChromeViewClient extends WebChromeClient{
 		@Override
 		public void onProgressChanged(WebView view, int newProgress) {
-			// TODO Auto-generated method stub
 			if(newProgress != 0){
 				pb.setVisibility(View.VISIBLE);
 				pb.setProgress(newProgress);

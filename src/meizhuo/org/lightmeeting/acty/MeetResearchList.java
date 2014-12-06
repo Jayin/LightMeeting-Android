@@ -101,7 +101,6 @@ public class MeetResearchList extends BaseActivity implements OnRefreshListener,
 			optionobj = array.getJSONObject(position);
 			 realoption = optionobj.getJSONObject("options");
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		kvlist.clear();
@@ -125,7 +124,6 @@ public class MeetResearchList extends BaseActivity implements OnRefreshListener,
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
@@ -222,7 +220,6 @@ public class MeetResearchList extends BaseActivity implements OnRefreshListener,
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
 		if(swipeRefreshLayout.isRefreshing() || isloading)
 			return ;
 		if(firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount!=0 && hasMore){
@@ -235,7 +232,6 @@ public class MeetResearchList extends BaseActivity implements OnRefreshListener,
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 

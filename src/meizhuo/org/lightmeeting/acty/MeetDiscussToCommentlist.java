@@ -199,7 +199,6 @@ public class MeetDiscussToCommentlist extends BaseActivity implements
 	}
 
 	@Override public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
 	}
 
 	class CommentBroadcastReceiver extends BroadcastReceiver {
