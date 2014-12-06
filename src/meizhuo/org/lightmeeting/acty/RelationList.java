@@ -68,6 +68,8 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 		pics.add(R.drawable.aa_pic_head2);
 		pics.add(R.drawable.aa_pic_head3);
 		pics.add(R.drawable.aa_pic_head4);
+		pics.add(R.drawable.aa_pic_head5);
+		pics.add(R.drawable.aa_pic_head6);
 		data  =  new ArrayList<Relation>();
 		adapter = new RelationListAdapter(this, data,pics);
 		adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -176,7 +178,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 					if (relationList.size() == 0) {
 						toast("暂无人脉");
 					}
-					if (relationList.size() < 5) {
+					if (relationList.size() < 10) {
 						hasMore = false;
 					} else {
 						hasMore = true;
@@ -214,7 +216,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 						.toString());
 				data.addAll(relationList);
 				adapter.notifyDataSetChanged();
-				if (obj.isNull("response") || relationList.size() < 5) {
+				if (obj.isNull("response") || relationList.size() < 10) {
 					hasMore = false;
 					toast("数据加载完毕!");
 				}
