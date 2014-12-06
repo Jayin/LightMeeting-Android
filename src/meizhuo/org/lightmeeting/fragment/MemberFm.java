@@ -33,6 +33,7 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	
 	MemberAdapter adapter; 
 	 String meetid ;
+	 List<Integer>pics;
 	
 	List<Member>data;
 	String page = "1";
@@ -50,8 +51,15 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 	}
 	
 	protected void initData(){
+		pics = new ArrayList<Integer>();
+		pics.add(R.drawable.aa_pic_head1);
+		pics.add(R.drawable.aa_pic_head2);
+		pics.add(R.drawable.aa_pic_head3);
+		pics.add(R.drawable.aa_pic_head4);
+		pics.add(R.drawable.aa_pic_head5);
 		data = new ArrayList<Member>();
-		adapter = new MemberAdapter(getActivity(),data);
+		adapter = new MemberAdapter(getActivity(),data,pics);
+	
 	}
 	
 	protected void initLayout(){

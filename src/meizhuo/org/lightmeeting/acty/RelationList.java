@@ -44,7 +44,7 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	String page = "1", limit = "";
 	boolean hasMore = true, isloading = false;
 	LoadingDialog dialog;
-	
+	 List<Integer>pics;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.acty_relation_list);
@@ -63,8 +63,13 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 	
 	@Override
 	protected void initData() {
+		pics = new ArrayList<Integer>();
+		pics.add(R.drawable.aa_pic_head1);
+		pics.add(R.drawable.aa_pic_head2);
+		pics.add(R.drawable.aa_pic_head3);
+		pics.add(R.drawable.aa_pic_head4);
 		data  =  new ArrayList<Relation>();
-		adapter = new RelationListAdapter(this, data);
+		adapter = new RelationListAdapter(this, data,pics);
 		adapter.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {

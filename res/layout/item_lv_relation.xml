@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="horizontal"
     android:background="@drawable/card_bg"
     >
     
-         <ImageView
-        android:id="@+id/user_img"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="12dp"
-        android:src="@drawable/aa_talker" />
+            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+             android:id="@+id/user_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            bootstrap:bct_image="@drawable/aa_pic_head1"
+            bootstrap:bct_minimal="true"
+            bootstrap:bct_size="small" />
     
    <LinearLayout 
            android:padding="5dp"

@@ -11,7 +11,6 @@ import meizhuo.org.lightmeeting.imple.JsonHandler;
 import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
@@ -31,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
  
 public class DrawerMain extends BaseFragment  {
-	
+	 
 	private MainActivity mainActivity;
 	LoadingDialog loadingdialog;
 	User user;

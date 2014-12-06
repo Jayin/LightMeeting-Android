@@ -1,6 +1,9 @@
 package meizhuo.org.lightmeeting.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.model.Relation;
@@ -20,11 +23,12 @@ public class RelationListAdapter extends BaseAdapter{
 	private Context mContext;
 	private List<Relation>mData;
 	private OnItemClickListener mOnItemClickListener = null;
+	private List<Integer>pics = new ArrayList<Integer>();
 	
-	public RelationListAdapter(Context context,List<Relation>list) {
+	public RelationListAdapter(Context context,List<Relation>list,List<Integer>picss) {
 		mContext = context;
 		mData = list;
-		
+		pics = picss;
 	}
 	
 
@@ -69,6 +73,7 @@ public class RelationListAdapter extends BaseAdapter{
 				
 			}
 		});
+		h.user_pic.setImage(pics.get(position));
 		return convertView;
 	}
 	
@@ -76,6 +81,8 @@ public class RelationListAdapter extends BaseAdapter{
 		@InjectView(R.id.tv_relation_nickname) TextView tv_relation_nickname;
 		@InjectView(R.id.tv_relation_company) TextView tv_relation_company;
 		@InjectView(R.id.iv_delete_relation)  ImageView iv_delete_relation;
+		@InjectView(R.id.user_pic) BootstrapCircleThumbnail user_pic;
+		
 		public ViewHolder(View v) {
 			ButterKnife.inject(this, v);
 		}

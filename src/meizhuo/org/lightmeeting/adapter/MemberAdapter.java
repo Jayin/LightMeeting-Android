@@ -1,6 +1,9 @@
 package meizhuo.org.lightmeeting.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.model.Member;
@@ -10,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,11 +24,12 @@ public class MemberAdapter extends BaseAdapter  {
 	
 	private Context mContext;
 	private List<Member>mData;
-	
+	private List<Integer>pics = new ArrayList<Integer>();
 
-	public MemberAdapter(Context context,List<Member>data) {
+	public MemberAdapter(Context context,List<Member>data,List<Integer>picss) {
 		mContext = context;
 		mData = data;
+		pics = picss;
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class MemberAdapter extends BaseAdapter  {
 		}
 			h.tv_usercompany.setText(mData.get(position).getCompany());
 			h.tv_userposition.setText(mData.get(position).getPosition());
+			h.user_img.setImage(pics.get(position));
 		return convertView;
 	}
 	
@@ -72,6 +79,7 @@ public class MemberAdapter extends BaseAdapter  {
 		@InjectView(R.id.tv_signup) TextView tv_signup;
 		@InjectView(R.id.tv_usercompany) TextView tv_usercompany;
 		@InjectView(R.id.tv_userposition) TextView tv_userposition;
+		@InjectView(R.id.user_img) BootstrapCircleThumbnail user_img;
 		
 		public ViewHolder(View v) {
 			ButterKnife.inject(this, v);
