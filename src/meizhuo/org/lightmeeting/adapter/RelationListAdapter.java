@@ -29,6 +29,7 @@ public class RelationListAdapter extends BaseAdapter{
 		mContext = context;
 		mData = list;
 		pics = picss;
+		
 	}
 	
 
@@ -70,10 +71,9 @@ public class RelationListAdapter extends BaseAdapter{
 				if(mOnItemClickListener!=null){
 					mOnItemClickListener.onItemClick(position);
 				}
-				
 			}
 		});
-		h.user_pic.setImage(pics.get(position));
+			h.user_pic.setImage(pics.get(position));
 		return convertView;
 	}
 	

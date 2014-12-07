@@ -95,6 +95,10 @@ public class MemberFm extends BaseFragment implements OnRefreshListener, OnScrol
 					throws Exception {
 				List<Member>member = Member.create_by_jsonarray(obj.toString());
 				data.clear();
+				int picsize = member.size();
+				for(int i=4;i<picsize;i++){
+					pics.add(R.drawable.aa_pic_head1);
+				}
 				data.addAll(member);
 				adapter.notifyDataSetChanged();
 				page = "1";
