@@ -172,6 +172,10 @@ public class RelationList extends BaseActivity implements OnRefreshListener,OnSc
 							.toString());
 					L.i("解析正确了？" + relationList);
 					data.clear();
+					int picsize = relationList.size();
+					for(int i=5;i<picsize;i++){
+						pics.add(R.drawable.aa_pic_head1);
+					}
 					data.addAll(relationList);
 					adapter.notifyDataSetChanged();
 					page = "1";
