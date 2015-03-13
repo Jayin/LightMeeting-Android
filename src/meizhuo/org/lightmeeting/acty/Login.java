@@ -6,16 +6,13 @@ import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.AppInfo;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
 import meizhuo.org.lightmeeting.model.User;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.EditTextUtils;
-import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;

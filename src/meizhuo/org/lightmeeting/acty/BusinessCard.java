@@ -2,13 +2,6 @@ package meizhuo.org.lightmeeting.acty;
 
 
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
-import com.google.zxing.WriterException;
-
-import butterknife.InjectView;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.api.UserAPI;
@@ -22,6 +15,10 @@ import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,6 +32,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.InjectView;
+
+import com.google.zxing.WriterException;
 
 public class BusinessCard extends BaseActivity  {
 	
