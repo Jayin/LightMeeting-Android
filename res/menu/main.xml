@@ -13,7 +13,6 @@
                 android:showAsAction="always|withText"
                 android:title="@string/action_sweep"
                 />
-            
         </menu>
         
     </item>

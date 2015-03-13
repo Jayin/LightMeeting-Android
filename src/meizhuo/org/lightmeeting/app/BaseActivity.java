@@ -2,6 +2,8 @@ package meizhuo.org.lightmeeting.app;
 
 import java.io.Serializable;
 
+import cn.jpush.android.api.JPushInterface;
+
 import meizhuo.org.lightmeeting.R;
 
 
@@ -152,6 +154,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override protected void onPause() {
 		super.onPause();
+		JPushInterface.onPause(this);
 	}
 
 	@Override protected void onStop() {
@@ -160,6 +163,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override protected void onResume() {
 		super.onResume();
+		JPushInterface.onResume(this);
 
 	}
 

@@ -1,11 +1,8 @@
 package meizhuo.org.lightmeeting.acty;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import meizhuo.org.lightmeeting.R;
 import meizhuo.org.lightmeeting.api.UserAPI;
+import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.AppInfo;
 import meizhuo.org.lightmeeting.app.BaseActivity;
 import meizhuo.org.lightmeeting.imple.JsonHandler;
@@ -16,6 +13,11 @@ import meizhuo.org.lightmeeting.utils.EditTextUtils;
 import meizhuo.org.lightmeeting.utils.L;
 import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
@@ -37,6 +39,11 @@ public class Login extends BaseActivity {
 	@InjectView(R.id.acty_register_et_username) EditText register_et_username;
 	@InjectView(R.id.acty_register_et_nickname) EditText register_et_nickname;
 	@InjectView(R.id.acty_register_et_password) EditText register_et_password;
+	
+	@InjectView(R.id.acty_register_et_company) EditText acty_register_et_company;
+	@InjectView(R.id.acty_register_et_position) EditText acty_register_et_position;
+	@InjectView(R.id.acty_register_et_phone) EditText acty_register_et_phone;
+	
 	@InjectView(R.id.radioMale) RadioButton maleRadio;
 	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
 	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
@@ -91,11 +98,10 @@ public class Login extends BaseActivity {
 					dialog = null;
 				}
 				toast("登录成功");
+				//设置推送标签
+				App app = (App)getApplication();
+				app.addTag(obj.getJSONObject("response").getString("id"), App.TAG_TYPE_PERSON);
 				closeActivity();
-				
-				
-				
-			
 			}
 
 			@Override
@@ -121,73 +127,7 @@ public class Login extends BaseActivity {
 				toast("网络不给力,请检查你的网络设置 ！");
 			}
 		});
-		//用户登录
-//		UserAPI.login(EditTextUtils.getText(login_et_username), EditTextUtils.getText(login_et_password), new JsonResponseHandler() {
-//			
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				if (dialog == null)
-//					dialog = new LoadingDialog(Login.this);
-//				dialog.setText("正在登录");
-//				dialog.show();
-//			}
-//			
-//			@Override
-//			public void onOK(Header[] headers, JSONObject obj) {
-//				// TODO Auto-generated method stub
-//				
-//				try {
-//					if(obj.getString("error_code").equals("40000"))
-//					{
-//						if(dialog.isShowing())
-//						{
-//							dialog.dismiss();
-//							dialog = null;
-//						}
-//						String msg = obj.getString("msg");
-//						toast(msg);
-//						return ;
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//				try {
-//					if(obj.getString("code").equals("20000")){
-//					
-//						String message = obj.getString("response");
-//						saveLoginInfo();
-//						if(dialog.isShowing())
-//						{
-//							dialog.dismiss();
-//							dialog = null;
-//						}
-//						toast("登录成功");
-//						closeActivity();
-//						
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//					toast("出现了异常!");
-//				}
-//				
-//		
-//			}
-//			
-//			@Override
-//			public void onFaild(int errorType, int errorCode) {
-//				// TODO Auto-generated method stub
-//				if(dialog.isShowing()){
-//					dialog.dismiss();
-//					dialog = null;
-//				}
-//				toast("网络不给力,请检查你的网络设置 ！");
-//				
-//			}
-//		});
+
 	}
 	//去注册
 	@OnClick(R.id.acty_login_btn_regist) public void to_regist(){
@@ -200,6 +140,7 @@ public class Login extends BaseActivity {
 	@InjectView(R.id.radioMale) RadioButton maleRadio;
 	@InjectView(R.id.radioFemale) RadioButton femaleRadio;
 	@InjectView(R.id.acty_register_et_email) EditText register_et_email;
+		
 	 */
 	//点击就进行注册
 	@OnClick(R.id.acty_register_btn_regist) public void regist(){
@@ -227,6 +168,10 @@ public class Login extends BaseActivity {
 			toast("电子邮箱不能为空");
 			return;
 		}
+		if(!StringUtils.isEmail(EditTextUtils.getText(register_et_email))){
+			toast("电子邮箱格式不正确");
+			return ;
+		}
 		String username =EditTextUtils.getText(register_et_username); 
 		String nickname =EditTextUtils.getText(register_et_nickname); 
 		String password =EditTextUtils.getText(register_et_password); 
@@ -236,62 +181,53 @@ public class Login extends BaseActivity {
 		if(maleIsChecked) sex = "男";
 		boolean femaleIsChecked = femaleRadio.isChecked(); //女性被点击
 		if(femaleIsChecked) sex = "女";
-		UserAPI.regist(username, nickname, password, sex, email, new JsonResponseHandler() {
-			
+		String company =EditTextUtils.getText(acty_register_et_company); 
+		String position =EditTextUtils.getText(acty_register_et_position); 
+		String phone =EditTextUtils.getText(acty_register_et_phone); 
+
+		UserAPI.regist(username, nickname, password, sex, email,company,position,phone,new JsonHandler(){
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				if(dialog == null){
 					dialog = new LoadingDialog(Login.this);
 				}
 				dialog.show();
 				dialog.setText("正在注册");
 			}
-			
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				
-				try {
-					if(obj.getString("error_code").equals("40000")){
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						String msg = obj.getString("msg");
-						toast(msg);
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
 				}
-				
-				try {
-					if(obj.getString("code").equals("20000")){
-						L.i(obj.toString());
-						if(dialog.isShowing())
-						{
-							dialog.dismiss();
-							dialog = null;
-						}
-						String message = obj.getString("response");
-						toast("注册成功");
-						flipper.showPrevious();
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-		
-				
+				toast("注册成功");
+				flipper.showPrevious();
 			}
 			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
+			public void onError(int error_code, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				String msg = obj.getString("msg");
+				toast(msg);
+				return ;
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+					dialog = null;
+				}
+				toast("网络不给力");
+				return ;
 			}
 		});
 		

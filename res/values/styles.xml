@@ -2,54 +2,61 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowAnimationStyle">@style/Animations.activity</item>
         <!-- ActionBar -->
-         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-            <item name="android:homeAsUpIndicator">@drawable/ic_navigation_previous_item</item>
-            <!-- 放在这里才有效 -->
-             <item name="android:actionModeBackground">@color/lm_lucency_blue</item>
-           <item name="android:actionModeCloseDrawable">@drawable/ic_navigation_previous_item</item>
-           
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_navigation_previous_item</item>
+        <!-- 放在这里才有效 -->
+        <item name="android:actionModeBackground">@color/lm_lucency_blue</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_navigation_previous_item</item>
     </style>
-    
+
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:icon">@drawable/ic_app_icon_pure</item>
         <item name="android:background">@color/lm_lucency_blue</item>
     </style>
-    
-    
+
     <style name="ImageView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    
-       <style name="TextView">
+
+    <style name="TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">null</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="TextView.DrawerMain" parent="@style/TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/lm_lucency_blue</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
     <style name="TextViewBase">
-          <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">null</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="TextViewDlg">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -58,46 +65,53 @@
         <item name="android:textSize">18sp</item>
         <item name="android:layout_marginBottom">2dp</item>
     </style>
-    
-    
-       <style name="ListView">
-           	<item name="android:layout_width">match_parent</item>
-           	<item name="android:layout_height">match_parent</item>
-           	<item name="android:listSelector">@android:color/transparent</item>
-           	<item name="android:divider">@drawable/ic_line_1</item>
-       </style>
 
-       <style name="LinearLayout">
-           <item name="android:layout_width">match_parent</item>
-           <item name="android:layout_height">match_parent</item>
-       </style>
-       <style name="LinearLayout.item">
-           <item name="android:clickable">true</item>
-          <item name="android:layout_width">match_parent</item>
-               <item name="android:layout_height">wrap_content</item>
-               <item name="android:background">@drawable/lm_btn_white2grey</item>
-           </style>
-        <style name="EditText_register_item">
-            <item name="android:layout_width">200dp</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:layout_marginLeft">6dp</item>
-            <item name="android:background">@color/lucency_white</item>
-            <item name="android:textColor">@color/white</item>
-            <item name="android:textColorHint">@color/white</item>
-            <item name="android:textCursorDrawable">@null</item>
-            <item name="android:textSize">16sp</item>
-            
-        </style>   
-        
-        <style name="EditText_EditUserDataItem">
-            <item name="android:layout_marginLeft">18dp</item>
-            <item name="android:layout_marginTop">10dp</item>
-            <item name="android:layout_marginRight">10dp</item>
-            <item name="android:layout_width">match_parent</item>
-            <item name="android:layout_height">wrap_content</item>
-        </style>
-        
-          <style name="Dialog"></style>
+    <style name="ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:divider">@drawable/ic_line_1</item>
+    </style>
+
+    <style name="LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="LinearLayout.Drawermain" parent="@style/LinearLayout">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/lm_btn_white2grey</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LinearLayout.item">
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/lm_btn_white2grey</item>
+    </style>
+
+    <style name="EditText_register_item">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:background">@color/lucency_white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="EditText_EditUserDataItem">
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Dialog"></style>
 
     <style name="Dialog.Theme.BaseDialog" parent="@android:Theme.Dialog">
         <item name="android:windowBackground">@color/lucency_white</item>
@@ -107,20 +121,22 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/Animations.dialog</item>
     </style>
-    
-     <style name="Animations" />
-         <style name="Animations.dialog">
+
+    <style name="Animations" />
+
+    <style name="Animations.dialog">
         <item name="@android:windowEnterAnimation">@anim/zoom_in</item>
         <item name="@android:windowExitAnimation">@anim/zoom_out</item>
     </style>
-       <style name="Animations.activity">
+
+    <style name="Animations.activity">
         <item name="android:activityOpenEnterAnimation">@anim/push_left_in</item>
         <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/push_right_in</item>
         <item name="android:activityCloseExitAnimation">@anim/push_right_out</item>
     </style>
-    
-          <style name="EditText">
+
+    <style name="EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/ic_inputbar</item>
@@ -128,5 +144,5 @@
         <item name="android:padding">5dp</item>
         <item name="android:textStyle">bold</item>
     </style>
-       
+
 </resources>

@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            bootstrap:bct_image="@drawable/aa_talker"
+            bootstrap:bct_image="@drawable/aa_pic_head1"
             bootstrap:bct_minimal="true"
             bootstrap:bct_size="medium" />
 
@@ -37,128 +37,93 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@drawable/lm_ic_line3" />
-    <ScrollView 
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbarStyle="@null"
-        >
-
-    <LinearLayout
-        android:id="@+id/lm_to_meetlist"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:clickable="false"
-        android:orientation="vertical" >
+        android:scrollbarStyle="@null" >
 
         <LinearLayout
-            android:background="@drawable/lm_btn_white2grey"
-            style="@style/LinearLayout"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:orientation="vertical" >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/aa_lm_meetlist" />
+            <LinearLayout
+                android:id="@+id/lm_to_meetlist"
+                style="@style/LinearLayout.Drawermain" >
 
-            <TextView
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="8dp"
-                android:text="会议列表"
-                 android:layout_marginLeft="8dp"
-                android:textColor="@color/lm_lucency_blue"
-                android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aa_lm_meetlist" />
+
+                <TextView
+                    style="@style/TextView.DrawerMain"
+                    android:text="会  议" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lm_to_relation"
+                style="@style/LinearLayout.Drawermain" >
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aa_meet_friend" />
+
+                <TextView
+                    style="@style/TextView.DrawerMain"
+                    android:text="人  脉" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lm_to_about"
+                style="@style/LinearLayout.Drawermain" >
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aa_lm_about" />
+
+                <TextView
+                    style="@style/TextView.DrawerMain"
+                    android:text="关  于" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lm_to_logoff"
+                style="@style/LinearLayout.Drawermain" >
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aa_meet_logoff" />
+
+                <TextView
+                    style="@style/TextView.DrawerMain"
+                    android:text="注  销" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lm_to_logout"
+                style="@style/LinearLayout.Drawermain" >
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aa_lm_meetlist_logout" />
+
+                <TextView
+                    style="@style/TextView.DrawerMain"
+                    android:text="退  出" />
+            </LinearLayout>
         </LinearLayout>
-         <LinearLayout
-            android:id="@+id/lm_to_logoff"
-            style="@style/LinearLayout"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lm_btn_white2grey"
-            android:clickable="true"
-            android:orientation="horizontal" >
+    </ScrollView>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/aa_meet_logoff" />
-
-            <TextView
-                android:id="@+id/tv_menuName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="注销"
-                android:textColor="@color/lm_lucency_blue"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lm_to_about"
-            style="@style/LinearLayout"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lm_btn_white2grey"
-            android:clickable="true"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/aa_lm_about" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="关于"
-                android:textColor="@color/lm_lucency_blue"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lm_to_logout"
-            style="@style/LinearLayout"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lm_btn_white2grey"
-            android:clickable="true"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/aa_lm_meetlist_logout" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="退出"
-                android:textColor="@color/lm_lucency_blue"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
 </LinearLayout>

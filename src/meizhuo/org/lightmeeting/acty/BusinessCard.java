@@ -3,35 +3,37 @@ package meizhuo.org.lightmeeting.acty;
 
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.zxing.WriterException;
 
 import butterknife.InjectView;
 
 import meizhuo.org.lightmeeting.R;
+import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.api.UserAPI;
 import meizhuo.org.lightmeeting.app.App;
 import meizhuo.org.lightmeeting.app.BaseActivity;
-import meizhuo.org.lightmeeting.imple.JsonResponseHandler;
-import meizhuo.org.lightmeeting.model.User;
+import meizhuo.org.lightmeeting.encoding.EncodingHandler;
+import meizhuo.org.lightmeeting.imple.JsonHandler;
+import meizhuo.org.lightmeeting.model.Member;
 import meizhuo.org.lightmeeting.utils.AndroidUtils;
 import meizhuo.org.lightmeeting.utils.Constants;
 import meizhuo.org.lightmeeting.utils.L;
+import meizhuo.org.lightmeeting.utils.StringUtils;
 import meizhuo.org.lightmeeting.widget.LoadingDialog;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BusinessCard extends BaseActivity  {
@@ -45,15 +47,13 @@ public class BusinessCard extends BaseActivity  {
 	@InjectView(R.id.lm_member_email) TextView member_email;
 	
 	 LoadingDialog loadingdialog;
-	BCHandler handler = new BCHandler();
-	DialogHandler dialogHandler =new DialogHandler(); 
-	User member;
+	Member member;
 	ActionBar mActionBar ;
 	String nickname,birth,sex,company,position,phone,email;
+	boolean isTime=false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState,R.layout.fm_buinesscard);
 		loadingdialog = new LoadingDialog(this);
 		 initData();
@@ -71,119 +71,43 @@ public class BusinessCard extends BaseActivity  {
 	}*/
 	
 	
-	
-	class BCHandler extends Handler{
-		LoadingDialog dialog;
-		
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			switch (msg.what) {
-			case Constants.Start:
-				if(dialog == null)
-				{
-					dialog = new LoadingDialog(BusinessCard.this);
-				}
-				dialog.setText("正在加载个人资料");
-				dialog.show();
-				break;
-			case Constants.Finish:
-				if(dialog.isShowing())
-				{
-					dialog.setText("加载完毕");
-					dialog.dismiss();
-					dialog = null;
-				}
-				JSONObject obj1 = (JSONObject)msg.obj;
-				try {
-					 member = User.create_by_json(obj1.getString("response"));
-					member_nickname.setText(member.getNickname());
-					member_birth.setText(member.getBirth());
-					if(member.getSex().equals("m")){
-						member_sex.setText("男");
-						sex="男";
-					}else{
-						member_sex.setText("女");
-						sex = "女";
-					}
-					L.i(member.toString());
-					member_company.setText(member.getCompany());
-					member_position.setText(member.getPosition());
-					member_phone.setText(member.getPhone());
-					member_email.setText(member.getEmail());
-				//String nickname,birth,sex,company,position,phone,email;
-					nickname = member.getNickname();
-					birth = member.getBirth();
-					company = member.getCompany();
-					position = member.getPosition();
-					phone = member.getPhone();
-					email = member.getEmail();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			default:
-				break;
-			}
-		}
-		
-	}
-	
-	class DialogHandler extends Handler{
-		LoadingDialog dialog;
-		
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			switch (msg.what) {
-			case Constants.Start:
-				if(dialog==null){
-					dialog = new LoadingDialog(BusinessCard.this);
-					dialog.setText("正在修改密码");
-					dialog.show();
-				}
-				break;
-			case Constants.Finish:
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						((App)getApplication()).cleanUpInfo();
-					}
-				}).start();
-				if(dialog.isShowing()){
-					dialog.dismiss();
-					dialog = null;
-				}
-				toast("修改成功,请重新登录");
-				openActivity(Login.class);
-				BusinessCard.this.finish();
-				break;
-			default:
-				break;
-			}
-		}
-		
-	}
-	
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.fm_user, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
+		case R.id.action_my_qrcode:
+			LayoutInflater layoutinflater = LayoutInflater.from(this);
+			View view = layoutinflater.inflate(R.layout.qr_code_dialog, null);
+			final ImageView qr_code = (ImageView)view.findViewById(R.id.iv_qr_image);
+			try {
+				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(RestClient.BASE_URL+"/home/relation/create/vicememberid/" + member.getId(), 350);
+				qr_code.setImageBitmap(qrCodeBitmap);
+			} catch (WriterException e) {
+				e.printStackTrace();
+			}
+			AlertDialog.Builder dialogbuilder =  new AlertDialog.Builder(this);
+			dialogbuilder.setTitle("          我的二维码");
+			dialogbuilder.setView(view);
+			AlertDialog qrdialog = dialogbuilder.create();
+			qrdialog.show();
+			
+			break;
 		case R.id.action_refreshdata:
-			Intent intent = new Intent(this, Update_userdata.class);
+			Intent intent = new Intent(this, UpdateUser.class);
 			intent.putExtra("nickname", nickname);
-			intent.putExtra("birth", birth);
+			if(isTime)
+			{
+				L.i("字符串" + birth);
+				Long tempbirth = StringUtils.dateToTimestamp2(birth);
+				L.i(" lOng" + tempbirth);
+				birth = String.valueOf(tempbirth);
+			}
+			intent.putExtra("birth",StringUtils.timestampToDate2(birth) );
 			intent.putExtra("sex", sex);
 			intent.putExtra("company", company);
 			intent.putExtra("position", position);
@@ -205,7 +129,6 @@ public class BusinessCard extends BaseActivity  {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
 					if((et_change_oldpsw.getText().toString()) == null || (et_change_oldpsw.getText().toString()).equals(""))
 					{
 						toast("旧密码不能为空!");
@@ -225,50 +148,46 @@ public class BusinessCard extends BaseActivity  {
 						toast("两次新密码输入不一致,修改失败!");
 						return ;
 					}
-					UserAPI.changePsw(et_change_oldpsw.getText().toString(), et_change_newpsw.getText().toString(), new JsonResponseHandler() {
-						
+					UserAPI.changePsw(et_change_oldpsw.getText().toString(), et_change_newpsw.getText().toString(), new JsonHandler(){
 						@Override
 						public void onStart() {
-							// TODO Auto-generated method stub
-							dialogHandler.sendEmptyMessage(Constants.Start);
+							if(loadingdialog==null){
+								loadingdialog = new LoadingDialog(BusinessCard.this);
+								loadingdialog.setText("正在修改密码");
+							}
+							loadingdialog.show();
 						}
 						
 						@Override
-						public void onOK(Header[] headers, JSONObject obj) {
-							// TODO Auto-generated method stub
-							
-							try {
-								if(obj.getString("code").equals("40000")){
-									String message = obj.getString("msg");
-									toast(message);
-									return ;
+						public void onOK(int statusCode, Header[] headers,
+								JSONObject obj) throws Exception {
+							new Thread(new Runnable() {
+								@Override
+								public void run() {
+									((App)getApplication()).cleanUpInfo();
 								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							}).start();
+							if(loadingdialog.isShowing()){
+								loadingdialog.dismiss();
+								loadingdialog = null;
 							}
-							
-							try {
-								if(obj.getString("code").equals("20000"))
-								{
-									dialogHandler.sendEmptyMessage(Constants.Finish);
-								
-								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						
+							toast("修改成功,请重新登录");
+							sendBroadcast(new Intent(Constants.Action_ChangePSW_Successful));
+							openActivity(Login.class);
+							BusinessCard.this.finish();
 							
 						}
 						
 						@Override
-						public void onFaild(int errorType, int errorCode) {
-							// TODO Auto-generated method stub
-							
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] data, Throwable arg3) {
+							if(loadingdialog.isShowing()){
+								loadingdialog.dismiss();
+								loadingdialog = null;
+							}
+							toast("网络不给力，请检查你的网络设置!");
 						}
 					});
-					
 				}
 			});
 			builder.setNegativeButton("取消", null);
@@ -286,14 +205,15 @@ public class BusinessCard extends BaseActivity  {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		if(requestCode == 204 && resultCode == 205){
 			member_nickname.setText(data.getStringExtra("nickname"));
 			member_birth.setText(data.getStringExtra("birth"));
-			if(data.getStringExtra("sex").equals("f")){
-				member_sex.setText("男");
+			if(data.getStringExtra("sex").equals("m")){
+				sex = "男";
+				member_sex.setText(sex);
 			}else{
-				member_sex.setText("女");
+				sex = "女";
+				member_sex.setText(sex);
 			}
 			member_company.setText(data.getStringExtra("company"));
 			member_position.setText(data.getStringExtra("position"));
@@ -301,6 +221,7 @@ public class BusinessCard extends BaseActivity  {
 			member_email.setText(data.getStringExtra("email"));
 			nickname = data.getStringExtra("nickname");
 			birth = data.getStringExtra("birth");
+			isTime=true;
 			sex = data.getStringExtra("sex");
 			company = data.getStringExtra("company");
 			position = data.getStringExtra("position");
@@ -311,44 +232,65 @@ public class BusinessCard extends BaseActivity  {
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
 		if(!AndroidUtils.isNetworkConnected(BusinessCard.this))
 		{
 			toast("请先连接您的网络 !");
 			return ;
 		}
-		handler.sendEmptyMessage(Constants.Start);
-		final Message msg = handler.obtainMessage();
-		UserAPI.getMemberData(new JsonResponseHandler() {
-			
-			
+		UserAPI.getOneMember(new JsonHandler(){
 			@Override
-			public void onOK(Header[] headers, JSONObject obj) {
-				// TODO Auto-generated method stub
-				try {
-					if(obj.getString("code").equals("20000")){
-						msg.obj =obj;
-						msg.what = Constants.Finish;
-						handler.sendMessage(msg);
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					toast("解析错误");
+			public void onStart() {
+				if(loadingdialog==null){
+					loadingdialog = new LoadingDialog(BusinessCard.this);
+					loadingdialog.setText("正在加载个人信息");
 				}
+				loadingdialog.show();
 			}
-			
 			@Override
-			public void onFaild(int errorType, int errorCode) {
-				// TODO Auto-generated method stub
-				
+			public void onOK(int statusCode, Header[] headers, JSONObject obj)
+					throws Exception {
+				if(loadingdialog.isShowing())
+				{
+					loadingdialog.setText("加载完毕");
+					loadingdialog.dismiss();
+					loadingdialog = null;
+				}
+				member = Member.create_by_json(obj.getString("response"));
+				member_nickname.setText(member.getNickname());
+				if(member.getBirth().equals("0")){
+					member_birth.setText("暂无生日资料");
+				}else{
+				member_birth.setText(StringUtils.timestampToDate2(member.getBirth()));
+				}
+				if(member.getSex().equals("m")){
+					member_sex.setText("男");
+					sex="男";
+				}else{
+					member_sex.setText("女");
+					sex = "女";
+				}
+				L.i(member.toString());
+				member_company.setText(member.getCompany());
+				member_position.setText(member.getPosition());
+				member_phone.setText(member.getPhone());
+				member_email.setText(member.getEmail());
+				nickname = member.getNickname();
+				birth = member.getBirth();
+				company = member.getCompany();
+				position = member.getPosition();
+				phone = member.getPhone();
+				email = member.getEmail();
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] data, Throwable arg3) {
+				super.onFailure(statusCode, headers, data, arg3);
 			}
 		});
 	}
 
 	@Override
 	protected void initLayout() {
-		// TODO Auto-generated method stub
 		mActionBar = getActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		mActionBar.setTitle("个人名片");

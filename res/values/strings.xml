@@ -3,6 +3,7 @@
 
     <string name="app_name">轻会议</string>
 	<string name="action_more">更多</string>
+	<string name="action_signup">会议签到</string>
 	<string name="action_addmeet">增加会议</string>
 	<string name="action_sweep">扫一扫</string>
 	<string name="action_user">个人设置</string>
@@ -10,6 +11,7 @@
 	<string name="action_logoff">注销账号</string>
 	<string name="action_logout">退出</string>
 	<string name="action_refresh_user">修改资料</string>
+	<string name="action_user_qrcode">我的二维码</string>
 	<string name="drawer_open">Open navigation drawer</string>
 	 <string name="drawer_close">Close navigation drawer</string>
 	 
@@ -26,4 +28,9 @@
 	  <string name="action_create_vote">创建投票</string>
 	 
 	 <!-- 调查 -->
+	 
+	 <!-- 人脉 -->
+	  <string name="action_add_relation">扫一扫添加</string>
+	 
+	 
 </resources>

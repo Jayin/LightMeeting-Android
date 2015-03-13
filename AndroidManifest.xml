@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="meizhuo.org.lightmeeting"
-    android:versionCode="4"
-    android:versionName="1.2.1" >
+    android:versionCode="10"
+    android:versionName="1.4.1" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -13,14 +13,33 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" >
     </uses-permission>
-     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <permission
+        android:name="meizhuo.org.lightmeeting.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="meizhuo.org.lightmeeting.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".app.App"
@@ -61,80 +80,44 @@
 
         <!-- Update_userdata -->
         <activity
-            android:name=".acty.Update_userdata"
+            android:name=".acty.UpdateUser"
             android:launchMode="standard" >
         </activity>
-        <!-- Lm_meeting_addnewmeet -->
-        <activity
-            android:name=".acty.Lm_meeting_addnewmeet"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- Update_meeting -->
-        <activity
-            android:name=".acty.Update_meeting"
-            android:launchMode="standard" >
-        </activity>
-
-        <!-- Lm_meeting_selecttime -->
-        <activity
-            android:name=".acty.Lm_meeting_selecttime"
-            android:launchMode="standard" >
-        </activity>
-        <!-- BusinessCard -->
         <activity
             android:name=".acty.BusinessCard"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_discuss -->
         <activity
-            android:name=".acty.MeetingData_discuss"
+            android:name=".acty.MeetDiscuss"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_discuss_item -->
         <activity
-            android:name=".acty.MeetingData_discuss_item"
+            android:name=".acty.MeetDiscussToCommentlist"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_research -->
         <activity
-            android:name=".acty.MeetingData_research"
+            android:name=".acty.MeetResearch"
             android:launchMode="singleTask" >
         </activity>
         <!-- MeetingData_research_item -->
         <activity
-            android:name=".acty.MeetingData_research_item"
+            android:name=".acty.MeetResearchList"
             android:launchMode="singleTask" >
         </activity>
-        <!-- MeetingData_discuss_update -->
-        <activity
-            android:name=".acty.MeetingData_discuss_update"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- MeetingData_discuss_create -->
-        <activity
-            android:name=".acty.MeetingData_discuss_create"
-            android:launchMode="singleTask" >
-        </activity>
+
         <!-- MeetingData_vote -->
         <activity
-            android:name=".acty.MeetingData_vote"
+            android:name=".acty.MeetVote"
             android:launchMode="singleTask" >
         </activity>
-        <!-- MeetingData_vote_update -->
         <activity
-            android:name=".acty.MeetingData_vote_update"
+            android:name=".acty.MeetVoteOption"
             android:launchMode="singleTask" >
         </activity>
-        <!-- MeetingData_vote_item -->
-            <activity
-            android:name=".acty.MeetingData_vote_item"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- Lm_meeting_selecttime_end -->
-          <activity
-            android:name=".acty.Lm_meeting_selecttime_end"
-            android:launchMode="standard" >
-        </activity>
+
         <!-- CaptureActivity -->
         <activity
             android:name=".acty.CaptureActivity"
@@ -143,34 +126,131 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <!-- MeetingData_vote_create -->
-           <activity
-            android:name=".acty.MeetingData_vote_create"
-            android:launchMode="singleTask" >
-        </activity>
+
         <!-- MeetingData_discuss_item_tocomment -->
-             <activity
-            android:name=".acty.MeetingData_discuss_item_tocomment"
+        <activity
+            android:name=".acty.MeetDiscussToComment"
             android:launchMode="singleTask" >
         </activity>
-        
-             <!-- MeetingData_research_item_option -->
-             
-                  <activity
-            android:name=".acty.MeetingData_research_item_option"
+
+        <!-- MeetingData_research_item_option -->
+
+        <activity
+            android:name=".acty.MeetResearchListOption"
             android:launchMode="singleTask" >
         </activity>
-        
-                  <!-- MeetingData_docdetail -->
-                          <activity
-            android:name=".acty.MeetingData_docdetail"
+
+        <activity
+            android:name=".acty.MeetDocDetail"
             android:launchMode="singleTask" >
         </activity>
         <!-- ShowWebImageActivity -->
-                            <activity
+        <activity
             android:name=".acty.ShowWebImageActivity"
             android:launchMode="singleTask" >
         </activity>
+        <!-- MdMemberBusinessCard -->
+        <activity
+            android:name=".acty.MdMemberBusinessCard"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- MeetResearchAnswer -->
+        <activity
+            android:name=".acty.MeetResearchAnswer"
+            android:launchMode="standard" >
+        </activity>
+        <!-- RelationList -->
+          <activity
+            android:name=".acty.RelationList"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        
+        
+
+        <!-- JPUSH -->
+        <!-- Required -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+
+                <category android:name="meizhuo.org.lightmeeting" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="meizhuo.org.lightmeeting" />
+            </intent-filter>
+        </activity>
+        <!-- Required SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <!-- Required SDK核心功能 -->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name="meizhuo.org.lightmeeting.app.JpushRecevier"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="meizhuo.org.lightmeeting" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="3d9f486d5b5cb7500cc24c26" />
     </application>
 
 </manifest>

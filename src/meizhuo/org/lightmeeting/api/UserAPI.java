@@ -1,5 +1,7 @@
 package meizhuo.org.lightmeeting.api;
 
+import meizhuo.org.lightmeeting.utils.StringUtils;
+
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -19,7 +21,7 @@ public class UserAPI {
 	 * @param responseHandler
 	 */
 	public static void regist(String username,String nickname,String password,
-			String sex,String email,AsyncHttpResponseHandler responseHandler){
+			String sex,String email,String company,String position,String phone,AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		params.add("username", username);
 		params.add("nickname", nickname);
@@ -30,6 +32,12 @@ public class UserAPI {
 			params.add("sex", "f");
 		}
 		params.add("email", email);
+		if(!(company==null || company.equals("")))
+		params.add("company", company);
+		if(!(position==null || position.equals("")))
+			params.add("position", position);
+		if(!(phone==null || phone.equals("")))
+			params.add("phone", phone);
 		RestClient.post("/home/member/addmember", params, responseHandler);
 	}
 	/**
@@ -58,19 +66,19 @@ public class UserAPI {
 		RequestParams params = new RequestParams();
 		if(!(nickname == null || nickname.equals("")))
 			params.add("nickname", nickname);
-		if(sex.equals("")||sex == null){
-			if(sex.equals("男")){
-				params.add("sex", "m");
-			}else{
-				params.add("sex", "f");
-			}
+		if(!(sex.equals("")||sex == null)){
+				params.add("sex", sex);
 		}
 		if(!(phone == null || phone.equals("")))
 			params.add("phone", phone);
-		if(email.equals("") || email == null)
+		if(!(email.equals("") || email == null))
 			params.add("email", email);
-		if(birth.equals("") || birth == null)
+		if(!(birth.equals("") || birth == null))
 		params.add("birth", birth);
+		if(!StringUtils.isEmpty(company))
+			params.add("company", company);
+		if(!StringUtils.isEmpty(position))
+			params.add("position", position);
 		RestClient.post("/home/member/updatemember", params, responseHandler);
 	}
 	
@@ -97,11 +105,19 @@ public class UserAPI {
 	}
 	
 	/**
-	 * 获取登录会员信息
+	 * 获取登录会员信息(descapte)
 	 * @param responseHandler
 	 */
 	public static void getMemberData(AsyncHttpResponseHandler responseHandler){
 		RestClient.post("/home/member/getloginmember", null, responseHandler);
+	}
+	
+	/**
+	 * 获取登录会员信息
+	 * @param responseHandler
+	 */
+	public static void getOneMember(AsyncHttpResponseHandler responseHandler){
+		RestClient.post("/home/member/getonemember", null, responseHandler);
 	}
 	
 }

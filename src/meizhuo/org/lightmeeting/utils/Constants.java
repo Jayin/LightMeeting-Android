@@ -24,13 +24,20 @@ public class Constants {
 	public static final String Action_Create_discuss_successful ="Create_discuss_successful";
 	/**更新讨论成功*/
 	public static final String Action_Update_discuss_successful ="Update_discuss_successful";
-	
 	/**接受版本信息*/
 	public static final String Action_Receive_VersionInfo ="Action_Receive_VersionInfo";
 	/**检查版本*/
 	public static final String Action_checkVersion ="checkVersion";
 	/**成功退出会议*/
 	public static final String Action_Logout_Meeting_Successful ="Logout_Meeting_Successful";
+	/**修改密码成功*/
+	public static final String Action_ChangePSW_Successful ="ChangePSW_Successful";
+	/**评论成功**/
+	public  static final String Action_Comment_Successful = "Comment_Successful";
+	/**会议刷新*/
+	public  static final String Action_Refresh_Successful = "Refresh_Successful";
+	
+	
 	
 	
 

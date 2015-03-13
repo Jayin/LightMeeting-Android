@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
     
-     
-    
     <android.support.v4.widget.SwipeRefreshLayout 
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
@@ -15,7 +13,6 @@
         
        <ListView
            android:layout_margin="10dp" 
-           
            android:id="@+id/option_lv"
            style="@style/ListView"
            android:layout_width = "match_parent"
@@ -24,31 +21,6 @@
            
   </android.support.v4.widget.SwipeRefreshLayout>
   
-       
-       <LinearLayout 
-           android:layout_marginTop="20dp"
-         android:clickable="true"
-       android:id="@+id/lm_meeting_endtime_item"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:background="@drawable/lm_btn_item_main"
-        >
-        <TextView 
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            style="@style/TextView"
-            android:text="你选择的选项是:"
-            />
-      <TextView 
-          android:id="@+id/option_select"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            style="@style/TextView"
-            android:text=""
-            />
-    </LinearLayout>
        
 	<Button 
         android:id="@+id/vote_confirm"

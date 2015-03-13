@@ -20,7 +20,6 @@ public class About extends BaseFragment {
 
 	@Override public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreateView(inflater, container, savedInstanceState,
 				R.layout.fragment_about);
 		String versionName;
@@ -28,7 +27,6 @@ public class About extends BaseFragment {
 			versionName = AndroidUtils.getAppVersionName(getActivity());
 			tv_versionCode.setText("版本 : " + versionName);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return contentView;
@@ -44,12 +42,10 @@ public class About extends BaseFragment {
 	}
 
 	@Override protected void initData() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override protected void initLayout() {
-		// TODO Auto-generated method stub
 
 	}
 

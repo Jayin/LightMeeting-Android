@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="lm_lucency_blue">#1AB3E9</color>
+    <color name="lm_sign_grey">#777777</color>
      <color name="lm_blue_title_nomal">#3B5998</color>
     <color name="lm_blue_title_press">#36528C</color>
     <color name="black">#ff000000</color>
@@ -13,7 +14,9 @@
     <color name="lm_grey2">#BABABA</color>
     <color name="lm_backgroundColor">#E8E8E0</color>
     <color name="lm_backgroundColorPress">#DBDBD3</color>
-    <color name="lm_card_bg">#D0D0D0</color>
+   <!--  <color name="lm_card_bg">#D0D0D0</color> -->
+    <color name = "lm_card_bg">#E8E8E8</color>
+    <color name="bottombar_bg_press">#4DA8CC</color>
     
     <!-- 二维码 -->
       <color name="bg_color">#EDEDED</color>

@@ -17,8 +17,10 @@
            style="@style/ListView"
            android:divider="@null"
            ></ListView>
-           
   </android.support.v4.widget.SwipeRefreshLayout>
+  
+    
+    
     <LinearLayout 
         android:clickable="true"
         android:id="@+id/to_comment"
@@ -26,7 +28,7 @@
         android:layout_height="45dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-         android:background="@drawable/bottombar_bg"
+         android:background="@drawable/lm_bottombar_bg"
          android:orientation="horizontal"
         >
        <ImageView 

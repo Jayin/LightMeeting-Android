@@ -20,7 +20,7 @@
 		      android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-		    android:text="调查标题:"
+		    android:text=""
 		    />
 
             <TextView
@@ -40,17 +40,17 @@
             android:layout_margin="10dp"
             style="@style/LinearLayout"
             android:layout_height="wrap_content"
-             android:orientation="vertical"
+             android:orientation="horizontal"
             >
               <TextView 
 		    style="@style/TextView"
                 android:layout_marginBottom="10dp"
-		    android:text="调查内容:"
+		    android:text=""
 		    />
             <TextView 
                 android:id="@+id/research_intro"
                 style="@style/TextView"
-                android:text=" 工作的戳我或者直接私信"
+                android:text=" "
                 />
         </LinearLayout>
          	<LinearLayout 

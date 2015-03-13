@@ -24,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import meizhuo.org.lightmeeting.R;
-import meizhuo.org.lightmeeting.api.RestClient;
 import meizhuo.org.lightmeeting.camera.CameraManager;
 import meizhuo.org.lightmeeting.decoding.CaptureActivityHandler;
 import meizhuo.org.lightmeeting.decoding.InactivityTimer;
@@ -45,7 +44,7 @@ public class CaptureActivity extends Activity implements Callback{
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 	private Button cancelScanButton;
-
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,8 @@ public class CaptureActivity extends Activity implements Callback{
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 	}
+	
+	
 
 	@Override
 	protected void onResume() {
@@ -121,11 +122,11 @@ public class CaptureActivity extends Activity implements Callback{
 		if (resultString.equals("")) {
 			Toast.makeText(CaptureActivity.this, "扫描失败", Toast.LENGTH_SHORT).show();
 		}else {
-//			Toast.makeText(CaptureActivity.this, "Scan Successful!" + resultString, Toast.LENGTH_SHORT).show();
-//			System.out.println("Result:"+resultString);
-			Intent resultIntent = new Intent(this,MeetingData_discuss.class);
+			L.i("成功刚刚" + resultString);
+			Intent resultIntent = new Intent();
 			resultIntent.putExtra("resultcode", resultString);
-			this.setResult(51, resultIntent);
+				this.setResult(51, resultIntent);
+			
 		}
 		CaptureActivity.this.finish();
 	}
@@ -222,5 +223,6 @@ public class CaptureActivity extends Activity implements Callback{
 			mediaPlayer.seekTo(0);
 		}
 	};
+	
 
 }

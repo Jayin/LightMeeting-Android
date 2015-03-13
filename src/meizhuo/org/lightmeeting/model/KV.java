@@ -18,24 +18,51 @@ public class KV implements Serializable ,Comparable<KV>{
 	
 	
 	
-	public String getKey() {
-		return key;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "KV [value=" + value + ", key=" + key + ", isclick=" + isclick
+				+ "]";
 	}
-	public void setKey(String key) {
-		this.key = key;
-	}
+
+
+
+
+	
 	public String getValue() {
 		return value;
 	}
+
 	public void setValue(String value) {
 		this.value = value;
 	}
-	private String key;
-	@Override
-	public String toString() {
-		return "KV [key=" + key + ", value=" + value + "]";
+
+	public String getKey() {
+		return key;
 	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public boolean isIsclick() {
+		return isclick;
+	}
+
+	public void setIsclick(boolean isclick) {
+		this.isclick = isclick;
+	}
+
+
+
 	private String value;
+	private String key;
+	private boolean isclick;
+	
+	
+	
 	@Override
 	public int compareTo(KV another) {
 		// TODO Auto-generated method stub

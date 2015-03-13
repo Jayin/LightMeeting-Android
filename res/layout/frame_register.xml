@@ -29,7 +29,7 @@
                 <EditText 
                     android:id="@+id/acty_register_et_username"
                     style="@style/EditText_register_item"
-                    android:hint="请输入登录用户名"
+                    android:hint="用户名(必填)"
                     android:inputType="text|textCapWords"
                     />
                 
@@ -55,7 +55,7 @@
                 <EditText 
                     android:id="@+id/acty_register_et_nickname"
                     style="@style/EditText_register_item"
-                    android:hint="请输入用户昵称"
+                    android:hint="用户昵称(必填 )"
                     android:inputType="text|textCapWords"
                     />
                 
@@ -81,7 +81,7 @@
                 <EditText 
                     android:id="@+id/acty_register_et_password"
                     style="@style/EditText_register_item"
-                    android:hint="请输入登录密码"
+                    android:hint="登录密码(必填)"
                     android:password="true"
                     />
                 
@@ -154,12 +154,12 @@
                 <EditText 
                     android:id="@+id/acty_register_et_email"
                     style="@style/EditText_register_item"
-                    android:hint="请输入电子邮箱 "
+                    android:hint="电子邮箱(必填) "
                     android:inputType="text|textCapWords"
                     />
                 
             </LinearLayout>
-          <!--     <View
+              <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
@@ -230,14 +230,14 @@
                     android:src="@drawable/ic_login_icon_user_name"
                     />
                 <EditText 
-                    android:id="@+id/acty_register_et_birth"
+                    android:id="@+id/acty_register_et_phone"
                     style="@style/EditText_register_item"
-                    android:hint="请输入出生日期 "
+                    android:hint="电话号码 "
                     android:inputType="text|textCapWords"
                     />
                 
             </LinearLayout>
-             -->  
+              
              <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
